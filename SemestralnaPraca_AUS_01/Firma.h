@@ -31,6 +31,7 @@ class Firma
 public:
 	Firma();
 	~Firma();
+	void pridajPrekladisko(Prekladisko * noveVozidlo);
 	void pridajVozidlo(Vozidlo * noveVozidlo);
 private:
 	structures::ArrayList<evidenciaVozidla*> * arrayVozidiel;

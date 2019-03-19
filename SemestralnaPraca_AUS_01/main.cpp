@@ -21,10 +21,11 @@ int main()
 
 	Firma * firma = new Firma();
 	firma->pridajVozidlo(new Vozidlo(10, 100));
-	firma.pridajPR
 
+	Prekladisko* prekladiskoZilina = new Prekladisko("ZA");
+	firma->pridajPrekladisko(prekladiskoZilina);
 
-		Dron * dron1 = new Dron(eDrony::JEDEN);
+	Dron * dron1 = new Dron(eDrony::JEDEN);
 	Dron * dron2 = new Dron(eDrony::DVA);
 
 
