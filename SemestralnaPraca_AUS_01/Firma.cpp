@@ -1,10 +1,10 @@
 #include "Firma.h"
-#include "Dron.h"
+#include "Prekladisko.h"
 
 Firma::Firma()
 {
 	arrayVozidiel = new structures::ArrayList<evidenciaVozidla*>();
-	arrayPrekladisk = new structures::ArrayList<Dron*>();
+	arrayPrekladisk = new structures::ArrayList<Prekladisko*>();
 }
 
 
@@ -14,10 +14,10 @@ Firma::~Firma()
 
 void Firma::pridajVozidlo(Vozidlo* noveVozidlo)
 {
+	// TODO adding by datum evidencie  
 	evidenciaVozidla * noveEvidovaneVozidlo = new evidenciaVozidla(noveVozidlo, Datum::getAktualnyDatum());
 	arrayVozidiel->add(noveEvidovaneVozidlo);
 
-	// TODO datum evidencie  
 	// evidenciaVozidla * pom = new evidenciaVozidla(noveVozidlo, Datum::getAktualnyDatum());
 	//int index = 0;
 	//for (Vozidlo* var : *arrayVozidiel) {

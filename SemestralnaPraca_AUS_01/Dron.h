@@ -9,6 +9,7 @@ class Dron
 public:
 	Dron(const eDrony typDronu);
 	~Dron();
+	void setSerialNumber();
 private:
 	eDrony typ_;
 	int nosnost_;  //pis to v kilach

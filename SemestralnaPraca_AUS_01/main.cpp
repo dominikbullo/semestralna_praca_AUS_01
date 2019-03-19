@@ -26,8 +26,8 @@ int main()
 	firma->pridajVozidlo(new Vozidlo(10, 100));
 	firma->pridajVozidlo(new Vozidlo(10, 100));
 
-	Dron * dron = new Dron(eDrony::DVA);
 	Dron * dron1 = new Dron(eDrony::JEDEN);
+	Dron * dron2 = new Dron(eDrony::DVA);
 
 
 

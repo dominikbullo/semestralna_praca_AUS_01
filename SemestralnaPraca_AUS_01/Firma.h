@@ -3,7 +3,7 @@
 #include "structures/list/array_list.h"
 #include "Vozidlo.h"
 #include "Datum.h"
-#include "Dron.h"
+#include "Prekladisko.h"
 
 using namespace std;
 
@@ -34,5 +34,5 @@ public:
 	void pridajVozidlo(Vozidlo * noveVozidlo);
 private:
 	structures::ArrayList<evidenciaVozidla*> * arrayVozidiel;
-	structures::ArrayList<Dron*> * arrayPrekladisk;
+	structures::ArrayList<Prekladisko*> * arrayPrekladisk;
 };

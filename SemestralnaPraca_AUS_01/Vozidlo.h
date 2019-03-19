@@ -5,6 +5,7 @@
 
 #include "Konstatnty.h"
 #include "structures/heap_monitor.h"
+#include "Vozidlo.h"
 
 
 class Vozidlo
