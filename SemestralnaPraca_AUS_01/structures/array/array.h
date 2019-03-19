@@ -170,7 +170,8 @@ namespace structures
 	{
 		// NOTE: porovnávam vektory, size nemusím to je vo vektore
 		// chcem dáta, preto hviezdičky
-		return *vector_ == *other.vector_
+		// FIXED missing ;
+		return *vector_ == *other.vector_;
 	}
 
 	template<typename T>

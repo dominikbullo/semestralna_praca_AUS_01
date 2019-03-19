@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+  <Type Name="structures::Vector" >
+    <DisplayString>{{size={size_}}}</DisplayString>
+    <Expand>
+      <IndexListItems>
+        <Size>size_</Size>
+        <ValueNode>static_cast&lt;unsigned&gt;(*((char *)memory_ + $i))</ValueNode>
+      </IndexListItems>
+    </Expand>
+  </Type>
+  
+  <Type Name="structures::Array&lt;*&gt;">
+    <DisplayString>{{size={size_}}}</DisplayString>
+    <Expand>
+      <ArrayItems>
+        <Size>size_</Size>
+        <ValuePointer>($T1*)(vector_->memory_)</ValuePointer>
+      </ArrayItems>
+    </Expand>
+  </Type>
+</AutoVisualizer>

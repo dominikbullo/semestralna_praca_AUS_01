@@ -5,118 +5,6 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SemestralnaPraca_AUS_01", "SemestralnaPraca_AUS_01\SemestralnaPraca_AUS_01.vcxproj", "{C6893CFE-1846-487C-91C8-B2D0F799A3C1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "structures", "structures", "{8BCAB974-2D61-444C-853E-1701AB0F96EE}"
-	ProjectSection(SolutionItems) = preProject
-		SemestralnaPraca_AUS_01\structures\ds_routines.cpp = SemestralnaPraca_AUS_01\structures\ds_routines.cpp
-		SemestralnaPraca_AUS_01\structures\ds_routines.h = SemestralnaPraca_AUS_01\structures\ds_routines.h
-		SemestralnaPraca_AUS_01\structures\ds_structure_factory.cpp = SemestralnaPraca_AUS_01\structures\ds_structure_factory.cpp
-		SemestralnaPraca_AUS_01\structures\ds_structure_factory.h = SemestralnaPraca_AUS_01\structures\ds_structure_factory.h
-		SemestralnaPraca_AUS_01\structures\ds_structure_types.h = SemestralnaPraca_AUS_01\structures\ds_structure_types.h
-		SemestralnaPraca_AUS_01\structures\heap_monitor.h = SemestralnaPraca_AUS_01\structures\heap_monitor.h
-		SemestralnaPraca_AUS_01\structures\memory_routines.cpp = SemestralnaPraca_AUS_01\structures\memory_routines.cpp
-		SemestralnaPraca_AUS_01\structures\memory_routines.h = SemestralnaPraca_AUS_01\structures\memory_routines.h
-		SemestralnaPraca_AUS_01\structures\structure.cpp = SemestralnaPraca_AUS_01\structures\structure.cpp
-		SemestralnaPraca_AUS_01\structures\structure.h = SemestralnaPraca_AUS_01\structures\structure.h
-		SemestralnaPraca_AUS_01\structures\structure_iterator.h = SemestralnaPraca_AUS_01\structures\structure_iterator.h
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "array", "array", "{666DFF4B-74E9-4FB4-A147-A27BBED82358}"
-	ProjectSection(SolutionItems) = preProject
-		SemestralnaPraca_AUS_01\structures\array\array.h = SemestralnaPraca_AUS_01\structures\array\array.h
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "graph", "graph", "{C8D8CEF4-C845-44CC-8D0E-B51451618B7B}"
-	ProjectSection(SolutionItems) = preProject
-		SemestralnaPraca_AUS_01\structures\graph\bi_star_graph.cpp = SemestralnaPraca_AUS_01\structures\graph\bi_star_graph.cpp
-		SemestralnaPraca_AUS_01\structures\graph\bi_star_graph.h = SemestralnaPraca_AUS_01\structures\graph\bi_star_graph.h
-		SemestralnaPraca_AUS_01\structures\graph\forward_star_graph.cpp = SemestralnaPraca_AUS_01\structures\graph\forward_star_graph.cpp
-		SemestralnaPraca_AUS_01\structures\graph\forward_star_graph.h = SemestralnaPraca_AUS_01\structures\graph\forward_star_graph.h
-		SemestralnaPraca_AUS_01\structures\graph\graph.cpp = SemestralnaPraca_AUS_01\structures\graph\graph.cpp
-		SemestralnaPraca_AUS_01\structures\graph\graph.h = SemestralnaPraca_AUS_01\structures\graph\graph.h
-		SemestralnaPraca_AUS_01\structures\graph\graph_with_registration.cpp = SemestralnaPraca_AUS_01\structures\graph\graph_with_registration.cpp
-		SemestralnaPraca_AUS_01\structures\graph\graph_with_registration.h = SemestralnaPraca_AUS_01\structures\graph\graph_with_registration.h
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "algorithms", "algorithms", "{94001BB5-F6EB-4346-AAA0-6DC051D85737}"
-	ProjectSection(SolutionItems) = preProject
-		SemestralnaPraca_AUS_01\structures\graph\algorithms\dijkstra.cpp = SemestralnaPraca_AUS_01\structures\graph\algorithms\dijkstra.cpp
-		SemestralnaPraca_AUS_01\structures\graph\algorithms\dijkstra.h = SemestralnaPraca_AUS_01\structures\graph\algorithms\dijkstra.h
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "list", "list", "{F1EDE022-F880-44B9-BE27-65A2A70B44E8}"
-	ProjectSection(SolutionItems) = preProject
-		SemestralnaPraca_AUS_01\structures\list\array_list.h = SemestralnaPraca_AUS_01\structures\list\array_list.h
-		SemestralnaPraca_AUS_01\structures\list\linked_list.h = SemestralnaPraca_AUS_01\structures\list\linked_list.h
-		SemestralnaPraca_AUS_01\structures\list\list.h = SemestralnaPraca_AUS_01\structures\list\list.h
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "priority_queue", "priority_queue", "{D6BB2F8F-3B3A-4BFF-AB22-626B3E1600C7}"
-	ProjectSection(SolutionItems) = preProject
-		SemestralnaPraca_AUS_01\structures\priority_queue\heap.h = SemestralnaPraca_AUS_01\structures\priority_queue\heap.h
-		SemestralnaPraca_AUS_01\structures\priority_queue\priority_queue.h = SemestralnaPraca_AUS_01\structures\priority_queue\priority_queue.h
-		SemestralnaPraca_AUS_01\structures\priority_queue\priority_queue_limited_sorted_array_list.h = SemestralnaPraca_AUS_01\structures\priority_queue\priority_queue_limited_sorted_array_list.h
-		SemestralnaPraca_AUS_01\structures\priority_queue\priority_queue_linked_list.h = SemestralnaPraca_AUS_01\structures\priority_queue\priority_queue_linked_list.h
-		SemestralnaPraca_AUS_01\structures\priority_queue\priority_queue_list.h = SemestralnaPraca_AUS_01\structures\priority_queue\priority_queue_list.h
-		SemestralnaPraca_AUS_01\structures\priority_queue\priority_queue_sorted_array_list.h = SemestralnaPraca_AUS_01\structures\priority_queue\priority_queue_sorted_array_list.h
-		SemestralnaPraca_AUS_01\structures\priority_queue\priority_queue_two_lists.h = SemestralnaPraca_AUS_01\structures\priority_queue\priority_queue_two_lists.h
-		SemestralnaPraca_AUS_01\structures\priority_queue\priority_queue_unsorted_array_list.h = SemestralnaPraca_AUS_01\structures\priority_queue\priority_queue_unsorted_array_list.h
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "queue", "queue", "{D347FB09-8E1A-43FF-A379-F4FE8115FC3E}"
-	ProjectSection(SolutionItems) = preProject
-		SemestralnaPraca_AUS_01\structures\queue\explicit_queue.h = SemestralnaPraca_AUS_01\structures\queue\explicit_queue.h
-		SemestralnaPraca_AUS_01\structures\queue\implicit_queue.h = SemestralnaPraca_AUS_01\structures\queue\implicit_queue.h
-		SemestralnaPraca_AUS_01\structures\queue\queue.h = SemestralnaPraca_AUS_01\structures\queue\queue.h
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "stack", "stack", "{94120BE4-FF64-495F-8678-CD0DCE757457}"
-	ProjectSection(SolutionItems) = preProject
-		SemestralnaPraca_AUS_01\structures\stack\explicit_stack.h = SemestralnaPraca_AUS_01\structures\stack\explicit_stack.h
-		SemestralnaPraca_AUS_01\structures\stack\implicit_stack.h = SemestralnaPraca_AUS_01\structures\stack\implicit_stack.h
-		SemestralnaPraca_AUS_01\structures\stack\stack.h = SemestralnaPraca_AUS_01\structures\stack\stack.h
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "table", "table", "{38CA3907-5E69-4652-A10B-8D69D6640134}"
-	ProjectSection(SolutionItems) = preProject
-		SemestralnaPraca_AUS_01\structures\table\binary_search_tree.h = SemestralnaPraca_AUS_01\structures\table\binary_search_tree.h
-		SemestralnaPraca_AUS_01\structures\table\hash_table.h = SemestralnaPraca_AUS_01\structures\table\hash_table.h
-		SemestralnaPraca_AUS_01\structures\table\linked_table.h = SemestralnaPraca_AUS_01\structures\table\linked_table.h
-		SemestralnaPraca_AUS_01\structures\table\sequence_table.h = SemestralnaPraca_AUS_01\structures\table\sequence_table.h
-		SemestralnaPraca_AUS_01\structures\table\sorted_sequence_table.h = SemestralnaPraca_AUS_01\structures\table\sorted_sequence_table.h
-		SemestralnaPraca_AUS_01\structures\table\table.h = SemestralnaPraca_AUS_01\structures\table\table.h
-		SemestralnaPraca_AUS_01\structures\table\treap.h = SemestralnaPraca_AUS_01\structures\table\treap.h
-		SemestralnaPraca_AUS_01\structures\table\unsorted_sequence_table.h = SemestralnaPraca_AUS_01\structures\table\unsorted_sequence_table.h
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sorting", "sorting", "{E24F1432-BE9B-4E4B-B8C6-662E74C78A9C}"
-	ProjectSection(SolutionItems) = preProject
-		SemestralnaPraca_AUS_01\structures\table\sorting\bubble_sort.h = SemestralnaPraca_AUS_01\structures\table\sorting\bubble_sort.h
-		SemestralnaPraca_AUS_01\structures\table\sorting\heap_sort.h = SemestralnaPraca_AUS_01\structures\table\sorting\heap_sort.h
-		SemestralnaPraca_AUS_01\structures\table\sorting\insert_sort.h = SemestralnaPraca_AUS_01\structures\table\sorting\insert_sort.h
-		SemestralnaPraca_AUS_01\structures\table\sorting\merge_sort.h = SemestralnaPraca_AUS_01\structures\table\sorting\merge_sort.h
-		SemestralnaPraca_AUS_01\structures\table\sorting\quick_sort.h = SemestralnaPraca_AUS_01\structures\table\sorting\quick_sort.h
-		SemestralnaPraca_AUS_01\structures\table\sorting\radix_sort.h = SemestralnaPraca_AUS_01\structures\table\sorting\radix_sort.h
-		SemestralnaPraca_AUS_01\structures\table\sorting\select_sort.h = SemestralnaPraca_AUS_01\structures\table\sorting\select_sort.h
-		SemestralnaPraca_AUS_01\structures\table\sorting\shell_sort.h = SemestralnaPraca_AUS_01\structures\table\sorting\shell_sort.h
-		SemestralnaPraca_AUS_01\structures\table\sorting\shuffle.h = SemestralnaPraca_AUS_01\structures\table\sorting\shuffle.h
-		SemestralnaPraca_AUS_01\structures\table\sorting\sort.cpp = SemestralnaPraca_AUS_01\structures\table\sorting\sort.cpp
-		SemestralnaPraca_AUS_01\structures\table\sorting\sort.h = SemestralnaPraca_AUS_01\structures\table\sorting\sort.h
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tree", "tree", "{D1B3D717-80F3-4B8B-95F2-FC90A69B9306}"
-	ProjectSection(SolutionItems) = preProject
-		SemestralnaPraca_AUS_01\structures\tree\binary_tree.h = SemestralnaPraca_AUS_01\structures\tree\binary_tree.h
-		SemestralnaPraca_AUS_01\structures\tree\k_way_tree.h = SemestralnaPraca_AUS_01\structures\tree\k_way_tree.h
-		SemestralnaPraca_AUS_01\structures\tree\multi_way_tree.h = SemestralnaPraca_AUS_01\structures\tree\multi_way_tree.h
-		SemestralnaPraca_AUS_01\structures\tree\tree.h = SemestralnaPraca_AUS_01\structures\tree\tree.h
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vector", "vector", "{A651E309-9518-4657-8724-7897E10213CA}"
-	ProjectSection(SolutionItems) = preProject
-		SemestralnaPraca_AUS_01\structures\vector\vector.cpp = SemestralnaPraca_AUS_01\structures\vector\vector.cpp
-		SemestralnaPraca_AUS_01\structures\vector\vector.h = SemestralnaPraca_AUS_01\structures\vector\vector.h
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -136,19 +24,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{666DFF4B-74E9-4FB4-A147-A27BBED82358} = {8BCAB974-2D61-444C-853E-1701AB0F96EE}
-		{C8D8CEF4-C845-44CC-8D0E-B51451618B7B} = {8BCAB974-2D61-444C-853E-1701AB0F96EE}
-		{94001BB5-F6EB-4346-AAA0-6DC051D85737} = {C8D8CEF4-C845-44CC-8D0E-B51451618B7B}
-		{F1EDE022-F880-44B9-BE27-65A2A70B44E8} = {8BCAB974-2D61-444C-853E-1701AB0F96EE}
-		{D6BB2F8F-3B3A-4BFF-AB22-626B3E1600C7} = {8BCAB974-2D61-444C-853E-1701AB0F96EE}
-		{D347FB09-8E1A-43FF-A379-F4FE8115FC3E} = {8BCAB974-2D61-444C-853E-1701AB0F96EE}
-		{94120BE4-FF64-495F-8678-CD0DCE757457} = {8BCAB974-2D61-444C-853E-1701AB0F96EE}
-		{38CA3907-5E69-4652-A10B-8D69D6640134} = {8BCAB974-2D61-444C-853E-1701AB0F96EE}
-		{E24F1432-BE9B-4E4B-B8C6-662E74C78A9C} = {38CA3907-5E69-4652-A10B-8D69D6640134}
-		{D1B3D717-80F3-4B8B-95F2-FC90A69B9306} = {8BCAB974-2D61-444C-853E-1701AB0F96EE}
-		{A651E309-9518-4657-8724-7897E10213CA} = {8BCAB974-2D61-444C-853E-1701AB0F96EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9BD13C20-4B12-4289-816A-838A69EBF003}

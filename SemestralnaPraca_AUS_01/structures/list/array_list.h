@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "list.h"
 #include "../structure_iterator.h"
@@ -22,7 +22,7 @@ namespace structures
 
 		/// <summary> Destruktor. </summary>
 		~ArrayList();
-		
+
 		/// <summary> Operacia klonovania. Vytvori a vrati duplikat zoznamu. </summary>
 		/// <returns> Ukazovatel na klon struktury. </returns>
 		Structure* clone() const override;
@@ -82,7 +82,7 @@ namespace structures
 
 		/// <summary> Vymaze zoznam. </summary>
 		void clear() override;
-	
+
 		/// <summary> Vrati skutocny iterator na zaciatok struktury </summary>
 		/// <returns> Iterator na zaciatok struktury. </returns>
 		/// <remarks> Zabezpecuje polymorfizmus. </remarks>
@@ -140,25 +140,33 @@ namespace structures
 	};
 
 	template<typename T>
-	inline ArrayList<T>::ArrayList():
-		List(),
-		array_(new Array<T>(4)),
+	inline ArrayList<T>::ArrayList() :
+		// NOTE: prázdny ArrayList
+		List(), // konštruktor predka
+		array_(new Array<T>(4)), // definovať atribúty - 4 -> ľubovoľné -> podľa účelu zoznamu
 		size_(0)
 	{
 	}
 
 	template<typename T>
-	inline ArrayList<T>::ArrayList(const ArrayList<T>& other):
+	// NOTE: implicitný -> 1 blok -> 1 adresa
+	// kopírovací konštruktor
+	inline ArrayList<T>::ArrayList(const ArrayList<T>& other) :
 		List(),
-		array_(new Array<T>(*other.array_)),
-		size_(other.size_)
+		array_(new Array<T>(*other.array_)), // kópia poľa druhého arraylistu
+		size_(other.size_) //nastavím si veľkosť kópie
 	{
 	}
 
 	template<typename T>
 	inline ArrayList<T>::~ArrayList()
 	{
-		// TODO 03: ArrayList
+		// nutné
+		delete array_;
+
+		// dobrovoľné
+		array_ = nullptr;
+		size_ = 0;
 	}
 
 	template<typename T>
@@ -186,85 +194,145 @@ namespace structures
 	template<typename T>
 	inline ArrayList<T>& ArrayList<T>::operator=(const ArrayList<T>& other)
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::operator=: Not implemented yet.");
+		if (this != &other)
+		{
+			delete array_;
+			array_ = new Array<T>(*other.array_);
+			size_ = other.size_;
+		}
+		return *this;
 	}
 
 	template<typename T>
 	inline T & ArrayList<T>::operator[](const int index)
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::operator[]: Not implemented yet.");
+		DSRoutines::rangeCheckExcept(index, size_, "Index out of range in ArrayList");
+		return (*array_)[index];
 	}
 
 	template<typename T>
 	inline const T ArrayList<T>::operator[](const int index) const
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::operator[]: Not implemented yet.");
+		DSRoutines::rangeCheckExcept(index, size_, "Index out of range in ArrayList");
+		return (*array_)[index];
 	}
 
 	template<typename T>
 	inline void ArrayList<T>::add(const T & data)
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::add: Not implemented yet.");
+		// NOTE: pridávam prvky na koniec
+
+		// pridávam do toho istého, až kým nemusím zväčšiť pole
+		if (array_->size() == size_)
+		{
+			enlarge();
+		}
+		//size nie je in a využívam hranaté zátvorky na poli, kde očakávam int
+		(*array_)[static_cast<int>(size_++)] = data;
 	}
 
 	template<typename T>
 	inline void ArrayList<T>::insert(const T & data, const int index)
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::insert: Not implemented yet.");
+		// NOTE: kdekoľvek
+		if (index == static_cast<int>(size_))
+		{
+			ArrayList<T>::add(data);
+		}
+		else
+		{
+			DSRoutines::rangeCheckExcept(index, size_ + 1, "Index out of range in ArrayList");
+
+			//ak mám pole plné, tak zo zväčším
+			if (array_->size() == size_)
+			{
+				enlarge();
+			}
+			// kopírujem všetko po index
+			// posuniem do prava pole akokeby
+			Array<T>::copy((*array_), index, (*array_), index + 1, static_cast<int>(size_) - index);
+			// vyplní údaje, ktoré som chcel
+			(*array_)[index] = data;
+			//zväčším size
+			size_++;
+		}
+
 	}
 
 	template<typename T>
 	inline bool ArrayList<T>::tryRemove(const T & data)
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::tryRemove: Not implemented yet.");
+		// NOTE: vymaže prvý výskyt prvku, ak existuje
+
+		int index = getIndexOf(data);
+		// ak ho nájdem tak ho vymažem a vŕatim true
+		if (index != -1)
+		{
+			removeAt(index);
+			return true;
+		}
+		// inak vrátim false
+		return false;
 	}
 
 	template<typename T>
 	inline T ArrayList<T>::removeAt(const int index)
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::removeAt: Not implemented yet.");
+		// FIXME: zmenšiť pole ? alebo nie ?
+		// NOTE: moŽno ak je veľké množstvo voľného priestoru
+
+
+		DSRoutines::rangeCheckExcept(index, static_cast<int>(size_), "Index out of range in ArrayList");
+		T temp = (*array_)[index];
+		// posuniem doľava pole akokeby
+		Array<T>::copy(*array_, index + 1, *array_, index, static_cast<int>(size_) - index - 1);
+		// zmenším size a vrátim
+		size_--;
+		// tie ostatné ma nezaujíma -> aj keď tam je bordel
+		return temp;
 	}
 
 	template<typename T>
 	inline int ArrayList<T>::getIndexOf(const T & data)
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::getIndexOf: Not implemented yet.");
+		// lineárna zložitosť, prehľadávam všetky prvky, môžem si dovoliť -> rýchle
+		for (int index = 0; index < static_cast<int>(size_); index++)
+		{
+			if ((*array_)[index] == data)
+			{
+				return index;
+			}
+		}
+		return -1;
 	}
 
 	template<typename T>
 	inline void ArrayList<T>::clear()
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::clear: Not implemented yet.");
+		size_ = 0;
 	}
 
 	template<typename T>
 	inline Iterator<T>* ArrayList<T>::getBeginIterator() const
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::getBeginIterator: Not implemented yet.");
+		return new ArrayListIterator(this, 0);
 	}
 
 	template<typename T>
 	inline Iterator<T>* ArrayList<T>::getEndIterator() const
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::getEndIterator: Not implemented yet.");
+		return new ArrayListIterator(this, size_);
 	}
 
 	template<typename T>
 	inline void ArrayList<T>::enlarge()
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::enlarge: Not implemented yet.");
+		// zväčším pole o dvojnásobok
+		Array<T>* newArray = new Array<T>(size_ * 2);
+		Array<T>::copy(*array_, 0, *newArray, 0, static_cast<int>(size_));
+		delete array_;
+		array_ = newArray;
+
 	}
 
 	template<typename T>
@@ -273,39 +341,33 @@ namespace structures
 		position_(position)
 	{
 	}
-
-	template<typename T>
-	inline ArrayList<T>::ArrayListIterator::~ArrayListIterator()
-	{
-		// TODO 03: ArrayList<T>::ArrayListIterator
-	}
-
 	template<typename T>
 	inline Iterator<T>& ArrayList<T>::ArrayListIterator::operator=(const Iterator<T>& other)
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::ArrayListIterator::operator=: Not implemented yet.");
+		if (this != &other) {
+			arrayList_ = dynamic_cast<const ArrayListIterator&>(other).arrayList_;
+			position_ = dynamic_cast<const ArrayListIterator&>(other).position_;
+		}
+		return *this;
 	}
 
 	template<typename T>
 	inline bool ArrayList<T>::ArrayListIterator::operator!=(const Iterator<T>& other)
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::ArrayListIterator::operator!=: Not implemented yet.");
+		return arrayList_ != dynamic_cast<const ArrayListIterator&>(other).arrayList_ || position_ != dynamic_cast<const ArrayListIterator&>(other).position_;
 	}
 
 	template<typename T>
 	inline const T ArrayList<T>::ArrayListIterator::operator*()
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::ArrayListIterator::operator*: Not implemented yet.");
+		return (*arrayList_)[position_];
 	}
 
 	template<typename T>
 	inline Iterator<T>& ArrayList<T>::ArrayListIterator::operator++()
 	{
-		// TODO 03: ArrayList
-		throw std::exception("ArrayList<T>::ArrayListIterator::operator++: Not implemented yet.");
+		++position_;
+		return *this;
 	}
 
 }
