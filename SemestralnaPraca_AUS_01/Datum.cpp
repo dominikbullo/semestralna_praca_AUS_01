@@ -1,8 +1,10 @@
 #pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS -> because of time 
 #include "Datum.h"
+#include <iostream>
+#include <ctime>
 
 Datum* Datum::instance = 0;
-std::string Datum::datum_ = "01/01/2001";
+std::string Datum::datum_ = "01/01/2019";
 
 void Datum::posunDen()
 {

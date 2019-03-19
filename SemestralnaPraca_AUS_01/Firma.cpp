@@ -16,15 +16,13 @@ void Firma::pridajPrekladisko(Prekladisko* novePrekladisko)
 	arrayPrekladisk->add(novePrekladisko);
 }
 
+// TODO: vklada vozidlá poporade -> pod¾a èasu a porovnáva 
+// FIXME vklada vozidlá na základe dátumu 
 void Firma::pridajVozidlo(Vozidlo* noveVozidlo)
 {
-	// TODO adding by datum evidencie  
 	evidenciaVozidla * noveEvidovaneVozidlo = new evidenciaVozidla(noveVozidlo, Datum::getAktualnyDatum());
-
 	//int index = 0;
 	//for (evidenciaVozidla* var : *arrayVozidiel) {
-	//	// TODO: vklada vozidlá poporade -> pod¾a èasu a porovnáva 
-	//	// FIXME vklada vozidlá na základe dátumu 
 	//	if (noveEvidovaneVozidlo->getDatum <= var->getDatum()) {
 	//		arrayVozidiel->insert(noveEvidovaneVozidlo, index);
 	//		return;
@@ -51,7 +49,6 @@ Vozidlo * evidenciaVozidla::dajVozidlo()
 {
 	return voz_;
 }
-
 
 
 string evidenciaVozidla::getDatum()

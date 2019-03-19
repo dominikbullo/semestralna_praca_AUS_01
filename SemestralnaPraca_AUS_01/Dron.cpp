@@ -33,3 +33,7 @@ Dron::~Dron()
 void Dron::setSerialNumber() {
 }
 
+void Dron::toString()
+{
+	std::cout << "Typ - " << nosnost_ << primernaRychlost_ << maxDobaLetu_ << casNaNabitie10Percent_ << std::endl;
+}
