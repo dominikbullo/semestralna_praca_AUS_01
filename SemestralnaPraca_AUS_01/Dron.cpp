@@ -1,10 +1,10 @@
 #include "Dron.h"
-#include "Konstatnty.h"
 
 
 Dron::Dron(const eDrony typDronu)
 {
 	typ_ = typDronu;
+	datumEvidencie_ = Datum::getAktualnyDatum();
 
 	switch (typDronu) {
 	case eDrony::JEDEN:

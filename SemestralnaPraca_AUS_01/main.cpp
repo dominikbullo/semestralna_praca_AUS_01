@@ -20,7 +20,7 @@ int main()
 
 	// TODO 2: Vypísanie zoznamu vozidiel podľa dátumu zaradenia do evidencie. Vypíše sa ŠPZ,
 	// nosnosť vozidla a celkové prevádzkové náklady od dátumu zaradenia do evidencie.
-
+	firma->vypisZoznamVozidiel();
 
 	// TODO 3: Pridanie nového dronu do lokálneho prekladiska. Dron je charakterizovaný sériovým
 	//číslom a typom, ktorý určuje jeho ďalšie atribúty, ktorými sú nosnosť, rýchlosť, doba letu a doba nabíjania.
@@ -68,7 +68,7 @@ int main()
 	//Dron * dron2 = new Dron(eDrony::DVA);
 
 
-
+	delete firma;
 	system("pause");
 	return 0;
 }

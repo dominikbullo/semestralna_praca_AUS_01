@@ -5,27 +5,6 @@
 #include "Datum.h"
 #include "Prekladisko.h"
 
-using namespace std;
-
-class evidenciaVozidla
-{
-public:
-	evidenciaVozidla(Vozidlo * noveVoz, string datum);
-	Vozidlo& getVozidlo();
-	Vozidlo* dajVozidlo();
-	string getDatum();
-	void setDatum(string dat) {
-		datumEvidencie_ = dat;
-	}
-	~evidenciaVozidla();
-
-
-private:
-	Vozidlo * voz_;
-	string datumEvidencie_;
-};
-
-
 class Firma
 {
 public:
@@ -33,7 +12,8 @@ public:
 	~Firma();
 	void pridajPrekladisko(Prekladisko * noveVozidlo);
 	void pridajVozidlo(Vozidlo * noveVozidlo);
+	void vypisZoznamVozidiel();
 private:
-	structures::ArrayList<evidenciaVozidla*> * arrayVozidiel;
+	structures::ArrayList<Vozidlo*> * arrayVozidiel;
 	structures::ArrayList<Prekladisko*> * arrayPrekladisk;
 };
