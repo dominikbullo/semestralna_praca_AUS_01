@@ -3,8 +3,9 @@
 
 
 
-Prekladisko::Prekladisko()
+Prekladisko::Prekladisko(std::string okres)
 {
+	okres_ = okres;
 	arrayDronov = new structures::ArrayList<Dron*>();
 }
 

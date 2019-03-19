@@ -6,10 +6,11 @@
 class Prekladisko
 {
 public:
-	Prekladisko();
+	Prekladisko(std::string okres);
 	~Prekladisko();
 	void pridajDron(Dron * novyDron);
 private:
 	structures::ArrayList<Dron*> * arrayDronov;
+	std::string okres_;
 };
 
