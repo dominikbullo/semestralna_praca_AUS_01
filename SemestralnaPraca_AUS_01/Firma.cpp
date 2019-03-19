@@ -1,10 +1,10 @@
 #include "Firma.h"
-
-
+#include "Dron.h"
 
 Firma::Firma()
 {
-	arrayVozidiel = new structures::ArrayList<Vozidlo*>();
+	arrayVozidiel = new structures::ArrayList<evidenciaVozidla*>();
+	arrayPrekladisk = new structures::ArrayList<Dron*>();
 }
 
 
@@ -12,20 +12,23 @@ Firma::~Firma()
 {
 }
 
-void Firma::pridajVozidlo(Vozidlo * noveVozidlo)
+void Firma::pridajVozidlo(Vozidlo* noveVozidlo)
 {
+	evidenciaVozidla * noveEvidovaneVozidlo = new evidenciaVozidla(noveVozidlo, Datum::getAktualnyDatum());
+	arrayVozidiel->add(noveEvidovaneVozidlo);
+
 	// TODO datum evidencie  
 	// evidenciaVozidla * pom = new evidenciaVozidla(noveVozidlo, Datum::getAktualnyDatum());
-	int index = 0;
-	for (Vozidlo* var : *arrayVozidiel) {
-		// TODO: vklada vozidlá poporade -> pod¾a èasu a porovnáva 
-		if (noveVozidlo->getSPZ() <= var->getSPZ()) {
-			arrayVozidiel->insert(noveVozidlo, index);
-			return;
-		}
-		index++;
-	}
-	arrayVozidiel->add(noveVozidlo);
+	//int index = 0;
+	//for (Vozidlo* var : *arrayVozidiel) {
+	//	// TODO: vklada vozidlá poporade -> pod¾a èasu a porovnáva 
+	//	if (noveVozidlo->getSPZ() <= var->getSPZ()) {
+	//		arrayVozidiel->insert(noveVozidlo, index);
+	//		return;
+	//	}
+	//	index++;
+	//}
+	//arrayVozidiel->add(noveVozidlo);
 
 }
 

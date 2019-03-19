@@ -321,7 +321,7 @@ namespace structures
 	template<typename T>
 	inline Iterator<T>* ArrayList<T>::getEndIterator() const
 	{
-		return new ArrayListIterator(this, size_);
+		return new ArrayList<T>::ArrayListIterator(this, static_cast<int>(size_));
 	}
 
 	template<typename T>
@@ -334,19 +334,27 @@ namespace structures
 		array_ = newArray;
 
 	}
-
 	template<typename T>
 	inline ArrayList<T>::ArrayListIterator::ArrayListIterator(const ArrayList<T>* arrayList, int position) :
 		arrayList_(arrayList),
 		position_(position)
 	{
 	}
+
+	template<typename T>
+	inline ArrayList<T>::ArrayListIterator::~ArrayListIterator()
+	{
+		position_ = 0;
+	}
+
 	template<typename T>
 	inline Iterator<T>& ArrayList<T>::ArrayListIterator::operator=(const Iterator<T>& other)
 	{
-		if (this != &other) {
-			arrayList_ = dynamic_cast<const ArrayListIterator&>(other).arrayList_;
-			position_ = dynamic_cast<const ArrayListIterator&>(other).position_;
+		if (this != &other)
+		{
+			const ArrayList<T>::ArrayListIterator temp = dynamic_cast<const ArrayList<T>::ArrayListIterator &>(other);
+			this->arrayList_ = temp.arrayList_;
+			this->position_ = temp.position_;
 		}
 		return *this;
 	}
@@ -354,7 +362,8 @@ namespace structures
 	template<typename T>
 	inline bool ArrayList<T>::ArrayListIterator::operator!=(const Iterator<T>& other)
 	{
-		return arrayList_ != dynamic_cast<const ArrayListIterator&>(other).arrayList_ || position_ != dynamic_cast<const ArrayListIterator&>(other).position_;
+		const ArrayList<T>::ArrayListIterator temp = dynamic_cast<const ArrayList<T>::ArrayListIterator &>(other);
+		return position_ != temp.position_;
 	}
 
 	template<typename T>
@@ -366,8 +375,7 @@ namespace structures
 	template<typename T>
 	inline Iterator<T>& ArrayList<T>::ArrayListIterator::operator++()
 	{
-		++position_;
+		position_++;
 		return *this;
 	}
-
 }

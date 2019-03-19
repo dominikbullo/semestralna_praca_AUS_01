@@ -183,13 +183,22 @@
     <ClInclude Include="Firma.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Prekladisko.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Objednávka.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Zákazník.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Prekladisko.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Datum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CentralnySklad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dron.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -233,13 +242,22 @@
     <ClCompile Include="Firma.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Prekladisko.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Objednávka.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Zákazník.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Prekladisko.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Datum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CentralnySklad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dron.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

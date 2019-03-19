@@ -2,6 +2,8 @@
 #include "structures/heap_monitor.h"
 #include "structures/list/array_list.h"
 #include "Vozidlo.h"
+#include "Datum.h"
+#include "Dron.h"
 
 using namespace std;
 
@@ -31,5 +33,6 @@ public:
 	~Firma();
 	void pridajVozidlo(Vozidlo * noveVozidlo);
 private:
-	structures::ArrayList<Vozidlo*> * arrayVozidiel;
+	structures::ArrayList<evidenciaVozidla*> * arrayVozidiel;
+	structures::ArrayList<Dron*> * arrayPrekladisk;
 };

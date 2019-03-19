@@ -3,8 +3,9 @@
 #include "structures/array/array.h"
 #include "structures/list/array_list.h"
 #include "Vozidlo.h"
+#include "Datum.h"
+#include "Dron.h"
 #include "Firma.h"
-
 
 int main()
 {
@@ -19,6 +20,15 @@ int main()
 	//každom drone sa vypíše jeho dátum zaradenia do evidencie, typ, celkový poèet nalietaných hodín a celkový poèet prepravených zásielok.
 
 	Firma * firma = new Firma();
+	firma->pridajVozidlo(new Vozidlo(10, 100));
+	firma->pridajVozidlo(new Vozidlo(10, 100));
+	firma->pridajVozidlo(new Vozidlo(10, 100));
+	firma->pridajVozidlo(new Vozidlo(10, 100));
+	firma->pridajVozidlo(new Vozidlo(10, 100));
+
+	Dron * dron = new Dron(eDrony::DVA);
+	Dron * dron1 = new Dron(eDrony::JEDEN);
+
 
 
 	system("pause");
