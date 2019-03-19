@@ -14,9 +14,11 @@ Firma::~Firma()
 
 void Firma::pridajVozidlo(Vozidlo * noveVozidlo)
 {
+	// TODO datum evidencie  
+	// evidenciaVozidla * pom = new evidenciaVozidla(noveVozidlo, Datum::getAktualnyDatum());
 	int index = 0;
 	for (Vozidlo* var : *arrayVozidiel) {
-		// TODO: vklada vozidlá poporade -> pod¾a nejakého èasu ? 
+		// TODO: vklada vozidlá poporade -> pod¾a èasu a porovnáva 
 		if (noveVozidlo->getSPZ() <= var->getSPZ()) {
 			arrayVozidiel->insert(noveVozidlo, index);
 			return;
@@ -25,4 +27,33 @@ void Firma::pridajVozidlo(Vozidlo * noveVozidlo)
 	}
 	arrayVozidiel->add(noveVozidlo);
 
+}
+
+// EVIDENCIE
+//vozidla
+evidenciaVozidla::evidenciaVozidla(Vozidlo * novyVoz, string datum) :
+	voz_(novyVoz), datumEvidencie_(datum)
+{
+}
+
+Vozidlo & evidenciaVozidla::getVozidlo()
+{
+	return *voz_;
+}
+
+Vozidlo * evidenciaVozidla::dajVozidlo()
+{
+	return voz_;
+}
+
+
+
+string evidenciaVozidla::getDatum()
+{
+	return datumEvidencie_;
+}
+
+evidenciaVozidla::~evidenciaVozidla()
+{
+	delete voz_;
 }

@@ -127,6 +127,8 @@
   <ItemGroup>
     <ClInclude Include="Firma.h" />
     <ClInclude Include="Konstatnty.h" />
+    <ClInclude Include="Objednávka.h" />
+    <ClInclude Include="Prekladisko.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="structures\array\array.h" />
     <ClInclude Include="structures\ds_routines.h" />
@@ -181,10 +183,13 @@
     <ClInclude Include="structures\tree\tree.h" />
     <ClInclude Include="structures\vector\vector.h" />
     <ClInclude Include="Vozidlo.h" />
+    <ClInclude Include="Zákazník.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Firma.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Objednávka.cpp" />
+    <ClCompile Include="Prekladisko.cpp" />
     <ClCompile Include="structures\ds_routines.cpp" />
     <ClCompile Include="structures\graph\algorithms\dijkstra.cpp" />
     <ClCompile Include="structures\graph\bi_star_graph.cpp" />
@@ -196,6 +201,7 @@
     <ClCompile Include="structures\table\sorting\sort.cpp" />
     <ClCompile Include="structures\vector\vector.cpp" />
     <ClCompile Include="Vozidlo.cpp" />
+    <ClCompile Include="Zákazník.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="aus.natvis" />

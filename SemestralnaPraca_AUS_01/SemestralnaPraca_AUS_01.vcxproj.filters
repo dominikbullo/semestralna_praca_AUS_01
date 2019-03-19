@@ -183,6 +183,15 @@
     <ClInclude Include="Firma.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Prekladisko.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Objednávka.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Zákazník.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -222,6 +231,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Firma.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Prekladisko.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Objednávka.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Zákazník.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
