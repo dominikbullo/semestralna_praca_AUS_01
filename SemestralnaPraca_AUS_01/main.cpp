@@ -13,29 +13,35 @@ int main()
 	initHeapMonitor();
 	Firma * firma = new Firma();
 
-	// TODO 1: Pridanie nového vozidla do vozového parku spoločnosti AoE. Vozidlo je jednoznačne
+	// NOTE 1: Pridanie nového vozidla do vozového parku spoločnosti AoE. Vozidlo je jednoznačne
 	// identifikovateľné na základe ŠPZ.Každé vozidlo má definovanú nosnosť(v tonách)a prevádzkové náklady(EUR / región).
+
+	// TODO pridávanie vozidla -> SPZ spýtať sa čo a ako ? 
 	firma->pridajVozidlo(new Vozidlo(10, 100));
 	firma->pridajVozidlo(new Vozidlo(14560, 1045550));
 
-	// TODO 2: Vypísanie zoznamu vozidiel podľa dátumu zaradenia do evidencie. Vypíše sa ŠPZ,
+	// NOTE 2: Vypísanie zoznamu vozidiel podľa dátumu zaradenia do evidencie. Vypíše sa ŠPZ,
 	// nosnosť vozidla a celkové prevádzkové náklady od dátumu zaradenia do evidencie.
+
+	// NOTE -> zaraďujem postupne, je treba podľa dátumu ?
 	firma->vypisZoznamVozidiel();
 
-	// TODO 3: Pridanie nového dronu do lokálneho prekladiska. Dron je charakterizovaný sériovým
+	// NOTE 3: Pridanie nového dronu do lokálneho prekladiska. Dron je charakterizovaný sériovým
 	//číslom a typom, ktorý určuje jeho ďalšie atribúty, ktorými sú nosnosť, rýchlosť, doba letu a doba nabíjania.
 
 		// TODO 3.1 : Pridanie všetkých prekladísk, na základe char arrayu okresov
-
-		// TODO 3.2 : Pridanie drona zaradeného do evidencie
+					// NOTE -> cyklus zo súboru načítam kraje a ich názvy a vytvorím -> aká údajová štruktúra na uloženie všetkých prekladísk ? Pole ?
 
 	Prekladisko* prekladiskoZilina = new Prekladisko("ZA");
 	firma->pridajPrekladisko(prekladiskoZilina);
+	prekladiskoZilina->pridajDron(new Dron(eDrony::JEDEN));
+	prekladiskoZilina->pridajDron(new Dron(eDrony::DVA));
 
 
-	// TODO 4: Vypísanie všetkých dronov evidovaných v zadanom lokálnom prekladisku. Pri
+	// NOTE 4: Vypísanie všetkých dronov evidovaných v zadanom lokálnom prekladisku. Pri
 	//každom drone sa vypíše jeho dátum zaradenia do evidencie, typ, celkový počet nalietaných hodín a celkový počet prepravených zásielok.
 
+	prekladiskoZilina->vypisZoznamDronov();
 
 	// TODO 5: Vytvorenie novej objednávky. V rámci objednávky sa definuje:
 	/*	 hmotnosť zásielky(kg; napr. 1, 4kg), ktorá má byť prepravená,

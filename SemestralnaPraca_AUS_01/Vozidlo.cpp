@@ -6,7 +6,7 @@ Vozidlo::Vozidlo(int nostnostVozidla, int prevadzkoveNaklady)
 {
 	nosnost_ = nostnostVozidla;
 	prevadzkoveNaklady_ = prevadzkoveNaklady;
-	//datumEvidencie = Datum::getAktualnyDatum();
+	datumEvidencie_ = Datum::getAktualnyDatum();
 	setSPZ();
 }
 

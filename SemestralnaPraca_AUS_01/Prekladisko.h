@@ -9,6 +9,7 @@ public:
 	Prekladisko(std::string okres);
 	~Prekladisko();
 	void pridajDron(Dron * novyDron);
+	void vypisZoznamDronov();
 private:
 	structures::ArrayList<Dron*> * arrayDronov;
 	std::string okres_;

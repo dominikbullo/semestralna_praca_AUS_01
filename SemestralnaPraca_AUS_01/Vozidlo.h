@@ -3,8 +3,10 @@
 #include <iostream>
 #include <stdio.h>
 
-#include "Konstatnty.h"
 #include "structures/heap_monitor.h"
+
+#include "Konstatnty.h"
+#include "Datum.h"
 #include "Vozidlo.h"
 
 
@@ -40,6 +42,7 @@ private:
 	void setSPZ();
 	int prevadzkoveNaklady_;
 	int nosnost_;  //pis to v tonách
+	std::string datumEvidencie_;
 	std::string SPZ_ = "ZA_";
 	int naklady_ = 0;
 protected:

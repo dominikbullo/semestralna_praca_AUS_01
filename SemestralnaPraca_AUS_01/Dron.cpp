@@ -33,7 +33,12 @@ Dron::~Dron()
 void Dron::setSerialNumber() {
 }
 
+
+
 void Dron::toString()
 {
-	std::cout << "Typ - " << nosnost_ << primernaRychlost_ << maxDobaLetu_ << casNaNabitie10Percent_ << std::endl;
+	std::cout << "Datum zaradenia do prevadzky - " << this->datumEvidencie_ << "\t TYP - "
+		<< ((typ_ == eDrony::JEDEN) ? "jeden" : "dva") << "\t celkovyPocetNalietanychHodin - "
+		<< this->celkovyPocetNalietanychHodin << "\t celkovyPocetPrepravenychZasielok - "
+		<< this->celkovyPocetPrepravenychZasielok << std::endl;
 }
