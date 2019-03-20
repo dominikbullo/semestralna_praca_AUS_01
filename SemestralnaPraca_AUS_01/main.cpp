@@ -11,7 +11,7 @@
 int main()
 {
 	initHeapMonitor();
-	Firma * firma = new Firma();
+	Firma * firma = new Firma("AoE");
 
 	// NOTE 1: Pridanie nového vozidla do vozového parku spoločnosti AoE. Vozidlo je jednoznačne
 	// identifikovateľné na základe ŠPZ.Každé vozidlo má definovanú nosnosť(v tonách)a prevádzkové náklady(EUR / región).
@@ -67,11 +67,6 @@ int main()
 	o tom informovaný a objednávku môže zrušiť.Ak objednávku nezruší, tak bude
 	obslúžený vyššie uvedeným dronom.
 	*/
-
-
-
-	//Dron * dron1 = new Dron(eDrony::JEDEN);
-	//Dron * dron2 = new Dron(eDrony::DVA);
 
 
 	delete firma;

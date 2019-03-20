@@ -2,8 +2,9 @@
 #include "Vozidlo.h"
 #include "Prekladisko.h"
 
-Firma::Firma()
+Firma::Firma(std::string nazovFirmy)
 {
+	nazovFirmy_ = nazovFirmy;
 	arrayVozidiel = new structures::ArrayList<Vozidlo*>();
 	arrayPrekladisk = new structures::ArrayList<Prekladisko*>();
 }

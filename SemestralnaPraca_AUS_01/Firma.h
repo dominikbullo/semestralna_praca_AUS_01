@@ -8,12 +8,13 @@
 class Firma
 {
 public:
-	Firma();
+	Firma(std::string nazovFirmy);
 	~Firma();
 	void pridajPrekladisko(Prekladisko * noveVozidlo);
 	void pridajVozidlo(Vozidlo * noveVozidlo);
 	void vypisZoznamVozidiel();
 private:
+	std::string nazovFirmy_;
 	structures::ArrayList<Vozidlo*> * arrayVozidiel;
 	structures::ArrayList<Prekladisko*> * arrayPrekladisk;
 };
