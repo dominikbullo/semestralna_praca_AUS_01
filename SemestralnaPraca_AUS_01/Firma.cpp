@@ -7,6 +7,7 @@ Firma::Firma(std::string nazovFirmy)
 	nazovFirmy_ = nazovFirmy;
 	arrayVozidiel = new structures::ArrayList<Vozidlo*>();
 	arrayPrekladisk = new structures::ArrayList<Prekladisko*>();
+	//linkObjednavok = new structures::LinkedList<Objednavka*>();
 }
 
 Firma::~Firma()
@@ -41,7 +42,7 @@ void Firma::vypisZoznamVozidiel()
 
 }
 
-Prekladisko* Firma::dajPrekladiskoPodlaOkresu(std::string okres) {
+Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string okres) {
 	// zložitos O(n)
 	for (Prekladisko * prekladisko : *arrayPrekladisk) {
 		if (prekladisko->dajOkres() == okres) {
@@ -51,3 +52,26 @@ Prekladisko* Firma::dajPrekladiskoPodlaOkresu(std::string okres) {
 	// TODO: throw exeption
 	throw std::logic_error("Prekladisko v tomto okrese sa nenaslo");
 }
+
+// TODO 5:Pri vytváraní objednávky je nutné kontrolova, èi nedôjde k jej zamietnutiu zo strany
+// AoE.Dokonèená objednávka je zaradená do frontu objednávok èakajúcich na spracovanie.
+// TODO 5:Poèas vystavovania objednávky, môže by zásielka z viacerých dôvodov zamietnutá:
+		//	a) zásielka by musela by vyzdvihnutá až po 20:00;
+		//	b) zásielka je mimo akèný rádius dronov(dron nestihne dôjs k odosielate¾ovi / adresátovi
+		//	a vráti sa spä predtým, ako sa mu vybije batéria);
+		//	c) zásielku nie je možné doruèi, pretože je jej hmotnos vyššia ako nosnos dostupných
+		//	dronov v lokálnom prekladisku odosielate¾a, resp.adresáta;
+		//	d) naloženie zásielky do vozidla prekroèí jeho nosnos;
+		//	e) prijatie zásielky v lokálnom prekladisku odosielate¾a by spôsobilo, že toto lokálne
+		//	prekladisko nedokáže doruèi niektoré zásielky, ktorých adresáti sa nachádzajú v jeho
+		//	regióne, do 18:00 daného dòa.
+
+Objednavka * Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat)
+{
+
+	Prekladisko* prekladiskoOdoslania = this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion());
+	prekladiskoOdoslania->vyberDrona(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska());
+
+	return new Objednavka(hmotnostZasielky, odosielatel, adresat);
+}
+

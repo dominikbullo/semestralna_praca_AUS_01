@@ -7,6 +7,9 @@
 #include "Dron.h"
 #include "Firma.h"
 #include "main.h"
+#include "Objednavka.h"
+#include "Konstatnty.h"
+
 #pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS -> because of time 
 
 int main()
@@ -38,14 +41,14 @@ int main()
 
 	pridajVsetkyPrekladiska(firma);
 
-	firma->dajPrekladiskoPodlaOkresu("MA")->pridajDron(new Dron(eDrony::JEDEN));
+	firma->dajPrekladiskoPodlaRegionu("MA")->pridajDron(new Dron(eDrony::JEDEN));
 
 	// NOTE 4: Vypísanie všetkých dronov evidovaných v zadanom lokálnom prekladisku. Pri
 	//každom drone sa vypíše jeho dátum zaradenia do evidencie, typ, celkový počet nalietaných hodín a celkový počet prepravených zásielok.
 
 
-	firma->dajPrekladiskoPodlaOkresu("MA")->vypisZoznamDronov();
-	firma->dajPrekladiskoPodlaOkresu("BA")->vypisZoznamDronov();
+	//firma->dajPrekladiskoPodlaRegionu("MA")->vypisZoznamDronov();
+	//firma->dajPrekladiskoPodlaRegionu("BA")->vypisZoznamDronov();
 
 
 	// TODO 5: Vytvorenie novej objednávky. V rámci objednávky sa definuje:
@@ -58,7 +61,13 @@ int main()
 
 			// TODO -> ASK -> Trieda zákazník je potrebná ? 
 			// TODO -> ASK -> evidencia ako samostatná trieda ? alebo priamo vo firme/prekladisku ? 
+	//Odosielatel* Jozko = new Odosielatel("BA", 35);
+	//Adresat* Ferko = new Adresat("MA", 50.75);
 
+	Dron* dron = new Dron(eDrony::JEDEN);
+	std::cout << (dron->zvladneLet(55) ? "ano" : "nie") << std::endl;
+
+	firma->vytvorObjednavku(2.75, new Odosielatel("BA", 35), new Adresat("MA", 50.75));
 
 	// TODO 6: Naplánovanie vyzdvihnutia zásielky u odosielateľa. V rámci tohto bodu sa skontroluje,
 	//		či je v lokálnom prekladisku dron, prostredníctvom ktorého je možné vyzdvihnúť zásielku,

@@ -30,11 +30,6 @@ Dron::~Dron()
 {
 }
 
-void Dron::setSerialNumber() {
-}
-
-
-
 void Dron::toString()
 {
 	std::cout << "Datum zaradenia do prevadzky - " << this->datumEvidencie_ << "\t TYP - "
