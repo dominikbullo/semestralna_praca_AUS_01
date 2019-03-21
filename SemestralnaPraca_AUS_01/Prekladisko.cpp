@@ -2,7 +2,6 @@
 #include "Dron.h"
 
 
-
 Prekladisko::Prekladisko(std::string region)
 {
 	region_ = region;
@@ -38,6 +37,7 @@ void Prekladisko::vypisZoznamDronov() {
 
 Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost)
 {
+	// TODO pokraèovanie -> výber správneho drona na doruèenie zásielky od adresáta/odosielatela z/do skladiska
 	for (Dron * dron : *arrayDronov) {
 		if (dron->zvladneLet(vzdialenost) && dron->unesieZasielku(hmotnostZasielky)) {
 			return dron;

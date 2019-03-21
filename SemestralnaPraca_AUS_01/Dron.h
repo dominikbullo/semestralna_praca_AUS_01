@@ -6,7 +6,8 @@
 #include "structures/heap_monitor.h"
 #include "Konstatnty.h"
 #include "Datum.h"
-#include "Firma.h"
+// FIXED -> neviem preèo to háde chybu ale
+// #include "Firma.h"
 
 class Dron
 {
@@ -24,7 +25,7 @@ public:
 	}
 	inline bool stihnePriletietPreZasielku(double vzdialenost) {
 		// TODO vypoèíta èi to stihne do 20:00, prida èas do parametrov metódy
-		return  true;
+		return true;
 	}
 private:
 	eDrony typ_;
