@@ -130,6 +130,7 @@
     <ClInclude Include="Dron.h" />
     <ClInclude Include="Firma.h" />
     <ClInclude Include="Konstatnty.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="Objednávka.h" />
     <ClInclude Include="Prekladisko.h" />
     <ClInclude Include="resource.h" />

@@ -7,6 +7,10 @@ Prekladisko::Prekladisko(std::string okres)
 {
 	okres_ = okres;
 	arrayDronov = new structures::ArrayList<Dron*>();
+
+	// prekladisko má vždy aspoò dvoch dronov pri vytváraní
+	arrayDronov->add(new Dron(eDrony::JEDEN));
+	arrayDronov->add(new Dron(eDrony::DVA));
 }
 
 
