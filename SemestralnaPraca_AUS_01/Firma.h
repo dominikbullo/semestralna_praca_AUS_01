@@ -13,6 +13,7 @@ public:
 	void pridajPrekladisko(Prekladisko * noveVozidlo);
 	void pridajVozidlo(Vozidlo * noveVozidlo);
 	void vypisZoznamVozidiel();
+	Prekladisko * dajPrekladiskoPodlaOkresu(std::string okres);
 private:
 	std::string nazovFirmy_;
 	structures::ArrayList<Vozidlo*> * arrayVozidiel;

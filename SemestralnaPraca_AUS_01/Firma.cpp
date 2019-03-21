@@ -40,3 +40,14 @@ void Firma::vypisZoznamVozidiel()
 	}
 
 }
+
+Prekladisko* Firma::dajPrekladiskoPodlaOkresu(std::string okres) {
+	// zložitos O(n)
+	for (Prekladisko * prekladisko : *arrayPrekladisk) {
+		if (prekladisko->dajOkres() == okres) {
+			return prekladisko;
+		}
+	}
+	// TODO: throw exeption
+	throw std::logic_error("Prekladisko v tomto okrese sa nenaslo");
+}

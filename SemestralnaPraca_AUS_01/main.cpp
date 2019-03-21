@@ -11,6 +11,7 @@
 int main()
 {
 	initHeapMonitor();
+
 	Firma * firma = new Firma("AoE");
 
 	// NOTE 1: Pridanie nového vozidla do vozového parku spoločnosti AoE. Vozidlo je jednoznačne
@@ -32,16 +33,20 @@ int main()
 		// TODO 3.1 : Pridanie všetkých prekladísk, na základe char arrayu okresov
 					// NOTE -> cyklus zo súboru načítam kraje a ich názvy a vytvorím -> aká údajová štruktúra na uloženie všetkých prekladísk ? Pole ?
 
-	Prekladisko* prekladiskoZilina = new Prekladisko("ZA");
-	firma->pridajPrekladisko(prekladiskoZilina);
-	prekladiskoZilina->pridajDron(new Dron(eDrony::JEDEN));
-	prekladiskoZilina->pridajDron(new Dron(eDrony::DVA));
+	//char * okresy[23] = { "MA","BA","TT","TN","NR","KN","PD","LV","CA","MT","BB","ZV","KA","NO","LM","LC","RA","SL","SN","PO","KE","HE","MI" };
 
+	firma->pridajPrekladisko(new Prekladisko("MA"));
+
+	firma->dajPrekladiskoPodlaOkresu("MA")->pridajDron(new Dron(eDrony::JEDEN));
 
 	// NOTE 4: Vypísanie všetkých dronov evidovaných v zadanom lokálnom prekladisku. Pri
 	//každom drone sa vypíše jeho dátum zaradenia do evidencie, typ, celkový počet nalietaných hodín a celkový počet prepravených zásielok.
 
-	prekladiskoZilina->vypisZoznamDronov();
+
+	firma->dajPrekladiskoPodlaOkresu("MA")->vypisZoznamDronov();
+	// TODO: keĎ prekladisko neexistuje
+	firma->dajPrekladiskoPodlaOkresu("BA")->vypisZoznamDronov();
+
 
 	// TODO 5: Vytvorenie novej objednávky. V rámci objednávky sa definuje:
 	//			 hmotnosť zásielky(kg; napr. 1, 4kg), ktorá má byť prepravená,

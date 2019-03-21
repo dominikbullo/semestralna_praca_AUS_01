@@ -24,6 +24,7 @@ void Prekladisko::pridajDron(Dron* novyDron)
 }
 
 void Prekladisko::vypisZoznamDronov() {
+	std::cout << "Vypisujem vsetkych dronov pre prekladisko z okresu - " << okres_ << std::endl;
 	for (Dron * dron : *arrayDronov) {
 		dron->toString();
 	};
