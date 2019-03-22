@@ -10,11 +10,19 @@ public:
 	UI();
 	~UI();
 	void hlavneMenu();
-	int getInputFromUser(std::string consoleOutput);
+	std::string getStrInputFromUser(std::string consoleOutput);
+	int getIntInputFromUser(std::string consoleOutput);
 	void pridajVsetkyPrekladiska();
-	void menuVozidla();
-	void menuPrekladiska();
+	void menuVozidla(std::string text, bool clearTerminal);
+	void menuVozidla(bool clearTerminal) {
+		menuVozidla("", clearTerminal);
+	};
+	void menuPrekladiska(std::string text, bool clearTerminal);
+	void menuPrekladiska(bool clearTerminal) {
+		menuPrekladiska("", clearTerminal);
+	};
 	void menuObjednavky();
 private:
 	Firma * firma;
+	structures::Array<std::string> *poleRegionov;
 };

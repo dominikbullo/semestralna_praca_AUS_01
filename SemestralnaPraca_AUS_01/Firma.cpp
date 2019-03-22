@@ -57,6 +57,10 @@ void Firma::vypisZoznamVozidiel()
 
 Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string okres) {
 	// zložitos O(n)
+
+	// NOTE osetrenie zlého vstupu
+	//for (auto & c : okres) c = toupper(c);
+
 	for (Prekladisko * prekladisko : *arrayPrekladisk) {
 		if (prekladisko->dajOkres() == okres) {
 			return prekladisko;
