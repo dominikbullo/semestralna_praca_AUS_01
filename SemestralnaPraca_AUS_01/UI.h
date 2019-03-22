@@ -12,6 +12,9 @@ public:
 	void hlavneMenu();
 	int getInputFromUser(std::string consoleOutput);
 	void pridajVsetkyPrekladiska();
+	void menuVozidla();
+	void menuPrekladiska();
+	void menuObjednavky();
 private:
 	Firma * firma;
 };

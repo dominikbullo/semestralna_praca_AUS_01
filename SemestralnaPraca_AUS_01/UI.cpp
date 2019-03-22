@@ -15,6 +15,7 @@ UI::~UI()
 
 void UI::hlavneMenu()
 {
+	system("cls");
 	cout << "++++++++++ Vytajte v Informacnom systeme firmy " << firma->getNazovFirmy() << "++++++++++" << endl;
 	//cout << "Date: " << Datum::getAktualnyDatum() << endl;
 	cout <<
@@ -28,7 +29,12 @@ void UI::hlavneMenu()
 		"10. Nacitaj\n" <<
 		endl;
 
-	getInputFromUser("Zvolte si moznost zo zoznamu");
+	switch (getInputFromUser("Zvolte si moznost zo zoznamu"))
+	{
+	case 1:
+		menuVozidla();
+		break;
+	}
 }
 
 int UI::getInputFromUser(std::string consoleOutput)
@@ -65,4 +71,30 @@ void UI::pridajVsetkyPrekladiska()
 	firma->pridajPrekladisko(new Prekladisko("KE"));
 	firma->pridajPrekladisko(new Prekladisko("HE"));
 	firma->pridajPrekladisko(new Prekladisko("MI"));
+}
+
+void UI::menuVozidla()
+{
+	system("cls");
+	cout << "++++++++++ Sprava Vozidiel ++++++++++" << endl;
+	cout <<
+		"1. Pridaj Vozidlo\n" <<
+		"2. Vypis zoznam Vozidiel firmy \n" <<
+		"3. Hlavne Menu" <<
+		endl;
+
+	switch (getInputFromUser("Zvolte si moznost zo zoznamu"))
+	{
+	case 3:
+		hlavneMenu();
+		break;
+	}
+}
+
+void UI::menuPrekladiska()
+{
+}
+
+void UI::menuObjednavky()
+{
 }
