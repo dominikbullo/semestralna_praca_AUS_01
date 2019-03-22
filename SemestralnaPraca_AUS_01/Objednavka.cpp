@@ -10,6 +10,8 @@ Objednavka::Objednavka(double hmotnostZasielky, Odosielatel * odosielatel, Adres
 
 Objednavka::~Objednavka()
 {
+	delete odosielatel_;
+	delete adresat_;
 }
 
 

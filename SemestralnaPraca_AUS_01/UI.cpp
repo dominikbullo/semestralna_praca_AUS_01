@@ -1,4 +1,4 @@
-#include "UI.h"
+﻿#include "UI.h"
 
 using namespace std;
 UI::UI()
@@ -16,17 +16,17 @@ UI::~UI()
 void UI::hlavneMenu()
 {
 	system("cls");
-	cout << "++++++++++ Vytajte v Informacnom systeme firmy " << firma->getNazovFirmy() << "++++++++++" << endl;
+	cout << "++++++++++ Vitajte v Informacnom systeme firmy " << firma->getNazovFirmy() << " ++++++++++" << endl;
 	//cout << "Date: " << Datum::getAktualnyDatum() << endl;
 	cout <<
 		"1. Sprava Vozidiel\n" <<
-		"2. Sprava Preklad�sk\n" <<
-		"4. Objednavky\n\n" <<
-		"6. Posun hodinu\n" <<
-		"7. Koniec\n" <<
-		"8. Test\n\n" <<
-		"9. Uloz\n" <<
-		"10. Nacitaj\n" <<
+		"2. Sprava Prekladísk\n" <<
+		"3. Sprava Objednavok\n\n" <<
+		"4. Posun hodinu\n" <<
+		"5. Koniec\n" <<
+		"6. Test\n\n" <<
+		"7. Uloz\n" <<
+		"8. Nacitaj\n" <<
 		endl;
 
 	switch (getInputFromUser("Zvolte si moznost zo zoznamu"))
@@ -34,7 +34,39 @@ void UI::hlavneMenu()
 	case 1:
 		menuVozidla();
 		break;
+	case 2:
+		menuPrekladiska();
+		break;
+	case 3:
+		menuObjednavky();
+		break;
+	case 4:
+		menuVozidla();
+		break;
+	case 5:
+		break;
+	case 6:
+		firma->pridajVozidlo(new Vozidlo(10, 100, "ZA232DB"));
+		firma->pridajVozidlo(new Vozidlo(14560, 1045550, "ZA222BA"));
+		firma->vypisZoznamVozidiel();
+		pridajVsetkyPrekladiska();
+
+		//pridám jeden extra dron prekladisku v regióne 
+		firma->dajPrekladiskoPodlaRegionu("MA")->pridajDron(new Dron(eDrony::JEDEN));
+
+		firma->dajPrekladiskoPodlaRegionu("MA")->vypisZoznamDronov();
+		// ↓↓ memory leak ↓↓
+		//firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15));
+
+		break;
+	case 7:
+		menuVozidla();
+		break;
+	case 8:
+		menuVozidla();
+		break;
 	}
+
 }
 
 int UI::getInputFromUser(std::string consoleOutput)
@@ -93,8 +125,36 @@ void UI::menuVozidla()
 
 void UI::menuPrekladiska()
 {
+	system("cls");
+	cout << "++++++++++ Sprava Prekladisk ++++++++++" << endl;
+	cout <<
+		"1. Pridaj Prekladisko\n" <<
+		"2. Vypis zoznam Vozidiel firmy \n" <<
+		"3. Hlavne Menu" <<
+		endl;
+
+	switch (getInputFromUser("Zvolte si moznost zo zoznamu"))
+	{
+	case 3:
+		hlavneMenu();
+		break;
+	}
 }
 
 void UI::menuObjednavky()
 {
+	system("cls");
+	cout << "++++++++++ Sprava Objednavok ++++++++++" << endl;
+	cout <<
+		"1. Pridaj Vozidlo\n" <<
+		"2. Vypis zoznam Vozidiel firmy \n" <<
+		"3. Hlavne Menu" <<
+		endl;
+
+	switch (getInputFromUser("Zvolte si moznost zo zoznamu"))
+	{
+	case 3:
+		hlavneMenu();
+		break;
+	}
 }

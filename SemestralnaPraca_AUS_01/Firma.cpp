@@ -19,6 +19,9 @@ Firma::~Firma()
 	for (Prekladisko * prekladisko : *arrayPrekladisk) {
 		delete prekladisko;
 	}
+	for (Objednavka * objednavka : *linkObjednavok) {
+		delete linkObjednavok;
+	}
 	delete arrayVozidiel;
 	delete arrayPrekladisk;
 	delete linkObjednavok;
@@ -85,9 +88,7 @@ Objednavka * Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odos
 	// zistÌm, Ëi m·m nejakÈho drona, ktor˝ stihne, unesie a je nabit˝ 
 	Dron* dron = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska());
 
-
-
-
+	// treba vymazaù !
 	return new Objednavka(hmotnostZasielky, odosielatel, adresat);
 }
 
