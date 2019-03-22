@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "queue.h"
 #include "../list/linked_list.h"
@@ -83,7 +83,8 @@ namespace structures
 	template<typename T>
 	ExplicitQueue<T>::~ExplicitQueue()
 	{
-		// TODO 05: ExplicitQueue
+		delete list_;
+		list_ = nullptr;
 	}
 
 	template<typename T>
@@ -99,8 +100,11 @@ namespace structures
 	template<typename T>
 	inline ExplicitQueue<T>& ExplicitQueue<T>::operator=(const ExplicitQueue<T>& other)
 	{
-		// TODO 05: ExplicitQueue
-		throw std::exception("ExplicitQueue<T>::operator=: Not implemented yet.");
+		if (this != &other)
+		{
+			*list_ = *(other.list_);
+		}
+		return *this;
 	}
 
 	template<typename T>
@@ -112,42 +116,38 @@ namespace structures
 	template<typename T>
 	size_t ExplicitQueue<T>::size() const
 	{
-		// TODO 05: ExplicitQueue
-		throw std::exception("ExplicitQueue<T>::size: Not implemented yet.");
+		return list_->size();
 	}
 
 	template<typename T>
 	inline void ExplicitQueue<T>::clear()
 	{
-		// TODO 05: ExplicitQueue
-		throw std::exception("ExplicitQueue<T>::clear: Not implemented yet.");
+		list_->clear();
 	}
 
 	template<typename T>
 	inline void ExplicitQueue<T>::push(const T& data)
 	{
-		// TODO 05: ExplicitQueue
-		throw std::exception("ExplicitQueue<T>::push: Not implemented yet.");
+		// NOTE: pridávam na koniec 
+		list_->add(data);
 	}
 
 	template<typename T>
 	inline T ExplicitQueue<T>::pop()
 	{
-		// TODO 05: ExplicitQueue
-		throw std::exception("ExplicitQueue<T>::pop: Not implemented yet.");
+		// NOTE: odoberám z konca
+		return list_->removeAt(0);
 	}
 
 	template<typename T>
 	inline T& ExplicitQueue<T>::peek()
 	{
-		// TODO 05: ExplicitQueue
-		throw std::exception("ExplicitQueue<T>::peek: Not implemented yet.");
+		return (*list_)[0];
 	}
 
 	template<typename T>
 	inline const T ExplicitQueue<T>::peek() const
 	{
-		// TODO 05: ExplicitQueue
-		throw std::exception("ExplicitQueue<T>::peek: Not implemented yet.");
+		return (*list_)[0];
 	}
 }
