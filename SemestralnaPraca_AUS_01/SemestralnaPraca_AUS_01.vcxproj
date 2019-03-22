@@ -130,7 +130,6 @@
     <ClInclude Include="Dron.h" />
     <ClInclude Include="Firma.h" />
     <ClInclude Include="Konstatnty.h" />
-    <ClInclude Include="main.h" />
     <ClInclude Include="Objednavka.h" />
     <ClInclude Include="Prekladisko.h" />
     <ClInclude Include="resource.h" />
@@ -186,6 +185,7 @@
     <ClInclude Include="structures\tree\multi_way_tree.h" />
     <ClInclude Include="structures\tree\tree.h" />
     <ClInclude Include="structures\vector\vector.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="Vozidlo.h" />
     <ClInclude Include="Zákazník.h" />
   </ItemGroup>
@@ -207,6 +207,7 @@
     <ClCompile Include="structures\structure.cpp" />
     <ClCompile Include="structures\table\sorting\sort.cpp" />
     <ClCompile Include="structures\vector\vector.cpp" />
+    <ClCompile Include="UI.cpp" />
     <ClCompile Include="Vozidlo.cpp" />
     <ClCompile Include="Zákazník.cpp" />
   </ItemGroup>

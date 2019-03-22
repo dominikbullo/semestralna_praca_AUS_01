@@ -13,6 +13,9 @@ class Firma
 public:
 	Firma(std::string nazovFirmy);
 	~Firma();
+	std::string getNazovFirmy() {
+		return nazovFirmy_;
+	}
 	void pridajPrekladisko(Prekladisko * noveVozidlo);
 	void pridajVozidlo(Vozidlo * noveVozidlo);
 	void vypisZoznamVozidiel();
@@ -22,5 +25,5 @@ private:
 	std::string nazovFirmy_;
 	structures::ArrayList<Vozidlo*> * arrayVozidiel;
 	structures::ArrayList<Prekladisko*> * arrayPrekladisk;
-	//structures::LinkedList<Objednavka*> * linkObjednavok;
+	structures::LinkedList<Objednavka*> * linkObjednavok;
 };

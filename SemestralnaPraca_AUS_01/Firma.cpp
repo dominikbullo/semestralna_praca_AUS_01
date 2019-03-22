@@ -7,7 +7,7 @@ Firma::Firma(std::string nazovFirmy)
 	nazovFirmy_ = nazovFirmy;
 	arrayVozidiel = new structures::ArrayList<Vozidlo*>();
 	arrayPrekladisk = new structures::ArrayList<Prekladisko*>();
-	//linkObjednavok = new structures::LinkedList<Objednavka*>();
+	linkObjednavok = new structures::LinkedList<Objednavka*>();
 }
 
 Firma::~Firma()
@@ -21,6 +21,7 @@ Firma::~Firma()
 	}
 	delete arrayVozidiel;
 	delete arrayPrekladisk;
+	delete linkObjednavok;
 }
 
 void Firma::pridajPrekladisko(Prekladisko* novePrekladisko)
@@ -31,6 +32,15 @@ void Firma::pridajPrekladisko(Prekladisko* novePrekladisko)
 void Firma::pridajVozidlo(Vozidlo* noveVozidlo)
 {
 	// vozidlo pridávam vždy na koniec, tým pádom viem, že vozidlá sú zoradené pod¾a poradia zaevidovania
+	int index = 0;
+	for (Vozidlo *vozidlo : *arrayVozidiel) {
+		// FIXME pozor na toto porovnávanie 
+		if (vozidlo->getDatumaCasEvidencie() <= noveVozidlo->getDatumaCasEvidencie()) {
+			arrayVozidiel->insert(noveVozidlo, index);
+			return;
+		}
+		index++;
+	}
 	arrayVozidiel->add(noveVozidlo);
 }
 

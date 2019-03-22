@@ -13,7 +13,7 @@
 class Vozidlo
 {
 public:
-	Vozidlo(int nostnostVozidla, int prevadzkoveNaklady);
+	Vozidlo(int nostnostVozidla, int prevadzkoveNaklady, std::string SPZ);
 	~Vozidlo();
 	void toString();
 	inline int getCelkovaNosnost() {
@@ -28,6 +28,9 @@ public:
 	inline int getNaklady() {
 		return naklady_;
 	}
+	std::string getDatumaCasEvidencie() {
+		return datumaCasEvidencie_;
+	}
 	void pridajZasielku(double hmotnostZasielky) {
 		nosnost_ -= hmotnostZasielky;
 	}
@@ -41,7 +44,7 @@ private:
 	void setSPZ();
 	int prevadzkoveNaklady_;
 	int celkovaNosnost_;
-	std::string datumEvidencie_;
+	std::string datumaCasEvidencie_;
 	std::string SPZ_ = "ZA_";
 	int naklady_ = 0;
 	double nosnost_ = celkovaNosnost_;
