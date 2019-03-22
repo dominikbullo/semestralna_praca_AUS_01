@@ -68,9 +68,15 @@ Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string okres) {
 
 Objednavka * Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat)
 {
+	// TODO pokraèovanie 5ky
 
+	// zistím prekladisko, kde sa odosielal dron
 	Prekladisko* prekladiskoOdoslania = this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion());
-	prekladiskoOdoslania->vyberDrona(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska());
+	// zistím, èi mám nejakého drona, ktorý stihne, unesie a je nabitý 
+	Dron* dron = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska());
+
+
+
 
 	return new Objednavka(hmotnostZasielky, odosielatel, adresat);
 }

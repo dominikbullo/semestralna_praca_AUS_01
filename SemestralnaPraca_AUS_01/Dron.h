@@ -6,6 +6,7 @@
 #include "structures/heap_monitor.h"
 #include "Konstatnty.h"
 #include "Datum.h"
+
 // FIXED -> neviem preèo to hádže chybu ale
 // #include "Firma.h"
 
@@ -16,15 +17,19 @@ public:
 	~Dron();
 	void toString();
 
-	inline bool zvladneLet(double vzdialenost) {
+	bool zvladneLet(double vzdialenost) {
 		// TODO zoh¾adni stav nabitia
 		return maxDobaLetu_ * (aktualnaKapacitaBaterie / 100) * (primernaRychlost_ / 60.0) / 2 >= vzdialenost ? true : false;
 	}
-	inline bool unesieZasielku(double hmotnostZasielky) {
+	bool unesieZasielku(double hmotnostZasielky) {
 		return  nosnost_ >= hmotnostZasielky ? true : false;
 	}
-	inline bool stihnePriletietPreZasielku(double vzdialenost) {
+	bool stihnePriletietPreZasielku(double vzdialenost) {
 		// TODO vypoèíta èi to stihne do 20:00, prida èas do parametrov metódy
+		// zober si èas -> ak je po 20:00 a menej ako 7:00 ani nerieš
+		// vypoèítaj èas potrebný na let k danému miestu
+		//maxDobaLetu_ * (aktualnaKapacitaBaterie / 100) * (primernaRychlost_ / 60.0) / 2
+
 		return true;
 	}
 private:

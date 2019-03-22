@@ -7,17 +7,17 @@
 class Datum
 {
 public:
-	static Datum* getInstance()
-	{
-		if (instance == 0)
-		{
-			instance = new Datum();
-		}
+	//static Datum* getInstance()
+	//{
+	//	if (instance == 0)
+	//	{
+	//		instance = new Datum();
+	//	}
 
-		return instance;
-	}
+	//	return instance;
+	//}
 
-	void posunDen();
+	void posunCasoHodinu();
 	Datum* get();
 	static std::string getAktualnyDatum() {
 		return datum_;
@@ -27,7 +27,7 @@ public:
 private:
 
 	static std::string datum_;
-	static Datum * instance;
+	//static Datum * instance;
 	Datum();
 	Datum(Datum const& copy);
 	Datum& operator=(Datum const& copy);

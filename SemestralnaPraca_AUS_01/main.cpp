@@ -64,10 +64,7 @@ int main()
 	//Odosielatel* Jozko = new Odosielatel("BA", 35);
 	//Adresat* Ferko = new Adresat("MA", 50.75);
 
-	Dron* dron = new Dron(eDrony::JEDEN);
-	std::cout << (dron->zvladneLet(55) ? "ano" : "nie") << std::endl;
-
-	firma->vytvorObjednavku(2.75, new Odosielatel("BA", 35), new Adresat("MA", 50.75));
+	firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15));
 
 	// TODO 6: Naplánovanie vyzdvihnutia zásielky u odosielateľa. V rámci tohto bodu sa skontroluje,
 	//		či je v lokálnom prekladisku dron, prostredníctvom ktorého je možné vyzdvihnúť zásielku,

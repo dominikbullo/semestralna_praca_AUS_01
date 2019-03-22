@@ -16,8 +16,8 @@ public:
 	Vozidlo(int nostnostVozidla, int prevadzkoveNaklady);
 	~Vozidlo();
 	void toString();
-	inline int getNosnost() {
-		return nosnost_;
+	inline int getCelkovaNosnost() {
+		return celkovaNosnost_;
 	}
 	inline int getPrevazdkoveNaklady() {
 		return prevadzkoveNaklady_;
@@ -28,23 +28,24 @@ public:
 	inline int getNaklady() {
 		return naklady_;
 	}
-	void setPrevadzkoveNaklady(int prevNaklady) {
-		prevadzkoveNaklady_ = prevNaklady;
+	void pridajZasielku(double hmotnostZasielky) {
+		nosnost_ -= hmotnostZasielky;
 	}
-	void setSPZ(std::string spz) {
-		SPZ_ = "";
-		SPZ_ = spz;
+	bool dokazeNalozitZasielku(double hmotnostZasielky) {
+		return celkovaNosnost_ >= nosnost_ + hmotnostZasielky;
 	}
-	void pridajNaklady(int naklady) {
-		naklady_ = naklady_ + naklady;
-	}
+	// TODO: e) prijatie zásielky v lokálnom prekladisku odosielate¾a by spôsobilo, e toto lokálne
+	//			prekladisko nedokáe doruèi niektoré zásielky, ktorıch adresáti sa nachádzajú v jeho regióne, do 18:00 daného dòa.
+
 private:
 	void setSPZ();
 	int prevadzkoveNaklady_;
-	int nosnost_;  //pis to v tonách
+	int celkovaNosnost_;
 	std::string datumEvidencie_;
 	std::string SPZ_ = "ZA_";
 	int naklady_ = 0;
+	double nosnost_ = celkovaNosnost_;
+
 protected:
 	static int unikatnostSPZ_;
 };
