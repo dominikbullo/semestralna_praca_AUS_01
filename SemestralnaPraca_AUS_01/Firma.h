@@ -44,6 +44,7 @@ public:
 
 	Prekladisko * dajPrekladiskoPodlaRegionu(std::string okres);
 	Vozidlo * vyberVozidlo(double hmotnostZasielky, Prekladisko * prekladiskoNaPrevzatieZasielky);
+	bool mamDostupneProstriedkyNaDorucenieObjednavky(double hmotnostZasielky, Prekladisko * prekladisko, double vzdialenostOdPrekladiska);
 	Objednavka * vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat);
 private:
 	std::string nazovFirmy_;

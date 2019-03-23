@@ -95,6 +95,7 @@ Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string okres) {
 		//	regiÛne, do 18:00 danÈho dÚa.
 
 Vozidlo* Firma::vyberVozidlo(double hmotnostZasielky, Prekladisko* prekladiskoNaPrevzatieZasielky) {
+	// TODO pozeraj eöte dopredu an napl·novanÈ z·sielky toho vozidla 
 	for (Vozidlo *vozidlo : *arrayListVozidiel) {
 		if (vozidlo->prechadzaPrekladiskom(prekladiskoNaPrevzatieZasielky) &&
 			vozidlo->dokazeNalozitZasielku(hmotnostZasielky))
@@ -110,15 +111,27 @@ Vozidlo* Firma::vyberVozidlo(double hmotnostZasielky, Prekladisko* prekladiskoNa
 Objednavka * Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat)
 {
 	// TODO pokraËovanie 5ky
+	//mamDostupneProstriedkyNaDorucenieObjednavky(hmotnostZasielky,
+	//	this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion()),
+	//	odosielatel->getVzdialenostOdPrekladiska());
+
+
 
 	// zistÌm prekladisko, kde sa odosielal dron
 	Prekladisko* prekladiskoOdoslania = this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion());
+
 	// zistÌm, Ëi m·m nejakÈho drona, ktor˝ stihne, unesie a je nabit˝ 
 	Dron* dron = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska());
+
 	// zistÌm Ëi mi do prekladiska prÌde auto ktorÈ bude maù nosnoù tak˙, ûe zvl·dne odniest objednavku
 	Vozidlo* vozidlo = this->vyberVozidlo(hmotnostZasielky, prekladiskoOdoslania);
 
+	Prekladisko* prekladiskoAdresata = this->dajPrekladiskoPodlaRegionu(adresat->getRegion());
+	Vozidlo* vozidlo = this->vyberVozidlo(hmotnostZasielky, prekladiskoAdresata);
+	Dron* dron = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, adresat->getVzdialenostOdPrekladiska());
+
 	// treba vymazaù !
-	return new Objednavka(hmotnostZasielky, odosielatel, adresat);
+	//return new Objednavka(hmotnostZasielky, odosielatel, adresat);
+	return NULL;
 }
 
