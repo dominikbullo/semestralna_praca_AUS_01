@@ -8,14 +8,14 @@ int main()
 	// FIXED 23.03 -> pridať autu pole regionov ako trasu ktorou pôjde
 
 	// ČAS
-	// TODO 23.03 -> meneźovanie času, kontrola dronu, či stihne vyzdvihnuť zasielku
-	// TODO 23.03 -> uloženie vozidla do Arraylistu podľa dátumu
+	// FIXED 23.03 -> meneźovanie času, kontrola dronu, či stihne vyzdvihnuť zasielku
+	// FIXED 23.03 -> uloženie vozidla do Arraylistu podľa dátumu
 
 	// TODO 23.03 ->!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// TODO 23.03 -> POROZMÝŠĽAŤ ako evidovať objednávku, kde si ju ukladať a čo s ňou potom spraviť
 	// TODO 23.03 ->!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-	// TODO 23.03 -> či naloženie zásielky neprekročí hmotnosť auta
+	// FIXED 23.03 -> či naloženie zásielky neprekročí hmotnosť auta
 		// prejdem si všetky auta, najdem ktore ide cez ten kraj a zistím či neprekroci hmotnost
 
 	// TODO 23.03 -> dron musí byť voľný; -> easy

@@ -1,5 +1,5 @@
 #pragma once
-#pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS -> because of time 
+#pragma warning(disable : 4189) // referenced but not used
 #include <string>
 #include <iostream>
 #include <stdio.h>
