@@ -15,25 +15,35 @@ class Firma
 public:
 	Firma(std::string nazovFirmy);
 	~Firma();
+	Firma * get();
 	std::string getNazovFirmy() {
 		return nazovFirmy_;
 	}
 	void pridajPrekladisko(Prekladisko * noveVozidlo);
 	void pridajVozidlo(Vozidlo * noveVozidlo);
-	Vozidlo* getVozidloBySPZ(std::string SPZ) {
-		for (Vozidlo* vozidlo : *arrayListVozidiel) {
-			if (vozidlo->getSPZ() == SPZ) {
+	void pridajRegionyDoTrasyVozidla(Vozidlo * vozidlo);
+
+	Vozidlo* getVozidloBySPZ(std::string SPZ)
+	{
+		for (Vozidlo* vozidlo : *arrayListVozidiel)
+		{
+			if (vozidlo->getSPZ() == SPZ)
+			{
 				return vozidlo;
 			}
 		}
 		return NULL;
 	}
-	void vypisZoznamVozidiel() {
-		for (Vozidlo* vozidlo : *arrayListVozidiel) {
+	void vypisZoznamVozidiel()
+	{
+		for (Vozidlo* vozidlo : *arrayListVozidiel)
+		{
 			vozidlo->toString();
 		}
 	}
+
 	Prekladisko * dajPrekladiskoPodlaRegionu(std::string okres);
+	Vozidlo * vyberVozidlo(double hmotnostZasielky, Prekladisko * prekladiskoNaPrevzatieZasielky);
 	Objednavka * vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat);
 private:
 	std::string nazovFirmy_;

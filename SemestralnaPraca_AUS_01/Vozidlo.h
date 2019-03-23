@@ -10,6 +10,7 @@
 #include "Konstatnty.h"
 #include "Datum.h"
 #include "Vozidlo.h"
+#include "Prekladisko.h"
 
 
 class Vozidlo
@@ -18,7 +19,8 @@ public:
 	Vozidlo(int nostnostVozidla, int prevadzkoveNaklady, std::string SPZ);
 	~Vozidlo();
 	void toString();
-	void pridajRegionyDoTrasyVozidla();
+	void pridajPrekladiskoDoTrasyVozidla(Prekladisko * prekladisko);
+
 	inline int getCelkovaNosnost() {
 		return celkovaNosnost_;
 	}
@@ -34,11 +36,22 @@ public:
 	std::string getDatumaCasEvidencie() {
 		return datumaCasEvidencie_;
 	}
-	void vypisTrasuvozidla() {
-		std::cout << "Trasa vozidlo s SPZ - " << SPZ_ << " je nasledujuca: " << std::endl;
-		for (std::string prekladisko : *linkedListTrasaVozidla)
+	bool prechadzaPrekladiskom(Prekladisko* prekladiskoKtorymMaPrechadzat) {
+		for (Prekladisko* prekladiskoKtorymPrechadza : *linkedListTrasaVozidla)
 		{
-			std::cout << " -> " << prekladisko;
+			if (prekladiskoKtorymPrechadza == prekladiskoKtorymMaPrechadzat) {
+				return true;
+			}
+		}
+		std::cout << "Toto auto neprechádza prekladiskom v okrese " << prekladiskoKtorymMaPrechadzat->dajOkres() << std::endl;
+		this->vypisTrasuVozidla();
+		return false;
+	}
+	void vypisTrasuVozidla() {
+		std::cout << "Trasa vozidlo s SPZ - " << SPZ_ << " je nasledujuca: " << std::endl;
+		for (Prekladisko* prekladisko : *linkedListTrasaVozidla)
+		{
+			std::cout << " -> " << prekladisko->dajOkres();
 		}
 		std::cout << std::endl;
 	}
@@ -49,8 +62,10 @@ public:
 	bool dokazeNalozitZasielku(double hmotnostZasielky) {
 		return celkovaNosnost_ >= nosnost_ + hmotnostZasielky;
 	}
+
+
 	// TODO: e) prijatie zásielky v lokálnom prekladisku odosielateľa by spôsobilo, že toto lokálne
-	//			prekladisko nedokáže doručiť niektoré zásielky, ktorých adresáti sa nachádzajú v jeho regióne, do 18:00 daného dňa.
+	//			prekladiskoKtorymPrechadza nedokáže doručiť niektoré zásielky, ktorých adresáti sa nachádzajú v jeho regióne, do 18:00 daného dňa.
 
 private:
 	int prevadzkoveNaklady_;
@@ -59,6 +74,6 @@ private:
 	std::string SPZ_ = "ZA_";
 	int naklady_ = 0;
 	double nosnost_ = celkovaNosnost_;
-	structures::LinkedList<std::string> * linkedListTrasaVozidla;
+	structures::ArrayList<Prekladisko *> * linkedListTrasaVozidla;
 };
 

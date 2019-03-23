@@ -2,6 +2,7 @@
 #include "Vozidlo.h"
 #include "Prekladisko.h"
 
+using namespace std;
 Firma::Firma(std::string nazovFirmy)
 {
 	nazovFirmy_ = nazovFirmy;
@@ -26,14 +27,20 @@ Firma::~Firma()
 	delete arrayListPrekladisk;
 	delete linkedListObjednavok;
 }
+Firma * Firma::get()
+{
+	return this;
+}
 
 void Firma::pridajPrekladisko(Prekladisko* novePrekladisko)
 {
 	arrayListPrekladisk->add(novePrekladisko);
 }
 
-void Firma::pridajVozidlo(Vozidlo* noveVozidlo)
+
+void  Firma::pridajVozidlo(Vozidlo* noveVozidlo)
 {
+	pridajRegionyDoTrasyVozidla(noveVozidlo);
 	// vozidlo prid·vam vûdy na koniec, t˝m p·dom viem, ûe vozidl· s˙ zoradenÈ podæa poradia zaevidovania
 	int index = 0;
 	for (Vozidlo *vozidlo : *arrayListVozidiel) {
@@ -45,6 +52,18 @@ void Firma::pridajVozidlo(Vozidlo* noveVozidlo)
 		index++;
 	}
 	arrayListVozidiel->add(noveVozidlo);
+
+}
+void Firma::pridajRegionyDoTrasyVozidla(Vozidlo* vozidlo) {
+	string userInput;
+	while (userInput != "0") {
+		cout << "Ktory region chces pridat do trasy vozidla - " << vozidlo->getSPZ() << " " << endl;
+		cin >> userInput;
+		if (userInput != "0") {
+			vozidlo->pridajPrekladiskoDoTrasyVozidla(this->dajPrekladiskoPodlaRegionu(userInput));
+		}
+	}
+	return;
 }
 
 Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string okres) {
@@ -75,6 +94,19 @@ Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string okres) {
 		//	prekladisko nedok·ûe doruËiù niektorÈ z·sielky, ktor˝ch adres·ti sa nach·dzaj˙ v jeho
 		//	regiÛne, do 18:00 danÈho dÚa.
 
+Vozidlo* Firma::vyberVozidlo(double hmotnostZasielky, Prekladisko* prekladiskoNaPrevzatieZasielky) {
+	for (Vozidlo *vozidlo : *arrayListVozidiel) {
+		if (vozidlo->prechadzaPrekladiskom(prekladiskoNaPrevzatieZasielky) &&
+			vozidlo->dokazeNalozitZasielku(hmotnostZasielky))
+		{
+			return vozidlo;
+		}
+	}
+
+	std::cout << "Takuto objednavku nezvladne dorucit ziadne vozidlo" << std::endl;
+	return NULL;
+}
+
 Objednavka * Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat)
 {
 	// TODO pokraËovanie 5ky
@@ -83,6 +115,8 @@ Objednavka * Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odos
 	Prekladisko* prekladiskoOdoslania = this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion());
 	// zistÌm, Ëi m·m nejakÈho drona, ktor˝ stihne, unesie a je nabit˝ 
 	Dron* dron = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska());
+	// zistÌm Ëi mi do prekladiska prÌde auto ktorÈ bude maù nosnoù tak˙, ûe zvl·dne odniest objednavku
+	Vozidlo* vozidlo = this->vyberVozidlo(hmotnostZasielky, prekladiskoOdoslania);
 
 	// treba vymazaù !
 	return new Objednavka(hmotnostZasielky, odosielatel, adresat);

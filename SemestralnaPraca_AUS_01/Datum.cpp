@@ -15,12 +15,6 @@ void Datum::posunCasoHodinu(int pocetSekund)
 	datum_a_cas_ = time_t_to_string(pom);
 }
 
-
-Datum * Datum::get()
-{
-	return this;
-}
-
 std::string Datum::time_t_to_string(time_t t)
 {
 	auto tm = *std::localtime(&t);

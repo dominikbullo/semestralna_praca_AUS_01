@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS -> because of time 
 #include <string>
 #include <iostream>
 #include <stdio.h>
@@ -18,19 +19,28 @@ public:
 	void toString();
 
 	bool zvladneLet(double vzdialenost) {
-		// TODO zoh¾adni stav nabitia
+		// zoh¾adniný aj stav nabitia
 		return maxDobaLetu_ * (aktualnaKapacitaBaterie / 100) * (primernaRychlost_ / 60.0) / 2 >= vzdialenost ? true : false;
 	}
 	bool unesieZasielku(double hmotnostZasielky) {
 		return  nosnost_ >= hmotnostZasielky ? true : false;
 	}
 	bool stihnePriletietPreZasielku(double vzdialenost) {
-		// TODO vypoèíta èi to stihne do 20:00, prida èas do parametrov metódy
-		// zober si èas -> ak je po 20:00 a menej ako 7:00 ani nerieš
-		// vypoèítaj èas potrebný na let k danému miestu
-		//maxDobaLetu_ * (aktualnaKapacitaBaterie / 100) * (primernaRychlost_ / 60.0) / 2
+		time_t aktualnyCas = Datum::string_to_time_t(Datum::getAktualnyDatumaCas());
 
-		return true;
+		tm *ltm = localtime(&aktualnyCas);
+		struct tm casNajneskor = *ltm;
+		casNajneskor.tm_hour = 20;
+		casNajneskor.tm_min = 00;
+
+		// t=s/v
+		// nejaký static/dynamic cast -> warning -> POSSIBLE LOSS OF DATA
+		time_t ocakavanyCasPriletu = aktualnyCas + (vzdialenost / primernaRychlost_) * 60 * 60;
+		std::cout <<
+			(ocakavanyCasPriletu <= mktime(&casNajneskor) ?
+				"Predpokladany cas priletu dronu : " + Datum::time_t_to_string(ocakavanyCasPriletu) :
+				"Dron to nestihne") << std::endl;
+		return ocakavanyCasPriletu <= mktime(&casNajneskor);
 	}
 private:
 	eDrony typ_;

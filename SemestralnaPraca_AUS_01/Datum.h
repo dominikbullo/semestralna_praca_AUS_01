@@ -18,7 +18,7 @@ public:
 	}
 
 	void posunCasoHodinu(int pocetSekund);
-	Datum* get();
+	//Datum* get();
 	static std::string getAktualnyDatumaCas() {
 		return datum_a_cas_;
 	}
@@ -31,7 +31,6 @@ private:
 	static Datum * instance;
 	Datum();
 	Datum(Datum const& copy);
-	//Datum& operator=(Datum const& copy);
 };
 
 

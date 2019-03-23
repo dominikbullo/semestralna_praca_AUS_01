@@ -26,6 +26,7 @@ UI::~UI()
 void UI::hlavneMenu()
 {
 	//system("cls");
+	datumUI->posunCasoHodinu(-60 * 60 * 3);
 	cout << "++++++++++ Vitajte v Informacnom systeme firmy " << firma->getNazovFirmy() << " ++++++++++" << endl;
 	cout << "Date: " << Datum::getAktualnyDatumaCas() << endl;
 	cout <<
@@ -55,9 +56,10 @@ void UI::hlavneMenu()
 		hlavneMenu();
 		break;
 	case 5:
-		firma->pridajVozidlo(new Vozidlo(14560, 1045550, "ZA222BA"));
-		// aj v prípade, že ho posuniem naspäť
-		datumUI->posunCasoHodinu(-60 * 60);
+
+		//firma->pridajVozidlo(new Vozidlo(14560, 1045550, "ZA222BA"));
+		//// aj v prípade, že ho posuniem naspäť
+		//datumUI->posunCasoHodinu(-60 * 60);
 		firma->pridajVozidlo(new Vozidlo(10, 100, "ZA232DB"));
 
 		firma->vypisZoznamVozidiel();
@@ -67,9 +69,9 @@ void UI::hlavneMenu()
 		firma->dajPrekladiskoPodlaRegionu("MA")->pridajDron(new Dron(eDrony::JEDEN, firma->dajPrekladiskoPodlaRegionu("MA")->set_get_SerioveCislo()));
 
 		firma->dajPrekladiskoPodlaRegionu("MA")->vypisZoznamDronov();
-		firma->getVozidloBySPZ("ZA232DB")->vypisTrasuvozidla();
+		firma->getVozidloBySPZ("ZA232DB")->vypisTrasuVozidla();
 		// ↓↓ memory leak ↓↓
-		//firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
 		hlavneMenu();
 		break;
 	case 6:
@@ -158,7 +160,7 @@ void UI::menuVozidla(std::string text, bool clearTerminal)
 		menuVozidla(false);
 		break;
 	case 3:
-		firma->getVozidloBySPZ(getStrInputFromUser("Zadaj SPZ vozidla, ktoremu chces vypiast trasu"))->vypisTrasuvozidla();
+		firma->getVozidloBySPZ(getStrInputFromUser("Zadaj SPZ vozidla, ktoremu chces vypiast trasu"))->vypisTrasuVozidla();
 		menuVozidla(false);
 		break;
 	case 0:

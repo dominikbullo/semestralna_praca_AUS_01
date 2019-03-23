@@ -14,14 +14,10 @@ public:
 	void pridajDron(Dron * novyDron);
 	void vypisZoznamDronov();
 	Dron * vyberDrona(double hmotnostZasielky, double vzdialenost);
-	void setSerioveCislo();
 	std::string dajOkres() {
 		return region_;
 	}
 	std::string Prekladisko::set_get_SerioveCislo();
-	//inline std::string getSerioveCislo() {
-	//	return serioveCislo_;
-	//}
 private:
 	std::string region_;
 	std::string serioveCislo_ = region_;
