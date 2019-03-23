@@ -4,7 +4,7 @@
 Dron::Dron(const eDrony typDronu, std::string serioveCislo)
 {
 	typ_ = typDronu;
-	serioveCislo_ = serioveCislo_;
+	serioveCislo_ = serioveCislo;
 	datumEvidencie_ = Datum::getAktualnyDatumaCas();
 
 	switch (typDronu) {
@@ -33,8 +33,9 @@ Dron::~Dron()
 
 void Dron::toString()
 {
-	std::cout << "Datum zaradenia do prevadzky - " << this->datumEvidencie_ << "\t TYP - "
-		<< ((typ_ == eDrony::JEDEN) ? "jeden" : "dva") << "\t celkovyPocetNalietanychHodin - "
-		<< this->celkovyPocetNalietanychHodin << "\t celkovyPocetPrepravenychZasielok - "
-		<< this->celkovyPocetPrepravenychZasielok << std::endl;
+	std::cout << "Datum zaradenia do prevadzky - " << this->datumEvidencie_ <<
+		"\t Seriove cislo - " << this->serioveCislo_ <<
+		"\t TYP - " << ((typ_ == eDrony::JEDEN) ? "jeden" : "dva") << "\t celkovyPocetNalietanychHodin - " <<
+		this->celkovyPocetNalietanychHodin << "\t celkovyPocetPrepravenychZasielok - " <<
+		this->celkovyPocetPrepravenychZasielok << std::endl;
 }

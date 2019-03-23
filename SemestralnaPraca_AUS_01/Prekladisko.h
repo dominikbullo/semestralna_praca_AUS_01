@@ -18,9 +18,10 @@ public:
 	std::string dajOkres() {
 		return region_;
 	}
-	inline std::string getSerioveCislo() {
-		return serioveCislo_;
-	}
+	std::string Prekladisko::set_get_SerioveCislo();
+	//inline std::string getSerioveCislo() {
+	//	return serioveCislo_;
+	//}
 private:
 	std::string region_;
 	std::string serioveCislo_ = region_;

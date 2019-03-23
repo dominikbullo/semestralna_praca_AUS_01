@@ -64,7 +64,7 @@ void UI::hlavneMenu()
 		pridajVsetkyPrekladiska();
 
 		//pridám jeden extra dron prekladisku v regióne 
-		firma->dajPrekladiskoPodlaRegionu("MA")->pridajDron(new Dron(eDrony::JEDEN, firma->dajPrekladiskoPodlaRegionu("MA")->getSerioveCislo()));
+		firma->dajPrekladiskoPodlaRegionu("MA")->pridajDron(new Dron(eDrony::JEDEN, firma->dajPrekladiskoPodlaRegionu("MA")->set_get_SerioveCislo()));
 
 		firma->dajPrekladiskoPodlaRegionu("MA")->vypisZoznamDronov();
 		firma->getVozidloBySPZ("ZA232DB")->vypisTrasuvozidla();

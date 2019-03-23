@@ -10,9 +10,9 @@ Prekladisko::Prekladisko(std::string region)
 	unikatneSerioveCislo_ = 000000;
 
 	// prekladisko má vždy aspoò dvoch dronov pri vytváraní
-	this->pridajDron(new Dron(eDrony::JEDEN, getSerioveCislo()));
-	this->pridajDron(new Dron(eDrony::JEDEN, getSerioveCislo()));
-	this->pridajDron(new Dron(eDrony::JEDEN, getSerioveCislo()));
+	this->pridajDron(new Dron(eDrony::JEDEN, set_get_SerioveCislo()));
+	this->pridajDron(new Dron(eDrony::JEDEN, set_get_SerioveCislo()));
+	this->pridajDron(new Dron(eDrony::JEDEN, set_get_SerioveCislo()));
 }
 
 Prekladisko::~Prekladisko()
@@ -26,7 +26,6 @@ Prekladisko::~Prekladisko()
 void Prekladisko::pridajDron(Dron * novyDron)
 {
 	// TODO sort by date
-	setSerioveCislo();
 	arrayListDronov->add(novyDron);
 }
 
@@ -51,11 +50,12 @@ Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost)
 	return 0;
 }
 
-void Prekladisko::setSerioveCislo()
+std::string Prekladisko::set_get_SerioveCislo()
 {
 	int pom = ++unikatneSerioveCislo_;
 	std::string formated = std::string(6 - std::to_string(pom).length(), '0') + std::to_string(pom);
 	serioveCislo_ = region_ + formated;
+	return serioveCislo_;
 }
 
 
