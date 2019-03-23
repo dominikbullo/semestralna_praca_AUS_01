@@ -1,4 +1,4 @@
-ï»¿#pragma once
+#pragma once
 
 #include "list.h"
 #include "../structure_iterator.h"
@@ -141,30 +141,30 @@ namespace structures
 
 	template<typename T>
 	inline ArrayList<T>::ArrayList() :
-		// NOTE: prÃ¡zdny ArrayList
-		List(), // konÅ¡truktor predka
-		array_(new Array<T>(4)), // definovaÅ¥ atribÃºty - 4 -> Ä¾ubovoÄ¾nÃ© -> podÄ¾a ÃºÄelu zoznamu
+		// NOTE: prázdny ArrayList
+		List(), // konštruktor predka
+		array_(new Array<T>(4)), // definova atribúty - 4 -> ¾ubovo¾né -> pod¾a úèelu zoznamu
 		size_(0)
 	{
 	}
 
 	template<typename T>
-	// NOTE: implicitnÃ½ -> 1 blok -> 1 adresa
-	// kopÃ­rovacÃ­ konÅ¡truktor
+	// NOTE: implicitnı -> 1 blok -> 1 adresa
+	// kopírovací konštruktor
 	inline ArrayList<T>::ArrayList(const ArrayList<T>& other) :
 		List(),
-		array_(new Array<T>(*other.array_)), // kÃ³pia poÄ¾a druhÃ©ho arraylistu
-		size_(other.size_) //nastavÃ­m si veÄ¾kosÅ¥ kÃ³pie
+		array_(new Array<T>(*other.array_)), // kópia po¾a druhého arraylistu
+		size_(other.size_) //nastavím si ve¾kos kópie
 	{
 	}
 
 	template<typename T>
 	inline ArrayList<T>::~ArrayList()
 	{
-		// nutnÃ©
+		// nutné
 		delete array_;
 
-		// dobrovoÄ¾nÃ©
+		// dobrovo¾né
 		array_ = nullptr;
 		size_ = 0;
 	}
@@ -220,21 +220,21 @@ namespace structures
 	template<typename T>
 	inline void ArrayList<T>::add(const T & data)
 	{
-		// NOTE: pridÃ¡vam prvky na koniec
+		// NOTE: pridávam prvky na koniec
 
-		// pridÃ¡vam do toho istÃ©ho, aÅ¾ kÃ½m nemusÃ­m zvÃ¤ÄÅ¡iÅ¥ pole
+		// pridávam do toho istého, a kım nemusím zväèši pole
 		if (array_->size() == size_)
 		{
 			enlarge();
 		}
-		//size nie je in a vyuÅ¾Ã­vam hranatÃ© zÃ¡tvorky na poli, kde oÄakÃ¡vam int
+		//size nie je in a vyuívam hranaté zátvorky na poli, kde oèakávam int
 		(*array_)[static_cast<int>(size_++)] = data;
 	}
 
 	template<typename T>
 	inline void ArrayList<T>::insert(const T & data, const int index)
 	{
-		// NOTE: kdekoÄ¾vek
+		// NOTE: kdeko¾vek
 		if (index == static_cast<int>(size_))
 		{
 			ArrayList<T>::add(data);
@@ -243,17 +243,17 @@ namespace structures
 		{
 			DSRoutines::rangeCheckExcept(index, size_ + 1, "Index out of range in ArrayList");
 
-			//ak mÃ¡m pole plnÃ©, tak zo zvÃ¤ÄÅ¡Ã­m
+			//ak mám pole plné, tak zo zväèším
 			if (array_->size() == size_)
 			{
 				enlarge();
 			}
-			// kopÃ­rujem vÅ¡etko po index
+			// kopírujem všetko po index
 			// posuniem do prava pole akokeby
 			Array<T>::copy((*array_), index, (*array_), index + 1, static_cast<int>(size_) - index);
-			// vyplnÃ­ Ãºdaje, ktorÃ© som chcel
+			// vyplní údaje, ktoré som chcel
 			(*array_)[index] = data;
-			//zvÃ¤ÄÅ¡Ã­m size
+			//zväèším size
 			size_++;
 		}
 
@@ -262,40 +262,40 @@ namespace structures
 	template<typename T>
 	inline bool ArrayList<T>::tryRemove(const T & data)
 	{
-		// NOTE: vymaÅ¾e prvÃ½ vÃ½skyt prvku, ak existuje
+		// NOTE: vymae prvı vıskyt prvku, ak existuje
 
 		int index = getIndexOf(data);
-		// ak ho nÃ¡jdem tak ho vymaÅ¾em a vÅ•atim true
+		// ak ho nájdem tak ho vymaem a vàatim true
 		if (index != -1)
 		{
 			removeAt(index);
 			return true;
 		}
-		// inak vrÃ¡tim false
+		// inak vrátim false
 		return false;
 	}
 
 	template<typename T>
 	inline T ArrayList<T>::removeAt(const int index)
 	{
-		// FIXME: zmenÅ¡iÅ¥ pole ? alebo nie ?
-		// NOTE: moÅ½no ak je veÄ¾kÃ© mnoÅ¾stvo voÄ¾nÃ©ho priestoru
+		// FIXME: zmenši pole ? alebo nie ?
+		// NOTE: mono ak je ve¾ké mnostvo vo¾ného priestoru
 
 
 		DSRoutines::rangeCheckExcept(index, static_cast<int>(size_), "Index out of range in ArrayList");
 		T temp = (*array_)[index];
-		// posuniem doÄ¾ava pole akokeby
+		// posuniem do¾ava pole akokeby
 		Array<T>::copy(*array_, index + 1, *array_, index, static_cast<int>(size_) - index - 1);
-		// zmenÅ¡Ã­m size a vrÃ¡tim
+		// zmenším size a vrátim
 		size_--;
-		// tie ostatnÃ© ma nezaujÃ­ma -> aj keÄ tam je bordel
+		// tie ostatné ma nezaujíma -> aj keï tam je bordel
 		return temp;
 	}
 
 	template<typename T>
 	inline int ArrayList<T>::getIndexOf(const T & data)
 	{
-		// lineÃ¡rna zloÅ¾itosÅ¥, prehÄ¾adÃ¡vam vÅ¡etky prvky, mÃ´Å¾em si dovoliÅ¥ -> rÃ½chle
+		// lineárna zloitos, preh¾adávam všetky prvky, môem si dovoli -> rıchle
 		for (int index = 0; index < static_cast<int>(size_); index++)
 		{
 			if ((*array_)[index] == data)
@@ -327,7 +327,7 @@ namespace structures
 	template<typename T>
 	inline void ArrayList<T>::enlarge()
 	{
-		// zvÃ¤ÄÅ¡Ã­m pole o dvojnÃ¡sobok
+		// zväèším pole o dvojnásobok
 		Array<T>* newArray = new Array<T>(size_ * 2);
 		Array<T>::copy(*array_, 0, *newArray, 0, static_cast<int>(size_));
 		delete array_;

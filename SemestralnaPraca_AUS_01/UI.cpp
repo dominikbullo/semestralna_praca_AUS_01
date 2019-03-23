@@ -7,10 +7,14 @@ UI::UI()
 	pridajVsetkyPrekladiska();
 	// TODO: pole okresov
 	//poleRegionov = new structures::Array<std::string>(23);
-	//{ "MA","BA","TT","TN","NR","KN","PD","LV","CA","MT","BB","ZV","KA","NO","LM","LC","RA","SL","SN","PO","KE","HE","MI" };
-	//char[3] test = { "MA", "BA", "TT", "TN", "NR", "KN", "PD", "LV", "CA", "MT", "BB", "ZV", "KA", "NO", "LM", "LC", "RA", "SL", "SN", "PO", "KE", "HE", "MI" };
+	//	char * regiony[23] = { "MA", "BA", "TT", "TN", "NR", "KN", "PD", "LV", "CA", "MT", "BB", "ZV", "KA", "NO", "LM", "LC", "RA", "SL", "SN", "PO", "KE", "HE", "MI" };
+	//	int index = 0;
+	//	for each (char *region in regiony)
+	//	{
+	//		(*poleRegionov)[index] = *region;
+	//		index++;
+	//	}
 }
-
 
 UI::~UI()
 {
@@ -56,9 +60,10 @@ void UI::hlavneMenu()
 		firma->dajPrekladiskoPodlaRegionu("MA")->pridajDron(new Dron(eDrony::JEDEN));
 
 		firma->dajPrekladiskoPodlaRegionu("MA")->vypisZoznamDronov();
+		firma->getVozidloBySPZ("ZA232DB")->vypisTrasuvozidla();
 		// ↓↓ memory leak ↓↓
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15));
-		hlavneMenu();
+		//firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15));
+		//hlavneMenu();
 		break;
 	case 6:
 		break;
@@ -127,12 +132,14 @@ void UI::menuVozidla(std::string text, bool clearTerminal)
 	cout << "++++++++++ Sprava Vozidiel ++++++++++" << endl;
 	cout <<
 		"1. Pridaj Vozidlo" << endl <<
-		"2. Vypis zoznam Vozidiel firmy" << endl << endl <<
+		"2. Vypis zoznam Vozidiel firmy" << endl <<
+		"3. Vypis trasu vozidla" << endl << endl <<
 		"0. Hlavne Menu" << endl;
 
-	switch (std::stoi(getStrInputFromUser("Zvolte si moznost zo zoznamu")))
+	switch (getIntInputFromUser("Zvolte si moznost zo zoznamu"))
 	{
 	case 1:
+		// TODO spýtať sa na trasu ? 
 		firma->pridajVozidlo(new Vozidlo(
 			getIntInputFromUser("Zadaj nosnost"),
 			getIntInputFromUser("Zadaj prevadzkoveNaklady"),
@@ -141,6 +148,10 @@ void UI::menuVozidla(std::string text, bool clearTerminal)
 		break;
 	case 2:
 		firma->vypisZoznamVozidiel();
+		menuVozidla(false);
+		break;
+	case 3:
+		firma->getVozidloBySPZ(getStrInputFromUser("Zadaj SPZ vozidla, ktoremu chces vypiast trasu"))->vypisTrasuvozidla();
 		menuVozidla(false);
 		break;
 	case 0:

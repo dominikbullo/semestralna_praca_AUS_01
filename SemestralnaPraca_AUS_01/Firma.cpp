@@ -5,54 +5,46 @@
 Firma::Firma(std::string nazovFirmy)
 {
 	nazovFirmy_ = nazovFirmy;
-	arrayVozidiel = new structures::ArrayList<Vozidlo*>();
-	arrayPrekladisk = new structures::ArrayList<Prekladisko*>();
-	linkObjednavok = new structures::LinkedList<Objednavka*>();
+	arrayListVozidiel = new structures::ArrayList<Vozidlo*>();
+	arrayListPrekladisk = new structures::ArrayList<Prekladisko*>();
+	linkedListObjednavok = new structures::LinkedList<Objednavka*>();
 }
 
 Firma::~Firma()
 {
 	// treba premazat vsetky objekty ktore som kam naplnil
-	for (Vozidlo *vozidlo : *arrayVozidiel) {
+	for (Vozidlo *vozidlo : *arrayListVozidiel) {
 		delete vozidlo;
 	}
-	for (Prekladisko * prekladisko : *arrayPrekladisk) {
+	for (Prekladisko * prekladisko : *arrayListPrekladisk) {
 		delete prekladisko;
 	}
-	for (Objednavka * objednavka : *linkObjednavok) {
-		delete linkObjednavok;
+	for (Objednavka * objednavka : *linkedListObjednavok) {
+		delete linkedListObjednavok;
 	}
-	delete arrayVozidiel;
-	delete arrayPrekladisk;
-	delete linkObjednavok;
+	delete arrayListVozidiel;
+	delete arrayListPrekladisk;
+	delete linkedListObjednavok;
 }
 
 void Firma::pridajPrekladisko(Prekladisko* novePrekladisko)
 {
-	arrayPrekladisk->add(novePrekladisko);
+	arrayListPrekladisk->add(novePrekladisko);
 }
 
 void Firma::pridajVozidlo(Vozidlo* noveVozidlo)
 {
 	// vozidlo pridávam vždy na koniec, tým pádom viem, že vozidlá sú zoradené pod¾a poradia zaevidovania
 	int index = 0;
-	for (Vozidlo *vozidlo : *arrayVozidiel) {
+	for (Vozidlo *vozidlo : *arrayListVozidiel) {
 		// FIXME pozor na toto porovnávanie 
 		if (vozidlo->getDatumaCasEvidencie() <= noveVozidlo->getDatumaCasEvidencie()) {
-			arrayVozidiel->insert(noveVozidlo, index);
+			arrayListVozidiel->insert(noveVozidlo, index);
 			return;
 		}
 		index++;
 	}
-	arrayVozidiel->add(noveVozidlo);
-}
-
-void Firma::vypisZoznamVozidiel()
-{
-	for (Vozidlo* var : *arrayVozidiel) {
-		var->toString();
-	}
-
+	arrayListVozidiel->add(noveVozidlo);
 }
 
 Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string okres) {
@@ -61,7 +53,7 @@ Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string okres) {
 	// NOTE osetrenie zlého vstupu
 	//for (auto & c : okres) c = toupper(c);
 
-	for (Prekladisko * prekladisko : *arrayPrekladisk) {
+	for (Prekladisko * prekladisko : *arrayListPrekladisk) {
 		if (prekladisko->dajOkres() == okres) {
 			return prekladisko;
 		}

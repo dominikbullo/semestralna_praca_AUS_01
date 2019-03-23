@@ -1,4 +1,4 @@
-ï»¿#pragma once
+#pragma once
 
 #include "../structure.h"
 #include "../vector/vector.h"
@@ -74,8 +74,8 @@ namespace structures
 		/// <summary> Vektor s datami. </summary>
 		Vector* vector_;
 		/// <summary> Pocet prvkov v poli. </summary>
-		// NOTE: size aj napriek tomu, Å¾e ho viem vypoÄÃ­taÅ¥ ->
-		// NOTE: rÃ½chlejÅ¡ie a nemusÃ­m stÃ¡le poÄÃ­taÅ¥
+		// NOTE: size aj napriek tomu, e ho viem vypoèíta ->
+		// NOTE: rıchlejšie a nemusím stále poèíta
 		size_t size_;
 
 	private:
@@ -94,7 +94,7 @@ namespace structures
 
 	template<typename T>
 	Array<T>::Array(const Array<T>& other) :
-		// chcem kÃ³piu vektora nie smernÃ­ka -> preto hviezdiÄka
+		// chcem kópiu vektora nie smerníka -> preto hviezdièka
 		vector_(new Vector(*(other.vector_))),
 		size_(other.size_)
 	{
@@ -134,8 +134,8 @@ namespace structures
 				throw std::out_of_range("Arrays sizes are not the same");
 			}
 			// cez hodnoty nie, cez smerniky
-			// NOTE:  keÄ chcem priradiÅ¥ polia, priradÃ­m vektory
-			// hviezdiÄky ako hodnoty, vnÃºtra, nie smernÃ­ky
+			// NOTE:  keï chcem priradi polia, priradím vektory
+			// hviezdièky ako hodnoty, vnútra, nie smerníky
 			*vector_ = *(other.vector_);
 		}
 		return *this;
@@ -155,7 +155,7 @@ namespace structures
 		T* typeVectorPointer = reinterpret_cast<T *>(vectorPointer);
 		return *typeVectorPointer;
 
-		// NOTE: dÃ¡ sa aj takto, v jednom riadku
+		// NOTE: dá sa aj takto, v jednom riadku
 		// return *(reinterpret_cast<T *>(vector_->getBytePointer(mapFunction(index))));
 	}
 
@@ -168,8 +168,8 @@ namespace structures
 	template<typename T>
 	inline bool Array<T>::operator==(const Array<T>& other) const
 	{
-		// NOTE: porovnÃ¡vam vektory, size nemusÃ­m to je vo vektore
-		// chcem dÃ¡ta, preto hviezdiÄky
+		// NOTE: porovnávam vektory, size nemusím to je vo vektore
+		// chcem dáta, preto hviezdièky
 		// FIXED missing ;
 		return *vector_ == *other.vector_;
 	}
@@ -177,7 +177,7 @@ namespace structures
 	template<typename T>
 	void Array<T>::copy(const Array<T>& src, const int srcStartIndex, Array<T>& dest, const int destStartIndex, const int length)
 	{
-		// skontrolujem, Äi mÃ¡m vÃ´bec, Äo kopÃ­rovaÅ¥
+		// skontrolujem, èi mám vôbec, èo kopírova
 		if (length > 0)
 		{
 			Vector::copy(*src.vector_, src.mapFunction(srcStartIndex), *dest.vector_, dest.mapFunction(destStartIndex), length * sizeof(T));
@@ -188,7 +188,7 @@ namespace structures
 	inline int Array<T>::mapFunction(const int index) const
 	{
 		// NOTE: TEST -- mapovancia funkcia 
-		// NOTE: TEST -- ODPOVEÄ: prepis, metÃ³da, prepoÄÃ­ta index v poli na index vo vektore 
+		// NOTE: TEST -- ODPOVEÏ: prepis, metóda, prepoèíta index v poli na index vo vektore 
 		DSRoutines::rangeCheckExcept(index, size_, "Invalid index in array!");
 		return index * sizeof(T);
 	}

@@ -20,12 +20,24 @@ public:
 	}
 	void pridajPrekladisko(Prekladisko * noveVozidlo);
 	void pridajVozidlo(Vozidlo * noveVozidlo);
-	void vypisZoznamVozidiel();
+	Vozidlo* getVozidloBySPZ(std::string SPZ) {
+		for (Vozidlo* vozidlo : *arrayListVozidiel) {
+			if (vozidlo->getSPZ() == SPZ) {
+				return vozidlo;
+			}
+		}
+		return NULL;
+	}
+	void vypisZoznamVozidiel() {
+		for (Vozidlo* vozidlo : *arrayListVozidiel) {
+			vozidlo->toString();
+		}
+	}
 	Prekladisko * dajPrekladiskoPodlaRegionu(std::string okres);
 	Objednavka * vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat);
 private:
 	std::string nazovFirmy_;
-	structures::ArrayList<Vozidlo*> * arrayVozidiel;
-	structures::ArrayList<Prekladisko*> * arrayPrekladisk;
-	structures::LinkedList<Objednavka*> * linkObjednavok;
+	structures::ArrayList<Vozidlo*> * arrayListVozidiel;
+	structures::ArrayList<Prekladisko*> * arrayListPrekladisk;
+	structures::LinkedList<Objednavka*> * linkedListObjednavok;
 };
