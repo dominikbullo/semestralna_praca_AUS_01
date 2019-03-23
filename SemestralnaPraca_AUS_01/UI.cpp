@@ -25,7 +25,7 @@ UI::~UI()
 
 void UI::hlavneMenu()
 {
-	system("cls");
+	//system("cls");
 	cout << "++++++++++ Vitajte v Informacnom systeme firmy " << firma->getNazovFirmy() << " ++++++++++" << endl;
 	cout << "Date: " << Datum::getAktualnyDatumaCas() << endl;
 	cout <<
@@ -51,23 +51,26 @@ void UI::hlavneMenu()
 		menuObjednavky();
 		break;
 	case 4:
-		datumUI->posunCasoHodinu();
+		datumUI->posunCasoHodinu(60 * 60);
 		hlavneMenu();
 		break;
 	case 5:
-		firma->pridajVozidlo(new Vozidlo(10, 100, "ZA232DB"));
 		firma->pridajVozidlo(new Vozidlo(14560, 1045550, "ZA222BA"));
+		// aj v prípade, že ho posuniem naspäť
+		datumUI->posunCasoHodinu(-60 * 60);
+		firma->pridajVozidlo(new Vozidlo(10, 100, "ZA232DB"));
+
 		firma->vypisZoznamVozidiel();
 		pridajVsetkyPrekladiska();
 
 		//pridám jeden extra dron prekladisku v regióne 
-		firma->dajPrekladiskoPodlaRegionu("MA")->pridajDron(new Dron(eDrony::JEDEN));
+		firma->dajPrekladiskoPodlaRegionu("MA")->pridajDron(new Dron(eDrony::JEDEN, firma->dajPrekladiskoPodlaRegionu("MA")->getSerioveCislo()));
 
 		firma->dajPrekladiskoPodlaRegionu("MA")->vypisZoznamDronov();
 		firma->getVozidloBySPZ("ZA232DB")->vypisTrasuvozidla();
 		// ↓↓ memory leak ↓↓
 		//firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15));
-		//hlavneMenu();
+		hlavneMenu();
 		break;
 	case 6:
 		break;
@@ -184,11 +187,11 @@ void UI::menuPrekladiska(std::string text, bool clearTerminal)
 
 	switch (getIntInputFromUser("Zvolte si moznost zo zoznamu"))
 	{
-	case 1:
-		firma->dajPrekladiskoPodlaRegionu(
-			getStrInputFromUser("Zadaj skratku regionu prekladiska do ktoreho chces pridat drona"))
-			->pridajDron(new Dron((getIntInputFromUser("Zadaj typ drona [1/2]") ? eDrony::JEDEN : eDrony::DVA)));
-		menuPrekladiska("Dron bol uspesne pridany", true);
+		//case 1:
+		//	firma->dajPrekladiskoPodlaRegionu(
+		//		getStrInputFromUser("Zadaj skratku regionu prekladiska do ktoreho chces pridat drona"))
+		//		->pridajDron(new Dron((getIntInputFromUser("Zadaj typ drona [1/2]") ? eDrony::JEDEN : eDrony::DVA)));
+		//	menuPrekladiska("Dron bol uspesne pridany", true);
 	case 2:
 		firma->pridajPrekladisko(new Prekladisko(getStrInputFromUser("Zadaj skratku regionu prekladiska, ktore chces pridat")));
 		menuPrekladiska("Prekladisko bolo uspesne pridane", true);

@@ -13,7 +13,7 @@
 class Dron
 {
 public:
-	Dron(const eDrony typDronu);
+	Dron(const eDrony typDronu, std::string serioveCislo);
 	~Dron();
 	void toString();
 
@@ -35,6 +35,7 @@ public:
 private:
 	eDrony typ_;
 	std::string datumEvidencie_;
+	std::string serioveCislo_;
 
 	int nosnost_;  //pis to v kilach
 	int primernaRychlost_;

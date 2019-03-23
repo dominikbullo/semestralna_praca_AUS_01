@@ -8,12 +8,13 @@ Datum* Datum::instance = 0;
 time_t now_ = time(0);
 std::string Datum::datum_a_cas_ = time_t_to_string(now_);
 
-void Datum::posunCasoHodinu()
+void Datum::posunCasoHodinu(int pocetSekund)
 {
 	time_t pom = string_to_time_t(datum_a_cas_);
-	pom += 60 * 60;
+	pom += pocetSekund;
 	datum_a_cas_ = time_t_to_string(pom);
 }
+
 
 Datum * Datum::get()
 {

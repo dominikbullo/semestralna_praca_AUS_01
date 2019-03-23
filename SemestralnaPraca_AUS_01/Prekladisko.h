@@ -14,11 +14,18 @@ public:
 	void pridajDron(Dron * novyDron);
 	void vypisZoznamDronov();
 	Dron * vyberDrona(double hmotnostZasielky, double vzdialenost);
+	void setSerioveCislo();
 	std::string dajOkres() {
 		return region_;
 	}
+	inline std::string getSerioveCislo() {
+		return serioveCislo_;
+	}
 private:
-	structures::ArrayList<Dron*> * arrayDronov;
 	std::string region_;
+	std::string serioveCislo_ = region_;
+	structures::ArrayList<Dron*> * arrayListDronov;
+protected:
+	static int unikatneSerioveCislo_;
 };
 

@@ -17,7 +17,7 @@ public:
 		return instance;
 	}
 
-	void posunCasoHodinu();
+	void posunCasoHodinu(int pocetSekund);
 	Datum* get();
 	static std::string getAktualnyDatumaCas() {
 		return datum_a_cas_;

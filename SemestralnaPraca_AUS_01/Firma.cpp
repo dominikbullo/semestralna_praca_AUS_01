@@ -37,8 +37,8 @@ void Firma::pridajVozidlo(Vozidlo* noveVozidlo)
 	// vozidlo pridávam vždy na koniec, tým pádom viem, že vozidlá sú zoradené pod¾a poradia zaevidovania
 	int index = 0;
 	for (Vozidlo *vozidlo : *arrayListVozidiel) {
-		// FIXME pozor na toto porovnávanie 
-		if (vozidlo->getDatumaCasEvidencie() <= noveVozidlo->getDatumaCasEvidencie()) {
+		// FIXED zaraïovanie pod¾a dátumu aj èasu
+		if (noveVozidlo->getDatumaCasEvidencie() < vozidlo->getDatumaCasEvidencie()) {
 			arrayListVozidiel->insert(noveVozidlo, index);
 			return;
 		}

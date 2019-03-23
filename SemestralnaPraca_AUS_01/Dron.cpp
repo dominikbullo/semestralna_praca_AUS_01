@@ -1,9 +1,10 @@
 #include "Dron.h"
 
 
-Dron::Dron(const eDrony typDronu)
+Dron::Dron(const eDrony typDronu, std::string serioveCislo)
 {
 	typ_ = typDronu;
+	serioveCislo_ = serioveCislo_;
 	datumEvidencie_ = Datum::getAktualnyDatumaCas();
 
 	switch (typDronu) {
