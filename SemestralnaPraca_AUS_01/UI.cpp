@@ -3,11 +3,13 @@
 using namespace std;
 UI::UI()
 {
+	datumUI = Datum::getInstance();
 	firma = new Firma("AoE");
 	pridajVsetkyPrekladiska();
 	// TODO: pole okresov
 	//poleRegionov = new structures::Array<std::string>(23);
-	//	char * regiony[23] = { "MA", "BA", "TT", "TN", "NR", "KN", "PD", "LV", "CA", "MT", "BB", "ZV", "KA", "NO", "LM", "LC", "RA", "SL", "SN", "PO", "KE", "HE", "MI" };
+	//	char * regiony[23] = { "MA", "BA", "TT", "TN", "NR", "KN",
+	//"PD", "LV", "CA", "MT", "BB", "ZV", "KA", "NO", "LM", "LC", "RA", "SL", "SN", "PO", "KE", "HE", "MI" };
 	//	int index = 0;
 	//	for each (char *region in regiony)
 	//	{
@@ -25,7 +27,7 @@ void UI::hlavneMenu()
 {
 	system("cls");
 	cout << "++++++++++ Vitajte v Informacnom systeme firmy " << firma->getNazovFirmy() << " ++++++++++" << endl;
-	//cout << "Date: " << Datum::getAktualnyDatum() << endl;
+	cout << "Date: " << Datum::getAktualnyDatumaCas() << endl;
 	cout <<
 		"1. Sprava Vozidiel" << endl <<
 		"2. Sprava Prekladísk" << endl <<
@@ -49,6 +51,8 @@ void UI::hlavneMenu()
 		menuObjednavky();
 		break;
 	case 4:
+		datumUI->posunCasoHodinu();
+		hlavneMenu();
 		break;
 	case 5:
 		firma->pridajVozidlo(new Vozidlo(10, 100, "ZA232DB"));

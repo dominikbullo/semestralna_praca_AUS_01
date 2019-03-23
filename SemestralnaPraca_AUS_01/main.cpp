@@ -26,6 +26,8 @@ int main()
 	// TODO 24.03 -> 7 - 8 - 11 -> ukladanie ho súbora ?
 
 	initHeapMonitor();
+	//std::string datumaCasEvidencie_ = Datum::getAktualnyDatumaCas();
+	//time_t testtime = Datum::string_to_time_t(datumaCasEvidencie_);
 	UI *userInterface = new UI();
 	userInterface->hlavneMenu();
 

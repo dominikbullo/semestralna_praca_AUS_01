@@ -12,7 +12,7 @@ Vozidlo::Vozidlo(int nostnostVozidla, int prevadzkoveNaklady, std::string SPZ)
 	celkovaNosnost_ = nostnostVozidla;
 	prevadzkoveNaklady_ = prevadzkoveNaklady;
 	SPZ_ = SPZ;
-	datumaCasEvidencie_ = Datum::getAktualnyDatum();
+	datumaCasEvidencie_ = Datum::getAktualnyDatumaCas();
 	linkedListTrasaVozidla = new structures::LinkedList<string>();
 	this->pridajRegionyDoTrasyVozidla();
 }

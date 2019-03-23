@@ -4,7 +4,7 @@
 Dron::Dron(const eDrony typDronu)
 {
 	typ_ = typDronu;
-	datumEvidencie_ = Datum::getAktualnyDatum();
+	datumEvidencie_ = Datum::getAktualnyDatumaCas();
 
 	switch (typDronu) {
 	case eDrony::JEDEN:

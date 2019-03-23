@@ -24,5 +24,6 @@ public:
 	void menuObjednavky();
 private:
 	Firma * firma;
+	Datum * datumUI;
 	structures::Array<std::string> *poleRegionov;
 };
