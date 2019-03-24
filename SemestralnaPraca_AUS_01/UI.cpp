@@ -54,7 +54,7 @@ void UI::hlavneMenu()
 		//firma->pridajVozidlo(new Vozidlo(14560, 1045550, "ZA222BA"));
 		//// aj v prípade, že ho posuniem naspäť
 		//datumUI->posunCasoHodinu(-60 * 60);
-		firma->pridajVozidlo(new Vozidlo(10, 100, "ZA232DB"));
+		firma->pridajVozidlo(new Vozidlo(10000, 100, "ZA232DB"));
 
 		firma->vypisZoznamVozidiel();
 		pridajVsetkyPrekladiska();
@@ -64,9 +64,13 @@ void UI::hlavneMenu()
 
 		firma->dajPrekladiskoPodlaRegionu("MA")->vypisZoznamDronov();
 		firma->getVozidloBySPZ("ZA232DB")->vypisTrasuVozidla();
+
 		// ↓↓ memory leak ↓↓
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
-		firma->vypisanieVsetkychObjednavok();
+		firma->vytvorObjednavku(1, new Odosielatel("CA", 18), new Adresat("MA", 15.5));
+		/*firma->vypisanieVsetkychObjednavok();*/
+		firma->spracujVsetkyObjednavky();
+
 		hlavneMenu();
 		break;
 	case 6:
@@ -226,6 +230,10 @@ void UI::menuObjednavky()
 	{
 	case 0:
 		hlavneMenu();
+		break;
+	case 2:
+		firma->vypisanieVsetkychObjednavok();
+		system("pause");
 		break;
 	default:
 		menuObjednavky();

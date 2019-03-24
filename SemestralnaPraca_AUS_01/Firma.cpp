@@ -16,14 +16,14 @@ Firma::Firma(std::string nazovFirmy)
 Firma::~Firma()
 {
 	// treba premazat vsetky objekty ktore som kam naplnil
-	for (Vozidlo *vozidlo : *arrayListVozidiel) {
-		delete vozidlo;
+	for (Objednavka * objednavka : *linkedListObjednavok) {
+		delete objednavka;
 	}
 	for (Prekladisko * prekladisko : *arrayListPrekladisk) {
 		delete prekladisko;
 	}
-	for (Objednavka * objednavka : *linkedListObjednavok) {
-		delete objednavka;
+	for (Vozidlo *vozidlo : *arrayListVozidiel) {
+		delete vozidlo;
 	}
 	delete arrayListVozidiel;
 	delete arrayListPrekladisk;
@@ -74,14 +74,14 @@ void Firma::pridajRegionyDoTrasyVozidla(Vozidlo* vozidlo) {
 	return;
 }
 
-Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string okres) {
+Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string region) {
 	// zložitos O(n)
 
 	// NOTE osetrenie zlého vstupu
-	//for (auto & c : okres) c = toupper(c);
+	//for (auto & c : region) c = toupper(c);
 
 	for (Prekladisko * prekladisko : *arrayListPrekladisk) {
-		if (prekladisko->dajOkres() == okres) {
+		if (prekladisko->dajRegion() == region) {
 			return prekladisko;
 		}
 	}
@@ -123,13 +123,11 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	//zaevidujem do firmy
 	this->linkedListObjednavok->add(objednavka);
 
-
-	// NOTE: ODOSIELATEL
-
-	// zistím prekladisko príjmutia
 	Prekladisko* prekladiskoOdoslania = this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion());
 
+
 	// zistím drona z tohto prekladiska, èi mám nejakého drona, ktorý stihne, unesie a je nabitý 
+	// TODO vyber drona ak nie je vo¾ný
 	Dron* dronPreOdosielatela = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska());
 
 	// zistím èi mi do prekladiska príde auto ktoré bude ma nosno takú, že zvládne odniest objednavku
@@ -141,6 +139,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	// FIXME toto sa ale pýtaj až neskôr, resp na nejaký èas, kedy tam daná objednávka bude 
 	// Dron* dronPreAdresata = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, adresat->getVzdialenostOdPrekladiska());
 
+	//if (dronPreOdosielatela == NULL ||
 
 	if (dronPreOdosielatela == NULL ||
 		vozidloPreOdosielatela == NULL ||
@@ -153,7 +152,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 		objednavka->setStav(eStavObjednavky::PRIJATA);
 		dronPreOdosielatela->pridajObjednavku(objednavka);
 		vozidloPreOdosielatela->pridajZasielku(objednavka->getHmotnostZasielky());
-
+		prekladiskoOdoslania->pridajObjednavku(objednavka);
 	}
 }
 

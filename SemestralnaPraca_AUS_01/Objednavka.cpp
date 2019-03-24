@@ -38,15 +38,17 @@ std::string Objednavka::stringStav()
 
 void Objednavka::toString()
 {
+	cout << "*****************************************************************" << endl;
 	cout <<
-		"Hmotnost zasielky: " << hmotnostZasielky_ <<
-		"Region odosielatela: " << odosielatel_->getRegion() <<
-		"Vzdialenost odosielatela od prekladiska: " << odosielatel_->getVzdialenostOdPrekladiska() <<
-		"Region adresata: " << adresat_->getRegion() <<
-		"Vzdialenost adresata od prekladiska: " << adresat_->getVzdialenostOdPrekladiska() <<
-		"Datum a cas vytvorenia zasielky: " << datumaCasVytvoreniaObjednavky_ <<
-		"Stav: " << stringStav() <<
-		endl;
+		"Hmotnost zasielky: " << hmotnostZasielky_ << endl <<
+		"Region odosielatela: " << odosielatel_->getRegion() << endl <<
+		"Vzdialenost odosielatela od prekladiska: " << odosielatel_->getVzdialenostOdPrekladiska() << endl <<
+		"Region adresata: " << adresat_->getRegion() << endl <<
+		"Vzdialenost adresata od prekladiska: " << adresat_->getVzdialenostOdPrekladiska() << endl <<
+		"Datum a cas vytvorenia zasielky: " << datumaCasVytvoreniaObjednavky_ << endl <<
+		"Stav: " << stringStav() << endl;
+	cout << "*****************************************************************" << endl;
+
 
 }
 

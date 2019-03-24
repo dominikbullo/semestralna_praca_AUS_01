@@ -26,6 +26,9 @@ Prekladisko::~Prekladisko()
 		delete dron;
 	}
 	delete arrayListDronov;
+
+	frontObjednavok->clear();
+	delete frontObjednavok;
 }
 
 void Prekladisko::pridajDron(Dron * novyDron)
@@ -44,9 +47,18 @@ void Prekladisko::pridajDron(Dron * novyDron)
 	arrayListDronov->add(novyDron);
 }
 
-void Prekladisko::pridajObjednavku(Objednavka * objednavka, Dron* dron)
+void Prekladisko::pridajObjednavku(Objednavka * objednavka)
 {
-	dron->pridajObjednavku(objednavka);
+	frontObjednavok->push(objednavka);
+}
+void Prekladisko::spracujObjednavky()
+{
+	cout << "Spracovavam objednavky v regione: " << this->dajRegion() << endl;
+	while (!frontObjednavok->isEmpty())
+	{
+		cout << "Spracovavam objednavku: " << endl;
+		frontObjednavok->pop()->toString();
+	}
 }
 
 void Prekladisko::vypisZoznamDronov() {

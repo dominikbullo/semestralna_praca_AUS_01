@@ -15,10 +15,11 @@ public:
 	Prekladisko(std::string okres);
 	~Prekladisko();
 	void pridajDron(Dron * novyDron);
-	void pridajObjednavku(Objednavka * objednavka, Dron * dron);
+	void pridajObjednavku(Objednavka * objednavka);
+	void spracujObjednavky();
 	void vypisZoznamDronov();
 	Dron * vyberDrona(double hmotnostZasielky, double vzdialenost);
-	std::string dajOkres() {
+	std::string dajRegion() {
 		return region_;
 	}
 	std::string Prekladisko::set_get_SerioveCislo();

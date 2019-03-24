@@ -40,7 +40,7 @@ public:
 				return true;
 			}
 		}
-		std::cout << "Toto auto neprechádza prekladiskom v okrese " << prekladiskoKtorymMaPrechadzat->dajOkres() << std::endl;
+		std::cout << "Toto auto neprechadza prekladiskom v okrese " << prekladiskoKtorymMaPrechadzat->dajRegion() << std::endl;
 		this->vypisTrasuVozidla();
 		return false;
 	}
@@ -48,7 +48,7 @@ public:
 		std::cout << "Trasa vozidlo s SPZ - " << SPZ_ << " je nasledujuca: " << std::endl;
 		for (Prekladisko* prekladisko : *linkedListTrasaVozidla)
 		{
-			std::cout << " -> " << prekladisko->dajOkres();
+			std::cout << " -> " << prekladisko->dajRegion();
 		}
 		std::cout << std::endl;
 	}

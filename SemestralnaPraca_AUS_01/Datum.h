@@ -4,6 +4,7 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
+
 class Datum
 {
 public:
@@ -17,11 +18,13 @@ public:
 		return instance;
 	}
 
-	void posunCasoHodinu(int pocetSekund);
 	//Datum* get();
 	static std::string getAktualnyDatumaCas() {
 		return datum_a_cas_;
 	}
+
+
+	void posunCasoHodinu(int pocetSekund);
 
 	static std::string time_t_to_string(time_t t);
 	static time_t string_to_time_t(std::string s);

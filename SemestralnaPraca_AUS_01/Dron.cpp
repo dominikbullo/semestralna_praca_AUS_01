@@ -32,17 +32,20 @@ Dron::Dron(const eDrony typDronu, std::string serioveCislo)
 
 Dron::~Dron()
 {
+	// Pretože v deštruktore firmy som vymazal vŠetky objednávky -> tu už nemusím
+	delete arrayListObjednavokNaVybavenie;
 }
 void Dron::pridajObjednavku(Objednavka * novaObjednavka) {
 
 	int index = 0;
 	for (Objednavka *objednavka : *arrayListObjednavokNaVybavenie) {
 		if (novaObjednavka->getDatumaCasVytvorenia() < objednavka->getDatumaCasVytvorenia())
+		{
 			arrayListObjednavokNaVybavenie->insert(objednavka, index);
-		return;
+			return;
+		}
+		index++;
 	}
-	index++;
-
 	arrayListObjednavokNaVybavenie->add(novaObjednavka);
 }
 

@@ -29,5 +29,4 @@ enum class dronTypuDva {
 	PRIEMERNA_RYCHLOST = 40,
 	MAX_DOBA_LETU = 60,
 	CAS_NABITIE_10_PERCENT = 5
-
 };

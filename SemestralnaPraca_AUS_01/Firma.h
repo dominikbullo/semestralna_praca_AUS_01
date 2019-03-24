@@ -22,7 +22,14 @@ public:
 	void vypisanieVsetkychObjednavok();
 	void pridajVozidlo(Vozidlo * noveVozidlo);
 	void pridajRegionyDoTrasyVozidla(Vozidlo * vozidlo);
+	void spracujVsetkyObjednavky()
+	{
+		for (Prekladisko* prekladisko : *arrayListPrekladisk)
+		{
+			prekladisko->spracujObjednavky();
+		}
 
+	};
 	Vozidlo* getVozidloBySPZ(std::string SPZ)
 	{
 		for (Vozidlo* vozidlo : *arrayListVozidiel) {
