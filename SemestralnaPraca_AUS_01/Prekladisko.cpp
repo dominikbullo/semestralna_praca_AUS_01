@@ -75,17 +75,22 @@ Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, stri
 
 	for (Dron * dron : *arrayListDronov) {
 		// premenna tak dam toho prveho
-		if (dron->jeVolny(casVytvoreniaObjednavky, vzdialenost))
-		{
-
+		// h¾adaj tu najlepšieho drona
+		if (!dron->jeVolny()) {
+			//a je lepší ako kandidát, tak zmeò kandidáta -> ako zistím, èi je lepší ako kandidát 
+			kandidatNaDrona = dron;
+			continue; // break ?
 		}
+
 		if (dron->zvladneLet(vzdialenost) &&
 			dron->unesieZasielku(hmotnostZasielky) &&
 			dron->stihnePriletietPreZasielku(vzdialenost))
 		{
 			return dron;
 		}
+
 	}
+
 	std::cout << "Takuto objednavku nezvladne dorucit ziaden dron" << std::endl;
 	return NULL;
 }

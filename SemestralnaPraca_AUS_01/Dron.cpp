@@ -48,16 +48,22 @@ void Dron::pridajObjednavku(Objednavka * novaObjednavka) {
 	}
 	arrayListObjednavokNaVybavenie->add(novaObjednavka);
 }
+bool Dron::stihnePriletietPreZasielku(double vzdialenost) {
+	time_t aktualnyCas = Datum::string_to_time_t(Datum::getAktualnyDatumaCas());
 
-bool Dron::jeVolny(std::string cas, double vzdialenost) {
-	int index = 0;
-	for (Objednavka *objednavka : *arrayListObjednavokNaVybavenie) {
-		objednavka->getDatumaCasVytvorenia() && objednavka->getCasDokonceniaObjednavky()
-	}
+	tm *ltm = localtime(&aktualnyCas);
+	struct tm casNajneskor = *ltm;
+	casNajneskor.tm_hour = 20;
+	casNajneskor.tm_min = 00;
+
+	time_t ocakavanyCasPriletu = this->casPriletuPreZasielku(vzdialenost);
+	std::cout <<
+		(ocakavanyCasPriletu <= mktime(&casNajneskor) ?
+			"Predpokladany cas priletu dronu : " + Datum::time_t_to_string(ocakavanyCasPriletu) : "Dron to nestihne") <<
+		std::endl;
+	return ocakavanyCasPriletu <= mktime(&casNajneskor);
 }
 
-
-}
 
 void Dron::toString()
 {
@@ -67,3 +73,4 @@ void Dron::toString()
 		this->celkovyPocetNalietanychHodin << "\t celkovyPocetPrepravenychZasielok - " <<
 		this->celkovyPocetPrepravenychZasielok << std::endl;
 }
+

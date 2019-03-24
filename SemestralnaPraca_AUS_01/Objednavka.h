@@ -3,7 +3,6 @@
 #include <string>
 #include "Konstatnty.h"
 #include "Datum.h"
-#include "Dron.h"
 
 class Odosielatel
 {
@@ -44,7 +43,7 @@ class Objednavka
 public:
 	Objednavka(double hmotnostZasielky, Odosielatel* odosielatel, Adresat* adresat);
 	~Objednavka();
-	std::string getCasDokonceniaObjednavky(Dron * dron, double vzdialenost);
+	std::string getCasDokonceniaObjednavky(time_t casLetu, double vzdialenost);
 	void toString();
 	inline double getHmotnostZasielky() {
 		return hmotnostZasielky_;

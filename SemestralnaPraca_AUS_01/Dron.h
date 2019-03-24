@@ -12,17 +12,22 @@
 #include "Datum.h"
 #include "Objednavka.h"
 
-// FIXED -> neviem preèo to hádže chybu ale
-// #include "Firma.h"
-
 class Dron
 {
 public:
 	Dron(const eDrony typDronu, std::string serioveCislo);
 	~Dron();
 	void pridajObjednavku(Objednavka * objednavka);
-	bool jeVolny(std::string cas, double vzdialenost);
 	void toString();
+	bool stihnePriletietPreZasielku(double vzdialenost);
+
+	bool jeVolny() {
+		return vytazeny_;
+	};
+
+	std::string dronBudeNajblizieVolnyO() {
+		//array casov ??? 
+	};
 
 	bool zvladneLet(double vzdialenost) {
 		// zoh¾adniný aj stav nabitia
@@ -35,30 +40,18 @@ public:
 	double trvanieLetu(double vzdialenost) {
 		return (vzdialenost / primernaRychlost_) * 60 * 60 * 2;
 	}
-	time_t ocakavanyCasPriletuPreZasielku(double vzdialenost) {
+	time_t casPriletuPreZasielku(double vzdialenost) {
 		return Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + (trvanieLetu(vzdialenost) / 2.0);
 	}
-	bool stihnePriletietPreZasielku(double vzdialenost) {
-		time_t aktualnyCas = Datum::string_to_time_t(Datum::getAktualnyDatumaCas());
 
-		tm *ltm = localtime(&aktualnyCas);
-		struct tm casNajneskor = *ltm;
-		casNajneskor.tm_hour = 20;
-		casNajneskor.tm_min = 00;
 
-		time_t ocakavanyCasPriletu = ocakavanyCasPriletuPreZasielku(vzdialenost);
-		std::cout <<
-			(ocakavanyCasPriletu <= mktime(&casNajneskor) ?
-				"Predpokladany cas priletu dronu : " + Datum::time_t_to_string(ocakavanyCasPriletu) : "Dron to nestihne") <<
-			std::endl;
-		return ocakavanyCasPriletu <= mktime(&casNajneskor);
-	}
 private:
 	eDrony typ_;
 	structures::ArrayList<Objednavka*> * arrayListObjednavokNaVybavenie;
 
 	std::string datumEvidencie_;
 	std::string serioveCislo_;
+	bool vytazeny_ = false;
 
 	int nosnost_;  //pis to v kilach
 	int primernaRychlost_;
