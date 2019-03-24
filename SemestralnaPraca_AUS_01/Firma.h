@@ -25,10 +25,8 @@ public:
 
 	Vozidlo* getVozidloBySPZ(std::string SPZ)
 	{
-		for (Vozidlo* vozidlo : *arrayListVozidiel)
-		{
-			if (vozidlo->getSPZ() == SPZ)
-			{
+		for (Vozidlo* vozidlo : *arrayListVozidiel) {
+			if (vozidlo->getSPZ() == SPZ) {
 				return vozidlo;
 			}
 		}
@@ -44,7 +42,7 @@ public:
 
 	Prekladisko * dajPrekladiskoPodlaRegionu(std::string okres);
 	Vozidlo * vyberVozidlo(double hmotnostZasielky, Prekladisko * prekladiskoNaPrevzatieZasielky);
-	Objednavka * vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat);
+	void vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat);
 private:
 	std::string nazovFirmy_;
 	structures::ArrayList<Vozidlo*> * arrayListVozidiel;

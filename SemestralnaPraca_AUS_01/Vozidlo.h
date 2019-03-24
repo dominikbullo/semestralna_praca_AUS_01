@@ -21,9 +21,6 @@ public:
 	void toString();
 	void pridajPrekladiskoDoTrasyVozidla(Prekladisko * prekladisko);
 
-	inline int getCelkovaNosnost() {
-		return celkovaNosnost_;
-	}
 	inline int getPrevazdkoveNaklady() {
 		return prevadzkoveNaklady_;
 	}
@@ -60,20 +57,18 @@ public:
 		nosnost_ -= hmotnostZasielky;
 	}
 	bool dokazeNalozitZasielku(double hmotnostZasielky) {
-		return celkovaNosnost_ >= nosnost_ + hmotnostZasielky;
+		return nosnost_ -= hmotnostZasielky >= 0;
 	}
-
 
 	// TODO: e) prijatie zásielky v lokálnom prekladisku odosielateľa by spôsobilo, že toto lokálne
 	//			prekladiskoKtorymPrechadza nedokáže doručiť niektoré zásielky, ktorých adresáti sa nachádzajú v jeho regióne, do 18:00 daného dňa.
 
 private:
 	int prevadzkoveNaklady_;
-	int celkovaNosnost_;
 	std::string datumaCasEvidencie_;
 	std::string SPZ_ = "ZA_";
 	int naklady_ = 0;
-	double nosnost_ = celkovaNosnost_;
+	double nosnost_;
 	structures::ArrayList<Prekladisko *> * linkedListTrasaVozidla;
 };
 

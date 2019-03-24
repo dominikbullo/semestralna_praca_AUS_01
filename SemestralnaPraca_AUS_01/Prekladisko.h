@@ -3,7 +3,7 @@
 
 #include "structures/heap_monitor.h"
 #include "structures/list/array_list.h"
-#include "structures/queue/explicit_queue.h"
+
 #include "Dron.h"
 #include"Objednavka.h"
 
@@ -15,7 +15,7 @@ public:
 	Prekladisko(std::string okres);
 	~Prekladisko();
 	void pridajDron(Dron * novyDron);
-	void pridajObjednavku(Objednavka * objednavka);
+	void pridajObjednavku(Objednavka * objednavka, Dron * dron);
 	void vypisZoznamDronov();
 	Dron * vyberDrona(double hmotnostZasielky, double vzdialenost);
 	std::string dajOkres() {
@@ -26,7 +26,8 @@ private:
 	std::string region_;
 	std::string serioveCislo_ = region_;
 	structures::ArrayList<Dron*> * arrayListDronov;
-	structures::ExplicitQueue<Objednavka*> * queueObjednavok;
+	structures::ExplicitQueue<Objednavka*> * frontObjednavok;
+
 protected:
 	static int unikatneSerioveCislo_;
 };

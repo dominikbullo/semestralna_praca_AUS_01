@@ -7,6 +7,9 @@ Dron::Dron(const eDrony typDronu, std::string serioveCislo)
 	serioveCislo_ = serioveCislo;
 	datumEvidencie_ = Datum::getAktualnyDatumaCas();
 
+	// evidujem bud˙ce objedn·vky, ktorÈ m· dron vybaviù
+	arrayListObjednavokNaVybavenie = new structures::ArrayList<Objednavka*>();
+
 	switch (typDronu) {
 	case eDrony::JEDEN:
 		nosnost_ = (int)dronTypuJeden::NOSNOST;
@@ -29,6 +32,18 @@ Dron::Dron(const eDrony typDronu, std::string serioveCislo)
 
 Dron::~Dron()
 {
+}
+void Dron::pridajObjednavku(Objednavka * novaObjednavka) {
+
+	int index = 0;
+	for (Objednavka *objednavka : *arrayListObjednavokNaVybavenie) {
+		if (novaObjednavka->getDatumaCasVytvorenia() < objednavka->getDatumaCasVytvorenia())
+			arrayListObjednavokNaVybavenie->insert(objednavka, index);
+		return;
+	}
+	index++;
+
+	arrayListObjednavokNaVybavenie->add(novaObjednavka);
 }
 
 void Dron::toString()

@@ -5,8 +5,12 @@
 #include <stdio.h>
 
 #include "structures/heap_monitor.h"
+#include "structures/queue/explicit_queue.h"
+#include "structures/list/array_list.h"
+
 #include "Konstatnty.h"
 #include "Datum.h"
+#include "Objednavka.h"
 
 // FIXED -> neviem preèo to hádže chybu ale
 // #include "Firma.h"
@@ -16,6 +20,7 @@ class Dron
 public:
 	Dron(const eDrony typDronu, std::string serioveCislo);
 	~Dron();
+	void pridajObjednavku(Objednavka * objednavka);
 	void toString();
 
 	bool zvladneLet(double vzdialenost) {
@@ -38,12 +43,14 @@ public:
 		time_t ocakavanyCasPriletu = aktualnyCas + (vzdialenost / primernaRychlost_) * 60 * 60;
 		std::cout <<
 			(ocakavanyCasPriletu <= mktime(&casNajneskor) ?
-				"Predpokladany cas priletu dronu : " + Datum::time_t_to_string(ocakavanyCasPriletu) :
-				"Dron to nestihne") << std::endl;
+				"Predpokladany cas priletu dronu : " + Datum::time_t_to_string(ocakavanyCasPriletu) : "Dron to nestihne") <<
+			std::endl;
 		return ocakavanyCasPriletu <= mktime(&casNajneskor);
 	}
 private:
 	eDrony typ_;
+	structures::ArrayList<Objednavka*> * arrayListObjednavokNaVybavenie;
+
 	std::string datumEvidencie_;
 	std::string serioveCislo_;
 

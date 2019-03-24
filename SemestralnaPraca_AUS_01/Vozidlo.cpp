@@ -9,7 +9,7 @@ Vozidlo::Vozidlo(int nostnostVozidla, int prevadzkoveNaklady, std::string SPZ)
 	//Pevná trasa mu bude priradená(napr., keï ho vytvorím a vloím do systému, tak mu aj vyberiem / vyskladám trasu, po ktorej bude vdy chodi)
 	//Trasa mu bude zakadım poèítaná(ve¾mi pekné a flexibilné riešenie, ale nemusíte to rieši takto)
 
-	celkovaNosnost_ = nostnostVozidla;
+	nosnost_ = nostnostVozidla;
 	prevadzkoveNaklady_ = prevadzkoveNaklady;
 	SPZ_ = SPZ;
 	datumaCasEvidencie_ = Datum::getAktualnyDatumaCas();

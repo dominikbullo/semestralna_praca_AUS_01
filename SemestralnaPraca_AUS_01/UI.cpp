@@ -66,6 +66,7 @@ void UI::hlavneMenu()
 		firma->getVozidloBySPZ("ZA232DB")->vypisTrasuVozidla();
 		// ↓↓ memory leak ↓↓
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+		firma->vypisanieVsetkychObjednavok();
 		hlavneMenu();
 		break;
 	case 6:

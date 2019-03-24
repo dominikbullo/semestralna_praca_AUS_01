@@ -53,6 +53,15 @@ public:
 	inline Adresat* getAdresat() {
 		return adresat_;
 	}
+	std::string getDatumaCasVytvorenia() {
+		return datumaCasVytvoreniaObjednavky_;
+	}
+	void setStav(eStavObjednavky stav) {
+		stav_ = stav;
+	}
+	eStavObjednavky getStav() {
+		return stav_;
+	}
 
 private:
 	std::string datumaCasVytvoreniaObjednavky_;

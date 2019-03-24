@@ -23,7 +23,7 @@ Firma::~Firma()
 		delete prekladisko;
 	}
 	for (Objednavka * objednavka : *linkedListObjednavok) {
-		delete linkedListObjednavok;
+		delete objednavka;
 	}
 	delete arrayListVozidiel;
 	delete arrayListPrekladisk;
@@ -85,8 +85,8 @@ Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string okres) {
 			return prekladisko;
 		}
 	}
-	// TODO: throw exeption
-	throw std::logic_error("Prekladisko v tomto okrese sa nenaslo");
+	cout << "Prekladisko v tomto okrese sa nenaslo" << endl;
+	return NULL;
 }
 
 // TODO 5:Pri vytváraní objednávky je nutné kontrolova, èi nedôjde k jej zamietnutiu zo strany
@@ -111,40 +111,49 @@ Vozidlo* Firma::vyberVozidlo(double hmotnostZasielky, Prekladisko* prekladiskoNa
 			return vozidlo;
 		}
 	}
-
-	std::cout << "Takuto objednavku nezvladne dorucit ziadne vozidlo" << std::endl;
+	cout << "Vyhovujuce vozidlo sa nenaslo" << endl;
 	return NULL;
 }
 
-Objednavka * Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat)
+// TODO: Všetko
+void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat)
 {
-	// TODO pokraèovanie 5ky
-
+	// vytvorím
 	Objednavka * objednavka = new Objednavka(hmotnostZasielky, odosielatel, adresat);
+	//zaevidujem do firmy
+	this->linkedListObjednavok->add(objednavka);
 
-	// zistím prekladisko, kde sa odosielal dron
+
+	// NOTE: ODOSIELATEL
+
+	// zistím prekladisko príjmutia
 	Prekladisko* prekladiskoOdoslania = this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion());
 
-	// zistím, èi mám nejakého drona, ktorý stihne, unesie a je nabitý 
+	// zistím drona z tohto prekladiska, èi mám nejakého drona, ktorý stihne, unesie a je nabitý 
 	Dron* dronPreOdosielatela = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska());
-	// TODO
-	//objednavka->pripaDronaPreOdosielatela();
 
 	// zistím èi mi do prekladiska príde auto ktoré bude ma nosno takú, že zvládne odniest objednavku
 	Vozidlo* vozidloPreOdosielatela = this->vyberVozidlo(hmotnostZasielky, prekladiskoOdoslania);
-	// TODO
-	//objednavka->priradVozidlo();
 
+	// TODO: ADRESAT
 	Prekladisko* prekladiskoAdresata = this->dajPrekladiskoPodlaRegionu(adresat->getRegion());
 	Vozidlo* vozidloPreAdresata = this->vyberVozidlo(hmotnostZasielky, prekladiskoAdresata);
-	// TODO
-	//objednavka->priradVozidlo();
-
 	// FIXME toto sa ale pýtaj až neskôr, resp na nejaký èas, kedy tam daná objednávka bude 
-	Dron* dronPreAdresata = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, adresat->getVzdialenostOdPrekladiska());
+	// Dron* dronPreAdresata = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, adresat->getVzdialenostOdPrekladiska());
 
-	// treba vymaza !
-	//return new Objednavka(hmotnostZasielky, odosielatel, adresat);
-	return NULL;
+
+	if (dronPreOdosielatela == NULL ||
+		vozidloPreOdosielatela == NULL ||
+		vozidloPreAdresata == NULL)
+	{
+		objednavka->setStav(eStavObjednavky::ZAMIETNUTA);
+	}
+	else
+	{
+		objednavka->setStav(eStavObjednavky::PRIJATA);
+		dronPreOdosielatela->pridajObjednavku(objednavka);
+		vozidloPreOdosielatela->pridajZasielku(objednavka->getHmotnostZasielky());
+
+	}
 }
 

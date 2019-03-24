@@ -177,9 +177,6 @@
     <ClInclude Include="Firma.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Zákazník.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Prekladisko.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -243,9 +240,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Firma.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Zákazník.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Prekladisko.cpp">

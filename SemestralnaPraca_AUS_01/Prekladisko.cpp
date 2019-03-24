@@ -10,9 +10,9 @@ Prekladisko::Prekladisko(std::string region)
 	arrayListDronov = new structures::ArrayList<Dron*>();
 
 	// evidujem èakajúce objednávky v skladisku
-	queueObjednavok = new structures::ExplicitQueue<Objednavka*>();
+	frontObjednavok = new structures::ExplicitQueue<Objednavka*>();
 
-	//queueObjednavok->push(new Objednavka(10, new Odosielatel("BA", 10), new Adresat("MA", 15.5)));
+	//arrayListObjednavokNaVybavenie->push(new Objednavka(10, new Odosielatel("BA", 10), new Adresat("MA", 15.5)));
 
 	// prekladisko má vždy aspoò pár dronov pri vytváraní
 	this->pridajDron(new Dron(eDrony::JEDEN, set_get_SerioveCislo()));
@@ -44,9 +44,9 @@ void Prekladisko::pridajDron(Dron * novyDron)
 	arrayListDronov->add(novyDron);
 }
 
-void Prekladisko::pridajObjednavku(Objednavka * objednavka)
+void Prekladisko::pridajObjednavku(Objednavka * objednavka, Dron* dron)
 {
-	queueObjednavok->push(objednavka);
+	dron->pridajObjednavku(objednavka);
 }
 
 void Prekladisko::vypisZoznamDronov() {

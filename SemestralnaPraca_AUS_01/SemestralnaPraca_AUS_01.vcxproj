@@ -187,7 +187,6 @@
     <ClInclude Include="structures\vector\vector.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Vozidlo.h" />
-    <ClInclude Include="Zákazník.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CentralnySklad.cpp" />
@@ -209,7 +208,6 @@
     <ClCompile Include="structures\vector\vector.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Vozidlo.cpp" />
-    <ClCompile Include="Zákazník.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="aus.natvis" />
