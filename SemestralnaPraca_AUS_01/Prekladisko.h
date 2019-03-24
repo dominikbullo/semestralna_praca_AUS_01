@@ -18,7 +18,7 @@ public:
 	void pridajObjednavku(Objednavka * objednavka);
 	void spracujObjednavky();
 	void vypisZoznamDronov();
-	Dron * vyberDrona(double hmotnostZasielky, double vzdialenost);
+	Dron * vyberDrona(double hmotnostZasielky, double vzdialenost, string casVytvoreniaObjednavky);
 	std::string dajRegion() {
 		return region_;
 	}

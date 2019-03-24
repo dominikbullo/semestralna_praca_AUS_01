@@ -68,12 +68,17 @@ void Prekladisko::vypisZoznamDronov() {
 	}
 }
 
-Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost)
+Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, string casVytvoreniaObjednavky)
 {
 	// NOTE výber správneho drona na doruèenie zásielky od adresáta/odosielatela z/do skladiska
+	Dron* kandidatNaDrona;
+
 	for (Dron * dron : *arrayListDronov) {
-		// TODO
-		//dron->jeVolny(cas)&&
+		// premenna tak dam toho prveho
+		if (dron->jeVolny(casVytvoreniaObjednavky, vzdialenost))
+		{
+
+		}
 		if (dron->zvladneLet(vzdialenost) &&
 			dron->unesieZasielku(hmotnostZasielky) &&
 			dron->stihnePriletietPreZasielku(vzdialenost))

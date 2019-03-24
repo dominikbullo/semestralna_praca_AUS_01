@@ -21,6 +21,7 @@ public:
 	Dron(const eDrony typDronu, std::string serioveCislo);
 	~Dron();
 	void pridajObjednavku(Objednavka * objednavka);
+	bool jeVolny(std::string cas, double vzdialenost);
 	void toString();
 
 	bool zvladneLet(double vzdialenost) {
@@ -30,6 +31,13 @@ public:
 	bool unesieZasielku(double hmotnostZasielky) {
 		return  nosnost_ >= hmotnostZasielky ? true : false;
 	}
+	// NOTE: trvanie cesty tam aj spä
+	double trvanieLetu(double vzdialenost) {
+		return (vzdialenost / primernaRychlost_) * 60 * 60 * 2;
+	}
+	time_t ocakavanyCasPriletuPreZasielku(double vzdialenost) {
+		return Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + (trvanieLetu(vzdialenost) / 2.0);
+	}
 	bool stihnePriletietPreZasielku(double vzdialenost) {
 		time_t aktualnyCas = Datum::string_to_time_t(Datum::getAktualnyDatumaCas());
 
@@ -38,9 +46,7 @@ public:
 		casNajneskor.tm_hour = 20;
 		casNajneskor.tm_min = 00;
 
-		// t=s/v
-		// nejaký static/dynamic cast -> warning -> POSSIBLE LOSS OF DATA
-		time_t ocakavanyCasPriletu = aktualnyCas + (vzdialenost / primernaRychlost_) * 60 * 60;
+		time_t ocakavanyCasPriletu = ocakavanyCasPriletuPreZasielku(vzdialenost);
 		std::cout <<
 			(ocakavanyCasPriletu <= mktime(&casNajneskor) ?
 				"Predpokladany cas priletu dronu : " + Datum::time_t_to_string(ocakavanyCasPriletu) : "Dron to nestihne") <<

@@ -14,6 +14,10 @@ Objednavka::~Objednavka()
 	delete odosielatel_;
 	delete adresat_;
 }
+string Objednavka::getCasDokonceniaObjednavky(Dron * dron, double vzdialenost)
+{
+	return Datum::getAktualnyDatumaCas() + dron->trvanieLetu(vzdialenost);
+}
 
 
 std::string Objednavka::stringStav()

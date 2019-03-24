@@ -49,6 +49,16 @@ void Dron::pridajObjednavku(Objednavka * novaObjednavka) {
 	arrayListObjednavokNaVybavenie->add(novaObjednavka);
 }
 
+bool Dron::jeVolny(std::string cas, double vzdialenost) {
+	int index = 0;
+	for (Objednavka *objednavka : *arrayListObjednavokNaVybavenie) {
+		objednavka->getDatumaCasVytvorenia() && objednavka->getCasDokonceniaObjednavky()
+	}
+}
+
+
+}
+
 void Dron::toString()
 {
 	std::cout << "Datum zaradenia do prevadzky - " << this->datumEvidencie_ <<
