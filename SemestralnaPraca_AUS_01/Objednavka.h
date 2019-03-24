@@ -2,12 +2,13 @@
 
 #include <string>
 #include "Konstatnty.h"
+#include "Datum.h"
 
 class Odosielatel
 {
 public:
 	Odosielatel(std::string region, double vzdialenostOdPrekladiska);
-	~Odosielatel();
+	~Odosielatel() {};
 	inline std::string getRegion() {
 		return region_;
 	}
@@ -24,7 +25,7 @@ class Adresat
 {
 public:
 	Adresat(std::string region, double vzdialenostOdPrekladiska);
-	~Adresat();
+	~Adresat() {};
 	inline std::string getRegion() {
 		return region_;
 	}
@@ -42,6 +43,7 @@ class Objednavka
 public:
 	Objednavka(double hmotnostZasielky, Odosielatel* odosielatel, Adresat* adresat);
 	~Objednavka();
+	void toString();
 	inline double getHmotnostZasielky() {
 		return hmotnostZasielky_;
 	}
@@ -52,8 +54,8 @@ public:
 		return adresat_;
 	}
 
-
 private:
+	std::string datumaCasVytvoreniaObjednavky_;
 	std::string stringStav();
 	eStavObjednavky stav_;
 	double hmotnostZasielky_ = 0.0;

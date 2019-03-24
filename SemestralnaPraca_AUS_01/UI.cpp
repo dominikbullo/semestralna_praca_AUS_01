@@ -6,21 +6,15 @@ UI::UI()
 	datumUI = Datum::getInstance();
 	firma = new Firma("AoE");
 	pridajVsetkyPrekladiska();
-	// TODO: pole okresov
+
+	// TODO: pole okresov ? 
 	//poleRegionov = new structures::Array<std::string>(23);
-	//	char * regiony[23] = { "MA", "BA", "TT", "TN", "NR", "KN",
-	//"PD", "LV", "CA", "MT", "BB", "ZV", "KA", "NO", "LM", "LC", "RA", "SL", "SN", "PO", "KE", "HE", "MI" };
-	//	int index = 0;
-	//	for each (char *region in regiony)
-	//	{
-	//		(*poleRegionov)[index] = *region;
-	//		index++;
-	//	}
 }
 
 UI::~UI()
 {
 	delete firma;
+	delete datumUI;
 }
 
 void UI::hlavneMenu()
@@ -105,8 +99,12 @@ string UI::getStrInputFromUser(string consoleOutput)
 
 void UI::pridajVsetkyPrekladiska()
 {
-
-	firma->pridajPrekladisko(new Prekladisko("MA"));
+	char * regiony[23] = { "MA", "BA", "TT", "TN", "NR", "KN","PD", "LV", "CA", "MT", "BB", "ZV", "KA", "NO", "LM", "LC", "RA", "SL", "SN", "PO", "KE", "HE", "MI" };
+	for each (char* region in regiony)
+	{
+		firma->pridajPrekladisko(new Prekladisko(region));
+	}
+	/*firma->pridajPrekladisko(new Prekladisko("MA"));
 	firma->pridajPrekladisko(new Prekladisko("BA"));
 	firma->pridajPrekladisko(new Prekladisko("TT"));
 	firma->pridajPrekladisko(new Prekladisko("TN"));
@@ -128,7 +126,7 @@ void UI::pridajVsetkyPrekladiska()
 	firma->pridajPrekladisko(new Prekladisko("PO"));
 	firma->pridajPrekladisko(new Prekladisko("KE"));
 	firma->pridajPrekladisko(new Prekladisko("HE"));
-	firma->pridajPrekladisko(new Prekladisko("MI"));
+	firma->pridajPrekladisko(new Prekladisko("MI"));*/
 }
 
 void UI::menuVozidla(std::string text, bool clearTerminal)
@@ -217,8 +215,9 @@ void UI::menuObjednavky()
 	system("cls");
 	cout << "++++++++++ Sprava Objednavok ++++++++++" << endl;
 	cout <<
-		"1. Pridaj Vozidlo" << endl <<
-		"2. Vypis zoznam Vozidiel firmy" << endl << endl <<
+		"1. Vytvor OBjednavku" << endl <<
+		"2. Vypis zoznam vsetkych objednavok Firmy" << endl <<
+		"2. Vypis zoznam vsetkych objednavok v Prekladisku" << endl << endl <<
 		"0. Hlavne Menu" <<
 		endl;
 

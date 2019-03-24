@@ -135,7 +135,7 @@ namespace structures
 	template<typename T>
 	inline T ExplicitQueue<T>::pop()
 	{
-		// NOTE: odoberám z konca
+		// NOTE: odoberám zo začiatku
 		return list_->removeAt(0);
 	}
 

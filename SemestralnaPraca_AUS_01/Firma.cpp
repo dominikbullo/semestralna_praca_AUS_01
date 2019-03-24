@@ -8,6 +8,8 @@ Firma::Firma(std::string nazovFirmy)
 	nazovFirmy_ = nazovFirmy;
 	arrayListVozidiel = new structures::ArrayList<Vozidlo*>();
 	arrayListPrekladisk = new structures::ArrayList<Prekladisko*>();
+
+	// kvôli štatistikám -> ko¾ko zamietnutıch, ko¾ko v kraji a pod.
 	linkedListObjednavok = new structures::LinkedList<Objednavka*>();
 }
 
@@ -37,6 +39,12 @@ void Firma::pridajPrekladisko(Prekladisko* novePrekladisko)
 	arrayListPrekladisk->add(novePrekladisko);
 }
 
+void Firma::vypisanieVsetkychObjednavok()
+{
+	for (Objednavka * var : *linkedListObjednavok) {
+		var->toString();
+	}
+}
 
 void  Firma::pridajVozidlo(Vozidlo* noveVozidlo)
 {
@@ -111,23 +119,28 @@ Vozidlo* Firma::vyberVozidlo(double hmotnostZasielky, Prekladisko* prekladiskoNa
 Objednavka * Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat)
 {
 	// TODO pokraèovanie 5ky
-	//mamDostupneProstriedkyNaDorucenieObjednavky(hmotnostZasielky,
-	//	this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion()),
-	//	odosielatel->getVzdialenostOdPrekladiska());
 
-
+	Objednavka * objednavka = new Objednavka(hmotnostZasielky, odosielatel, adresat);
 
 	// zistím prekladisko, kde sa odosielal dron
 	Prekladisko* prekladiskoOdoslania = this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion());
 
 	// zistím, èi mám nejakého drona, ktorı stihne, unesie a je nabitı 
 	Dron* dronPreOdosielatela = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska());
+	// TODO
+	//objednavka->pripaDronaPreOdosielatela();
 
 	// zistím èi mi do prekladiska príde auto ktoré bude ma nosno takú, e zvládne odniest objednavku
 	Vozidlo* vozidloPreOdosielatela = this->vyberVozidlo(hmotnostZasielky, prekladiskoOdoslania);
+	// TODO
+	//objednavka->priradVozidlo();
 
 	Prekladisko* prekladiskoAdresata = this->dajPrekladiskoPodlaRegionu(adresat->getRegion());
 	Vozidlo* vozidloPreAdresata = this->vyberVozidlo(hmotnostZasielky, prekladiskoAdresata);
+	// TODO
+	//objednavka->priradVozidlo();
+
+	// FIXME toto sa ale pıtaj a neskôr, resp na nejakı èas, kedy tam daná objednávka bude 
 	Dron* dronPreAdresata = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, adresat->getVzdialenostOdPrekladiska());
 
 	// treba vymaza !

@@ -9,7 +9,6 @@
 #include "Prekladisko.h"
 #include "Objednavka.h"
 #include "Dron.h"
-
 class Firma
 {
 public:
@@ -20,6 +19,7 @@ public:
 		return nazovFirmy_;
 	}
 	void pridajPrekladisko(Prekladisko * noveVozidlo);
+	void vypisanieVsetkychObjednavok();
 	void pridajVozidlo(Vozidlo * noveVozidlo);
 	void pridajRegionyDoTrasyVozidla(Vozidlo * vozidlo);
 
@@ -44,7 +44,6 @@ public:
 
 	Prekladisko * dajPrekladiskoPodlaRegionu(std::string okres);
 	Vozidlo * vyberVozidlo(double hmotnostZasielky, Prekladisko * prekladiskoNaPrevzatieZasielky);
-	bool mamDostupneProstriedkyNaDorucenieObjednavky(double hmotnostZasielky, Prekladisko * prekladisko, double vzdialenostOdPrekladiska);
 	Objednavka * vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat);
 private:
 	std::string nazovFirmy_;

@@ -5,14 +5,19 @@ int Prekladisko::unikatneSerioveCislo_ = 000000;
 
 Prekladisko::Prekladisko(std::string region)
 {
+	unikatneSerioveCislo_ = 000000;
 	region_ = region;
 	arrayListDronov = new structures::ArrayList<Dron*>();
-	unikatneSerioveCislo_ = 000000;
 
-	// prekladisko má vždy aspoò dvoch dronov pri vytváraní
+	// evidujem èakajúce objednávky v skladisku
+	queueObjednavok = new structures::ExplicitQueue<Objednavka*>();
+
+	//queueObjednavok->push(new Objednavka(10, new Odosielatel("BA", 10), new Adresat("MA", 15.5)));
+
+	// prekladisko má vždy aspoò pár dronov pri vytváraní
 	this->pridajDron(new Dron(eDrony::JEDEN, set_get_SerioveCislo()));
 	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
-	this->pridajDron(new Dron(eDrony::JEDEN, set_get_SerioveCislo()));
+	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
 }
 
 Prekladisko::~Prekladisko()
@@ -39,6 +44,11 @@ void Prekladisko::pridajDron(Dron * novyDron)
 	arrayListDronov->add(novyDron);
 }
 
+void Prekladisko::pridajObjednavku(Objednavka * objednavka)
+{
+	queueObjednavok->push(objednavka);
+}
+
 void Prekladisko::vypisZoznamDronov() {
 	std::cout << "Vypisujem vsetkych dronov pre prekladisko z okresu - " << region_ << std::endl;
 	for (Dron * dron : *arrayListDronov) {
@@ -48,8 +58,10 @@ void Prekladisko::vypisZoznamDronov() {
 
 Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost)
 {
-	// TODO výber správneho drona na doruèenie zásielky od adresáta/odosielatela z/do skladiska
+	// NOTE výber správneho drona na doruèenie zásielky od adresáta/odosielatela z/do skladiska
 	for (Dron * dron : *arrayListDronov) {
+		// TODO
+		//dron->jeVolny(cas)&&
 		if (dron->zvladneLet(vzdialenost) &&
 			dron->unesieZasielku(hmotnostZasielky) &&
 			dron->stihnePriletietPreZasielku(vzdialenost))
@@ -68,5 +80,4 @@ std::string Prekladisko::set_get_SerioveCislo()
 	serioveCislo_ = region_ + formated;
 	return serioveCislo_;
 }
-
 
