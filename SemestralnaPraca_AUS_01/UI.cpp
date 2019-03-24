@@ -68,6 +68,10 @@ void UI::hlavneMenu()
 		// ↓↓ memory leak ↓↓
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
 		firma->vytvorObjednavku(2.5, new Odosielatel("BA", 18), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.5, new Odosielatel("BA", 18), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.5, new Odosielatel("BA", 18), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.5, new Odosielatel("BA", 18), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.5, new Odosielatel("BA", 18), new Adresat("MA", 15.5));
 		/*firma->vypisanieVsetkychObjednavok();*/
 		firma->spracujVsetkyObjednavky();
 

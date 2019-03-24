@@ -36,7 +36,10 @@ Dron::~Dron()
 	delete arrayListObjednavokNaVybavenie;
 }
 void Dron::pridajObjednavku(Objednavka * novaObjednavka) {
+	// èo tu treba ešte ???
 	vytazeny_ = true;
+	std::string vytazenyDo = novaObjednavka->getCasDokonceniaObjednavky(novaObjednavka->getOdosielatel()->getVzdialenostOdPrekladiska());
+	// TODO možno èeknút èi je momentálne vyažený a do kedy. ak by to bolo menšie tak to viem porovnáva
 	int index = 0;
 	for (Objednavka *objednavka : *arrayListObjednavokNaVybavenie) {
 		if (novaObjednavka->getDatumaCasVytvorenia() < objednavka->getDatumaCasVytvorenia())
