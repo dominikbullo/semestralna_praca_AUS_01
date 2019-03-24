@@ -36,7 +36,7 @@ Dron::~Dron()
 	delete arrayListObjednavokNaVybavenie;
 }
 void Dron::pridajObjednavku(Objednavka * novaObjednavka) {
-
+	vytazeny_ = true;
 	int index = 0;
 	for (Objednavka *objednavka : *arrayListObjednavokNaVybavenie) {
 		if (novaObjednavka->getDatumaCasVytvorenia() < objednavka->getDatumaCasVytvorenia())
@@ -59,7 +59,7 @@ bool Dron::stihnePriletietPreZasielku(double vzdialenost) {
 	time_t ocakavanyCasPriletu = this->casPriletuPreZasielku(vzdialenost);
 	std::cout <<
 		(ocakavanyCasPriletu <= mktime(&casNajneskor) ?
-			"Predpokladany cas priletu dronu : " + Datum::time_t_to_string(ocakavanyCasPriletu) : "Dron to nestihne") <<
+			"Predpokladany cas priletu dronu ( " + this->serioveCislo_ + " ) : " + Datum::time_t_to_string(ocakavanyCasPriletu) : "Dron to nestihne") <<
 		std::endl;
 	return ocakavanyCasPriletu <= mktime(&casNajneskor);
 }
@@ -70,7 +70,7 @@ void Dron::toString()
 	std::cout << "Datum zaradenia do prevadzky - " << this->datumEvidencie_ <<
 		"\t Seriove cislo - " << this->serioveCislo_ <<
 		"\t TYP - " << ((typ_ == eDrony::JEDEN) ? "jeden" : "dva") << "\t celkovyPocetNalietanychHodin - " <<
-		this->celkovyPocetNalietanychHodin << "\t celkovyPocetPrepravenychZasielok - " <<
-		this->celkovyPocetPrepravenychZasielok << std::endl;
+		this->celkovyPocetNalietanychHodin_ << "\t celkovyPocetPrepravenychZasielok - " <<
+		this->celkovyPocetPrepravenychZasielok_ << std::endl;
 }
 

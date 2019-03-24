@@ -1,3 +1,6 @@
+Ôªø#include<iostream> 
+#include<algorithm> 
+
 #include "Prekladisko.h"
 #include "Dron.h"
 
@@ -9,12 +12,12 @@ Prekladisko::Prekladisko(std::string region)
 	region_ = region;
 	arrayListDronov = new structures::ArrayList<Dron*>();
 
-	// evidujem Ëakaj˙ce objedn·vky v skladisku
+	// evidujem ƒçakaj√∫ce objedn√°vky v skladisku
 	frontObjednavok = new structures::ExplicitQueue<Objednavka*>();
 
 	//arrayListObjednavokNaVybavenie->push(new Objednavka(10, new Odosielatel("BA", 10), new Adresat("MA", 15.5)));
 
-	// prekladisko m· vûdy aspoÚ p·r dronov pri vytv·ranÌ
+	// prekladisko m√° v≈ædy aspo≈à p√°r dronov pri vytv√°ran√≠
 	this->pridajDron(new Dron(eDrony::JEDEN, set_get_SerioveCislo()));
 	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
 	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
@@ -36,7 +39,7 @@ void Prekladisko::pridajDron(Dron * novyDron)
 	// TODO sort by date
 	//int index = 0;
 	//for (Vozidlo *vozidlo : *arrayListVozidiel) {
-	//	// FIXED zaraÔovanie podæa d·tumu aj Ëasu
+	//	// FIXED zaraƒèovanie podƒæa d√°tumu aj ƒçasu
 	//	if (noveVozidlo->getDatumaCasEvidencie() < vozidlo->getDatumaCasEvidencie()) {
 	//		arrayListVozidiel->insert(noveVozidlo, index);
 	//		return;
@@ -70,20 +73,26 @@ void Prekladisko::vypisZoznamDronov() {
 
 Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, string casVytvoreniaObjednavky)
 {
-	// NOTE v˝ber spr·vneho drona na doruËenie z·sielky od adres·ta/odosielatela z/do skladiska
-	Dron* kandidatNaDrona;
+	// NOTE v√Ωber spr√°vneho drona na doruƒçenie z√°sielky od adres√°ta/odosielatela z/do skladiska
+	Dron* kandidatNaDrona = nullptr;
 
 	for (Dron * dron : *arrayListDronov) {
 		// premenna tak dam toho prveho
-		// hæadaj tu najlepöieho drona
+		// hƒæadaj tu najlep≈°ieho drona
+		// dron mus√≠ by≈• voƒæn√Ω;
+		if (!dron->unesieZasielku(hmotnostZasielky)) { continue; }
 		if (!dron->jeVolny()) {
-			//a je lepöÌ ako kandid·t, tak zmeÚ kandid·ta -> ako zistÌm, Ëi je lepöÌ ako kandid·t 
-			kandidatNaDrona = dron;
-			continue; // break ?
+			if (kandidatNaDrona == nullptr) {
+				kandidatNaDrona = dron;
+				continue;
+			}
+			else {
+				kandidatNaDrona = dajLelp≈°iehoDrona(dron, kandidatNaDrona);
+				continue;
+			}
 		}
 
 		if (dron->zvladneLet(vzdialenost) &&
-			dron->unesieZasielku(hmotnostZasielky) &&
 			dron->stihnePriletietPreZasielku(vzdialenost))
 		{
 			return dron;
@@ -91,8 +100,17 @@ Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, stri
 
 	}
 
-	std::cout << "Takuto objednavku nezvladne dorucit ziaden dron" << std::endl;
-	return NULL;
+	//std::cout << "Takuto objednavku nezvladne dorucit ziaden dron" << std::endl;
+	return (kandidatNaDrona == nullptr) ? NULL : kandidatNaDrona;
+}
+
+Dron* Prekladisko::dajLelp≈°iehoDrona(Dron* dron1, Dron* dron2) {
+	if (dron1->getNosnost() == dron2->getNosnost()) {
+		return (dron1->getAktualnaKapacitaBaterie() > dron2->getAktualnaKapacitaBaterie()) ? dron1 : dron2;
+	}
+	else {
+		return (dron1->getNosnost() < dron2->getNosnost()) ? dron1 : dron2;
+	}
 }
 
 std::string Prekladisko::set_get_SerioveCislo()

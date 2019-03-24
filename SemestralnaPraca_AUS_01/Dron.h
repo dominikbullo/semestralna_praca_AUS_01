@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 #pragma warning(disable : 4189) // referenced but not used
 #include <string>
 #include <iostream>
@@ -22,7 +22,7 @@ public:
 	bool stihnePriletietPreZasielku(double vzdialenost);
 
 	bool jeVolny() {
-		return vytazeny_;
+		return !vytazeny_;
 	};
 
 	std::string dronBudeNajblizieVolnyO() {
@@ -30,18 +30,30 @@ public:
 	};
 
 	bool zvladneLet(double vzdialenost) {
-		// zohæadnin˝ aj stav nabitia
-		return maxDobaLetu_ * (aktualnaKapacitaBaterie / 100) * (primernaRychlost_ / 60.0) / 2 >= vzdialenost ? true : false;
+		// zohƒæadnin√Ω aj stav nabitia
+		return maxDobaLetu_ * (aktualnaKapacitaBaterie_ / 100) * (primernaRychlost_ / 60.0) / 2 >= vzdialenost ? true : false;
 	}
 	bool unesieZasielku(double hmotnostZasielky) {
 		return  nosnost_ >= hmotnostZasielky ? true : false;
 	}
-	// NOTE: trvanie cesty tam aj sp‰ù
+	// NOTE: trvanie cesty tam aj sp√§≈•
 	double trvanieLetu(double vzdialenost) {
 		return (vzdialenost / primernaRychlost_) * 60 * 60 * 2;
 	}
 	time_t casPriletuPreZasielku(double vzdialenost) {
 		return Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + (trvanieLetu(vzdialenost) / 2.0);
+	}
+	double getAktualnaKapacitaBaterie() {
+		return aktualnaKapacitaBaterie_;
+	}
+	double getCelkovyPocetNalietanychHodin() {
+		return celkovyPocetNalietanychHodin_;
+	}
+	int getCelkovyPocetPrepravenychZasielok() {
+		return celkovyPocetPrepravenychZasielok_;
+	}
+	int getNosnost() {
+		return nosnost_;
 	}
 
 
@@ -57,9 +69,9 @@ private:
 	int primernaRychlost_;
 	int maxDobaLetu_;
 	int casNaNabitie10Percent_;
-	double aktualnaKapacitaBaterie = 100.0;
-	double celkovyPocetNalietanychHodin = 0.0;
-	int celkovyPocetPrepravenychZasielok = 0;
+	double aktualnaKapacitaBaterie_ = 100.0;
+	double celkovyPocetNalietanychHodin_ = 0.0;
+	int celkovyPocetPrepravenychZasielok_ = 0;
 
 };
 
