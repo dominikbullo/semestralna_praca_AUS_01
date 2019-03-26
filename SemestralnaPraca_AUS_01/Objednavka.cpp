@@ -7,19 +7,12 @@ Objednavka::Objednavka(double hmotnostZasielky, Odosielatel * odosielatel, Adres
 	odosielatel_ = odosielatel;
 	adresat_ = adresat;
 	datumaCasVytvoreniaObjednavky_ = Datum::getAktualnyDatumaCas();
-	//datumaCasSpracovania_ = Datum::getAktualnyDatumaCas();
-	//datumaCasUkonCenia = Datum::getAktualnyDatumaCas();
 }
 
 Objednavka::~Objednavka()
 {
 	delete odosielatel_;
 	delete adresat_;
-}
-string Objednavka::getCasDokonceniaObjednavky(time_t casLetu, double vzdialenost)
-{
-	time_t aktualnyCas = Datum::string_to_time_t(Datum::getAktualnyDatumaCas());
-	return Datum::time_t_to_string(aktualnyCas + casLetu);
 }
 
 

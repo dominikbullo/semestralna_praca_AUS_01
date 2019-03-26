@@ -36,13 +36,23 @@ Dron::~Dron()
 	frontObjednavok_->clear();
 	delete frontObjednavok_;
 }
-void Dron::pridajObjednavku(Objednavka * novaObjednavka) {
+//string Objednavka::getCasDokonceniaObjednavky()
+//{
+//	time_t aktualnyCas = Datum::string_to_time_t(Datum::getAktualnyDatumaCas());
+//	return Datum::time_t_to_string(aktualnyCas + casLetu);
+//}
+
+std::string Dron::pridajObjednavku(Objednavka * novaObjednavka) {
 	// èo tu treba ešte ???
 	vytazeny_ = true;
+
 	//std::string vytazenyDo = novaObjednavka->
-		//getCasDokonceniaObjednavky(novaObjednavka->getOdosielatel()->getVzdialenostOdPrekladiska());
+	//	getCasDokonceniaObjednavky(novaObjednavka->getOdosielatel()->getVzdialenostOdPrekladiska());
 
 	frontObjednavok_->push(novaObjednavka);
+	//novaObjednavka->setDatumaCasUkoncenia_("ešte neviem èo")
+	//return vytazenyDo;
+	return "";
 }
 
 void Dron::spracujObjednavky() {

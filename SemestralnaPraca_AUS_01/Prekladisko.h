@@ -22,7 +22,8 @@ public:
 	std::string dajRegion() {
 		return region_;
 	}
-	Dron * dajLelpšiehoDrona(Dron * dron1, Dron * dron2);
+	Dron * dajLepšiehoVolnehoDrona(Dron * dron1, Dron * dron2);
+	Dron * dajLelpšiehoObsadenehoDrona(Dron * dron1, Dron * dron2);
 	std::string Prekladisko::set_get_SerioveCislo();
 private:
 	std::string region_;

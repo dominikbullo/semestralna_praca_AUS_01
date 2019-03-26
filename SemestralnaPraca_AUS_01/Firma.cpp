@@ -119,7 +119,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 
 
 	// zistím drona z tohto prekladiska, èi mám nejakého drona, ktorý stihne, unesie a je nabitý 
-	// TODO vyber drona ak nie je vo¾ný
+	// TODO vyber drona ak nie je vo¾ný -> zisti èas, kedy môže
 	Dron* dronPreOdosielatela = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska(), objednavka->getDatumaCasVytvorenia());
 
 	// zistím èi mi do prekladiska príde auto ktoré bude ma nosno takú, že zvládne odniest objednavku
@@ -142,9 +142,15 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	else
 	{
 		objednavka->setStav(eStavObjednavky::PRIJATA);
-		dronPreOdosielatela->pridajObjednavku(objednavka);
+		// nastavím èas spracovania, pod¾a toho, èo mi vráti tá metóda 
+		objednavka->setDatumaCasSpracovania_(dronPreOdosielatela->pridajObjednavku(objednavka));
+
+		// TODO if setDatumaCasSpracovania_ > 1 hodina -> možnos zrušenia 
+		//objednavka->setStav(eStavObjednavky::ZRUSENA); 
+		//return;
+
 		vozidloPreOdosielatela->pridajZasielku(objednavka->getHmotnostZasielky());
-		// TODO prida ?
+		// prida ?
 		//prekladiskoAdresata->pridajObjednavku(objednavka);
 	}
 }

@@ -4,26 +4,8 @@
 
 int main()
 {
-	// TODO 23.03 -> pridať pole regionov
-	// FIXED 23.03 -> pridať autu pole regionov ako trasu ktorou pôjde
-
-	// ČAS
-	// FIXED 23.03 -> meneźovanie času, kontrola dronu, či stihne vyzdvihnuť zasielku
-	// FIXED 23.03 -> uloženie vozidla do Arraylistu podľa dátumu
-
-	// TODO 23.03 ->!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	// TODO 23.03 -> POROZMÝŠĽAŤ ako evidovať objednávku, kde si ju ukladať a čo s ňou potom spraviť
-	// TODO 23.03 ->!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-	// FIXED 23.03 -> či naloženie zásielky neprekročí hmotnosť auta
-		// prejdem si všetky auta, najdem ktore ide cez ten kraj a zistím či neprekroci hmotnost
-
-	// TODO 23.03 -> dron musí byť voľný; -> easy
-	// TODO 23.03 -> ak viac dronov spĺňa vyššie špecifikované pravidlá, prioritne sa použije dron s najmenšou nosnosťou, ktorá ešte umožní prepraviť danú zásielku;
-	// TODO 23.03 -> ak viac dronov spĺňa vyššie špecifikované pravidlá, vyberie sa ten, ktorý je aktuálne najviac nabitý.
-		// zoradenie priamo v arrayliste ?
-
-	// TODO 24.03 -> 7 - 8 - 11 -> ukladanie ho súbora ?
+	// TODO vrátiť sa k výberu drona -> zoptimalizovať
+	// TODO pri spracovańí objednávok, prechádzam každý sklad a potom každého drona, ktorý je v tom sklade -> znížiť zložitosť 
 
 	initHeapMonitor();
 	//std::string datumaCasEvidencie_ = Datum::getAktualnyDatumaCas();

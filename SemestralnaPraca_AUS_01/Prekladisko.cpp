@@ -30,15 +30,16 @@ Prekladisko::~Prekladisko()
 
 void Prekladisko::pridajDron(Dron * novyDron)
 {
-	for (int i = 0; i < arrayListDronov_->size(); i++)
-	{
-		if (arrayListDronov_->operator[](i)->getDatumaCasEvidencie() > novyDron->getDatumaCasEvidencie())
-		{
-			arrayListDronov_->insert(novyDron, i);
-			return;
-		}
-
-	}
+	// NOTE: netreba ich ukladať podľa dátumu
+	// TODO: priestor na usporiadanie dronov podľa hmotnosti napríklad, následne rýchlejšie sortovanie a vyberanie ? 
+	//for (int i = 0; i < arrayListDronov_->size(); i++)
+	//{
+	//	if (arrayListDronov_->operator[](i)->getDatumaCasEvidencie() > novyDron->getDatumaCasEvidencie())
+	//	{
+	//		arrayListDronov_->insert(novyDron, i);
+	//		return;
+	//	}
+	//}
 	arrayListDronov_->add(novyDron);
 }
 
@@ -52,7 +53,6 @@ void Prekladisko::vypisZoznamDronov() {
 
 void Prekladisko::spracujObjednavky()
 {
-	// pozor na zložitosť!!!
 	for (Dron * dron : *arrayListDronov_) {
 		dron->spracujObjednavky();
 	}
@@ -78,24 +78,21 @@ Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, stri
 		}
 
 		if (dron->jeVolny()) {
-			volnyKandidatNaDrona = dajLelpšiehoDrona(dron, volnyKandidatNaDrona);
+			volnyKandidatNaDrona = dajLepšiehoVolnehoDrona(dron, volnyKandidatNaDrona);
 			continue;
 		}
 		if (volnyKandidatNaDrona == nullptr) {
 			// TODO lepší dron aj na základe času doručenia a vrátenia sa späť
-			obsadenyKandidatNaDrona = dajLelpšiehoDrona(dron, obsadenyKandidatNaDrona);
+			obsadenyKandidatNaDrona = dajLelpšiehoObsadenehoDrona(dron, obsadenyKandidatNaDrona);
 			continue;
 		}
-
-
 	}
 	//volnyKandidatNaDrona == nullptr ? "treba bypocitat cas " : mam volneho drona;
 	//std::cout << "Takuto objednavku nezvladne dorucit ziaden dron" << std::endl;
 	return (volnyKandidatNaDrona == nullptr) ? NULL : volnyKandidatNaDrona;
 }
 
-Dron* Prekladisko::dajLelpšiehoDrona(Dron* dron1, Dron* dron2) {
-	// TODO porovnávať časi, možného príletu
+Dron* Prekladisko::dajLepšiehoVolnehoDrona(Dron* dron1, Dron* dron2) {
 	if (dron1 == nullptr) { return dron2; }
 	if (dron2 == nullptr) { return dron1; }
 
@@ -103,6 +100,11 @@ Dron* Prekladisko::dajLelpšiehoDrona(Dron* dron1, Dron* dron2) {
 		return dron1->getAktualnaKapacitaBaterie() > dron2->getAktualnaKapacitaBaterie() ? dron1 : dron2;
 	}
 	return dron1->getNosnost() < dron2->getNosnost() ? dron1 : dron2;
+}
+
+Dron * Prekladisko::dajLelpšiehoObsadenehoDrona(Dron * dron1, Dron * dron2)
+{
+	return nullptr;
 }
 
 std::string Prekladisko::set_get_SerioveCislo()

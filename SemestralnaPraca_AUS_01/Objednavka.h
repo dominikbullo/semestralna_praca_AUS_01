@@ -57,6 +57,12 @@ public:
 	std::string getDatumaCasVytvorenia() {
 		return datumaCasVytvoreniaObjednavky_;
 	}
+	void setDatumaCasSpracovania_(std::string datum_a_cas) {
+		datumaCasSpracovania_ = datum_a_cas;
+	}
+	void setDatumaCasUkoncenia_(std::string datum_a_cas) {
+		datumaCasUkoncenia_ = datum_a_cas;
+	}
 	void setStav(eStavObjednavky stav) {
 		stav_ = stav;
 	}
@@ -66,6 +72,8 @@ public:
 
 private:
 	std::string datumaCasVytvoreniaObjednavky_;
+	std::string datumaCasSpracovania_;
+	std::string datumaCasUkoncenia_;
 	std::string stringStav();
 	eStavObjednavky stav_;
 	double hmotnostZasielky_ = 0.0;

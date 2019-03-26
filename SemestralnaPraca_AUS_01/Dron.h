@@ -1,5 +1,6 @@
 ﻿#pragma once
 #pragma warning(disable : 4189) // referenced but not used
+#pragma warning(disable : 4244) // referenced but not used
 #include <string>
 #include <iostream>
 #include <stdio.h>
@@ -18,7 +19,7 @@ public:
 	Dron(const eDrony typDronu, std::string serioveCislo);
 	~Dron();
 	void toString();
-	void pridajObjednavku(Objednavka * objednavka);
+	std::string pridajObjednavku(Objednavka * objednavka);
 	void spracujObjednavky();
 	bool stihnePriletietPreZasielku(double vzdialenost);
 
