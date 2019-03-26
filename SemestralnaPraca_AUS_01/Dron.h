@@ -18,8 +18,9 @@ class Dron
 public:
 	Dron(const eDrony typDronu, std::string serioveCislo);
 	~Dron();
+	std::string getCasDokonceniaObjednavky(double casLetu);
 	void toString();
-	std::string pridajObjednavku(Objednavka * objednavka);
+	void pridajObjednavku(Objednavka * objednavka);
 	void spracujObjednavky();
 	bool stihnePriletietPreZasielku(double vzdialenost);
 
@@ -27,8 +28,8 @@ public:
 		return !vytazeny_;
 	};
 
-	std::string dronBudeNajblizieVolnyO() {
-		//array casov ??? 
+	std::string vytazenyDo() {
+		return vytazenyDo_;
 	};
 
 	std::string getDatumaCasEvidencie() {
@@ -47,7 +48,7 @@ public:
 		return (vzdialenost / primernaRychlost_) * 60 * 60 * 2;
 	}
 	time_t casPriletuPreZasielku(double vzdialenost) {
-		return Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + (trvanieLetu(vzdialenost) / 2.0);
+		return Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + ((trvanieLetu(vzdialenost) / 2.0));
 	}
 	double getAktualnaKapacitaBaterie() {
 		return aktualnaKapacitaBaterie_;
@@ -62,7 +63,6 @@ public:
 		return nosnost_;
 	}
 
-
 private:
 	eDrony typ_;
 	structures::ExplicitQueue<Objednavka*> * frontObjednavok_;
@@ -70,6 +70,8 @@ private:
 	std::string datumaCasEvidencie_;
 	std::string serioveCislo_;
 	bool vytazeny_ = false;
+	// TODO vytazenie do ? inicializovane ?
+	std::string vytazenyDo_ = Datum::getAktualnyDatumaCas();
 
 	int nosnost_;  //pis to v kilach
 	int primernaRychlost_;

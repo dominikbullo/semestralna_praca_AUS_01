@@ -43,7 +43,6 @@ class Objednavka
 public:
 	Objednavka(double hmotnostZasielky, Odosielatel* odosielatel, Adresat* adresat);
 	~Objednavka();
-	std::string getCasDokonceniaObjednavky(time_t casLetu, double vzdialenost);
 	void toString();
 	inline double getHmotnostZasielky() {
 		return hmotnostZasielky_;

@@ -83,14 +83,7 @@ Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string region) {
 
 // TODO 5:Pri vytv·ranÌ objedn·vky je nutnÈ kontrolovaù, Ëi nedÙjde k jej zamietnutiu zo strany
 // AoE.DokonËen· objedn·vka je zaraden· do frontu objedn·vok Ëakaj˙cich na spracovanie.
-// TODO 5:PoËas vystavovania objedn·vky, mÙûe byù z·sielka z viacer˝ch dÙvodov zamietnut·:
-		//	a) z·sielka by musela byù vyzdvihnut· aû po 20:00;
-		//	b) z·sielka je mimo akËn˝ r·dius dronov(dron nestihne dÙjsù k odosielateæovi / adres·tovi
-		//	a vr·tiù sa sp‰ù predt˝m, ako sa mu vybije batÈria);
-		//	c) z·sielku nie je moûnÈ doruËiù, pretoûe je jej hmotnosù vyööia ako nosnosù dostupn˝ch
-		//	dronov v lok·lnom prekladisku odosielateæa, resp.adres·ta;
-		//	d) naloûenie z·sielky do vozidla prekroËÌ jeho nosnosù;
-		//	e) prijatie z·sielky v lok·lnom prekladisku odosielateæa by spÙsobilo, ûe toto lok·lne
+// TODO //	e) prijatie z·sielky v lok·lnom prekladisku odosielateæa by spÙsobilo, ûe toto lok·lne
 		//	prekladisko nedok·ûe doruËiù niektorÈ z·sielky, ktor˝ch adres·ti sa nach·dzaj˙ v jeho
 		//	regiÛne, do 18:00 danÈho dÚa.
 
@@ -122,6 +115,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	// TODO vyber drona ak nie je voæn˝ -> zisti Ëas, kedy mÙûe
 	Dron* dronPreOdosielatela = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska(), objednavka->getDatumaCasVytvorenia());
 
+
 	// zistÌm Ëi mi do prekladiska prÌde auto ktorÈ bude maù nosnoù tak˙, ûe zvl·dne odniest objednavku
 	Vozidlo* vozidloPreOdosielatela = this->vyberVozidlo(hmotnostZasielky, prekladiskoOdoslania);
 
@@ -132,7 +126,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	// Dron* dronPreAdresata = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, adresat->getVzdialenostOdPrekladiska());
 
 	//if (dronPreOdosielatela == NULL ||
-
+	// TODO
 	if (dronPreOdosielatela == NULL ||
 		vozidloPreOdosielatela == NULL ||
 		vozidloPreAdresata == NULL)
@@ -141,17 +135,39 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	}
 	else
 	{
+		if (dronPreOdosielatela->vytazenyDo() > Datum::time_t_to_string(Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + 60 * 60)) {
+			// TODO if setDatumaCasSpracovania_ > 1 hodina -> moûnosù zruöenia ;
+			if (chceUserZrusitObjednavku(dronPreOdosielatela, objednavka)) { return; }
+		}
+		std::cout << "Predpokladany cas priletu dronu je " << std::endl;
 		objednavka->setStav(eStavObjednavky::PRIJATA);
-		// nastavÌm Ëas spracovania, podæa toho, Ëo mi vr·ti t· metÛda 
-		objednavka->setDatumaCasSpracovania_(dronPreOdosielatela->pridajObjednavku(objednavka));
+		objednavka->setDatumaCasSpracovania_(dronPreOdosielatela->vytazenyDo());
+		dronPreOdosielatela->pridajObjednavku(objednavka);
 
-		// TODO if setDatumaCasSpracovania_ > 1 hodina -> moûnosù zruöenia 
-		//objednavka->setStav(eStavObjednavky::ZRUSENA); 
-		//return;
+
+
 
 		vozidloPreOdosielatela->pridajZasielku(objednavka->getHmotnostZasielky());
 		// pridaù ?
 		//prekladiskoAdresata->pridajObjednavku(objednavka);
 	}
+}
+
+bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Objednavka * objednavka)
+{
+	int userInput;
+	cout << "Vasu zasielku mÙzeme spracovat o viac ako hodinu a to konkretne " <<
+		dronPreOdosielatela->vytazenyDo() << endl <<
+		"Prajete si zasielku zrusit?" << endl;
+	cout <<
+		"1. ANO" << endl <<
+		"2. NIE" << endl;
+	cin >> userInput;
+	if (userInput == 1) {
+		objednavka->setStav(eStavObjednavky::ZRUSENA);
+		cout << "Vasa objednavka bola zrusena" << endl;
+		return true;
+	}
+	return false;
 }
 

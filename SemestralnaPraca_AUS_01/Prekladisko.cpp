@@ -11,11 +11,13 @@ Prekladisko::Prekladisko(std::string region)
 	unikatneSerioveCislo_ = 000000;
 	region_ = region;
 	arrayListDronov_ = new structures::ArrayList<Dron*>();
+	// arrayListZasielok_ = new structures::ArrayList<Objednavok*>();
+
 
 
 	// prekladisko má vždy aspoň pár dronov pri vytváraní
-	this->pridajDron(new Dron(eDrony::JEDEN, set_get_SerioveCislo()));
-	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
+	//this->pridajDron(new Dron(eDrony::JEDEN, set_get_SerioveCislo()));
+	//this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
 	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
 }
 
@@ -70,26 +72,43 @@ Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, stri
 	Dron* obsadenyKandidatNaDrona = nullptr;
 
 	for (Dron * dron : *arrayListDronov_) {
-		// v príapde, že dron nespĺňa tieto podmienky, nie je žiadnym spôsobom možné, že by mohol ttúto zásielku doručiť
-		if (!dron->unesieZasielku(hmotnostZasielky) ||
-			!dron->zvladneLet(vzdialenost) ||
-			!dron->stihnePriletietPreZasielku(vzdialenost)) {
-			continue;
-		}
+		// v príapde, že dron nespĺňa tieto podmienky,
+		// nie je žiadnym spôsobom možné, že by mohol ttúto zásielku doručiť
 
-		if (dron->jeVolny()) {
-			volnyKandidatNaDrona = dajLepšiehoVolnehoDrona(dron, volnyKandidatNaDrona);
-			continue;
+		if (dron->unesieZasielku(hmotnostZasielky) &&
+			dron->zvladneLet(vzdialenost) &&
+			dron->stihnePriletietPreZasielku(vzdialenost)) {
+
+			if (dron->jeVolny()) {
+				volnyKandidatNaDrona = dajLepšiehoVolnehoDrona(dron, volnyKandidatNaDrona);
+				continue;
+			}
+			if (volnyKandidatNaDrona == nullptr) {
+				// TODO lepší dron aj na základe času doručenia a vrátenia sa späť
+				obsadenyKandidatNaDrona = dajLelpšiehoObsadenehoDrona(dron, obsadenyKandidatNaDrona);
+				continue;
+			}
 		}
-		if (volnyKandidatNaDrona == nullptr) {
-			// TODO lepší dron aj na základe času doručenia a vrátenia sa späť
-			obsadenyKandidatNaDrona = dajLelpšiehoObsadenehoDrona(dron, obsadenyKandidatNaDrona);
+		else
+		{
 			continue;
 		}
 	}
 	//volnyKandidatNaDrona == nullptr ? "treba bypocitat cas " : mam volneho drona;
 	//std::cout << "Takuto objednavku nezvladne dorucit ziaden dron" << std::endl;
-	return (volnyKandidatNaDrona == nullptr) ? NULL : volnyKandidatNaDrona;
+
+	// TODO: dron, ktorý zvládne najefektívnejšie doručiť objednávku, aj s userovím súhlasom ak to bude neskoro
+	if (volnyKandidatNaDrona != nullptr)
+	{
+		return volnyKandidatNaDrona;
+	}
+	if (obsadenyKandidatNaDrona != nullptr)
+	{
+		return obsadenyKandidatNaDrona;
+	}
+	cout << "No way" << endl;
+	return NULL;
+
 }
 
 Dron* Prekladisko::dajLepšiehoVolnehoDrona(Dron* dron1, Dron* dron2) {
@@ -104,7 +123,11 @@ Dron* Prekladisko::dajLepšiehoVolnehoDrona(Dron* dron1, Dron* dron2) {
 
 Dron * Prekladisko::dajLelpšiehoObsadenehoDrona(Dron * dron1, Dron * dron2)
 {
-	return nullptr;
+	if (dron1 == nullptr) { return dron2; }
+	if (dron2 == nullptr) { return dron1; }
+
+	return dron1->vytazenyDo() < dron2->vytazenyDo() ? dron1 : dron2;
+
 }
 
 std::string Prekladisko::set_get_SerioveCislo()

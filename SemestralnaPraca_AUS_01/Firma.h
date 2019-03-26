@@ -56,6 +56,7 @@ public:
 	Prekladisko * dajPrekladiskoPodlaRegionu(std::string okres);
 	Vozidlo * vyberVozidlo(double hmotnostZasielky, Prekladisko * prekladiskoNaPrevzatieZasielky);
 	void vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat);
+	bool chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Objednavka * objednavka);
 private:
 	std::string nazovFirmy_;
 	structures::ArrayList<Vozidlo*> * arrayListVozidiel;

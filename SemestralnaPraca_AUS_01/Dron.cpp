@@ -36,23 +36,20 @@ Dron::~Dron()
 	frontObjednavok_->clear();
 	delete frontObjednavok_;
 }
-//string Objednavka::getCasDokonceniaObjednavky()
-//{
-//	time_t aktualnyCas = Datum::string_to_time_t(Datum::getAktualnyDatumaCas());
-//	return Datum::time_t_to_string(aktualnyCas + casLetu);
-//}
-
-std::string Dron::pridajObjednavku(Objednavka * novaObjednavka) {
+std::string Dron::getCasDokonceniaObjednavky(double casLetu)
+{
+	time_t aktualnyCas = Datum::string_to_time_t(Datum::getAktualnyDatumaCas());
+	return Datum::time_t_to_string(aktualnyCas + casLetu);
+}
+void Dron::pridajObjednavku(Objednavka * novaObjednavka) {
 	// èo tu treba ešte ???
+	double vzdialenostObjednavky = novaObjednavka->getOdosielatel()->getVzdialenostOdPrekladiska();
 	vytazeny_ = true;
-
-	//std::string vytazenyDo = novaObjednavka->
-	//	getCasDokonceniaObjednavky(novaObjednavka->getOdosielatel()->getVzdialenostOdPrekladiska());
+	//FIXME add time 
+	time_t pom = Datum::string_to_time_t(vytazenyDo_);
+	vytazenyDo_ = Datum::time_t_to_string(pom + trvanieLetu(vzdialenostObjednavky));
 
 	frontObjednavok_->push(novaObjednavka);
-	//novaObjednavka->setDatumaCasUkoncenia_("ešte neviem èo")
-	//return vytazenyDo;
-	return "";
 }
 
 void Dron::spracujObjednavky() {
@@ -75,10 +72,10 @@ bool Dron::stihnePriletietPreZasielku(double vzdialenost) {
 	casNajneskor.tm_min = 00;
 
 	time_t ocakavanyCasPriletu = this->casPriletuPreZasielku(vzdialenost);
-	std::cout <<
-		(ocakavanyCasPriletu <= mktime(&casNajneskor) ?
-			"Predpokladany cas priletu dronu ( " + this->serioveCislo_ + " ) : " + Datum::time_t_to_string(ocakavanyCasPriletu) : "Dron to nestihne") <<
-		std::endl;
+	//std::cout <<
+	//	(ocakavanyCasPriletu <= mktime(&casNajneskor) ?
+	//		"Predpokladany cas priletu dronu ( " + this->serioveCislo_ + " ) : " + Datum::time_t_to_string(ocakavanyCasPriletu) : "Dron to nestihne") <<
+	//	std::endl;
 	return ocakavanyCasPriletu <= mktime(&casNajneskor);
 }
 

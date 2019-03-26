@@ -20,7 +20,6 @@ UI::~UI()
 void UI::hlavneMenu()
 {
 	//system("cls");
-	datumUI->posunCasoHodinu(-60 * 60 * 3);
 	cout << "++++++++++ Vitajte v Informacnom systeme firmy " << firma->getNazovFirmy() << " ++++++++++" << endl;
 	cout << "Date: " << Datum::getAktualnyDatumaCas() << endl;
 	cout <<
@@ -67,11 +66,20 @@ void UI::hlavneMenu()
 
 		// ↓↓ memory leak ↓↓
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.5, new Odosielatel("BA", 18), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.5, new Odosielatel("BA", 18), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.5, new Odosielatel("BA", 18), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.5, new Odosielatel("BA", 18), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.5, new Odosielatel("BA", 18), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+		//firma->vytvorObjednavku(2.5, new Odosielatel("BA", 6), new Adresat("MA", 15.5));
+		//firma->vytvorObjednavku(2.51, new Odosielatel("BA", 6.1), new Adresat("MA", 15.5));
+		//firma->vytvorObjednavku(2.53, new Odosielatel("BA", 6.2), new Adresat("MA", 15.5));
+		//firma->vytvorObjednavku(2.512, new Odosielatel("BA", 6.3), new Adresat("MA", 15.5));
+		//firma->vytvorObjednavku(2.535, new Odosielatel("BA", 6), new Adresat("MA", 15.5));
+		//firma->vytvorObjednavku(1, new Odosielatel("BA", 6), new Adresat("MA", 15.5));
+		//firma->vytvorObjednavku(1.25, new Odosielatel("BA", 6), new Adresat("MA", 15.5));
+		//firma->vytvorObjednavku(2.5, new Odosielatel("BA", 6), new Adresat("MA", 15.5));
+		//firma->vytvorObjednavku(2.5, new Odosielatel("BA", 18), new Adresat("MA", 15.5));
 		/*firma->vypisanieVsetkychObjednavok();*/
 		firma->spracujVsetkyObjednavky();
 
