@@ -18,7 +18,6 @@ class Dron
 public:
 	Dron(const eDrony typDronu, std::string serioveCislo);
 	~Dron();
-	std::string getCasDokonceniaObjednavky(double casLetu);
 	void toString();
 	void pridajObjednavku(Objednavka * objednavka);
 	void spracujObjednavky();
@@ -66,7 +65,22 @@ public:
 		kapacitaBaterie_ -= (pocetSekundLetu / 60) * (100.0 / maxDobaLetu_);
 	}
 	void nabiDrona(double pocetSekundNaNabijacke) {
+		// TODO VZOREEEEEEEEEEC
 		kapacitaBaterie_ += pocetSekundNaNabijacke;
+
+		// Overflow 
+		if (kapacitaBaterie_ > 100) { kapacitaBaterie_ = 100; }
+	}
+	void prepocitajInformacieoDosupnosti() {
+		this->nabiDrona(Datum::string_to_time_t(vytazenyDo_) - Datum::getAktualnyDatumaCasAsTime());
+		time_t test = Datum::string_to_time_t(vytazenyDo_);
+		time_t test1 = Datum::getAktualnyDatumaCasAsTime();
+
+		// TODO better
+		if (Datum::string_to_time_t(vytazenyDo_) < Datum::getAktualnyDatumaCasAsTime())
+		{
+			this->vytazeny_ = false;
+		}
 	}
 
 

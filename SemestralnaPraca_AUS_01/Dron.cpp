@@ -43,9 +43,9 @@ void Dron::pridajObjednavku(Objednavka * novaObjednavka)
 	double trvanieLetuObjednavky = trvanieLetu(vzdialenostObjednavky);
 	time_t pom = Datum::string_to_time_t(vytazenyDo_);
 
-	this->vytazenyDo_ = Datum::time_t_to_string(pom + vzdialenostObjednavky);
-	znizKapacituBaterie(vzdialenostObjednavky);
-	this->celkovyPocetNalietanychHodin_ += vzdialenostObjednavky;
+	this->vytazenyDo_ = Datum::time_t_to_string(pom + trvanieLetuObjednavky);
+	znizKapacituBaterie(trvanieLetuObjednavky);
+	this->celkovyPocetNalietanychHodin_ += trvanieLetuObjednavky / 60 / 60;
 	this->celkovyPocetPrepravenychZasielok_++;
 	novaObjednavka->setDatumaCasUkoncenia_(Datum::time_t_to_string(pom + trvanieLetuObjednavky));
 
@@ -54,6 +54,7 @@ void Dron::pridajObjednavku(Objednavka * novaObjednavka)
 
 void Dron::spracujObjednavky()
 {
+	//Objednavka* objednavka = frontObjednavok_->pop();
 	// TODO think about this 
 	//while (frontObjednavok_->peek()->getDatumaCasUkoncenia_() < Datum::getAktualnyDatumaCas())
 	//{
@@ -79,14 +80,16 @@ bool Dron::stihnePriletietPreZasielku(double vzdialenost) {
 
 void Dron::toString()
 {
+	cout << "******************** Informacie o dronovi **********************" << endl;
 	cout <<
-		"\t Seriove cislo - " << this->serioveCislo_ << endl <<
-		"\t Datum zaradenia do prevadzky - " << this->datumaCasEvidencie_ << endl <<
-		"\t Typ - " << ((typ_ == eDrony::JEDEN) ? "jeden" : "dva") <<
-		"\t Obsadeny do - " << this->vytazenyDo_ << endl <<
-		"\t Kapacita baterie - " << this->kapacitaBaterie_ << endl <<
-		"\t celkovyPocetNalietanychHodin - " << this->celkovyPocetNalietanychHodin_ << endl <<
-		"\t celkovyPocetPrepravenychZasielok - " << this->celkovyPocetPrepravenychZasielok_ << endl;
-	cout << "*****************************************************************" << endl;
+		"Seriove cislo - " << this->serioveCislo_ << endl <<
+		"Datum zaradenia do prevadzky - " << this->datumaCasEvidencie_ << endl <<
+		"Typ - " << ((typ_ == eDrony::JEDEN) ? "jeden" : "dva") << endl <<
+		"Obsadeny do - " << this->vytazenyDo_ << endl <<
+		"Kapacita baterie - " << this->kapacitaBaterie_ << endl <<
+		"celkovyPocetNalietanychHodin - " << this->celkovyPocetNalietanychHodin_ << endl <<
+		"celkovyPocetPrepravenychZasielok - " << this->celkovyPocetPrepravenychZasielok_ << endl;
+	cout << "*******************************************************************" << endl;
+
 }
 

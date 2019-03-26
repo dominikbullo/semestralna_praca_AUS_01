@@ -22,7 +22,10 @@ public:
 	static std::string getAktualnyDatumaCas() {
 		return datum_a_cas_;
 	}
-	void posunCasoHodinu(int pocetSekund);
+	static time_t getAktualnyDatumaCasAsTime() {
+		return Datum::string_to_time_t(datum_a_cas_);
+	}
+	void posunCas(int pocetSekund);
 	std::string pridajCas(int pocetMinut) {
 		return Datum::time_t_to_string(Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + (pocetMinut * 60));
 	}

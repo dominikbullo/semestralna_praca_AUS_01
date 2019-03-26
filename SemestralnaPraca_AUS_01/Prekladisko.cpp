@@ -13,13 +13,8 @@ Prekladisko::Prekladisko(std::string region)
 	arrayListDronov_ = new structures::ArrayList<Dron*>();
 	// arrayListZasielok_ = new structures::ArrayList<Objednavok*>();
 
-
-
 	// prekladisko má vždy aspoň pár dronov pri vytváraní
 	//this->pridajDron(new Dron(eDrony::JEDEN, set_get_SerioveCislo()));
-	//this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
-	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
-	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
 	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
 }
 
@@ -64,19 +59,19 @@ void Prekladisko::spracujObjednavky()
 
 Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, string casVytvoreniaObjednavky)
 {
-	//Ak sú všetky drony, ktoré sa nachádzajú v lokálnom prekladisku, 
-	// aktuálne vyťažené alebo majú naplánovanú už inú akciu, je vypočítaný čas, 
-	// za ktorý sa môže dostať dron, ktorý dokáže vyzdvihnúť danú zásielku a 
-	// ktorý ako prvý dokončí svoju aktuálne vykonávanú úlohu, k odosielateľovi.
-	//Ak je tento čas väčší ako jedna hodina, zákazník je o tom informovaný a 
-	// objednávku môže zrušiť. Ak objednávku nezruší, tak bude obslúžený vyššie uvedeným dronom.
+
 	Dron* volnyKandidatNaDrona = nullptr;
 	Dron* obsadenyKandidatNaDrona = nullptr;
 
 	for (Dron * dron : *arrayListDronov_) {
 		// v príapde, že dron nespĺňa tieto podmienky,
 		// nie je žiadnym spôsobom možné, že by mohol ttúto zásielku doručiť
+		dron->prepocitajInformacieoDosupnosti();
+		cout << "dron po prepocitani" << endl;
 
+		dron->toString();
+
+		// FIXME pozor tu ešte rátam s tým stavom drona pred nabitím
 		if (dron->unesieZasielku(hmotnostZasielky) &&
 			dron->zvladneLet(vzdialenost) &&
 			dron->stihnePriletietPreZasielku(vzdialenost)) {
@@ -108,7 +103,7 @@ Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, stri
 	{
 		return obsadenyKandidatNaDrona;
 	}
-	cout << "No way" << endl;
+	cout << "Firma nema prostriedky, aby dorucila tuto objednavku" << endl;
 	return NULL;
 
 }
@@ -128,6 +123,7 @@ Dron * Prekladisko::dajLelpšiehoObsadenehoDrona(Dron * dron1, Dron * dron2)
 	if (dron1 == nullptr) { return dron2; }
 	if (dron2 == nullptr) { return dron1; }
 
+	// TODO možno tu, zarátať aj čas, ktorý sa mohol nabíjať
 	return dron1->vytazenyDo() < dron2->vytazenyDo() ? dron1 : dron2;
 
 }

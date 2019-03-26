@@ -4,6 +4,7 @@ using namespace std;
 UI::UI()
 {
 	datumUI = Datum::getInstance();
+	datumUI->posunCas(-15 * 60 * 60);
 	firma = new Firma("AoE");
 	pridajVsetkyPrekladiska();
 
@@ -45,7 +46,7 @@ void UI::hlavneMenu()
 		menuObjednavky();
 		break;
 	case 4:
-		datumUI->posunCasoHodinu(60 * 60);
+		datumUI->posunCas(60 * 60);
 		firma->spracujVsetkyObjednavky();
 		hlavneMenu();
 		break;
@@ -53,7 +54,7 @@ void UI::hlavneMenu()
 
 		//firma->pridajVozidlo(new Vozidlo(14560, 1045550, "ZA222BA"));
 		//// aj v prípade, že ho posuniem naspäť
-		//datumUI->posunCasoHodinu(-60 * 60);
+		//datumUI->posunCas(-60 * 60);
 		firma->pridajVozidlo(new Vozidlo(10000, 100, "ZA232DB"));
 
 		firma->vypisZoznamVozidiel();
@@ -65,12 +66,14 @@ void UI::hlavneMenu()
 		//firma->dajPrekladiskoPodlaRegionu("MA")->vypisZoznamDronov();
 		firma->getVozidloBySPZ("ZA232DB")->vypisTrasuVozidla();
 
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+		datumUI->posunCas(60 * 60);
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+		datumUI->posunCas(60 * 60);
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
 
 
 		//firma->vypisanieVsetkychObjednavok();
@@ -222,7 +225,7 @@ void UI::menuPrekladiska(std::string text, bool clearTerminal)
 
 void UI::menuObjednavky()
 {
-	system("cls");
+	//system("cls");
 	cout << "++++++++++ Sprava Objednavok ++++++++++" << endl;
 	cout <<
 		"1. Vytvor OBjednavku" << endl <<
@@ -238,7 +241,7 @@ void UI::menuObjednavky()
 		break;
 	case 2:
 		firma->vypisanieVsetkychObjednavok();
-		system("pause");
+		menuObjednavky();
 		break;
 	default:
 		menuObjednavky();

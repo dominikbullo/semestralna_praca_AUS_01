@@ -123,10 +123,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	Prekladisko* prekladiskoAdresata = this->dajPrekladiskoPodlaRegionu(adresat->getRegion());
 	Vozidlo* vozidloPreAdresata = this->vyberVozidlo(hmotnostZasielky, prekladiskoAdresata);
 	// FIXME toto sa ale pýtaj až neskôr, resp na nejaký èas, kedy tam daná objednávka bude 
-	// Dron* dronPreAdresata = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, adresat->getVzdialenostOdPrekladiska());
 
-	//if (dronPreOdosielatela == NULL ||
-	// TODO
 	if (dronPreOdosielatela == NULL ||
 		vozidloPreOdosielatela == NULL ||
 		vozidloPreAdresata == NULL)
@@ -138,10 +135,12 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 		if (dronPreOdosielatela->vytazenyDo() > Datum::time_t_to_string(Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + 60 * 60)) {
 			if (chceUserZrusitObjednavku(dronPreOdosielatela, objednavka)) { return; }
 		}
-		dronPreOdosielatela->toString();
 		objednavka->setStav(eStavObjednavky::PRIJATA);
 		objednavka->setDatumaCasSpracovania_(dronPreOdosielatela->vytazenyDo());
 		dronPreOdosielatela->pridajObjednavku(objednavka);
+
+		dronPreOdosielatela->toString();
+		objednavka->toString();
 
 
 		vozidloPreOdosielatela->pridajZasielku(objednavka->getHmotnostZasielky());
