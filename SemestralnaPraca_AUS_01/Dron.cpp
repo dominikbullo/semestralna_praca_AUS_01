@@ -5,10 +5,10 @@ Dron::Dron(const eDrony typDronu, std::string serioveCislo)
 {
 	typ_ = typDronu;
 	serioveCislo_ = serioveCislo;
-	datumEvidencie_ = Datum::getAktualnyDatumaCas();
+	datumaCasEvidencie_ = Datum::getAktualnyDatumaCas();
 
 	// evidujem bud˙ce objedn·vky, ktorÈ m· dron vybaviù
-	arrayListObjednavokNaVybavenie = new structures::ArrayList<Objednavka*>();
+	frontObjednavok = new structures::ExplicitQueue<Objednavka*>();
 
 	switch (typDronu) {
 	case eDrony::JEDEN:
@@ -33,24 +33,34 @@ Dron::Dron(const eDrony typDronu, std::string serioveCislo)
 Dron::~Dron()
 {
 	// Pretoûe v deötruktore firmy som vymazal väetky objedn·vky -> tu uû nemusÌm
-	delete arrayListObjednavokNaVybavenie;
+	frontObjednavok->clear();
+	delete frontObjednavok;
 }
 void Dron::pridajObjednavku(Objednavka * novaObjednavka) {
 	// Ëo tu treba eöte ???
 	vytazeny_ = true;
 	std::string vytazenyDo = novaObjednavka->getCasDokonceniaObjednavky(novaObjednavka->getOdosielatel()->getVzdialenostOdPrekladiska());
-	// TODO moûno Ëekn˙t Ëi je moment·lne vyùaûen˝ a do kedy. ak by to bolo menöie tak to viem porovn·vaç
-	int index = 0;
-	for (Objednavka *objednavka : *arrayListObjednavokNaVybavenie) {
-		if (novaObjednavka->getDatumaCasVytvorenia() < objednavka->getDatumaCasVytvorenia())
-		{
-			arrayListObjednavokNaVybavenie->insert(objednavka, index);
-			return;
-		}
-		index++;
-	}
-	arrayListObjednavokNaVybavenie->add(novaObjednavka);
+
+	frontObjednavok->push(novaObjednavka);
 }
+
+void Dron::pridajObjednavku(Objednavka * novaObjednavka)
+{
+	vytazeny_ = true;
+	std::string vytazenyDo = novaObjednavka->getCasDokonceniaObjednavky(novaObjednavka->getOdosielatel()->getVzdialenostOdPrekladiska());
+	frontObjednavok->push(novaObjednavka);
+}
+void Dron::spracujObjednavky() {
+
+	//while (!frontObjednavok->isEmpty())
+	//{
+	//	cout << "Spracovavam objednavku: " << endl;
+	//	frontObjednavok->pop()->toString();
+	//}
+	std::cout << "metoda spracovania objedfnavok este nie je k dispozicii" << std::endl;
+}
+
+
 bool Dron::stihnePriletietPreZasielku(double vzdialenost) {
 	time_t aktualnyCas = Datum::string_to_time_t(Datum::getAktualnyDatumaCas());
 
@@ -70,7 +80,7 @@ bool Dron::stihnePriletietPreZasielku(double vzdialenost) {
 
 void Dron::toString()
 {
-	std::cout << "Datum zaradenia do prevadzky - " << this->datumEvidencie_ <<
+	std::cout << "Datum zaradenia do prevadzky - " << this->datumaCasEvidencie_ <<
 		"\t Seriove cislo - " << this->serioveCislo_ <<
 		"\t TYP - " << ((typ_ == eDrony::JEDEN) ? "jeden" : "dva") << "\t celkovyPocetNalietanychHodin - " <<
 		this->celkovyPocetNalietanychHodin_ << "\t celkovyPocetPrepravenychZasielok - " <<

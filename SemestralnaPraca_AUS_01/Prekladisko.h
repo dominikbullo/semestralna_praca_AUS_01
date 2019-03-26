@@ -27,8 +27,7 @@ public:
 private:
 	std::string region_;
 	std::string serioveCislo_ = region_;
-	structures::ArrayList<Dron*> * arrayListDronov;
-	structures::ExplicitQueue<Objednavka*> * frontObjednavok;
+	structures::ArrayList<Dron*> * arrayListDronov_;
 
 protected:
 	static int unikatneSerioveCislo_;

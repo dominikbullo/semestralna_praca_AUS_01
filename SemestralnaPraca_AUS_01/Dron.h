@@ -17,8 +17,9 @@ class Dron
 public:
 	Dron(const eDrony typDronu, std::string serioveCislo);
 	~Dron();
-	void pridajObjednavku(Objednavka * objednavka);
 	void toString();
+	void pridajObjednavku(Objednavka * objednavka);
+	void spracujObjednavky();
 	bool stihnePriletietPreZasielku(double vzdialenost);
 
 	bool jeVolny() {
@@ -28,6 +29,10 @@ public:
 	std::string dronBudeNajblizieVolnyO() {
 		//array casov ??? 
 	};
+
+	std::string getDatumaCasEvidencie() {
+		return datumaCasEvidencie_;
+	}
 
 	bool zvladneLet(double vzdialenost) {
 		// zohľadniný aj stav nabitia
@@ -59,9 +64,9 @@ public:
 
 private:
 	eDrony typ_;
-	structures::ArrayList<Objednavka*> * arrayListObjednavokNaVybavenie;
+	structures::ExplicitQueue<Objednavka*> * frontObjednavok;
 
-	std::string datumEvidencie_;
+	std::string datumaCasEvidencie_;
 	std::string serioveCislo_;
 	bool vytazeny_ = false;
 

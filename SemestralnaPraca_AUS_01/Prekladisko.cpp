@@ -10,12 +10,8 @@ Prekladisko::Prekladisko(std::string region)
 {
 	unikatneSerioveCislo_ = 000000;
 	region_ = region;
-	arrayListDronov = new structures::ArrayList<Dron*>();
+	arrayListDronov_ = new structures::ArrayList<Dron*>();
 
-	// evidujem čakajúce objednávky v skladisku
-	frontObjednavok = new structures::ExplicitQueue<Objednavka*>();
-
-	//arrayListObjednavokNaVybavenie->push(new Objednavka(10, new Odosielatel("BA", 10), new Adresat("MA", 15.5)));
 
 	// prekladisko má vždy aspoň pár dronov pri vytváraní
 	this->pridajDron(new Dron(eDrony::JEDEN, set_get_SerioveCislo()));
@@ -25,83 +21,67 @@ Prekladisko::Prekladisko(std::string region)
 
 Prekladisko::~Prekladisko()
 {
-	for (Dron * dron : *arrayListDronov) {
+	for (Dron * dron : *arrayListDronov_) {
 		delete dron;
 	}
-	delete arrayListDronov;
+	delete arrayListDronov_;
 
-	frontObjednavok->clear();
-	delete frontObjednavok;
 }
 
 void Prekladisko::pridajDron(Dron * novyDron)
 {
-	// TODO sort by date
-	//int index = 0;
-	//for (Vozidlo *vozidlo : *arrayListVozidiel) {
-	//	// FIXED zaraďovanie podľa dátumu aj času
-	//	if (noveVozidlo->getDatumaCasEvidencie() < vozidlo->getDatumaCasEvidencie()) {
-	//		arrayListVozidiel->insert(noveVozidlo, index);
-	//		return;
-	//	}
-	//	index++;
-	//}
-	//arrayListVozidiel->add(noveVozidlo);
-	arrayListDronov->add(novyDron);
+	for (int i = 0; i < arrayListDronov_->size(); i++)
+	{
+		if (arrayListDronov_->operator[](i)->getDatumaCasEvidencie() > novyDron->getDatumaCasEvidencie())
+		{
+			arrayListDronov_->insert(novyDron, i);
+			return;
+		}
+
+	}
+	arrayListDronov_->add(novyDron);
 }
 
-void Prekladisko::pridajObjednavku(Objednavka * objednavka)
-{
-	frontObjednavok->push(objednavka);
-}
-void Prekladisko::spracujObjednavky()
-{
-	cout << "Spracovavam objednavky v regione: " << this->dajRegion() << endl;
-	while (!frontObjednavok->isEmpty())
-	{
-		cout << "Spracovavam objednavku: " << endl;
-		frontObjednavok->pop()->toString();
-	}
-}
 
 void Prekladisko::vypisZoznamDronov() {
 	std::cout << "Vypisujem vsetkych dronov pre prekladisko z okresu - " << region_ << std::endl;
-	for (Dron * dron : *arrayListDronov) {
+	for (Dron * dron : *arrayListDronov_) {
 		dron->toString();
 	}
 }
 
 Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, string casVytvoreniaObjednavky)
 {
-	// NOTE výber správneho drona na doručenie zásielky od adresáta/odosielatela z/do skladiska
-	Dron* kandidatNaDrona = nullptr;
 
-	for (Dron * dron : *arrayListDronov) {
-		// premenna tak dam toho prveho
-		// hľadaj tu najlepšieho drona
-		// dron musí byť voľný;
-		if (!dron->unesieZasielku(hmotnostZasielky)) { continue; }
-		if (!dron->jeVolny()) {
-			if (kandidatNaDrona == nullptr) {
-				kandidatNaDrona = dron;
-				continue;
-			}
-			else {
-				kandidatNaDrona = dajLelpšiehoDrona(dron, kandidatNaDrona);
-				continue;
-			}
-		}
 
-		if (dron->zvladneLet(vzdialenost) &&
-			dron->stihnePriletietPreZasielku(vzdialenost))
-		{
-			return dron;
-		}
+	//Dron* kandidatNaDrona = nullptr;
 
-	}
+	//for (Dron * dron : *arrayListDronov_) {
+	//	// premenna tak dam toho prveho
+	//	// hľadaj tu najlepšieho drona
+	//	// dron musí byť voľný;
+	//	if (!dron->unesieZasielku(hmotnostZasielky)) { continue; }
+	//	if (!dron->jeVolny()) {
+	//		if (kandidatNaDrona == nullptr) {
+	//			kandidatNaDrona = dron;
+	//			continue;
+	//		}
+	//		else {
+	//			kandidatNaDrona = dajLelpšiehoDrona(dron, kandidatNaDrona);
+	//			continue;
+	//		}
+	//	}
 
-	//std::cout << "Takuto objednavku nezvladne dorucit ziaden dron" << std::endl;
-	return (kandidatNaDrona == nullptr) ? NULL : kandidatNaDrona;
+	//	if (dron->zvladneLet(vzdialenost) &&
+	//		dron->stihnePriletietPreZasielku(vzdialenost))
+	//	{
+	//		return dron;
+	//	}
+
+	//}
+
+	////std::cout << "Takuto objednavku nezvladne dorucit ziaden dron" << std::endl;
+	//return (kandidatNaDrona == nullptr) ? NULL : kandidatNaDrona;
 }
 
 Dron* Prekladisko::dajLelpšiehoDrona(Dron* dron1, Dron* dron2) {
