@@ -64,7 +64,7 @@ public:
 
 private:
 	eDrony typ_;
-	structures::ExplicitQueue<Objednavka*> * frontObjednavok;
+	structures::ExplicitQueue<Objednavka*> * frontObjednavok_;
 
 	std::string datumaCasEvidencie_;
 	std::string serioveCislo_;

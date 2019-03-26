@@ -8,7 +8,7 @@ Dron::Dron(const eDrony typDronu, std::string serioveCislo)
 	datumaCasEvidencie_ = Datum::getAktualnyDatumaCas();
 
 	// evidujem bud˙ce objedn·vky, ktorÈ m· dron vybaviù
-	frontObjednavok = new structures::ExplicitQueue<Objednavka*>();
+	frontObjednavok_ = new structures::ExplicitQueue<Objednavka*>();
 
 	switch (typDronu) {
 	case eDrony::JEDEN:
@@ -33,29 +33,29 @@ Dron::Dron(const eDrony typDronu, std::string serioveCislo)
 Dron::~Dron()
 {
 	// Pretoûe v deötruktore firmy som vymazal väetky objedn·vky -> tu uû nemusÌm
-	frontObjednavok->clear();
-	delete frontObjednavok;
+	frontObjednavok_->clear();
+	delete frontObjednavok_;
 }
 void Dron::pridajObjednavku(Objednavka * novaObjednavka) {
 	// Ëo tu treba eöte ???
 	vytazeny_ = true;
 	std::string vytazenyDo = novaObjednavka->getCasDokonceniaObjednavky(novaObjednavka->getOdosielatel()->getVzdialenostOdPrekladiska());
 
-	frontObjednavok->push(novaObjednavka);
+	frontObjednavok_->push(novaObjednavka);
 }
 
 void Dron::pridajObjednavku(Objednavka * novaObjednavka)
 {
 	vytazeny_ = true;
 	std::string vytazenyDo = novaObjednavka->getCasDokonceniaObjednavky(novaObjednavka->getOdosielatel()->getVzdialenostOdPrekladiska());
-	frontObjednavok->push(novaObjednavka);
+	frontObjednavok_->push(novaObjednavka);
 }
 void Dron::spracujObjednavky() {
 
-	//while (!frontObjednavok->isEmpty())
+	//while (!frontObjednavok_->isEmpty())
 	//{
 	//	cout << "Spracovavam objednavku: " << endl;
-	//	frontObjednavok->pop()->toString();
+	//	frontObjednavok_->pop()->toString();
 	//}
 	std::cout << "metoda spracovania objedfnavok este nie je k dispozicii" << std::endl;
 }

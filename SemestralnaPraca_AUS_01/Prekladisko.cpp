@@ -52,45 +52,45 @@ void Prekladisko::vypisZoznamDronov() {
 
 Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, string casVytvoreniaObjednavky)
 {
+	//Ak sú všetky drony, ktoré sa nachádzajú v lokálnom prekladisku, 
+	// aktuálne vyťažené alebo majú naplánovanú už inú akciu, je vypočítaný čas, 
+	// za ktorý sa môže dostať dron, ktorý dokáže vyzdvihnúť danú zásielku a 
+	// ktorý ako prvý dokončí svoju aktuálne vykonávanú úlohu, k odosielateľovi.
+	//Ak je tento čas väčší ako jedna hodina, zákazník je o tom informovaný a 
+	// objednávku môže zrušiť. Ak objednávku nezruší, tak bude obslúžený vyššie uvedeným dronom.
+	Dron* kandidatNaDrona = nullptr;
+	for (Dron * dron : *arrayListDronov_) {
+		// v príapde, že dron nespĺňa tieto podmienky, nie je žiadnym spôsobom možné, že by mohol ttúto zásielku doručiť
+		if (!dron->unesieZasielku(hmotnostZasielky) ||
+			!dron->zvladneLet(vzdialenost) ||
+			!dron->stihnePriletietPreZasielku(vzdialenost)) {
+			continue;
+		}
+		if (dron->jeVolny()) {
+			kandidatNaDrona = dajLelpšiehoDrona(dron, kandidatNaDrona);
+			continue;
+		}
+		else
+		{
+			//poznač si, že nemáš voľného -> ale zvláda podmienky
+			continue;
+		}
 
-
-	//Dron* kandidatNaDrona = nullptr;
-
-	//for (Dron * dron : *arrayListDronov_) {
-	//	// premenna tak dam toho prveho
-	//	// hľadaj tu najlepšieho drona
-	//	// dron musí byť voľný;
-	//	if (!dron->unesieZasielku(hmotnostZasielky)) { continue; }
-	//	if (!dron->jeVolny()) {
-	//		if (kandidatNaDrona == nullptr) {
-	//			kandidatNaDrona = dron;
-	//			continue;
-	//		}
-	//		else {
-	//			kandidatNaDrona = dajLelpšiehoDrona(dron, kandidatNaDrona);
-	//			continue;
-	//		}
-	//	}
-
-	//	if (dron->zvladneLet(vzdialenost) &&
-	//		dron->stihnePriletietPreZasielku(vzdialenost))
-	//	{
-	//		return dron;
-	//	}
-
-	//}
-
-	////std::cout << "Takuto objednavku nezvladne dorucit ziaden dron" << std::endl;
-	//return (kandidatNaDrona == nullptr) ? NULL : kandidatNaDrona;
+	}
+	//kandidatNaDrona == nullptr ? "treba bypocitat cas " : mam volneho drona;
+	//std::cout << "Takuto objednavku nezvladne dorucit ziaden dron" << std::endl;
+	return (kandidatNaDrona == nullptr) ? NULL : kandidatNaDrona;
 }
 
 Dron* Prekladisko::dajLelpšiehoDrona(Dron* dron1, Dron* dron2) {
+	// TODO porovnávať časi, možného príletu
+	if (dron1 == nullptr) { return dron2; }
+	if (dron2 == nullptr) { return dron1; }
+
 	if (dron1->getNosnost() == dron2->getNosnost()) {
-		return (dron1->getAktualnaKapacitaBaterie() > dron2->getAktualnaKapacitaBaterie()) ? dron1 : dron2;
+		return dron1->getAktualnaKapacitaBaterie() > dron2->getAktualnaKapacitaBaterie() ? dron1 : dron2;
 	}
-	else {
-		return (dron1->getNosnost() < dron2->getNosnost()) ? dron1 : dron2;
-	}
+	return dron1->getNosnost() < dron2->getNosnost() ? dron1 : dron2;
 }
 
 std::string Prekladisko::set_get_SerioveCislo()
