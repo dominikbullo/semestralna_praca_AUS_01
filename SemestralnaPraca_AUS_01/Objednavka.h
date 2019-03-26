@@ -62,6 +62,9 @@ public:
 	void setDatumaCasUkoncenia_(std::string datum_a_cas) {
 		datumaCasUkoncenia_ = datum_a_cas;
 	}
+	std::string getDatumaCasUkoncenia_() {
+		return datumaCasUkoncenia_;
+	}
 	void setStav(eStavObjednavky stav) {
 		stav_ = stav;
 	}

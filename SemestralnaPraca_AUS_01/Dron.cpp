@@ -36,31 +36,30 @@ Dron::~Dron()
 	frontObjednavok_->clear();
 	delete frontObjednavok_;
 }
-std::string Dron::getCasDokonceniaObjednavky(double casLetu)
+
+void Dron::pridajObjednavku(Objednavka * novaObjednavka)
 {
-	time_t aktualnyCas = Datum::string_to_time_t(Datum::getAktualnyDatumaCas());
-	return Datum::time_t_to_string(aktualnyCas + casLetu);
-}
-void Dron::pridajObjednavku(Objednavka * novaObjednavka) {
 	double vzdialenostObjednavky = novaObjednavka->getOdosielatel()->getVzdialenostOdPrekladiska();
-	vytazeny_ = true;
-	//FIXME add time 
+	double trvanieLetuObjednavky = trvanieLetu(vzdialenostObjednavky);
 	time_t pom = Datum::string_to_time_t(vytazenyDo_);
-	vytazenyDo_ = Datum::time_t_to_string(pom + trvanieLetu(vzdialenostObjednavky));
-	znizKapacituBaterie(trvanieLetu(vzdialenostObjednavky));
 
-
+	this->vytazenyDo_ = Datum::time_t_to_string(pom + vzdialenostObjednavky);
+	znizKapacituBaterie(vzdialenostObjednavky);
+	this->celkovyPocetNalietanychHodin_ += vzdialenostObjednavky;
+	this->celkovyPocetPrepravenychZasielok_++;
+	novaObjednavka->setDatumaCasUkoncenia_(Datum::time_t_to_string(pom + trvanieLetuObjednavky));
 	frontObjednavok_->push(novaObjednavka);
 }
 
-void Dron::spracujObjednavky() {
-
-	//while (!frontObjednavok_->isEmpty())
+void Dron::spracujObjednavky()
+{
+	// TODO think about this 
+	//while (frontObjednavok_->peek()->getDatumaCasUkoncenia_() < Datum::getAktualnyDatumaCas())
 	//{
-	//	cout << "Spracovavam objednavku: " << endl;
-	//	frontObjednavok_->pop()->toString();
+	//	vytazeny_ = false;
+	//	frontObjednavok_->peek()->setStav(eStavObjednavky::ZREALIZOVANA);
+	//	frontObjednavok_->pop();
 	//}
-	std::cout << "metoda spracovania objedfnavok este nie je k dispozicii" << std::endl;
 }
 
 
@@ -73,20 +72,18 @@ bool Dron::stihnePriletietPreZasielku(double vzdialenost) {
 	casNajneskor.tm_min = 00;
 
 	time_t ocakavanyCasPriletu = this->casPriletuPreZasielku(vzdialenost);
-	//std::cout <<
-	//	(ocakavanyCasPriletu <= mktime(&casNajneskor) ?
-	//		"Predpokladany cas priletu dronu ( " + this->serioveCislo_ + " ) : " + Datum::time_t_to_string(ocakavanyCasPriletu) : "Dron to nestihne") <<
-	//	std::endl;
 	return ocakavanyCasPriletu <= mktime(&casNajneskor);
 }
 
 
 void Dron::toString()
 {
-	std::cout << "Datum zaradenia do prevadzky - " << this->datumaCasEvidencie_ << endl <<
+	std::cout <<
 		"\t Seriove cislo - " << this->serioveCislo_ << endl <<
+		"\t Datum zaradenia do prevadzky - " << this->datumaCasEvidencie_ << endl <<
 		"\t TYP - " << ((typ_ == eDrony::JEDEN) ? "jeden" : "dva") <<
 		"\t Obsadeny do - " << this->vytazenyDo_ << endl <<
+		"\t Kapacita baterie - " << this->kapacitaBaterie_ << endl <<
 		"\t celkovyPocetNalietanychHodin - " << this->celkovyPocetNalietanychHodin_ << endl <<
 		"\t celkovyPocetPrepravenychZasielok - " << this->celkovyPocetPrepravenychZasielok_ << std::endl;
 }

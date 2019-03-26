@@ -46,6 +46,7 @@ void UI::hlavneMenu()
 		break;
 	case 4:
 		datumUI->posunCasoHodinu(60 * 60);
+		firma->spracujVsetkyObjednavky();
 		hlavneMenu();
 		break;
 	case 5:
@@ -61,27 +62,19 @@ void UI::hlavneMenu()
 		//pridám jeden extra dron prekladisku v regióne 
 		//firma->dajPrekladiskoPodlaRegionu("MA")->pridajDron(new Dron(eDrony::JEDEN, firma->dajPrekladiskoPodlaRegionu("MA")->set_get_SerioveCislo()));
 
-		firma->dajPrekladiskoPodlaRegionu("MA")->vypisZoznamDronov();
+		//firma->dajPrekladiskoPodlaRegionu("MA")->vypisZoznamDronov();
 		firma->getVozidloBySPZ("ZA232DB")->vypisTrasuVozidla();
 
-		// ↓↓ memory leak ↓↓
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
-		//firma->vytvorObjednavku(2.5, new Odosielatel("BA", 6), new Adresat("MA", 15.5));
-		//firma->vytvorObjednavku(2.51, new Odosielatel("BA", 6.1), new Adresat("MA", 15.5));
-		//firma->vytvorObjednavku(2.53, new Odosielatel("BA", 6.2), new Adresat("MA", 15.5));
-		//firma->vytvorObjednavku(2.512, new Odosielatel("BA", 6.3), new Adresat("MA", 15.5));
-		//firma->vytvorObjednavku(2.535, new Odosielatel("BA", 6), new Adresat("MA", 15.5));
-		//firma->vytvorObjednavku(1, new Odosielatel("BA", 6), new Adresat("MA", 15.5));
-		//firma->vytvorObjednavku(1.25, new Odosielatel("BA", 6), new Adresat("MA", 15.5));
-		//firma->vytvorObjednavku(2.5, new Odosielatel("BA", 6), new Adresat("MA", 15.5));
-		//firma->vytvorObjednavku(2.5, new Odosielatel("BA", 18), new Adresat("MA", 15.5));
-		/*firma->vypisanieVsetkychObjednavok();*/
-		firma->spracujVsetkyObjednavky();
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
+
+
+		//firma->vypisanieVsetkychObjednavok();
+		//firma->spracujVsetkyObjednavky();
 
 		hlavneMenu();
 		break;
