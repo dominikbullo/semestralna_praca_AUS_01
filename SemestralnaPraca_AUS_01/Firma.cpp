@@ -136,16 +136,12 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	else
 	{
 		if (dronPreOdosielatela->vytazenyDo() > Datum::time_t_to_string(Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + 60 * 60)) {
-			// TODO if setDatumaCasSpracovania_ > 1 hodina -> možnos zrušenia ;
 			if (chceUserZrusitObjednavku(dronPreOdosielatela, objednavka)) { return; }
 		}
 		dronPreOdosielatela->toString();
-		std::cout << "Predpokladany cas priletu dronu je " << std::endl;
 		objednavka->setStav(eStavObjednavky::PRIJATA);
 		objednavka->setDatumaCasSpracovania_(dronPreOdosielatela->vytazenyDo());
 		dronPreOdosielatela->pridajObjednavku(objednavka);
-
-
 
 
 		vozidloPreOdosielatela->pridajZasielku(objednavka->getHmotnostZasielky());

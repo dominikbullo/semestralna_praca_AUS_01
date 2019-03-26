@@ -1,7 +1,7 @@
 #include "Dron.h"
 using namespace std;
 
-Dron::Dron(const eDrony typDronu, std::string serioveCislo)
+Dron::Dron(const eDrony typDronu, string serioveCislo)
 {
 	typ_ = typDronu;
 	serioveCislo_ = serioveCislo;
@@ -26,7 +26,7 @@ Dron::Dron(const eDrony typDronu, std::string serioveCislo)
 		break;
 
 	default:
-		std::cout << "Neviem vytvorit takyto dron" << std::endl;
+		cout << "Neviem vytvorit takyto dron" << endl;
 	}
 }
 
@@ -48,6 +48,7 @@ void Dron::pridajObjednavku(Objednavka * novaObjednavka)
 	this->celkovyPocetNalietanychHodin_ += vzdialenostObjednavky;
 	this->celkovyPocetPrepravenychZasielok_++;
 	novaObjednavka->setDatumaCasUkoncenia_(Datum::time_t_to_string(pom + trvanieLetuObjednavky));
+
 	frontObjednavok_->push(novaObjednavka);
 }
 
@@ -78,13 +79,14 @@ bool Dron::stihnePriletietPreZasielku(double vzdialenost) {
 
 void Dron::toString()
 {
-	std::cout <<
+	cout <<
 		"\t Seriove cislo - " << this->serioveCislo_ << endl <<
 		"\t Datum zaradenia do prevadzky - " << this->datumaCasEvidencie_ << endl <<
-		"\t TYP - " << ((typ_ == eDrony::JEDEN) ? "jeden" : "dva") <<
+		"\t Typ - " << ((typ_ == eDrony::JEDEN) ? "jeden" : "dva") <<
 		"\t Obsadeny do - " << this->vytazenyDo_ << endl <<
 		"\t Kapacita baterie - " << this->kapacitaBaterie_ << endl <<
 		"\t celkovyPocetNalietanychHodin - " << this->celkovyPocetNalietanychHodin_ << endl <<
-		"\t celkovyPocetPrepravenychZasielok - " << this->celkovyPocetPrepravenychZasielok_ << std::endl;
+		"\t celkovyPocetPrepravenychZasielok - " << this->celkovyPocetPrepravenychZasielok_ << endl;
+	cout << "*****************************************************************" << endl;
 }
 
