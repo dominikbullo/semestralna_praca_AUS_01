@@ -19,6 +19,8 @@ Prekladisko::Prekladisko(std::string region)
 	//this->pridajDron(new Dron(eDrony::JEDEN, set_get_SerioveCislo()));
 	//this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
 	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
+	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
+	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
 }
 
 Prekladisko::~Prekladisko()

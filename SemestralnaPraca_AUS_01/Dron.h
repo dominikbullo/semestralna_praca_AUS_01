@@ -38,7 +38,7 @@ public:
 
 	bool zvladneLet(double vzdialenost) {
 		// zohľadniný aj stav nabitia
-		return maxDobaLetu_ * (aktualnaKapacitaBaterie_ / 100) * (primernaRychlost_ / 60.0) / 2 >= vzdialenost ? true : false;
+		return maxDobaLetu_ * (kapacitaBaterie_ / 100) * (primernaRychlost_ / 60.0) / 2 >= vzdialenost ? true : false;
 	}
 	bool unesieZasielku(double hmotnostZasielky) {
 		return  nosnost_ >= hmotnostZasielky ? true : false;
@@ -51,7 +51,7 @@ public:
 		return Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + ((trvanieLetu(vzdialenost) / 2.0));
 	}
 	double getAktualnaKapacitaBaterie() {
-		return aktualnaKapacitaBaterie_;
+		return kapacitaBaterie_;
 	}
 	double getCelkovyPocetNalietanychHodin() {
 		return celkovyPocetNalietanychHodin_;
@@ -62,6 +62,10 @@ public:
 	int getNosnost() {
 		return nosnost_;
 	}
+	void znizKapacituBaterie(double pocetSekundLetu) {
+		kapacitaBaterie_ -= (pocetSekundLetu / 60) * (100.0 / maxDobaLetu_);
+	}
+
 
 private:
 	eDrony typ_;
@@ -77,7 +81,7 @@ private:
 	int primernaRychlost_;
 	int maxDobaLetu_;
 	int casNaNabitie10Percent_;
-	double aktualnaKapacitaBaterie_ = 100.0;
+	double kapacitaBaterie_ = 100.0;
 	double celkovyPocetNalietanychHodin_ = 0.0;
 	int celkovyPocetPrepravenychZasielok_ = 0;
 

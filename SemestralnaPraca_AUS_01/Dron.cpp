@@ -1,5 +1,5 @@
 #include "Dron.h"
-
+using namespace std;
 
 Dron::Dron(const eDrony typDronu, std::string serioveCislo)
 {
@@ -42,12 +42,13 @@ std::string Dron::getCasDokonceniaObjednavky(double casLetu)
 	return Datum::time_t_to_string(aktualnyCas + casLetu);
 }
 void Dron::pridajObjednavku(Objednavka * novaObjednavka) {
-	// èo tu treba ešte ???
 	double vzdialenostObjednavky = novaObjednavka->getOdosielatel()->getVzdialenostOdPrekladiska();
 	vytazeny_ = true;
 	//FIXME add time 
 	time_t pom = Datum::string_to_time_t(vytazenyDo_);
 	vytazenyDo_ = Datum::time_t_to_string(pom + trvanieLetu(vzdialenostObjednavky));
+	znizKapacituBaterie(trvanieLetu(vzdialenostObjednavky));
+
 
 	frontObjednavok_->push(novaObjednavka);
 }
@@ -82,10 +83,11 @@ bool Dron::stihnePriletietPreZasielku(double vzdialenost) {
 
 void Dron::toString()
 {
-	std::cout << "Datum zaradenia do prevadzky - " << this->datumaCasEvidencie_ <<
-		"\t Seriove cislo - " << this->serioveCislo_ <<
-		"\t TYP - " << ((typ_ == eDrony::JEDEN) ? "jeden" : "dva") << "\t celkovyPocetNalietanychHodin - " <<
-		this->celkovyPocetNalietanychHodin_ << "\t celkovyPocetPrepravenychZasielok - " <<
-		this->celkovyPocetPrepravenychZasielok_ << std::endl;
+	std::cout << "Datum zaradenia do prevadzky - " << this->datumaCasEvidencie_ << endl <<
+		"\t Seriove cislo - " << this->serioveCislo_ << endl <<
+		"\t TYP - " << ((typ_ == eDrony::JEDEN) ? "jeden" : "dva") <<
+		"\t Obsadeny do - " << this->vytazenyDo_ << endl <<
+		"\t celkovyPocetNalietanychHodin - " << this->celkovyPocetNalietanychHodin_ << endl <<
+		"\t celkovyPocetPrepravenychZasielok - " << this->celkovyPocetPrepravenychZasielok_ << std::endl;
 }
 

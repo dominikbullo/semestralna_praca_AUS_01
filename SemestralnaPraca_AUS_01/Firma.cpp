@@ -139,6 +139,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 			// TODO if setDatumaCasSpracovania_ > 1 hodina -> možnos zrušenia ;
 			if (chceUserZrusitObjednavku(dronPreOdosielatela, objednavka)) { return; }
 		}
+		dronPreOdosielatela->toString();
 		std::cout << "Predpokladany cas priletu dronu je " << std::endl;
 		objednavka->setStav(eStavObjednavky::PRIJATA);
 		objednavka->setDatumaCasSpracovania_(dronPreOdosielatela->vytazenyDo());
