@@ -7,6 +7,8 @@ Objednavka::Objednavka(double hmotnostZasielky, Odosielatel * odosielatel, Adres
 	odosielatel_ = odosielatel;
 	adresat_ = adresat;
 	datumaCasVytvoreniaObjednavky_ = Datum::getAktualnyDatumaCas();
+	//datumaCasSpracovania_ = Datum::getAktualnyDatumaCas();
+	//datumaCasUkonCenia = Datum::getAktualnyDatumaCas();
 }
 
 Objednavka::~Objednavka()

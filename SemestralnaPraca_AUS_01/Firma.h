@@ -14,14 +14,18 @@ class Firma
 public:
 	Firma(std::string nazovFirmy);
 	~Firma();
-	Firma * get();
-	std::string getNazovFirmy() {
-		return nazovFirmy_;
-	}
-	void pridajPrekladisko(Prekladisko * noveVozidlo);
 	void vypisanieVsetkychObjednavok();
 	void pridajVozidlo(Vozidlo * noveVozidlo);
 	void pridajRegionyDoTrasyVozidla(Vozidlo * vozidlo);
+
+	std::string getNazovFirmy() {
+		return nazovFirmy_;
+	}
+
+	void pridajPrekladisko(Prekladisko * novePrekladisko) {
+		arrayListPrekladisk->add(novePrekladisko);
+	};
+
 	void spracujVsetkyObjednavky()
 	{
 		for (Prekladisko* prekladisko : *arrayListPrekladisk)
@@ -30,8 +34,10 @@ public:
 		}
 
 	};
+
 	Vozidlo* getVozidloBySPZ(std::string SPZ)
 	{
+		// TODO inline int ArrayList<T>::getIndexOf(const T & data)
 		for (Vozidlo* vozidlo : *arrayListVozidiel) {
 			if (vozidlo->getSPZ() == SPZ) {
 				return vozidlo;

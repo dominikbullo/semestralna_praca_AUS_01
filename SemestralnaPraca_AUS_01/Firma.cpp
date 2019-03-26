@@ -29,15 +29,7 @@ Firma::~Firma()
 	delete arrayListPrekladisk;
 	delete linkedListObjednavok;
 }
-Firma * Firma::get()
-{
-	return this;
-}
 
-void Firma::pridajPrekladisko(Prekladisko* novePrekladisko)
-{
-	arrayListPrekladisk->add(novePrekladisko);
-}
 
 void Firma::vypisanieVsetkychObjednavok()
 {
@@ -152,7 +144,8 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 		objednavka->setStav(eStavObjednavky::PRIJATA);
 		dronPreOdosielatela->pridajObjednavku(objednavka);
 		vozidloPreOdosielatela->pridajZasielku(objednavka->getHmotnostZasielky());
-		prekladiskoOdoslania->pridajObjednavku(objednavka);
+		// TODO prida ?
+		//prekladiskoAdresata->pridajObjednavku(objednavka);
 	}
 }
 

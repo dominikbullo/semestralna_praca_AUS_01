@@ -50,6 +50,14 @@ void Prekladisko::vypisZoznamDronov() {
 	}
 }
 
+void Prekladisko::spracujObjednavky()
+{
+	// pozor na zložitosť!!!
+	for (Dron * dron : *arrayListDronov_) {
+		dron->spracujObjednavky();
+	}
+}
+
 Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, string casVytvoreniaObjednavky)
 {
 	//Ak sú všetky drony, ktoré sa nachádzajú v lokálnom prekladisku, 
@@ -58,7 +66,9 @@ Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, stri
 	// ktorý ako prvý dokončí svoju aktuálne vykonávanú úlohu, k odosielateľovi.
 	//Ak je tento čas väčší ako jedna hodina, zákazník je o tom informovaný a 
 	// objednávku môže zrušiť. Ak objednávku nezruší, tak bude obslúžený vyššie uvedeným dronom.
-	Dron* kandidatNaDrona = nullptr;
+	Dron* volnyKandidatNaDrona = nullptr;
+	Dron* obsadenyKandidatNaDrona = nullptr;
+
 	for (Dron * dron : *arrayListDronov_) {
 		// v príapde, že dron nespĺňa tieto podmienky, nie je žiadnym spôsobom možné, že by mohol ttúto zásielku doručiť
 		if (!dron->unesieZasielku(hmotnostZasielky) ||
@@ -66,20 +76,22 @@ Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, stri
 			!dron->stihnePriletietPreZasielku(vzdialenost)) {
 			continue;
 		}
+
 		if (dron->jeVolny()) {
-			kandidatNaDrona = dajLelpšiehoDrona(dron, kandidatNaDrona);
+			volnyKandidatNaDrona = dajLelpšiehoDrona(dron, volnyKandidatNaDrona);
 			continue;
 		}
-		else
-		{
-			//poznač si, že nemáš voľného -> ale zvláda podmienky
+		if (volnyKandidatNaDrona == nullptr) {
+			// TODO lepší dron aj na základe času doručenia a vrátenia sa späť
+			obsadenyKandidatNaDrona = dajLelpšiehoDrona(dron, obsadenyKandidatNaDrona);
 			continue;
 		}
 
+
 	}
-	//kandidatNaDrona == nullptr ? "treba bypocitat cas " : mam volneho drona;
+	//volnyKandidatNaDrona == nullptr ? "treba bypocitat cas " : mam volneho drona;
 	//std::cout << "Takuto objednavku nezvladne dorucit ziaden dron" << std::endl;
-	return (kandidatNaDrona == nullptr) ? NULL : kandidatNaDrona;
+	return (volnyKandidatNaDrona == nullptr) ? NULL : volnyKandidatNaDrona;
 }
 
 Dron* Prekladisko::dajLelpšiehoDrona(Dron* dron1, Dron* dron2) {

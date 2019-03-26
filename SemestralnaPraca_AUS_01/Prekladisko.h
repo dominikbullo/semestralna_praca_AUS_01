@@ -15,9 +15,9 @@ public:
 	Prekladisko(std::string okres);
 	~Prekladisko();
 	void pridajDron(Dron * novyDron);
-	void pridajObjednavku(Objednavka * objednavka);
-	void spracujObjednavky();
 	void vypisZoznamDronov();
+	void spracujObjednavky();
+
 	Dron * vyberDrona(double hmotnostZasielky, double vzdialenost, string casVytvoreniaObjednavky);
 	std::string dajRegion() {
 		return region_;

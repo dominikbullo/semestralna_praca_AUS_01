@@ -39,17 +39,12 @@ Dron::~Dron()
 void Dron::pridajObjednavku(Objednavka * novaObjednavka) {
 	// èo tu treba ešte ???
 	vytazeny_ = true;
-	std::string vytazenyDo = novaObjednavka->getCasDokonceniaObjednavky(novaObjednavka->getOdosielatel()->getVzdialenostOdPrekladiska());
+	//std::string vytazenyDo = novaObjednavka->
+		//getCasDokonceniaObjednavky(novaObjednavka->getOdosielatel()->getVzdialenostOdPrekladiska());
 
 	frontObjednavok_->push(novaObjednavka);
 }
 
-void Dron::pridajObjednavku(Objednavka * novaObjednavka)
-{
-	vytazeny_ = true;
-	std::string vytazenyDo = novaObjednavka->getCasDokonceniaObjednavky(novaObjednavka->getOdosielatel()->getVzdialenostOdPrekladiska());
-	frontObjednavok_->push(novaObjednavka);
-}
 void Dron::spracujObjednavky() {
 
 	//while (!frontObjednavok_->isEmpty())
