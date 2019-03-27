@@ -134,23 +134,24 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	}
 	else
 	{	// TODO stihne dorucit zasielku a spýtam sa na hodinu dopredu, nie na 20:00
-		if (vhodnyDron->vytazenyDo() > Datum::time_t_to_string(Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + 60 * 60)) {
-			if (chceUserZrusitObjednavku(vhodnyDron, objednavka)) {
-				return;
+		{	// FIXME stihne dorucit zasielku a spýtam sa na hodinu dopredu, nie na 20:00
+			//stihnePriletietPreZasielku(zasielka, 20, 00)
+			if (vhodnyDron->casPriletuPreZasielku(zasielka) > Datum::getAktualnyDatumaCasAsTime() + 60 * 60) {
+				if (chceUserZrusitObjednavku(vhodnyDron, objednavka)) {
+					return;
+				}
 			}
+
+			objednavka->setStav(eStavObjednavky::PRIJATA);
+			zasielka->setDatumaCasSpracovania(vhodnyDron->vytazenyDo());
+			objednavka->setDatumaCasSpracovania(zasielka->getDatumaCasSpracovania());
+			vhodnyDron->pridajZasielku(zasielka);
+			zasielka->toString();
+
+			vozidloNaVyzdvihnutie->pridajZasielku(zasielka);
 		}
-		objednavka->setStav(eStavObjednavky::PRIJATA);
-
-		zasielka->setDatumaCasSpracovania_(vhodnyDron->vytazenyDo());
-		vhodnyDron->pridajZasielku(zasielka);
-
-		//objednavka->toString();
-		zasielka->toString();
-
-		vozidloNaVyzdvihnutie->pridajZasielku(zasielka);
 	}
 }
-
 bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Objednavka * objednavka)
 {
 	int userInput;

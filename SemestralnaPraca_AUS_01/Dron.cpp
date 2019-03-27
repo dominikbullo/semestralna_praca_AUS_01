@@ -40,14 +40,14 @@ Dron::~Dron()
 void Dron::pridajZasielku(Zasielka * novaZasielka)
 {
 	double vzdialenostObjednavky = novaZasielka->getVzdialenost();
-	double trvanieLetuObjednavky = trvanieLetu(vzdialenostObjednavky);
+	double trvanieLetuObjednavky = trvanieLetu(novaZasielka);
 	time_t pom = Datum::string_to_time_t(vytazenyDo_);
 
 	this->vytazenyDo_ = Datum::time_t_to_string(pom + trvanieLetuObjednavky);
 	znizKapacituBaterie(trvanieLetuObjednavky);
 	this->celkovyPocetNalietanychHodin_ += trvanieLetuObjednavky / 60 / 60;
 	this->celkovyPocetPrepravenychZasielok_++;
-	novaZasielka->setDatumaCasUkoncenia_(Datum::time_t_to_string(pom + trvanieLetuObjednavky));
+	novaZasielka->setDatumaCasUkoncenia(Datum::time_t_to_string(pom + trvanieLetuObjednavky));
 
 	frontZasielok_->push(novaZasielka);
 }
@@ -69,16 +69,18 @@ void Dron::spracujObjednavky()
 
 }
 
-
-bool Dron::stihnePriletietPreZasielku(double vzdialenost) {
+// TODO: možnos využitia s pridaním stavu nabitia a následneho poèítania
+bool Dron::stihnePriletietPreZasielku(Zasielka * zasielka) {
 	time_t aktualnyCas = Datum::string_to_time_t(Datum::getAktualnyDatumaCas());
 
 	tm *ltm = localtime(&aktualnyCas);
 	struct tm casNajneskor = *ltm;
+
+	//TODO try parsing time
 	casNajneskor.tm_hour = 20;
 	casNajneskor.tm_min = 00;
 
-	time_t ocakavanyCasPriletu = this->casPriletuPreZasielku(vzdialenost);
+	time_t ocakavanyCasPriletu = this->casPriletuPreZasielku(zasielka);
 	return ocakavanyCasPriletu <= mktime(&casNajneskor);
 }
 

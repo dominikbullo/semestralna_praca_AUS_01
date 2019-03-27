@@ -75,9 +75,9 @@ Dron * Prekladisko::vyberDrona(Zasielka * zasielka)
 		dron->prepocitajInformacieoDosupnosti();
 		//dron->toString();
 
-		if (dron->unesieZasielku(zasielka->getHmotnost()) &&
-			dron->zvladneLet(zasielka->getVzdialenost()) &&
-			dron->stihnePriletietPreZasielku(zasielka->getVzdialenost()))
+		if (dron->unesieZasielku(zasielka) &&
+			dron->zvladneLet(zasielka) &&
+			dron->stihnePriletietPreZasielku(zasielka))
 		{
 
 			if (dron->jeVolny()) {
@@ -90,8 +90,8 @@ Dron * Prekladisko::vyberDrona(Zasielka * zasielka)
 			}
 		}
 		// TODO better way ? 
-		else if (dron->unesieZasielku(zasielka->getHmotnost()) &&
-			dron->stihnePriletietPreZasielku(zasielka->getVzdialenost()))
+		else if (dron->unesieZasielku(zasielka) &&
+			dron->stihnePriletietPreZasielku(zasielka))
 		{
 			vybityKandidatNaDrona = dron;
 			continue;

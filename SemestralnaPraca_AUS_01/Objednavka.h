@@ -44,32 +44,19 @@ public:
 	Objednavka(double hmotnostZasielky, Odosielatel* odosielatel, Adresat* adresat);
 	~Objednavka();
 	void toString();
-	inline double getHmotnostZasielky() {
-		return hmotnostZasielky_;
-	}
-	inline Odosielatel* getOdosielatel() {
-		return odosielatel_;
-	}
-	inline Adresat* getAdresat() {
-		return adresat_;
-	}
-	std::string getDatumaCasVytvorenia() {
-		return datumaCasVytvoreniaObjednavky_;
-	}
-	//std::string getDatumaCasUkoncenia_() {
-	//	return datumaCasUkoncenia_;
-	//}
-	void setStav(eStavObjednavky stav) {
-		stav_ = stav;
-	}
-	//eStavObjednavky getStav() {
-	//	return stav_;
-	//}
+
+	void setDatumaCasSpracovania(std::string datum_a_cas) { datumaCasSpracovania_ = datum_a_cas; }
+	void setStav(eStavObjednavky stav) { stav_ = stav; }
+
+	inline double getHmotnostZasielky() { return hmotnostZasielky_; }
+	inline Adresat* getAdresat() { return adresat_; }
+	inline Odosielatel* getOdosielatel() { return odosielatel_; }
+	std::string getDatumaCasVytvorenia() { return datumaCasVytvoreniaObjednavky_; }
+	std::string getDatumaCasSpracovania() { return datumaCasSpracovania_; }
 
 private:
 	std::string datumaCasVytvoreniaObjednavky_;
-	//std::string datumaCasSpracovania_;
-	//std::string datumaCasUkoncenia_;
+	std::string datumaCasSpracovania_;
 
 	std::string stringStav();
 	eStavObjednavky stav_;

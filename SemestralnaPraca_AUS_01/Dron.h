@@ -20,7 +20,7 @@ public:
 	Dron(const eDrony typDronu, std::string serioveCislo);
 	~Dron();
 	void toString();
-	bool stihnePriletietPreZasielku(double vzdialenost);
+	bool stihnePriletietPreZasielku(Zasielka * zasielka);
 	void prepocitajInformacieoDosupnosti();
 	void pridajZasielku(Zasielka * zasielka);
 	void spracujObjednavky();
@@ -28,18 +28,21 @@ public:
 	bool jeVolny() { return !vytazeny_; };
 	std::string vytazenyDo() { return vytazenyDo_; };
 	std::string getDatumaCasEvidencie() { return datumaCasEvidencie_; }
-	bool unesieZasielku(double hmotnostZasielky) { return  nosnost_ >= hmotnostZasielky ? true : false; }
 
-	bool zvladneLet(double vzdialenost) {
+	bool unesieZasielku(Zasielka * zasielka) { return  nosnost_ >= zasielka->getHmotnost() ? true : false; }
+
+	bool zvladneLet(Zasielka * zasielka) {
 		// zohľadniný aj stav nabitia
-		return maxDobaLetu_ * (kapacitaBaterie_ / 100) * (primernaRychlost_ / 60.0) / 2 >= vzdialenost ? true : false;
+		return maxDobaLetu_ * (kapacitaBaterie_ / 100) * (primernaRychlost_ / 60.0) / 2 >= zasielka->getVzdialenost() ? true : false;
 	}
 
 	// NOTE: trvanie cesty tam aj späť
-	double trvanieLetu(double vzdialenost) { return (vzdialenost / primernaRychlost_) * 60 * 60 * 2; }
+	double trvanieLetu(Zasielka* zasielka) { return (zasielka->getVzdialenost() / primernaRychlost_) * 60 * 60 * 2; }
 
-	time_t casPriletuPreZasielku(double vzdialenost) {
-		return Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + ((trvanieLetu(vzdialenost) / 2.0));
+
+	// FIXME podla toho kedy odletí
+	time_t casPriletuPreZasielku(Zasielka * zasielka) {
+		return Datum::string_to_time_t(vytazenyDo_) + ((trvanieLetu(zasielka) / 2.0));
 	}
 
 	double getAktualnaKapacitaBaterie() {

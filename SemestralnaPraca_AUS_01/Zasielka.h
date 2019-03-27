@@ -11,18 +11,18 @@ public:
 	Zasielka(double hmotnost, double vzdialenost, std::string region);
 	~Zasielka();
 	void toString();
-	void setDatumaCasSpracovania_(std::string datum_a_cas) {
-		datumaCasSpracovania_ = datum_a_cas;
-	}
-	void setDatumaCasUkoncenia_(std::string datum_a_cas) {
-		datumaCasUkoncenia_ = datum_a_cas;
-	}
 
+	// SETTERS
+	void setDatumaCasSpracovania(std::string datum_a_cas) { datumaCasSpracovania_ = datum_a_cas; }
+	void setDatumaCasUkoncenia(std::string datum_a_cas) { datumaCasUkoncenia_ = datum_a_cas; }
+	//void setPrekladisko(Prekladisko * prekladisko) { prekladisko_ = prekladisko; }
+
+	// GETTERS
+	string getDatumaCasSpracovania() { return datumaCasSpracovania_; }
 	double getHmotnost() { return hmotnost_; }
 	double getVzdialenost() { return vzdialenostOdPrekladiska_; }
-
 	std::string getRegion() { return region_; }
-	//void setPrekladisko(Prekladisko * prekladisko) { prekladisko_ = prekladisko; }
+
 
 private:
 	double hmotnost_;
