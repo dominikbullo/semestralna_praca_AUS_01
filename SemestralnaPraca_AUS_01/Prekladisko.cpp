@@ -73,7 +73,7 @@ Dron * Prekladisko::vyberDrona(Zasielka * zasielka)
 	{
 
 		dron->prepocitajInformacieoDosupnosti();
-		dron->toString();
+		//dron->toString();
 
 		if (dron->unesieZasielku(zasielka->getHmotnost()) &&
 			dron->zvladneLet(zasielka->getVzdialenost()) &&

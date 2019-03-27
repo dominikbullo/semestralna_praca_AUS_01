@@ -115,6 +115,8 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	Objednavka * objednavka = new Objednavka(hmotnostZasielky, odosielatel, adresat);
 	this->linkedListObjednavok->add(objednavka);
 
+	// MEMORY LEAK POZOR NA TO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	Zasielka * zasielka = new Zasielka(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska(), odosielatel->getRegion());
 
 	Prekladisko* prekladiskoOdoslania = this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion());
@@ -131,18 +133,18 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 		objednavka->setStav(eStavObjednavky::ZAMIETNUTA);
 	}
 	else
-	{
+	{	// TODO stihne dorucit zasielku a spýtam sa na hodinu dopredu, nie na 20:00
 		if (vhodnyDron->vytazenyDo() > Datum::time_t_to_string(Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + 60 * 60)) {
-			if (chceUserZrusitObjednavku(vhodnyDron, objednavka)) { return; }
+			if (chceUserZrusitObjednavku(vhodnyDron, objednavka)) {
+				return;
+			}
 		}
 		objednavka->setStav(eStavObjednavky::PRIJATA);
-
 
 		zasielka->setDatumaCasSpracovania_(vhodnyDron->vytazenyDo());
 		vhodnyDron->pridajZasielku(zasielka);
 
-		vhodnyDron->toString();
-		objednavka->toString();
+		//objednavka->toString();
 		zasielka->toString();
 
 		vozidloNaVyzdvihnutie->pridajZasielku(zasielka);

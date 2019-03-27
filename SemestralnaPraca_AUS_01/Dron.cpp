@@ -54,7 +54,7 @@ void Dron::pridajZasielku(Zasielka * novaZasielka)
 
 void Dron::spracujObjednavky()
 {
-	////throw std::exception("Dron::spracujObjednavky: Not implemented yet.");
+	throw std::exception("Dron::spracujObjednavky: Not implemented yet.");
 	//if (frontZasielok_->isEmpty()) { return; }
 	////TODO think about this
 	//while (frontZasielok_->peek()->getDatumaCasUkoncenia_() < Datum::getAktualnyDatumaCas())
@@ -81,6 +81,23 @@ bool Dron::stihnePriletietPreZasielku(double vzdialenost) {
 	time_t ocakavanyCasPriletu = this->casPriletuPreZasielku(vzdialenost);
 	return ocakavanyCasPriletu <= mktime(&casNajneskor);
 }
+
+void Dron::prepocitajInformacieoDosupnosti()
+{
+
+	this->nabiDrona(Datum::string_to_time_t(vytazenyDo_) - Datum::getAktualnyDatumaCasAsTime());
+	time_t test = Datum::string_to_time_t(vytazenyDo_);
+	time_t test1 = Datum::getAktualnyDatumaCasAsTime();
+
+	// TODO better
+	if (Datum::string_to_time_t(vytazenyDo_) < Datum::getAktualnyDatumaCasAsTime())
+	{
+		this->vytazeny_ = false;
+	}
+	std::cout << "Prepocital som drona" << std::endl;
+}
+
+
 
 
 void Dron::toString()

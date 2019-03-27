@@ -20,36 +20,28 @@ public:
 	Dron(const eDrony typDronu, std::string serioveCislo);
 	~Dron();
 	void toString();
+	bool stihnePriletietPreZasielku(double vzdialenost);
+	void prepocitajInformacieoDosupnosti();
 	void pridajZasielku(Zasielka * zasielka);
 	void spracujObjednavky();
-	bool stihnePriletietPreZasielku(double vzdialenost);
 
-	bool jeVolny() {
-		return !vytazeny_;
-	};
-
-	std::string vytazenyDo() {
-		return vytazenyDo_;
-	};
-
-	std::string getDatumaCasEvidencie() {
-		return datumaCasEvidencie_;
-	}
+	bool jeVolny() { return !vytazeny_; };
+	std::string vytazenyDo() { return vytazenyDo_; };
+	std::string getDatumaCasEvidencie() { return datumaCasEvidencie_; }
+	bool unesieZasielku(double hmotnostZasielky) { return  nosnost_ >= hmotnostZasielky ? true : false; }
 
 	bool zvladneLet(double vzdialenost) {
 		// zohľadniný aj stav nabitia
 		return maxDobaLetu_ * (kapacitaBaterie_ / 100) * (primernaRychlost_ / 60.0) / 2 >= vzdialenost ? true : false;
 	}
-	bool unesieZasielku(double hmotnostZasielky) {
-		return  nosnost_ >= hmotnostZasielky ? true : false;
-	}
+
 	// NOTE: trvanie cesty tam aj späť
-	double trvanieLetu(double vzdialenost) {
-		return (vzdialenost / primernaRychlost_) * 60 * 60 * 2;
-	}
+	double trvanieLetu(double vzdialenost) { return (vzdialenost / primernaRychlost_) * 60 * 60 * 2; }
+
 	time_t casPriletuPreZasielku(double vzdialenost) {
 		return Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + ((trvanieLetu(vzdialenost) / 2.0));
 	}
+
 	double getAktualnaKapacitaBaterie() {
 		return kapacitaBaterie_;
 	}
@@ -72,18 +64,6 @@ public:
 		// Overflow 
 		if (kapacitaBaterie_ > 100) { kapacitaBaterie_ = 100; }
 	}
-	void prepocitajInformacieoDosupnosti() {
-		this->nabiDrona(Datum::string_to_time_t(vytazenyDo_) - Datum::getAktualnyDatumaCasAsTime());
-		time_t test = Datum::string_to_time_t(vytazenyDo_);
-		time_t test1 = Datum::getAktualnyDatumaCasAsTime();
-
-		// TODO better
-		if (Datum::string_to_time_t(vytazenyDo_) < Datum::getAktualnyDatumaCasAsTime())
-		{
-			this->vytazeny_ = false;
-		}
-	}
-
 
 private:
 	eDrony typ_;
