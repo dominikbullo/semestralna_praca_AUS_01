@@ -84,6 +84,8 @@ public:
 	}
 
 
+
+
 private:
 	eDrony typ_;
 	structures::ExplicitQueue<Objednavka*> * frontObjednavok_;

@@ -1,7 +1,7 @@
 #include "Firma.h"
 #include "Vozidlo.h"
 #include "Prekladisko.h"
-
+bool testingProgram = true;
 using namespace std;
 Firma::Firma(std::string nazovFirmy)
 {
@@ -38,9 +38,12 @@ void Firma::vypisanieVsetkychObjednavok()
 	}
 }
 
+
 void  Firma::pridajVozidlo(Vozidlo* noveVozidlo)
 {
-	pridajRegionyDoTrasyVozidla(noveVozidlo);
+	if (testingProgram) { pridajVsetkyRegionyDoTrasyVozidla(noveVozidlo); }
+	else { pridajRegionyDoTrasyVozidla(noveVozidlo); }
+
 	// vozidlo pridávam vždy na koniec, tým pádom viem, že vozidlá sú zoradené pod¾a poradia zaevidovania
 	int index = 0;
 	for (Vozidlo *vozidlo : *arrayListVozidiel) {
@@ -54,6 +57,12 @@ void  Firma::pridajVozidlo(Vozidlo* noveVozidlo)
 	arrayListVozidiel->add(noveVozidlo);
 
 }
+void Firma::pridajVsetkyRegionyDoTrasyVozidla(Vozidlo* vozidlo)
+{
+	for (Prekladisko * prekladisko : *arrayListPrekladisk) {
+		vozidlo->pridajPrekladiskoDoTrasyVozidla(prekladisko);
+	}
+}
 void Firma::pridajRegionyDoTrasyVozidla(Vozidlo* vozidlo) {
 	string userInput;
 	while (userInput != "0") {
@@ -64,6 +73,11 @@ void Firma::pridajRegionyDoTrasyVozidla(Vozidlo* vozidlo) {
 		}
 	}
 	return;
+}
+
+void Firma::vratVozidlaDoCentralnehoSkladu()
+{
+	this->spracujVsetkyObjednavky();
 }
 
 Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string region) {
@@ -103,19 +117,14 @@ Vozidlo* Firma::vyberVozidlo(double hmotnostZasielky, Prekladisko* prekladiskoNa
 // TODO: Všetko
 void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat)
 {
-	// vytvorím
 	Objednavka * objednavka = new Objednavka(hmotnostZasielky, odosielatel, adresat);
 	//zaevidujem do firmy
 	this->linkedListObjednavok->add(objednavka);
 
 	Prekladisko* prekladiskoOdoslania = this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion());
-
-
 	// zistím drona z tohto prekladiska, èi mám nejakého drona, ktorý stihne, unesie a je nabitý 
 	// TODO vyber drona ak nie je vo¾ný -> zisti èas, kedy môže
 	Dron* dronPreOdosielatela = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska(), objednavka->getDatumaCasVytvorenia());
-
-
 	// zistím èi mi do prekladiska príde auto ktoré bude ma nosno takú, že zvládne odniest objednavku
 	Vozidlo* vozidloPreOdosielatela = this->vyberVozidlo(hmotnostZasielky, prekladiskoOdoslania);
 

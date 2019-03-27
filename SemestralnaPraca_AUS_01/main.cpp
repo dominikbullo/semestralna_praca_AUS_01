@@ -4,7 +4,6 @@
 
 int main()
 {
-	// TODO: nabíjanie drona -> ako
 
 	// TODO: Návrat áut do centrálneho skladu
 	// TODO: Naplnenie vozidiel v centrálnom sklade zásielkami.

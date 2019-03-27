@@ -5,6 +5,7 @@
 #include "structures/list/array_list.h"
 #include "structures/list/linked_list.h"
 #include "Vozidlo.h"
+#include "Konstatnty.h"
 #include "Datum.h"
 #include "Prekladisko.h"
 #include "Objednavka.h"
@@ -16,7 +17,9 @@ public:
 	~Firma();
 	void vypisanieVsetkychObjednavok();
 	void pridajVozidlo(Vozidlo * noveVozidlo);
+	void pridajVsetkyRegionyDoTrasyVozidla(Vozidlo * vozidlo);
 	void pridajRegionyDoTrasyVozidla(Vozidlo * vozidlo);
+	void vratVozidlaDoCentralnehoSkladu();
 
 	std::string getNazovFirmy() {
 		return nazovFirmy_;

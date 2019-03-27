@@ -57,14 +57,6 @@ void Prekladisko::spracujObjednavky()
 	}
 }
 
-void Prekladisko::nalozVozidlo(Vozidlo * vozidloNaNalozenie)
-{
-	// TODO: ak ostanú nejaké prijaté ? 
-	// TODO: kontrola
-	spracujObjednavky();
-}
-
-
 Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, string casVytvoreniaObjednavky)
 {
 

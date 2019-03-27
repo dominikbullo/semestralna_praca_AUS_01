@@ -62,6 +62,7 @@ void Dron::spracujObjednavky()
 		Objednavka* vybranaObjednavka = frontObjednavok_->peek();
 		vytazeny_ = false;
 		vybranaObjednavka->setStav(eStavObjednavky::ZREALIZOVANA);
+		std::cout << "Objednavka bola zrealizovana" << std::endl;
 		vybranaObjednavka->toString();
 		frontObjednavok_->pop();
 

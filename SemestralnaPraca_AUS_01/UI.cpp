@@ -74,7 +74,7 @@ void UI::hlavneMenu()
 		datumUI->posunCas(60 * 60);
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
-
+		firma->vratVozidlaDoCentralnehoSkladu();
 
 		//firma->vypisanieVsetkychObjednavok();
 		//firma->spracujVsetkyObjednavky();

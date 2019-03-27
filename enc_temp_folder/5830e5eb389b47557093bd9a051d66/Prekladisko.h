@@ -6,7 +6,6 @@
 
 #include "Dron.h"
 #include"Objednavka.h"
-#include"Vozidlo.h"
 
 using namespace std;
 
@@ -18,7 +17,6 @@ public:
 	void pridajDron(Dron * novyDron);
 	void vypisZoznamDronov();
 	void spracujObjednavky();
-	void nalozVozidlo(Vozidlo* vozidloNaNalozenie);
 
 	Dron * vyberDrona(double hmotnostZasielky, double vzdialenost, string casVytvoreniaObjednavky);
 	std::string dajRegion() {
