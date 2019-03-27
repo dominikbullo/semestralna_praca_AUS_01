@@ -7,12 +7,9 @@
 #include "structures/list/array_list.h"
 #include "structures/list/linked_list.h"
 
-#include "Konstatnty.h"
 #include "Datum.h"
-#include "Vozidlo.h"
 #include "Prekladisko.h"
-
-
+#include "Zasielka.h"
 class Vozidlo
 {
 public:
@@ -34,7 +31,7 @@ public:
 		return datumaCasEvidencie_;
 	}
 	bool prechadzaPrekladiskom(Prekladisko* prekladiskoKtorymMaPrechadzat) {
-		for (Prekladisko* prekladiskoKtorymPrechadza : *linkedListTrasaVozidla)
+		for (Prekladisko * prekladiskoKtorymPrechadza : *linkedListTrasaVozidla)
 		{
 			if (prekladiskoKtorymPrechadza == prekladiskoKtorymMaPrechadzat) {
 				return true;
@@ -53,15 +50,12 @@ public:
 		std::cout << std::endl;
 	}
 
-	void pridajZasielku(double hmotnostZasielky) {
-		nosnost_ -= hmotnostZasielky;
+	void pridajZasielku(Zasielka* zasielka) {
+		nosnost_ -= zasielka->getHmotnost();
 	}
-	bool dokazeNalozitZasielku(double hmotnostZasielky) {
-		return nosnost_ -= hmotnostZasielky >= 0;
+	bool dokazeNalozitZasielku(Zasielka* zasielka) {
+		return nosnost_ - zasielka->getHmotnost() >= 0;
 	}
-
-	// TODO: e) prijatie zásielky v lokálnom prekladisku odosielateľa by spôsobilo, že toto lokálne
-	//			prekladiskoKtorymPrechadza nedokáže doručiť niektoré zásielky, ktorých adresáti sa nachádzajú v jeho regióne, do 18:00 daného dňa.
 
 private:
 	int prevadzkoveNaklady_;

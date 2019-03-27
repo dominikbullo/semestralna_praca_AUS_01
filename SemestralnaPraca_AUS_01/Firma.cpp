@@ -1,6 +1,5 @@
 #include "Firma.h"
-#include "Vozidlo.h"
-#include "Prekladisko.h"
+
 bool testingProgram = true;
 using namespace std;
 Firma::Firma(std::string nazovFirmy)
@@ -33,9 +32,7 @@ Firma::~Firma()
 
 void Firma::vypisanieVsetkychObjednavok()
 {
-	for (Objednavka * var : *linkedListObjednavok) {
-		var->toString();
-	}
+	for (Objednavka * var : *linkedListObjednavok) { var->toString(); }
 }
 
 
@@ -94,18 +91,16 @@ Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string region) {
 	cout << "Prekladisko v tomto okrese sa nenaslo" << endl;
 	return NULL;
 }
+Vozidlo* Firma::vyberVozidlo(Zasielka* zasielka)
+{	// zistím èi mi do prekladiska príde auto ktoré bude ma nosno takú, že zvládne odniest objednavku
+	return this->vyberVozidlo(zasielka, this->dajPrekladiskoPodlaRegionu(zasielka->getRegion()));
+}
 
-// TODO 5:Pri vytváraní objednávky je nutné kontrolova, èi nedôjde k jej zamietnutiu zo strany
-// AoE.Dokonèená objednávka je zaradená do frontu objednávok èakajúcich na spracovanie.
-// TODO //	e) prijatie zásielky v lokálnom prekladisku odosielate¾a by spôsobilo, že toto lokálne
-		//	prekladisko nedokáže doruèi niektoré zásielky, ktorých adresáti sa nachádzajú v jeho
-		//	regióne, do 18:00 daného dòa.
-
-Vozidlo* Firma::vyberVozidlo(double hmotnostZasielky, Prekladisko* prekladiskoNaPrevzatieZasielky) {
+Vozidlo* Firma::vyberVozidlo(Zasielka* zasielka, Prekladisko * prekladisko) {
 	// TODO pozeraj ešte dopredu an naplánované zásielky toho vozidla 
-	for (Vozidlo *vozidlo : *arrayListVozidiel) {
-		if (vozidlo->prechadzaPrekladiskom(prekladiskoNaPrevzatieZasielky) &&
-			vozidlo->dokazeNalozitZasielku(hmotnostZasielky))
+	for (Vozidlo * vozidlo : *arrayListVozidiel) {
+		if (vozidlo->prechadzaPrekladiskom(prekladisko) &&
+			vozidlo->dokazeNalozitZasielku(zasielka))
 		{
 			return vozidlo;
 		}
@@ -114,47 +109,43 @@ Vozidlo* Firma::vyberVozidlo(double hmotnostZasielky, Prekladisko* prekladiskoNa
 	return NULL;
 }
 
-// TODO: Všetko
 void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat)
 {
+	// vytvorím objednávku a zaevidujem do firmy
 	Objednavka * objednavka = new Objednavka(hmotnostZasielky, odosielatel, adresat);
-	//zaevidujem do firmy
 	this->linkedListObjednavok->add(objednavka);
 
+	Zasielka * zasielka = new Zasielka(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska(), odosielatel->getRegion());
+
 	Prekladisko* prekladiskoOdoslania = this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion());
-	// zistím drona z tohto prekladiska, èi mám nejakého drona, ktorý stihne, unesie a je nabitý 
-	// TODO vyber drona ak nie je vo¾ný -> zisti èas, kedy môže
-	Dron* dronPreOdosielatela = prekladiskoOdoslania->vyberDrona(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska(), objednavka->getDatumaCasVytvorenia());
-	// zistím èi mi do prekladiska príde auto ktoré bude ma nosno takú, že zvládne odniest objednavku
-	Vozidlo* vozidloPreOdosielatela = this->vyberVozidlo(hmotnostZasielky, prekladiskoOdoslania);
+	Dron* vhodnyDron = prekladiskoOdoslania->vyberDrona(zasielka);
+	Vozidlo* vozidloNaVyzdvihnutie = this->vyberVozidlo(zasielka);
 
-	// TODO: ADRESAT
-	Prekladisko* prekladiskoAdresata = this->dajPrekladiskoPodlaRegionu(adresat->getRegion());
-	Vozidlo* vozidloPreAdresata = this->vyberVozidlo(hmotnostZasielky, prekladiskoAdresata);
-	// FIXME toto sa ale pýtaj až neskôr, resp na nejaký èas, kedy tam daná objednávka bude 
+	// preaženým metódy sa pýtam nie na prekladisko, ktoré mu bolo priradené, ale na prekladisko k adresátovi
+	Vozidlo* vozidloPreAdresata = this->vyberVozidlo(zasielka, this->dajPrekladiskoPodlaRegionu(adresat->getRegion()));
 
-	if (dronPreOdosielatela == NULL ||
-		vozidloPreOdosielatela == NULL ||
+	if (vhodnyDron == NULL ||
+		vozidloNaVyzdvihnutie == NULL ||
 		vozidloPreAdresata == NULL)
 	{
 		objednavka->setStav(eStavObjednavky::ZAMIETNUTA);
 	}
 	else
 	{
-		if (dronPreOdosielatela->vytazenyDo() > Datum::time_t_to_string(Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + 60 * 60)) {
-			if (chceUserZrusitObjednavku(dronPreOdosielatela, objednavka)) { return; }
+		if (vhodnyDron->vytazenyDo() > Datum::time_t_to_string(Datum::string_to_time_t(Datum::getAktualnyDatumaCas()) + 60 * 60)) {
+			if (chceUserZrusitObjednavku(vhodnyDron, objednavka)) { return; }
 		}
 		objednavka->setStav(eStavObjednavky::PRIJATA);
-		objednavka->setDatumaCasSpracovania_(dronPreOdosielatela->vytazenyDo());
-		dronPreOdosielatela->pridajObjednavku(objednavka);
 
-		dronPreOdosielatela->toString();
+
+		zasielka->setDatumaCasSpracovania_(vhodnyDron->vytazenyDo());
+		vhodnyDron->pridajZasielku(zasielka);
+
+		vhodnyDron->toString();
 		objednavka->toString();
+		zasielka->toString();
 
-
-		vozidloPreOdosielatela->pridajZasielku(objednavka->getHmotnostZasielky());
-		// prida ?
-		//prekladiskoAdresata->pridajObjednavku(objednavka);
+		vozidloNaVyzdvihnutie->pridajZasielku(zasielka);
 	}
 }
 

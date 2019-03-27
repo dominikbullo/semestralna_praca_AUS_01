@@ -1,7 +1,8 @@
 #pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS -> because of time 
-#include "Datum.h"
 #include <iostream>
 #include <ctime>
+#include "Datum.h"
+
 
 
 Datum* Datum::instance = 0;

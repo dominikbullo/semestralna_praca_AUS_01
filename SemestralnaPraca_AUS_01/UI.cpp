@@ -55,10 +55,9 @@ void UI::hlavneMenu()
 		//firma->pridajVozidlo(new Vozidlo(14560, 1045550, "ZA222BA"));
 		//// aj v prípade, že ho posuniem naspäť
 		//datumUI->posunCas(-60 * 60);
-		firma->pridajVozidlo(new Vozidlo(10000, 100, "ZA232DB"));
 
+		firma->pridajVozidlo(new Vozidlo(10000, 100, "ZA232DB"));
 		firma->vypisZoznamVozidiel();
-		pridajVsetkyPrekladiska();
 
 		//pridám jeden extra dron prekladisku v regióne 
 		//firma->dajPrekladiskoPodlaRegionu("MA")->pridajDron(new Dron(eDrony::JEDEN, firma->dajPrekladiskoPodlaRegionu("MA")->set_get_SerioveCislo()));

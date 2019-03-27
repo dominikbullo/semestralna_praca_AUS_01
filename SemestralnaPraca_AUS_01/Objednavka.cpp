@@ -45,9 +45,9 @@ void Objednavka::toString()
 		"Vzdialenost odosielatela od prekladiska: " << odosielatel_->getVzdialenostOdPrekladiska() << endl <<
 		"Region adresata: " << adresat_->getRegion() << endl <<
 		"Vzdialenost adresata od prekladiska: " << adresat_->getVzdialenostOdPrekladiska() << endl <<
-		"Datum a cas vytvorenia zasielky: " << datumaCasVytvoreniaObjednavky_ << endl <<
-		"Datum a cas spracovania zasielky: " << datumaCasSpracovania_ << endl <<
-		"Datum a cas ukoncenia zasielky: " << datumaCasUkoncenia_ << endl <<
+		"Datum a cas vytvorenia objednavky: " << datumaCasVytvoreniaObjednavky_ << endl <<
+		//"Datum a cas spracovania zasielky: " << datumaCasSpracovania_ << endl <<
+		//"Datum a cas ukoncenia zasielky: " << datumaCasUkoncenia_ << endl <<
 		"Stav: " << stringStav() << endl;
 	cout << "*******************************************************************" << endl;
 

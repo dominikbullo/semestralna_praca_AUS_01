@@ -10,6 +10,7 @@
 #include "Prekladisko.h"
 #include "Objednavka.h"
 #include "Dron.h"
+
 class Firma
 {
 public:
@@ -57,7 +58,8 @@ public:
 	}
 
 	Prekladisko * dajPrekladiskoPodlaRegionu(std::string okres);
-	Vozidlo * vyberVozidlo(double hmotnostZasielky, Prekladisko * prekladiskoNaPrevzatieZasielky);
+	Vozidlo * vyberVozidlo(Zasielka * zasielka);
+	Vozidlo * vyberVozidlo(Zasielka * zasielka, Prekladisko * prekladisko);
 	void vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat);
 	bool chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Objednavka * objednavka);
 private:

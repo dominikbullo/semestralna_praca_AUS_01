@@ -1,5 +1,5 @@
-#include "Vozidlo.h"
 #include "structures/heap_monitor.h"
+#include "Vozidlo.h"
 
 using namespace std;
 
@@ -11,6 +11,8 @@ Vozidlo::Vozidlo(int nostnostVozidla, int prevadzkoveNaklady, std::string SPZ)
 	datumaCasEvidencie_ = Datum::getAktualnyDatumaCas();
 	// Zmenil som Linked na Array - POZOR 
 	linkedListTrasaVozidla = new structures::ArrayList<Prekladisko*>();
+
+	//linkedListZasielok = new structures::LinkedList<Zasielka*>();
 }
 
 Vozidlo::~Vozidlo()

@@ -1,9 +1,7 @@
-﻿#include<iostream> 
-#include<algorithm> 
+﻿#include "Prekladisko.h"
 
-#include "Prekladisko.h"
-#include "Dron.h"
 
+using namespace std;
 int Prekladisko::unikatneSerioveCislo_ = 000000;
 
 Prekladisko::Prekladisko(std::string region)
@@ -13,8 +11,6 @@ Prekladisko::Prekladisko(std::string region)
 	arrayListDronov_ = new structures::ArrayList<Dron*>();
 	// arrayListZasielok_ = new structures::ArrayList<Objednavok*>();
 
-	// prekladisko má vždy aspoň pár dronov pri vytváraní
-	//this->pridajDron(new Dron(eDrony::JEDEN, set_get_SerioveCislo()));
 	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
 }
 
@@ -57,29 +53,32 @@ void Prekladisko::spracujObjednavky()
 	}
 }
 
-void Prekladisko::nalozVozidlo(Vozidlo * vozidloNaNalozenie)
-{
-	// TODO: ak ostanú nejaké prijaté ? 
-	// TODO: kontrola
-	spracujObjednavky();
-}
+//void Prekladisko::nalozVozidlo(Vozidlo * vozidloNaNalozenie)
+//{
+//	// TODO: ak ostanú nejaké prijaté ? 
+//	// TODO: kontrola
+//	spracujObjednavky();
+//
+//}
 
-
-Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, string casVytvoreniaObjednavky)
+Dron * Prekladisko::vyberDrona(Zasielka * zasielka)
 {
+	// zistím drona z tohto prekladiska, či mám nejakého drona, ktorý stihne, unesie a je nabitý 
 
 	Dron* volnyKandidatNaDrona = nullptr;
 	Dron* obsadenyKandidatNaDrona = nullptr;
 	Dron* vybityKandidatNaDrona = nullptr;
 
-	for (Dron * dron : *arrayListDronov_) {
+	for (Dron * dron : *arrayListDronov_)
+	{
 
 		dron->prepocitajInformacieoDosupnosti();
 		dron->toString();
 
-		if (dron->unesieZasielku(hmotnostZasielky) &&
-			dron->zvladneLet(vzdialenost) &&
-			dron->stihnePriletietPreZasielku(vzdialenost)) {
+		if (dron->unesieZasielku(zasielka->getHmotnost()) &&
+			dron->zvladneLet(zasielka->getVzdialenost()) &&
+			dron->stihnePriletietPreZasielku(zasielka->getVzdialenost()))
+		{
 
 			if (dron->jeVolny()) {
 				volnyKandidatNaDrona = dajLepšiehoVolnehoDrona(dron, volnyKandidatNaDrona);
@@ -90,8 +89,9 @@ Dron * Prekladisko::vyberDrona(double hmotnostZasielky, double vzdialenost, stri
 				continue;
 			}
 		}
-		else if (dron->unesieZasielku(hmotnostZasielky) &&
-			dron->stihnePriletietPreZasielku(vzdialenost))
+		// TODO better way ? 
+		else if (dron->unesieZasielku(zasielka->getHmotnost()) &&
+			dron->stihnePriletietPreZasielku(zasielka->getVzdialenost()))
 		{
 			vybityKandidatNaDrona = dron;
 			continue;

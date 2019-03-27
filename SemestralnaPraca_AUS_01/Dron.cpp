@@ -8,7 +8,7 @@ Dron::Dron(const eDrony typDronu, string serioveCislo)
 	datumaCasEvidencie_ = Datum::getAktualnyDatumaCas();
 
 	// evidujem bud˙ce objedn·vky, ktorÈ m· dron vybaviù
-	frontObjednavok_ = new structures::ExplicitQueue<Objednavka*>();
+	frontZasielok_ = new structures::ExplicitQueue<Zasielka*>();
 
 	switch (typDronu) {
 	case eDrony::JEDEN:
@@ -33,13 +33,13 @@ Dron::Dron(const eDrony typDronu, string serioveCislo)
 Dron::~Dron()
 {
 	// Pretoûe v deötruktore firmy som vymazal väetky objedn·vky -> tu uû nemusÌm
-	frontObjednavok_->clear();
-	delete frontObjednavok_;
+	frontZasielok_->clear();
+	delete frontZasielok_;
 }
 
-void Dron::pridajObjednavku(Objednavka * novaObjednavka)
+void Dron::pridajZasielku(Zasielka * novaZasielka)
 {
-	double vzdialenostObjednavky = novaObjednavka->getOdosielatel()->getVzdialenostOdPrekladiska();
+	double vzdialenostObjednavky = novaZasielka->getVzdialenost();
 	double trvanieLetuObjednavky = trvanieLetu(vzdialenostObjednavky);
 	time_t pom = Datum::string_to_time_t(vytazenyDo_);
 
@@ -47,25 +47,25 @@ void Dron::pridajObjednavku(Objednavka * novaObjednavka)
 	znizKapacituBaterie(trvanieLetuObjednavky);
 	this->celkovyPocetNalietanychHodin_ += trvanieLetuObjednavky / 60 / 60;
 	this->celkovyPocetPrepravenychZasielok_++;
-	novaObjednavka->setDatumaCasUkoncenia_(Datum::time_t_to_string(pom + trvanieLetuObjednavky));
+	novaZasielka->setDatumaCasUkoncenia_(Datum::time_t_to_string(pom + trvanieLetuObjednavky));
 
-	frontObjednavok_->push(novaObjednavka);
+	frontZasielok_->push(novaZasielka);
 }
 
 void Dron::spracujObjednavky()
 {
-	//throw std::exception("Dron::spracujObjednavky: Not implemented yet.");
-	if (frontObjednavok_->isEmpty()) { return; }
-	//TODO think about this
-	while (frontObjednavok_->peek()->getDatumaCasUkoncenia_() < Datum::getAktualnyDatumaCas())
-	{
-		Objednavka* vybranaObjednavka = frontObjednavok_->peek();
-		vytazeny_ = false;
-		vybranaObjednavka->setStav(eStavObjednavky::ZREALIZOVANA);
-		vybranaObjednavka->toString();
-		frontObjednavok_->pop();
+	////throw std::exception("Dron::spracujObjednavky: Not implemented yet.");
+	//if (frontZasielok_->isEmpty()) { return; }
+	////TODO think about this
+	//while (frontZasielok_->peek()->getDatumaCasUkoncenia_() < Datum::getAktualnyDatumaCas())
+	//{
+	//	Objednavka* vybranaObjednavka = frontZasielok_->peek();
+	//	vytazeny_ = false;
+	//	vybranaObjednavka->setStav(eStavObjednavky::ZREALIZOVANA);
+	//	vybranaObjednavka->toString();
+	//	frontZasielok_->pop();
 
-	}
+	//}
 
 }
 

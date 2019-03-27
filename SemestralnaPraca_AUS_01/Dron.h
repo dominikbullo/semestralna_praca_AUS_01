@@ -12,6 +12,7 @@
 #include "Konstatnty.h"
 #include "Datum.h"
 #include "Objednavka.h"
+#include "Zasielka.h"
 
 class Dron
 {
@@ -19,7 +20,7 @@ public:
 	Dron(const eDrony typDronu, std::string serioveCislo);
 	~Dron();
 	void toString();
-	void pridajObjednavku(Objednavka * objednavka);
+	void pridajZasielku(Zasielka * zasielka);
 	void spracujObjednavky();
 	bool stihnePriletietPreZasielku(double vzdialenost);
 
@@ -84,11 +85,9 @@ public:
 	}
 
 
-
-
 private:
 	eDrony typ_;
-	structures::ExplicitQueue<Objednavka*> * frontObjednavok_;
+	structures::ExplicitQueue<Zasielka*> * frontZasielok_;
 
 	std::string datumaCasEvidencie_;
 	std::string serioveCislo_;
