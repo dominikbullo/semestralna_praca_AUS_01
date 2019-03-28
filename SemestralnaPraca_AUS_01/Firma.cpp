@@ -126,6 +126,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	// preaženým metódy sa pýtam nie na prekladisko, ktoré mu bolo priradené, ale na prekladisko k adresátovi
 	Vozidlo* vozidloPreAdresata = this->vyberVozidlo(zasielka, this->dajPrekladiskoPodlaRegionu(adresat->getRegion()));
 
+	// TODO: vypisuj aj dôvody zamietnutia
 	if (vhodnyDron == NULL ||
 		vozidloNaVyzdvihnutie == NULL ||
 		vozidloPreAdresata == NULL)

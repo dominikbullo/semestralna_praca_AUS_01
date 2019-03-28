@@ -30,7 +30,7 @@ public:
 		return region_;
 	}
 	inline double getVzdialenostOdPrekladiska() {
-		return vzdialenostOdPrekladiska_;
+		return this->vzdialenostOdPrekladiska_;
 	}
 private:
 	std::string region_;
@@ -45,8 +45,9 @@ public:
 	~Objednavka();
 	void toString();
 
-	void setDatumaCasSpracovania(std::string datum_a_cas) { datumaCasSpracovania_ = datum_a_cas; }
-	void setStav(eStavObjednavky stav) { stav_ = stav; }
+	void setDatumaCasSpracovania(std::string datum_a_cas) { this->datumaCasSpracovania_ = datum_a_cas; }
+	void setStav(eStavObjednavky stav) { this->stav_ = stav; }
+	void setDovodZamietnutia(string dovodZamietnutia) { this->dovodZamietnutia_ = dovodZamietnutia_; }
 
 	inline double getHmotnostZasielky() { return hmotnostZasielky_; }
 	inline Adresat* getAdresat() { return adresat_; }
@@ -55,12 +56,14 @@ public:
 	std::string getDatumaCasSpracovania() { return datumaCasSpracovania_; }
 
 private:
+	double hmotnostZasielky_ = 0.0;
 	std::string datumaCasVytvoreniaObjednavky_;
 	std::string datumaCasSpracovania_;
 
 	std::string stringStav();
 	eStavObjednavky stav_;
-	double hmotnostZasielky_ = 0.0;
+	std::string dovodZamietnutia_ = "";
+
 	Odosielatel* odosielatel_;
 	Adresat* adresat_;
 };
