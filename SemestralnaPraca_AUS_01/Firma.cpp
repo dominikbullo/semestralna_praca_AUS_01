@@ -80,10 +80,10 @@ void Firma::vratVozidlaDoCentralnehoSkladu()
 }
 
 Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string region) {
-	// zložitos O(n)
 
 	// NOTE osetrenie zlého vstupu
 	//for (auto & c : region) c = toupper(c);
+	std::transform(region.begin(), region.end(), region.begin(), ::toupper);
 
 	for (Prekladisko * prekladisko : *arrayListPrekladisk) {
 		if (prekladisko->dajRegion() == region) {

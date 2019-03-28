@@ -6,9 +6,10 @@ int Prekladisko::unikatneSerioveCislo_ = 000000;
 
 Prekladisko::Prekladisko(std::string region)
 {
-	unikatneSerioveCislo_ = 000000;
-	region_ = region;
-	arrayListDronov_ = new structures::ArrayList<Dron*>();
+	this->unikatneSerioveCislo_ = 000000;
+	std::transform(region.begin(), region.end(), region.begin(), ::toupper);
+	this->region_ = region;
+	this->arrayListDronov_ = new structures::ArrayList<Dron*>();
 	// arrayListZasielok_ = new structures::ArrayList<Objednavok*>();
 
 	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
@@ -16,10 +17,10 @@ Prekladisko::Prekladisko(std::string region)
 
 Prekladisko::~Prekladisko()
 {
-	for (Dron * dron : *arrayListDronov_) {
+	for (Dron * dron : *this->arrayListDronov_) {
 		delete dron;
 	}
-	delete arrayListDronov_;
+	delete this->arrayListDronov_;
 
 }
 
@@ -35,31 +36,23 @@ void Prekladisko::pridajDron(Dron * novyDron)
 	//		return;
 	//	}
 	//}
-	arrayListDronov_->add(novyDron);
+	this->arrayListDronov_->add(novyDron);
 }
 
 
 void Prekladisko::vypisZoznamDronov() {
 	std::cout << "Vypisujem vsetkych dronov pre prekladisko z okresu - " << region_ << std::endl;
-	for (Dron * dron : *arrayListDronov_) {
+	for (Dron * dron : *this->arrayListDronov_) {
 		dron->toString();
 	}
 }
 
 void Prekladisko::spracujObjednavky()
 {
-	for (Dron * dron : *arrayListDronov_) {
+	for (Dron * dron : *this->arrayListDronov_) {
 		dron->spracujObjednavky();
 	}
 }
-
-//void Prekladisko::nalozVozidlo(Vozidlo * vozidloNaNalozenie)
-//{
-//	// TODO: ak ostanú nejaké prijaté ? 
-//	// TODO: kontrola
-//	spracujObjednavky();
-//
-//}
 
 Dron * Prekladisko::vyberDrona(Zasielka * zasielka)
 {
@@ -69,10 +62,9 @@ Dron * Prekladisko::vyberDrona(Zasielka * zasielka)
 	Dron* obsadenyKandidatNaDrona = nullptr;
 	Dron* vybityKandidatNaDrona = nullptr;
 
-	for (Dron * dron : *arrayListDronov_)
+	for (Dron * dron : *this->arrayListDronov_)
 	{
 		dron->prepocitajInformacieoDosupnosti();
-		//dron->toString();
 
 		if (dron->unesieZasielku(zasielka) &&
 			dron->zvladneLet(zasielka) &&
@@ -88,6 +80,7 @@ Dron * Prekladisko::vyberDrona(Zasielka * zasielka)
 				continue;
 			}
 		}
+
 		// TODO better way ? 
 		else if (dron->unesieZasielku(zasielka) &&
 			dron->stihnePriletietPreZasielku(zasielka))
@@ -97,18 +90,16 @@ Dron * Prekladisko::vyberDrona(Zasielka * zasielka)
 		}
 
 	}
-	//volnyKandidatNaDrona == nullptr ? "treba bypocitat cas " : mam volneho drona;
-	//std::cout << "Takuto objednavku nezvladne dorucit ziaden dron" << std::endl;
 
 	// TODO: dron, ktorý zvládne najefektívnejšie doručiť objednávku, aj s userovím súhlasom ak to bude neskoro
 	if (volnyKandidatNaDrona != nullptr) { return volnyKandidatNaDrona; }
 	if (obsadenyKandidatNaDrona != nullptr) { return obsadenyKandidatNaDrona; }
 	if (vybityKandidatNaDrona != nullptr)
 	{
-		std::cout << "Dron je vybity ale bdue ososlany hned ako to bude mozne" << std::endl;
+		std::cout << "Dron je vybity ale bude ososlany hned ako to bude mozne" << std::endl;
 		return obsadenyKandidatNaDrona;
 	}
-	cout << "Firma nema prostriedky, aby dorucila tuto objednavku" << endl;
+	std::cout << "Firma nema prostriedky, aby dorucila tuto objednavku" << endl;
 	return NULL;
 
 }
@@ -137,7 +128,9 @@ std::string Prekladisko::set_get_SerioveCislo()
 {
 	int pom = ++unikatneSerioveCislo_;
 	std::string formated = std::string(6 - std::to_string(pom).length(), '0') + std::to_string(pom);
-	serioveCislo_ = region_ + formated;
+	// SET
+	this->serioveCislo_ = this->region_ + formated;
+	// GET
 	return serioveCislo_;
 }
 
