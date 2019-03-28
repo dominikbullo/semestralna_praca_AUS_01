@@ -129,7 +129,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	Zasielka * zasielka = new Zasielka(
 		hmotnostZasielky,
 		odosielatel->getVzdialenostOdPrekladiska(),
-		odosielatel->getRegion()
+		odosielatel->getRegion(), objednavka
 	);
 
 	Prekladisko* prekladiskoOdoslania = this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion());

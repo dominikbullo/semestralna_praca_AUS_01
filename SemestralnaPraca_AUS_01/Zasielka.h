@@ -2,13 +2,14 @@
 #include <string>
 #include <iostream>
 #include "Konstatnty.h"
+#include "Objednavka.h"
 // NO WAY!
 //#include "Prekladisko.h"
 using namespace std;
 class Zasielka
 {
 public:
-	Zasielka(double hmotnost, double vzdialenost, std::string region);
+	Zasielka(double hmotnost, Objednavka* objednavka);
 	~Zasielka();
 	void toString();
 
@@ -27,6 +28,7 @@ public:
 
 
 private:
+	Objednavka* objednavka_;
 	double hmotnost_;
 	double vzdialenostOdPrekladiska_;
 	std::string region_; // prekladisko, ktoré momentálne spravuje zásielku

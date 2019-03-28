@@ -2,12 +2,12 @@
 
 using namespace std;
 
-
-Zasielka::Zasielka(double hmotnost, double vzdialenost, std::string region)
+Zasielka::Zasielka(double hmotnost, Objednavka * objednavka)
 {
 	this->hmotnost_ = hmotnost;
-	this->vzdialenostOdPrekladiska_ = vzdialenost;
-	this->region_ = region;
+	this->region_ = objednavka->getOdosielatel()->getRegion();
+	this->vzdialenostOdPrekladiska_ = objednavka->getOdosielatel()->getVzdialenostOdPrekladiska();
+	this->objednavka_ = objednavka;
 }
 
 Zasielka::~Zasielka()
