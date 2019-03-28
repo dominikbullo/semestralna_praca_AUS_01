@@ -16,24 +16,20 @@ public:
 	Vozidlo(int nostnostVozidla, int prevadzkoveNaklady, std::string SPZ);
 	~Vozidlo();
 	void toString();
+	void vypisZasielkyVozidla();
 	void pridajPrekladiskoDoTrasyVozidla(Prekladisko * prekladisko);
 
-	void vypisZasielkyVozidla();
+	inline int getPrevazdkoveNaklady() { return prevadzkoveNaklady_; }
+	std::string getSPZ() { return SPZ_; }
+	inline int getNaklady() { return naklady_; }
+	std::string getDatumaCasEvidencie() { return datumaCasEvidencie_; }
+	structures::ArrayList<Zasielka*> getArrayListZasielok() { return *arrayListZasielok_; }
 
-	inline int getPrevazdkoveNaklady() {
-		return prevadzkoveNaklady_;
-	}
-	std::string getSPZ() {
-		return SPZ_;
-	}
-	inline int getNaklady() {
-		return naklady_;
-	}
-	std::string getDatumaCasEvidencie() {
-		return datumaCasEvidencie_;
-	}
+	void aktualizujCelkoveNaklady() { this->naklady_ += 2.0 * prevadzkoveNaklady_ + linkedListTrasaVozidla_->size(); }
+	bool dokazeNalozitZasielku(Zasielka* zasielka) { return nosnost_ - zasielka->getHmotnost() >= 0; }
+
 	bool prechadzaPrekladiskom(Prekladisko* prekladiskoKtorymMaPrechadzat) {
-		for (Prekladisko * prekladiskoKtorymPrechadza : *linkedListTrasaVozidla)
+		for (Prekladisko * prekladiskoKtorymPrechadza : *linkedListTrasaVozidla_)
 		{
 			if (prekladiskoKtorymPrechadza == prekladiskoKtorymMaPrechadzat) {
 				return true;
@@ -45,7 +41,7 @@ public:
 	}
 	void vypisTrasuVozidla() {
 		std::cout << "Trasa vozidlo s SPZ - " << SPZ_ << " je nasledujuca: " << std::endl;
-		for (Prekladisko* prekladisko : *linkedListTrasaVozidla)
+		for (Prekladisko* prekladisko : *linkedListTrasaVozidla_)
 		{
 			std::cout << " -> " << prekladisko->dajRegion();
 		}
@@ -54,23 +50,16 @@ public:
 
 	void pridajZasielku(Zasielka* zasielka) {
 		nosnost_ -= zasielka->getHmotnost();
-		arrayListZasielok->add(zasielka);
-	}
-	void aktualizujCelkoveNaklady()
-	{
-		this->naklady_ += 2 * prevadzkoveNaklady_ + linkedListTrasaVozidla->size();
-	}
-	bool dokazeNalozitZasielku(Zasielka* zasielka) {
-		return nosnost_ - zasielka->getHmotnost() >= 0;
+		arrayListZasielok_->add(zasielka);
 	}
 
 private:
 	int prevadzkoveNaklady_;
 	std::string datumaCasEvidencie_;
 	std::string SPZ_ = "ZA_";
-	int naklady_ = 0;
+	double naklady_ = 0;
 	double nosnost_;
-	structures::LinkedList<Prekladisko *> * linkedListTrasaVozidla;
-	structures::ArrayList<Zasielka *> * arrayListZasielok;
+	structures::LinkedList<Prekladisko *> * linkedListTrasaVozidla_;
+	structures::ArrayList<Zasielka *> * arrayListZasielok_;
 };
 

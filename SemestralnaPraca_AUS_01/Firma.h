@@ -10,6 +10,7 @@
 #include "Prekladisko.h"
 #include "Objednavka.h"
 #include "Dron.h"
+#include "CentralnySklad.h"
 
 class Firma
 {
@@ -64,6 +65,7 @@ public:
 	bool chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasielka);
 private:
 	std::string nazovFirmy_;
+	CentralnySklad* centralnySklad_;
 	structures::ArrayList<Vozidlo*> * arrayListVozidiel;
 	structures::ArrayList<Prekladisko*> * arrayListPrekladisk;
 	structures::LinkedList<Objednavka*> * linkedListObjednavok;

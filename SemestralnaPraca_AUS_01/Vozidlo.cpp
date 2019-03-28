@@ -10,18 +10,18 @@ Vozidlo::Vozidlo(int nostnostVozidla, int prevadzkoveNaklady, std::string SPZ)
 	SPZ_ = SPZ;
 	datumaCasEvidencie_ = Datum::getAktualnyDatumaCas();
 
-	linkedListTrasaVozidla = new structures::LinkedList<Prekladisko*>();
-	arrayListZasielok = new structures::ArrayList<Zasielka*>();
+	linkedListTrasaVozidla_ = new structures::LinkedList<Prekladisko*>();
+	arrayListZasielok_ = new structures::ArrayList<Zasielka*>();
 }
 
 Vozidlo::~Vozidlo()
 {
-	for (Zasielka* zasielka : *arrayListZasielok)
+	for (Zasielka* zasielka : *arrayListZasielok_)
 	{
 		delete zasielka;
 	}
-	delete linkedListTrasaVozidla;
-	delete arrayListZasielok;
+	delete linkedListTrasaVozidla_;
+	delete arrayListZasielok_;
 }
 
 void Vozidlo::toString()
@@ -30,12 +30,12 @@ void Vozidlo::toString()
 }
 
 void Vozidlo::pridajPrekladiskoDoTrasyVozidla(Prekladisko* prekladisko) {
-	linkedListTrasaVozidla->add(prekladisko);
+	linkedListTrasaVozidla_->add(prekladisko);
 }
 
 void Vozidlo::vypisZasielkyVozidla()
 {
-	for (Zasielka *zasielka : *arrayListZasielok)
+	for (Zasielka *zasielka : *arrayListZasielok_)
 	{
 		zasielka->toString();
 	}

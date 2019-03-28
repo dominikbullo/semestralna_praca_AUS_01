@@ -57,7 +57,7 @@ void Dron::spracujZasielky()
 	//TODO think about this	while (frontZasielok_->peek()->getdatumaCasUkoncenia_() < Datum::getAktualnyDatumaCas())
 	{
 		// TODO test it
-		//arrayListZasielok->add(frontZasielok_->pop());
+		//arrayListZasielok_->add(frontZasielok_->pop());
 		frontZasielok_->pop();
 	}
 	prepocitajInformacieoDosupnosti();

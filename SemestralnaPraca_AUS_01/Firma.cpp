@@ -5,10 +5,10 @@ using namespace std;
 Firma::Firma(std::string nazovFirmy)
 {
 	nazovFirmy_ = nazovFirmy;
+	centralnySklad_ = new CentralnySklad();
+
 	arrayListVozidiel = new structures::ArrayList<Vozidlo*>();
 	arrayListPrekladisk = new structures::ArrayList<Prekladisko*>();
-
-	// kvôli štatistikám -> ko¾ko zamietnutých, ko¾ko v kraji a pod.
 	linkedListObjednavok = new structures::LinkedList<Objednavka*>();
 }
 
@@ -27,6 +27,7 @@ Firma::~Firma()
 	delete arrayListVozidiel;
 	delete arrayListPrekladisk;
 	delete linkedListObjednavok;
+	delete centralnySklad_;
 }
 
 
@@ -84,7 +85,10 @@ void Firma::vratVozidlaDoCentralnehoSkladu()
 		vozidlo->toString();
 		cout << "Zasielky tohto vozidla su" << endl;
 		vozidlo->vypisZasielkyVozidla();
+		this->centralnySklad_->prijmiZasielky(vozidlo);
 	}
+
+
 }
 
 Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string region) {
