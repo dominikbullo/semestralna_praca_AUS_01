@@ -1,6 +1,6 @@
 #include "CentralnySklad.h"
 
-
+using namespace std;
 
 CentralnySklad::CentralnySklad()
 {
@@ -14,6 +14,19 @@ CentralnySklad::~CentralnySklad()
 
 void CentralnySklad::prijmiZasielky(Vozidlo * vozidlo)
 {
-	// TODO dokonèi priradenie
-	//arrayListZasielok = vozidlo->*getArrayListZasielok();
+
+	for (Zasielka* zasielka : vozidlo->getArrayListZasielok())
+	{
+		arrayListZasielok->add(zasielka);
+	}
+}
+
+void CentralnySklad::vypisZoznamZasielok() {
+	cout << endl << "*******************************************************************" << endl;
+	cout << "*************** Zoznam zasielok v centralnom sklade ***************" << endl;
+	cout << "*******************************************************************" << endl << endl;
+	for (Zasielka* zasielka : *arrayListZasielok)
+	{
+		zasielka->toString();
+	}
 }

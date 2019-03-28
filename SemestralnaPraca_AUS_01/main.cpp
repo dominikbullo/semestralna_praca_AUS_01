@@ -4,14 +4,7 @@
 
 int main()
 {
-	// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	// TODO: pripocitaj kedy by daný dron doletel, aj s nabitím
-	// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-	// TODO: Návrat áut do centrálneho skladu
-	// TODO: Naplnenie vozidiel v centrálnom sklade zásielkami.
-	// TODO: Transport zásielok z centrálneho skladu do lokálnych prekladísk.
-	// TODO: Odovzdanie zásielky adresátovi vo zvolenom lokálnom prekladisku.
 	// TODO: Vypísanie nasledujúcich sumárnych štatistík:
 	// TODO: Uloženie a načítanie aktuálneho stavu evidencie do/zo súboru.
 

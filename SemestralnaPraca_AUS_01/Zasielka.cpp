@@ -20,7 +20,7 @@ Zasielka::~Zasielka()
 
 void Zasielka::toString()
 {
-	cout << "******************** Informacie o zasielkeke **********************" << endl;
+	cout << "********************* Informacie o zasielke ***********************" << endl;
 	cout <<
 		"Hmotnost zasielky: " << hmotnost_ << endl <<
 		"datumaCasSpracovania_: " << datumaCasSpracovania_ << endl <<

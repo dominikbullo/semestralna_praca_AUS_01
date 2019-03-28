@@ -65,12 +65,13 @@ void UI::hlavneMenu()
 		//firma->dajPrekladiskoPodlaRegionu("MA")->vypisZoznamDronov();
 		firma->getVozidloBySPZ("ZA232DB")->vypisTrasuVozidla();
 
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 20), new Adresat("MA", 15.5));
+		//firma->vytvorObjednavku(2.75, new Odosielatel("BA", 20), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 2), new Adresat("MA", 15.5));
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 1), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("CA", 1), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("CA", 1), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("CA", 1), new Adresat("MA", 15.5));
 		//datumUI->posunCas(60 * 60);
 		//firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
 		//firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
@@ -80,6 +81,7 @@ void UI::hlavneMenu()
 
 
 		firma->vratVozidlaDoCentralnehoSkladu();
+
 
 		//firma->vypisanieVsetkychObjednavok();
 		//firma->spracujVsetkyObjednavky();

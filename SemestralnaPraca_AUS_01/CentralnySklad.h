@@ -6,6 +6,7 @@ public:
 	CentralnySklad();
 	~CentralnySklad();
 	void prijmiZasielky(Vozidlo *vozidlo);
+	void vypisZoznamZasielok();
 private:
 	structures::ArrayList<Zasielka *> * arrayListZasielok;
 };

@@ -83,12 +83,10 @@ void Firma::vratVozidlaDoCentralnehoSkladu()
 	{
 		vozidlo->aktualizujCelkoveNaklady();
 		vozidlo->toString();
-		cout << "Zasielky tohto vozidla su" << endl;
-		vozidlo->vypisZasielkyVozidla();
 		this->centralnySklad_->prijmiZasielky(vozidlo);
 	}
 
-
+	this->centralnySklad_->vypisZoznamZasielok();
 }
 
 Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string region) {
@@ -128,9 +126,11 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	Objednavka * objednavka = new Objednavka(hmotnostZasielky, odosielatel, adresat);
 	this->linkedListObjednavok->add(objednavka);
 
-	// MEMORY LEAK POZOR NA TO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	Zasielka * zasielka = new Zasielka(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska(), odosielatel->getRegion());
+	Zasielka * zasielka = new Zasielka(
+		hmotnostZasielky,
+		odosielatel->getVzdialenostOdPrekladiska(),
+		odosielatel->getRegion()
+	);
 
 	Prekladisko* prekladiskoOdoslania = this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion());
 
