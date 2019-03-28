@@ -27,6 +27,10 @@ public:
 		return nazovFirmy_;
 	}
 
+	CentralnySklad* getCentralnySklad() {
+		return centralnySklad_;
+	}
+
 	void pridajPrekladisko(Prekladisko * novePrekladisko) {
 		arrayListPrekladisk->add(novePrekladisko);
 	};

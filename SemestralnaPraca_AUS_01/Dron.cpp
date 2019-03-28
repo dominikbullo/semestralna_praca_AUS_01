@@ -40,7 +40,6 @@ Dron::~Dron()
 void Dron::pridajZasielku(Zasielka * novaZasielka)
 {
 	double cestaSpat = trvanieLetu(novaZasielka) / 2.0;
-	// TODO check this
 
 	this->vytazenyDo_ = Datum::time_t_to_string(casPriletuPreZasielku(novaZasielka) + cestaSpat);
 	znizKapacituBaterie(trvanieLetu(novaZasielka));
@@ -109,6 +108,7 @@ void Dron::prepocitajInformacieoDosupnosti()
 void Dron::toString()
 {
 	cout << "******************** Informacie o dronovi **********************" << endl;
+	if (kapacitaBaterie_ < 0) { throw std::exception("Neplatny stav nabitia baterie"); }
 	cout <<
 		"Seriove cislo - " << this->serioveCislo_ << endl <<
 		"Datum zaradenia do prevadzky - " << this->datumaCasEvidencie_ << endl <<

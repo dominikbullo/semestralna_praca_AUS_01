@@ -7,9 +7,9 @@ CentralnySklad::CentralnySklad()
 	arrayListZasielok = new structures::ArrayList<Zasielka*>();
 }
 
-
 CentralnySklad::~CentralnySklad()
 {
+	delete arrayListZasielok;
 }
 
 void CentralnySklad::prijmiZasielky(Vozidlo * vozidlo)
@@ -19,6 +19,9 @@ void CentralnySklad::prijmiZasielky(Vozidlo * vozidlo)
 	{
 		arrayListZasielok->add(zasielka);
 	}
+	// TODO po pridaní, odstraò zasielku z vozidla -> vyber a prelož do iného 
+	// TODO otestova 
+	vozidlo->getArrayListZasielok().clear();
 }
 
 void CentralnySklad::vypisZoznamZasielok() {
@@ -29,4 +32,6 @@ void CentralnySklad::vypisZoznamZasielok() {
 	{
 		zasielka->toString();
 	}
+}
+void CentralnySklad::naplVozidla() {
 }

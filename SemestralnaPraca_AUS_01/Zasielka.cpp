@@ -2,9 +2,9 @@
 
 using namespace std;
 
-Zasielka::Zasielka(double hmotnost, Objednavka * objednavka)
+Zasielka::Zasielka(Objednavka * objednavka)
 {
-	this->hmotnost_ = hmotnost;
+	this->hmotnost_ = objednavka->getHmotnostZasielky();
 	this->region_ = objednavka->getOdosielatel()->getRegion();
 	this->vzdialenostOdPrekladiska_ = objednavka->getOdosielatel()->getVzdialenostOdPrekladiska();
 	this->objednavka_ = objednavka;

@@ -82,6 +82,8 @@ void UI::hlavneMenu()
 
 		firma->vratVozidlaDoCentralnehoSkladu();
 
+		firma->getCentralnySklad()->vypisZoznamZasielok();
+		firma->getCentralnySklad()->naplVozidla();
 
 		//firma->vypisanieVsetkychObjednavok();
 		//firma->spracujVsetkyObjednavky();

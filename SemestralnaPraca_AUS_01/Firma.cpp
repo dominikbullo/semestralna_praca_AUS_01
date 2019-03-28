@@ -85,9 +85,8 @@ void Firma::vratVozidlaDoCentralnehoSkladu()
 		vozidlo->toString();
 		this->centralnySklad_->prijmiZasielky(vozidlo);
 	}
-
-	this->centralnySklad_->vypisZoznamZasielok();
 }
+
 
 Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string region) {
 
@@ -126,7 +125,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	Objednavka * objednavka = new Objednavka(hmotnostZasielky, odosielatel, adresat);
 	this->linkedListObjednavok->add(objednavka);
 
-	Zasielka * zasielka = new Zasielka(hmotnostZasielky, objednavka);
+	Zasielka * zasielka = new Zasielka(objednavka);
 
 	Prekladisko* prekladiskoOdoslania = this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion());
 
@@ -168,7 +167,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	vhodnyDron->pridajZasielku(zasielka);
 	vozidloNaVyzdvihnutie->pridajZasielku(zasielka);
 
-	zasielka->toString();
+	//zasielka->toString();
 }
 bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasielka)
 {

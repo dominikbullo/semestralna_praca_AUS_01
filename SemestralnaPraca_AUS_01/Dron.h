@@ -24,7 +24,6 @@ public:
 	void prepocitajInformacieoDosupnosti();
 	void pridajZasielku(Zasielka * zasielka);
 	void spracujZasielky();
-	void spracujZasielky(structures::ArrayList<Zasielka*> *poleZasielok);
 	bool jeVolny() { return !vytazeny_; };
 
 	std::string vytazenyDo() { return vytazenyDo_; };

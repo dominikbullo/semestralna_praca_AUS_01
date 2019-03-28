@@ -9,7 +9,7 @@ using namespace std;
 class Zasielka
 {
 public:
-	Zasielka(double hmotnost, Objednavka* objednavka);
+	Zasielka(Objednavka* objednavka);
 	~Zasielka();
 	void toString();
 
