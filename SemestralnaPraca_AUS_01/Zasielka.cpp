@@ -8,6 +8,8 @@ Zasielka::Zasielka(double hmotnost, Objednavka * objednavka)
 	this->region_ = objednavka->getOdosielatel()->getRegion();
 	this->vzdialenostOdPrekladiska_ = objednavka->getOdosielatel()->getVzdialenostOdPrekladiska();
 	this->objednavka_ = objednavka;
+	// NOTE: nemusím vedie smer, v sklade iba zmenim region a vzdialenost
+	//this->smerZasielky = eSmerZasielky::DO_CENTRALNEHO_SKLADU;
 }
 
 Zasielka::~Zasielka()
@@ -26,5 +28,9 @@ void Zasielka::toString()
 		"datumaCasSpracovania_: " << datumaCasSpracovania_ << endl <<
 		"datumaCasPrevzatia_: " << datumaCasPrevzatia_ << endl <<
 		"datumaCasUkoncenia_: " << datumaCasUkoncenia_ << endl;
+	cout << "********************** Pre tuto objednavku ************************" << endl;
+	this->objednavka_->toString();
+	cout << "*******************************************************************" << endl;
+	cout << "*******************************************************************" << endl;
 	cout << "*******************************************************************" << endl;
 }

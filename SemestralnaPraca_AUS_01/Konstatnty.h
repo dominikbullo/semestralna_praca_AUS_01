@@ -7,7 +7,11 @@ enum class eStavObjednavky
 	ZAMIETNUTA = 2,
 	ZRUSENA = 3,
 	ZREALIZOVANA = 4,
-	PRIPRAVENA = 5
+};
+enum class eSmerZasielky
+{
+	DO_CENTRALNEHO_SKLADU,
+	Z_CENTRALNEHO_SKLADU
 };
 
 
