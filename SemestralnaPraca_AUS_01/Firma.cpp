@@ -145,7 +145,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// TODO: pripocitaj kedy by daný dron doletel, aj s nabitím
 	// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+	auto caspriletu = Datum::time_t_to_string(vhodnyDron->casPriletuPreZasielku(zasielka));
 	if (vhodnyDron->casPriletuPreZasielku(zasielka) > Datum::getAktualnyDatumaCasAsTime() + 60 * 60) {
 		if (chceUserZrusitObjednavku(vhodnyDron, zasielka)) {
 			objednavka->setStav(eStavObjednavky::ZRUSENA);
@@ -153,6 +153,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 			return;
 		}
 	}
+	vhodnyDron->toString();
 
 	zasielka->setDatumaCasSpracovania(vhodnyDron->vytazenyDo());
 	zasielka->setdatumaCasPrevzatia(Datum::time_t_to_string(vhodnyDron->casPriletuPreZasielku(zasielka)));
@@ -164,8 +165,6 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	vozidloNaVyzdvihnutie->pridajZasielku(zasielka);
 
 	zasielka->toString();
-	vhodnyDron->prepocitajInformacieoDosupnosti();
-	vhodnyDron->toString();
 }
 bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasielka)
 {

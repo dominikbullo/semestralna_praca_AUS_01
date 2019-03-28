@@ -39,15 +39,15 @@ Dron::~Dron()
 
 void Dron::pridajZasielku(Zasielka * novaZasielka)
 {
-	double vzdialenostObjednavky = novaZasielka->getVzdialenost();
-	double trvanieLetuObjednavky = trvanieLetu(novaZasielka);
-	time_t pom = Datum::string_to_time_t(vytazenyDo_);
+	double cestaSpat = trvanieLetu(novaZasielka) / 2.0;
+	// TODO check this
 
-	this->vytazenyDo_ = Datum::time_t_to_string(pom + trvanieLetuObjednavky);
-	znizKapacituBaterie(trvanieLetuObjednavky);
-	this->celkovyPocetNalietanychHodin_ += trvanieLetuObjednavky / 60 / 60;
+
+	this->vytazenyDo_ = Datum::time_t_to_string(casPriletuPreZasielku(novaZasielka) + cestaSpat);
+	znizKapacituBaterie(trvanieLetu(novaZasielka));
+	this->celkovyPocetNalietanychHodin_ += trvanieLetu(novaZasielka) / 60 / 60;
 	this->celkovyPocetPrepravenychZasielok_++;
-	novaZasielka->setDatumaCasUkoncenia(Datum::time_t_to_string(pom + trvanieLetuObjednavky));
+	novaZasielka->setDatumaCasUkoncenia(this->vytazenyDo_);
 
 	this->frontZasielok_->push(novaZasielka);
 }
@@ -72,30 +72,18 @@ void Dron::spracujObjednavky()
 double Dron::getCasPotrebnyNaDobitie(double potrebnyPocetPercent)
 {
 	// FIXME time ?? how much
-	if (potrebnyPocetPercent < 0) {
-		throw std::exception("fucked");
-	}
 	if (potrebnyPocetPercent <= this->kapacitaBaterie_) { return 0; }
 	double potrebujemNabit = potrebnyPocetPercent - this->kapacitaBaterie_;
-	double casNaNabitiePercenta = 10 / casNaNabitie10Percent_ * 60;
-	return potrebujemNabit / casNaNabitiePercenta;
+	double casNaNabitiePercenta = ((casNaNabitie10Percent_ * 60) / 10.0);
+	return potrebujemNabit * casNaNabitiePercenta;
 }
 double Dron::getPocetPercentNaZvladnutieLetu(Zasielka * zasielka)
 {
-	// toto mam km 
-	double potrebujemPreletiet = zasielka->getVzdialenost();
-	// toto mam km
-	double aktualneDokazePreletiet = maxDobaLetu_ * (kapacitaBaterie_ / 100) * (primernaRychlost_ / 60.0) / 2;
+	double potrebujemPreletietVzialenost = zasielka->getVzdialenost() * 2;
+	double result = 100 / (((primernaRychlost_ / 60.0) * maxDobaLetu_) / potrebujemPreletietVzialenost);
+	if (result > 100) { throw std::exception("no way"); }
+	return result;
 
-	// potrebujem dobiù baterku na pocet km
-	double potrebujemDobit = potrebujemPreletiet - aktualneDokazePreletiet;
-
-	if (potrebujemDobit <= 0) {
-		return kapacitaBaterie_;
-	}
-	// FIXMEEEEEEEEEEEEEEEEEEEEEE
-	auto test = potrebujemDobit + trvanieLetu(zasielka);
-	return kapacitaBaterie_ + test; // nieËo
 }
 
 // TODO: moûnosù vyuûitia s pridanÌm stavu nabitia a n·sledneho poËÌtania
@@ -110,6 +98,7 @@ bool Dron::stihnePriletietPreZasielku(Zasielka * zasielka) {
 	casNajneskor.tm_min = 00;
 
 	time_t ocakavanyCasPriletu = this->casPriletuPreZasielku(zasielka);
+	std::string string = Datum::time_t_to_string(ocakavanyCasPriletu);
 	return ocakavanyCasPriletu <= mktime(&casNajneskor);
 }
 

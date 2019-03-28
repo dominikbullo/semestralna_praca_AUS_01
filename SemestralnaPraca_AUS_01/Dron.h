@@ -36,17 +36,11 @@ public:
 
 	time_t casPriletuPreZasielku(Zasielka * zasielka)
 	{
-		// FIXME tu sa to nejako pletie
-		auto test = Datum::time_t_to_string(Datum::string_to_time_t(vytazenyDo_) +
-			getCasPotrebnyNaDobitie(getPocetPercentNaZvladnutieLetu(zasielka)) * 60 +
-			((trvanieLetu(zasielka) / 2.0)));
-		auto cas = getCasPotrebnyNaDobitie(getPocetPercentNaZvladnutieLetu(zasielka)) * 60 * 60;
-		auto let = Datum::time_t_to_string(trvanieLetu(zasielka) / 2.0);
-
-
-		// FIXME -> nemyslím si že funguje dobre
+		auto test1 = Datum::string_to_time_t(vytazenyDo_);
+		auto test2 = getCasPotrebnyNaDobitie(getPocetPercentNaZvladnutieLetu(zasielka));
+		auto test3 = trvanieLetu(zasielka) / 2.0;
 		return Datum::string_to_time_t(vytazenyDo_) +
-			getCasPotrebnyNaDobitie(getPocetPercentNaZvladnutieLetu(zasielka)) * 60 * 60 +
+			getCasPotrebnyNaDobitie(getPocetPercentNaZvladnutieLetu(zasielka)) +
 			(trvanieLetu(zasielka) / 2.0);
 	}
 
