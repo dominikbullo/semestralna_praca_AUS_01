@@ -4,7 +4,7 @@ using namespace std;
 UI::UI()
 {
 	datumUI = Datum::getInstance();
-	datumUI->posunCas(-15 * 60 * 60);
+	//datumUI->posunCas(-15 * 60 * 60);
 	firma = new Firma("AoE");
 	pridajVsetkyPrekladiska();
 

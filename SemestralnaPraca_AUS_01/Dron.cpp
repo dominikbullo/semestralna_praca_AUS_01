@@ -3,12 +3,12 @@ using namespace std;
 
 Dron::Dron(const eDrony typDronu, string serioveCislo)
 {
-	typ_ = typDronu;
-	serioveCislo_ = serioveCislo;
-	datumaCasEvidencie_ = Datum::getAktualnyDatumaCas();
+	this->typ_ = typDronu;
+	this->serioveCislo_ = serioveCislo;
+	this->datumaCasEvidencie_ = Datum::getAktualnyDatumaCas();
 
 	// evidujem budúce objednávky, ktoré má dron vybavi
-	frontZasielok_ = new structures::ExplicitQueue<Zasielka*>();
+	this->frontZasielok_ = new structures::ExplicitQueue<Zasielka*>();
 
 	switch (typDronu) {
 	case eDrony::JEDEN:
@@ -33,8 +33,8 @@ Dron::Dron(const eDrony typDronu, string serioveCislo)
 Dron::~Dron()
 {
 	// Pretoe v deštruktore firmy som vymazal vŠetky objednávky -> tu u nemusím
-	frontZasielok_->clear();
-	delete frontZasielok_;
+	this->frontZasielok_->clear();
+	delete this->frontZasielok_;
 }
 
 void Dron::pridajZasielku(Zasielka * novaZasielka)
@@ -49,7 +49,7 @@ void Dron::pridajZasielku(Zasielka * novaZasielka)
 	this->celkovyPocetPrepravenychZasielok_++;
 	novaZasielka->setDatumaCasUkoncenia(Datum::time_t_to_string(pom + trvanieLetuObjednavky));
 
-	frontZasielok_->push(novaZasielka);
+	this->frontZasielok_->push(novaZasielka);
 }
 
 void Dron::spracujObjednavky()
@@ -96,7 +96,7 @@ void Dron::prepocitajInformacieoDosupnosti()
 	{
 		this->vytazeny_ = false;
 	}
-	std::cout << "Prepocital som drona" << std::endl;
+	//std::cout << "Prepocital som drona" << std::endl;
 }
 
 
