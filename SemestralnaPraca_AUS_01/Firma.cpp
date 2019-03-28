@@ -180,3 +180,98 @@ bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasi
 	return (userInput == 1);
 }
 
+ostream& operator<< (ostream& os, Firma& firma) {
+	// potrebujem 
+	//nazovFirmy_ = nazovFirmy;
+	//centralnySklad_ = new CentralnySklad();
+
+	//arrayListVozidiel = new structures::ArrayList<Vozidlo*>();
+	//arrayListPrekladisk = new structures::ArrayList<Prekladisko*>();
+	//linkedListObjednavok = new structures::LinkedList<Objednavka*>();
+
+	int pocetVozidiel = firma.arrayListVozidiel->size();
+	os << pocetVozidiel << " ";
+	for (Vozidlo * var : *firma.arrayListVozidiel) {
+		os << *var;
+	}
+
+	//int pocetVoz = firma.arrayVozidiel->size();
+	//os << pocetVoz << " ";
+	//for (evidenciaVozidla * voz : *firma.arrayVozidiel) {
+	//	os << (int)voz->getVozidlo().getTyp() << " ";
+	//	os << voz->getVozidlo().getPrevazdkoveNaklady() << " ";
+	//	os << voz->getVozidlo().getSPZ() << " ";
+	//	os << voz->getVozidlo().getNaklady() << " ";
+	//	os << voz->getDatum() << "\n";
+	//}
+	//int pocetZak = firma.linkListZakaznikov->size();
+	//os << pocetZak << " ";
+	//for (Zakaznik * zak : *firma.linkListZakaznikov)
+	//{
+	//	os << zak->getMeno() << " " << zak->getAdresa() << "\n";
+	//}
+	//int pocetObj = firma.linkListObjednavok->size();
+	//os << pocetObj << " ";
+	//for (evidenciaObjednavky * obj : *firma.linkListObjednavok) {
+	//	os << *obj;
+	//}
+	//os << firma.pocetMraziacichAut_ << " " << firma.pocetLupienkovychAut_ << " " << firma.kapacitaMraziarenskych_ << " " <<
+	//	firma.kapacitaLupienkovych_ << " " << firma.skladZemiakov_ << " " << firma.skladOleja_ << " " << firma.skladOchu_ << "\n";
+
+	return os;
+}
+istream& operator>> (istream& is, Firma& firma) {
+	/*int pocetFarm = 0;
+	is >> pocetFarm;
+	for (size_t i = 0; i < pocetFarm; i++)
+	{
+		Biofarmar * test = new Biofarmar("", true, true, true);
+		is >> *test;
+		firma.arrayBiofarmarov->add(test);
+	}
+	int pocetVoz = 0;
+	is >> pocetVoz;
+	for (size_t i = 0; i < pocetVoz; i++)
+	{
+		int pomocna = 0;
+		string spz = "";
+		string datumEv = "";
+		is >> pomocna;
+		evidenciaVozidla * pom = new evidenciaVozidla(new Vozidlo((eVozidla)pomocna), "");
+		is >> pomocna;
+		pom->getVozidlo().setPrevadzkoveNaklady(pomocna);
+		is >> spz;
+		pom->getVozidlo().setSPZ(spz);
+		is >> pomocna;
+		pom->getVozidlo().pridajNaklady(pomocna);
+		is >> datumEv;
+		pom->setDatum(datumEv);
+		firma.arrayVozidiel->add(pom);
+	}
+	int pocetZak = 0;
+	is >> pocetZak;
+	for (size_t i = 0; i < pocetZak; i++)
+	{
+		int region = 0;
+		string meno = "";
+		is >> meno >> region;
+		Zakaznik * pom = new Zakaznik(meno, region);
+		firma.linkListZakaznikov->add(pom);
+	}
+	int pocetObj = 0;
+	is >> pocetObj;
+	for (size_t i = 0; i < pocetObj; i++)
+	{
+		string menoZakaznika = "";
+		is >> menoZakaznika;
+		evidenciaObjednavky * prazda = new evidenciaObjednavky(nullptr, "");
+		is >> *prazda;
+		prazda->getObjednavka()->setZakaznik(firma.najdiZakaznikaPodlaMena(menoZakaznika));
+		firma.linkListObjednavok->add(prazda);
+	}
+	is >> firma.pocetMraziacichAut_ >> firma.pocetLupienkovychAut_ >> firma.kapacitaMraziarenskych_ >> firma.kapacitaLupienkovych_ >>
+		firma.skladZemiakov_ >> firma.skladOleja_ >> firma.skladOchu_;
+
+	cout << "Nacitanie prebehlo uspesne \n";*/
+	return is;
+}

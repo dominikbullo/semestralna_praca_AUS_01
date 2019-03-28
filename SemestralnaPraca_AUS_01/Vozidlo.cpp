@@ -40,3 +40,15 @@ void Vozidlo::vypisZasielkyVozidla()
 		zasielka->toString();
 	}
 }
+
+ostream & operator<<(ostream & os, Vozidlo & vozidlo)
+{
+	// TODO: insert return statement here
+	throw std::exception("Dorobit");
+}
+
+istream & operator>>(istream & is, Vozidlo & vozidlo)
+{
+	throw std::exception("Dorobit");
+	// TODO: insert return statement here
+}

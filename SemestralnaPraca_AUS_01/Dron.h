@@ -59,6 +59,8 @@ public:
 		(kapacitaBaterie_ + pocetPercetDobitia > 100) ? kapacitaBaterie_ = 100 : kapacitaBaterie_ += pocetPercetDobitia;
 	}
 
+	//friend ostream& operator<< (ostream& os, Dron& dron);
+	//friend istream& operator>> (istream& is, Dron& dron);
 private:
 	eDrony typ_;
 	bool vytazeny_ = false;

@@ -53,6 +53,8 @@ public:
 		arrayListZasielok_->add(zasielka);
 	}
 
+	friend ostream& operator<< (ostream& os, Vozidlo& vozidlo);
+	friend istream& operator>> (istream& is, Vozidlo& vozidlo);
 private:
 	int prevadzkoveNaklady_;
 	std::string datumaCasEvidencie_;

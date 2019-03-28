@@ -1,4 +1,5 @@
-﻿#include "UI.h"
+﻿#include <fstream>
+#include "UI.h"
 
 using namespace std;
 UI::UI()
@@ -20,6 +21,9 @@ UI::~UI()
 
 void UI::hlavneMenu()
 {
+	std::ofstream out;
+	std::ifstream in;
+
 	//system("cls");
 	cout << "++++++++++ Vitajte v Informacnom systeme firmy " << firma->getNazovFirmy() << " ++++++++++" << endl;
 	cout << "Date: " << Datum::getAktualnyDatumaCas() << endl;
@@ -91,9 +95,18 @@ void UI::hlavneMenu()
 		hlavneMenu();
 		break;
 	case 6:
+		system("cls");
+		out.open("ulozenie");
+		out << *firma;
+		out.close();
+		hlavneMenu();
 		break;
 	case 7:
-		break;
+		system("cls");
+		in.open("ulozenie");
+		in >> *firma;
+		in.close();
+		hlavneMenu();
 	case 111:
 		exit(0);
 	case 0:

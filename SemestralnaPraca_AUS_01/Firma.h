@@ -67,6 +67,9 @@ public:
 	Vozidlo * vyberVozidlo(Zasielka * zasielka, Prekladisko * prekladisko);
 	void vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat);
 	bool chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasielka);
+
+	friend ostream& operator<< (ostream& os, Firma& firma);
+	friend istream& operator>> (istream& is, Firma& firma);
 private:
 	std::string nazovFirmy_;
 	CentralnySklad* centralnySklad_;
