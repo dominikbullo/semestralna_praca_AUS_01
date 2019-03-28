@@ -34,32 +34,44 @@ public:
 	double trvanieLetu(Zasielka* zasielka) { return (zasielka->getVzdialenost() / primernaRychlost_) * 60 * 60 * 2; }
 
 
-	// FIXME podla toho kedy odletí a kapacity
-	time_t casPriletuPreZasielku(Zasielka * zasielka) { return Datum::string_to_time_t(vytazenyDo_) + ((trvanieLetu(zasielka) / 2.0)); }
+	time_t casPriletuPreZasielku(Zasielka * zasielka)
+	{
+		// FIXME tu sa to nejako pletie
+		auto test = Datum::time_t_to_string(Datum::string_to_time_t(vytazenyDo_) +
+			getCasPotrebnyNaDobitie(getPocetPercentNaZvladnutieLetu(zasielka)) * 60 +
+			((trvanieLetu(zasielka) / 2.0)));
+		auto cas = getCasPotrebnyNaDobitie(getPocetPercentNaZvladnutieLetu(zasielka)) * 60 * 60;
+		auto let = Datum::time_t_to_string(trvanieLetu(zasielka) / 2.0);
+
+
+		// FIXME -> nemyslím si že funguje dobre
+		return Datum::string_to_time_t(vytazenyDo_) +
+			getCasPotrebnyNaDobitie(getPocetPercentNaZvladnutieLetu(zasielka)) * 60 * 60 +
+			(trvanieLetu(zasielka) / 2.0);
+	}
 
 	double getAktualnaKapacitaBaterie() { return kapacitaBaterie_; }
 	double getCelkovyPocetNalietanychHodin() { return celkovyPocetNalietanychHodin_; }
 	int getCelkovyPocetPrepravenychZasielok() { return celkovyPocetPrepravenychZasielok_; }
 	int getNosnost() { return nosnost_; }
 	void znizKapacituBaterie(double pocetSekundLetu) { kapacitaBaterie_ -= (pocetSekundLetu / 60) * (100.0 / maxDobaLetu_); }
+	double getCasPotrebnyNaDobitie(double potrebnyPocetPercent);
+	double getPocetPercentNaZvladnutieLetu(Zasielka* zasielka);
 
-	void nabiDrona(double pocetSekundNaNabijacke) {
-		// TODO VZOREEEEEEEEEEC
-		double casNaNabitie1Percenta = 10 / casNaNabitie10Percent_ * 60;
-		kapacitaBaterie_ += (pocetSekundNaNabijacke / 60) / casNaNabitie1Percenta;
 
-		// Overflow 
-		if (kapacitaBaterie_ > 100) { kapacitaBaterie_ = 100; }
+	void nabiDrona(double pocetSekundNaNabijacke)
+	{
+		double pocetPercetDobitia = (pocetSekundNaNabijacke / 60) / (10 / casNaNabitie10Percent_ * 60);
+		(kapacitaBaterie_ + pocetPercetDobitia > 100) ? kapacitaBaterie_ = 100 : kapacitaBaterie_ += pocetPercetDobitia;
 	}
 
 private:
 	eDrony typ_;
+	bool vytazeny_ = false;
 	structures::ExplicitQueue<Zasielka*> * frontZasielok_;
 
 	std::string datumaCasEvidencie_;
 	std::string serioveCislo_;
-	bool vytazeny_ = false;
-	// TODO vytazenie do ? inicializovane ?
 	std::string vytazenyDo_ = Datum::getAktualnyDatumaCas();
 
 	int nosnost_;  //pis to v kilach
@@ -69,6 +81,5 @@ private:
 	double kapacitaBaterie_ = 100.0;
 	double celkovyPocetNalietanychHodin_ = 0.0;
 	int celkovyPocetPrepravenychZasielok_ = 0;
-
 };
 

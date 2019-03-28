@@ -69,6 +69,35 @@ void Dron::spracujObjednavky()
 
 }
 
+double Dron::getCasPotrebnyNaDobitie(double potrebnyPocetPercent)
+{
+	// FIXME time ?? how much
+	if (potrebnyPocetPercent < 0) {
+		throw std::exception("fucked");
+	}
+	if (potrebnyPocetPercent <= this->kapacitaBaterie_) { return 0; }
+	double potrebujemNabit = potrebnyPocetPercent - this->kapacitaBaterie_;
+	double casNaNabitiePercenta = 10 / casNaNabitie10Percent_ * 60;
+	return potrebujemNabit / casNaNabitiePercenta;
+}
+double Dron::getPocetPercentNaZvladnutieLetu(Zasielka * zasielka)
+{
+	// toto mam km 
+	double potrebujemPreletiet = zasielka->getVzdialenost();
+	// toto mam km
+	double aktualneDokazePreletiet = maxDobaLetu_ * (kapacitaBaterie_ / 100) * (primernaRychlost_ / 60.0) / 2;
+
+	// potrebujem dobiù baterku na pocet km
+	double potrebujemDobit = potrebujemPreletiet - aktualneDokazePreletiet;
+
+	if (potrebujemDobit <= 0) {
+		return kapacitaBaterie_;
+	}
+	// FIXMEEEEEEEEEEEEEEEEEEEEEE
+	auto test = potrebujemDobit + trvanieLetu(zasielka);
+	return kapacitaBaterie_ + test; // nieËo
+}
+
 // TODO: moûnosù vyuûitia s pridanÌm stavu nabitia a n·sledneho poËÌtania
 bool Dron::stihnePriletietPreZasielku(Zasielka * zasielka) {
 	time_t aktualnyCas = Datum::string_to_time_t(Datum::getAktualnyDatumaCas());
@@ -86,21 +115,15 @@ bool Dron::stihnePriletietPreZasielku(Zasielka * zasielka) {
 
 void Dron::prepocitajInformacieoDosupnosti()
 {
-	// FIXME -> podæa mÚa to zle funguje
 	this->nabiDrona(Datum::string_to_time_t(vytazenyDo_) - Datum::getAktualnyDatumaCasAsTime());
 	time_t test = Datum::string_to_time_t(vytazenyDo_);
 	time_t test1 = Datum::getAktualnyDatumaCasAsTime();
 
-	// TODO better
 	if (Datum::string_to_time_t(vytazenyDo_) < Datum::getAktualnyDatumaCasAsTime())
 	{
 		this->vytazeny_ = false;
 	}
-	//std::cout << "Prepocital som drona" << std::endl;
 }
-
-
-
 
 void Dron::toString()
 {

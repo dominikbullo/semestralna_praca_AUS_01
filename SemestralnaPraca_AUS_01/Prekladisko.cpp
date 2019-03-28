@@ -97,7 +97,7 @@ Dron * Prekladisko::vyberDrona(Zasielka * zasielka)
 	if (vybityKandidatNaDrona != nullptr)
 	{
 		std::cout << "Dron je vybity ale bude ososlany hned ako to bude mozne" << std::endl;
-		return obsadenyKandidatNaDrona;
+		return vybityKandidatNaDrona;
 	}
 	std::cout << "Firma nema prostriedky, aby dorucila tuto objednavku" << endl;
 	return NULL;

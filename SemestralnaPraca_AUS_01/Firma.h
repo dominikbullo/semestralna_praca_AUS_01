@@ -61,7 +61,7 @@ public:
 	Vozidlo * vyberVozidlo(Zasielka * zasielka);
 	Vozidlo * vyberVozidlo(Zasielka * zasielka, Prekladisko * prekladisko);
 	void vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat);
-	bool chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Objednavka * objednavka);
+	bool chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasielka);
 private:
 	std::string nazovFirmy_;
 	structures::ArrayList<Vozidlo*> * arrayListVozidiel;

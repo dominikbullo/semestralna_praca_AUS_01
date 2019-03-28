@@ -4,6 +4,9 @@
 
 int main()
 {
+	// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// TODO: pripocitaj kedy by daný dron doletel, aj s nabitím
+	// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	// TODO: Návrat áut do centrálneho skladu
 	// TODO: Naplnenie vozidiel v centrálnom sklade zásielkami.

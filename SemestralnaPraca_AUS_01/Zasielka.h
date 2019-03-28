@@ -14,6 +14,7 @@ public:
 
 	// SETTERS
 	void setDatumaCasSpracovania(std::string datum_a_cas) { datumaCasSpracovania_ = datum_a_cas; }
+	void setdatumaCasPrevzatia(std::string datum_a_cas) { datumaCasPrevzatia_ = datum_a_cas; }
 	void setDatumaCasUkoncenia(std::string datum_a_cas) { datumaCasUkoncenia_ = datum_a_cas; }
 	//void setPrekladisko(Prekladisko * prekladisko) { prekladisko_ = prekladisko; }
 
@@ -30,6 +31,7 @@ private:
 	std::string region_; // prekladisko, ktoré momentálne spravuje zásielku
 
 	std::string datumaCasSpracovania_;
+	std::string datumaCasPrevzatia_;
 	std::string datumaCasUkoncenia_;
 	eStavObjednavky stav_;
 };

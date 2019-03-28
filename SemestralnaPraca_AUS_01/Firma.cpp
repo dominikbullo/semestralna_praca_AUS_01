@@ -113,7 +113,6 @@ Vozidlo* Firma::vyberVozidlo(Zasielka* zasielka, Prekladisko * prekladisko) {
 
 void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat)
 {
-	// vytvorím objednávku a zaevidujem do firmy
 	Objednavka * objednavka = new Objednavka(hmotnostZasielky, odosielatel, adresat);
 	this->linkedListObjednavok->add(objednavka);
 
@@ -146,13 +145,17 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// TODO: pripocitaj kedy by daný dron doletel, aj s nabitím
 	// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 	if (vhodnyDron->casPriletuPreZasielku(zasielka) > Datum::getAktualnyDatumaCasAsTime() + 60 * 60) {
-		if (chceUserZrusitObjednavku(vhodnyDron, objednavka)) {
+		if (chceUserZrusitObjednavku(vhodnyDron, zasielka)) {
+			objednavka->setStav(eStavObjednavky::ZRUSENA);
+			cout << "Vasa objednavka bola zrusena" << endl;
 			return;
 		}
 	}
 
 	zasielka->setDatumaCasSpracovania(vhodnyDron->vytazenyDo());
+	zasielka->setdatumaCasPrevzatia(Datum::time_t_to_string(vhodnyDron->casPriletuPreZasielku(zasielka)));
 
 	objednavka->setStav(eStavObjednavky::PRIJATA);
 	objednavka->setDatumaCasSpracovania(zasielka->getDatumaCasSpracovania());
@@ -161,22 +164,17 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	vozidloNaVyzdvihnutie->pridajZasielku(zasielka);
 
 	zasielka->toString();
+	vhodnyDron->prepocitajInformacieoDosupnosti();
+	vhodnyDron->toString();
 }
-bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Objednavka * objednavka)
+bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasielka)
 {
 	int userInput;
 	cout << "Vasu zasielku môzeme spracovat o viac ako hodinu a to konkretne " <<
-		dronPreOdosielatela->vytazenyDo() << endl <<
+		Datum::time_t_to_string(dronPreOdosielatela->casPriletuPreZasielku(zasielka)) << endl <<
 		"Prajete si zasielku zrusit?" << endl;
-	cout <<
-		"1. ANO" << endl <<
-		"2. NIE" << endl;
+	cout << "1. ANO" << endl << "2. NIE" << endl;
 	cin >> userInput;
-	if (userInput == 1) {
-		objednavka->setStav(eStavObjednavky::ZRUSENA);
-		cout << "Vasa objednavka bola zrusena" << endl;
-		return true;
-	}
-	return false;
+	return (userInput == 1);
 }
 

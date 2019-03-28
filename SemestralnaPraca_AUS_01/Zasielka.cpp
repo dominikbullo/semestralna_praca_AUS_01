@@ -21,6 +21,7 @@ void Zasielka::toString()
 	cout <<
 		"Hmotnost zasielky: " << hmotnost_ << endl <<
 		"datumaCasSpracovania_: " << datumaCasSpracovania_ << endl <<
+		"datumaCasPrevzatia_: " << datumaCasPrevzatia_ << endl <<
 		"datumaCasUkoncenia_: " << datumaCasUkoncenia_ << endl;
 	cout << "*******************************************************************" << endl;
 }
