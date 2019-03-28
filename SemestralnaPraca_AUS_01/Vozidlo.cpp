@@ -9,15 +9,19 @@ Vozidlo::Vozidlo(int nostnostVozidla, int prevadzkoveNaklady, std::string SPZ)
 	prevadzkoveNaklady_ = prevadzkoveNaklady;
 	SPZ_ = SPZ;
 	datumaCasEvidencie_ = Datum::getAktualnyDatumaCas();
-	// Zmenil som Linked na Array - POZOR 
-	linkedListTrasaVozidla = new structures::ArrayList<Prekladisko*>();
 
-	//linkedListZasielok = new structures::LinkedList<Zasielka*>();
+	linkedListTrasaVozidla = new structures::LinkedList<Prekladisko*>();
+	arrayListZasielok = new structures::ArrayList<Zasielka*>();
 }
 
 Vozidlo::~Vozidlo()
 {
+	for (Zasielka* zasielka : *arrayListZasielok)
+	{
+		delete zasielka;
+	}
 	delete linkedListTrasaVozidla;
+	delete arrayListZasielok;
 }
 
 void Vozidlo::toString()
@@ -27,4 +31,12 @@ void Vozidlo::toString()
 
 void Vozidlo::pridajPrekladiskoDoTrasyVozidla(Prekladisko* prekladisko) {
 	linkedListTrasaVozidla->add(prekladisko);
+}
+
+void Vozidlo::vypisZasielkyVozidla()
+{
+	for (Zasielka *zasielka : *arrayListZasielok)
+	{
+		zasielka->toString();
+	}
 }

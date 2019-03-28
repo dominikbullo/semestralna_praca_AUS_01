@@ -4,7 +4,7 @@ using namespace std;
 UI::UI()
 {
 	datumUI = Datum::getInstance();
-	//datumUI->posunCas(-15 * 60 * 60);
+	datumUI->posunCas(-15 * 60 * 60);
 	firma = new Firma("AoE");
 	pridajVsetkyPrekladiska();
 
@@ -79,7 +79,7 @@ void UI::hlavneMenu()
 		//firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
 
 
-		// firma->vratVozidlaDoCentralnehoSkladu();
+		firma->vratVozidlaDoCentralnehoSkladu();
 
 		//firma->vypisanieVsetkychObjednavok();
 		//firma->spracujVsetkyObjednavky();

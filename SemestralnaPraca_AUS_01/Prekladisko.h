@@ -20,7 +20,8 @@ public:
 	~Prekladisko();
 	void pridajDron(Dron * novyDron);
 	void vypisZoznamDronov();
-	void spracujObjednavky();
+	void spracujZasielky();
+	//structures::ArrayList<Zasielka*>  vyzdvihniZasielky();
 	//void nalozVozidlo(Vozidlo* vozidloNaNalozenie);
 	std::string dajRegion() { return region_; }
 
@@ -31,7 +32,10 @@ public:
 private:
 	std::string region_;
 	std::string serioveCislo_ = region_;
+
+	// TODO ako vraciaù toto ? 
 	structures::ArrayList<Dron*> * arrayListDronov_;
+	structures::ArrayList<Zasielka*> * arrayListZasielok_;
 
 protected:
 	static int unikatneSerioveCislo_;

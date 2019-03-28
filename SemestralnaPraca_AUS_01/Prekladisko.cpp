@@ -10,7 +10,7 @@ Prekladisko::Prekladisko(std::string region)
 	std::transform(region.begin(), region.end(), region.begin(), ::toupper);
 	this->region_ = region;
 	this->arrayListDronov_ = new structures::ArrayList<Dron*>();
-	// arrayListZasielok_ = new structures::ArrayList<Objednavok*>();
+	//this->arrayListZasielok_ = new structures::ArrayList<Zasielka*>();
 
 	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
 }
@@ -47,12 +47,14 @@ void Prekladisko::vypisZoznamDronov() {
 	}
 }
 
-void Prekladisko::spracujObjednavky()
+void Prekladisko::spracujZasielky()
 {
 	for (Dron * dron : *this->arrayListDronov_) {
-		dron->spracujObjednavky();
+		//dron->spracujZasielky(arrayListZasielok_);
+		dron->spracujZasielky();
 	}
 }
+
 
 Dron * Prekladisko::vyberDrona(Zasielka * zasielka)
 {

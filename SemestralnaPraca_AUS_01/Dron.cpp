@@ -42,7 +42,6 @@ void Dron::pridajZasielku(Zasielka * novaZasielka)
 	double cestaSpat = trvanieLetu(novaZasielka) / 2.0;
 	// TODO check this
 
-
 	this->vytazenyDo_ = Datum::time_t_to_string(casPriletuPreZasielku(novaZasielka) + cestaSpat);
 	znizKapacituBaterie(trvanieLetu(novaZasielka));
 	this->celkovyPocetNalietanychHodin_ += trvanieLetu(novaZasielka) / 60 / 60;
@@ -52,31 +51,27 @@ void Dron::pridajZasielku(Zasielka * novaZasielka)
 	this->frontZasielok_->push(novaZasielka);
 }
 
-void Dron::spracujObjednavky()
+void Dron::spracujZasielky()
 {
-	throw std::exception("Dron::spracujObjednavky: Not implemented yet.");
-	//if (frontZasielok_->isEmpty()) { return; }
-	////TODO think about this
-	//while (frontZasielok_->peek()->getDatumaCasUkoncenia_() < Datum::getAktualnyDatumaCas())
-	//{
-	//	Objednavka* vybranaObjednavka = frontZasielok_->peek();
-	//	vytazeny_ = false;
-	//	vybranaObjednavka->setStav(eStavObjednavky::ZREALIZOVANA);
-	//	vybranaObjednavka->toString();
-	//	frontZasielok_->pop();
-
-	//}
+	if (frontZasielok_->isEmpty()) { return; }
+	//TODO think about this	while (frontZasielok_->peek()->getdatumaCasUkoncenia_() < Datum::getAktualnyDatumaCas())
+	{
+		// TODO test it
+		//arrayListZasielok->add(frontZasielok_->pop());
+		frontZasielok_->pop();
+	}
+	prepocitajInformacieoDosupnosti();
 
 }
 
 double Dron::getCasPotrebnyNaDobitie(double potrebnyPocetPercent)
 {
-	// FIXME time ?? how much
 	if (potrebnyPocetPercent <= this->kapacitaBaterie_) { return 0; }
 	double potrebujemNabit = potrebnyPocetPercent - this->kapacitaBaterie_;
 	double casNaNabitiePercenta = ((casNaNabitie10Percent_ * 60) / 10.0);
 	return potrebujemNabit * casNaNabitiePercenta;
 }
+
 double Dron::getPocetPercentNaZvladnutieLetu(Zasielka * zasielka)
 {
 	double potrebujemPreletietVzialenost = zasielka->getVzdialenost() * 2;
@@ -86,27 +81,24 @@ double Dron::getPocetPercentNaZvladnutieLetu(Zasielka * zasielka)
 
 }
 
-// TODO: možnos využitia s pridaním stavu nabitia a následneho poèítania
 bool Dron::stihnePriletietPreZasielku(Zasielka * zasielka) {
 	time_t aktualnyCas = Datum::string_to_time_t(Datum::getAktualnyDatumaCas());
 
 	tm *ltm = localtime(&aktualnyCas);
 	struct tm casNajneskor = *ltm;
 
-	//TODO try parsing time
 	casNajneskor.tm_hour = 20;
 	casNajneskor.tm_min = 00;
 
 	time_t ocakavanyCasPriletu = this->casPriletuPreZasielku(zasielka);
-	std::string string = Datum::time_t_to_string(ocakavanyCasPriletu);
 	return ocakavanyCasPriletu <= mktime(&casNajneskor);
 }
 
 void Dron::prepocitajInformacieoDosupnosti()
 {
 	this->nabiDrona(Datum::string_to_time_t(vytazenyDo_) - Datum::getAktualnyDatumaCasAsTime());
-	time_t test = Datum::string_to_time_t(vytazenyDo_);
-	time_t test1 = Datum::getAktualnyDatumaCasAsTime();
+	//time_t test = Datum::string_to_time_t(vytazenyDo_);
+	//time_t test1 = Datum::getAktualnyDatumaCasAsTime();
 
 	if (Datum::string_to_time_t(vytazenyDo_) < Datum::getAktualnyDatumaCasAsTime())
 	{

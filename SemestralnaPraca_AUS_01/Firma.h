@@ -34,7 +34,7 @@ public:
 	{
 		for (Prekladisko* prekladisko : *arrayListPrekladisk)
 		{
-			prekladisko->spracujObjednavky();
+			prekladisko->spracujZasielky();
 		}
 
 	};

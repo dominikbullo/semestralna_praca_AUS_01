@@ -18,6 +18,8 @@ public:
 	void toString();
 	void pridajPrekladiskoDoTrasyVozidla(Prekladisko * prekladisko);
 
+	void vypisZasielkyVozidla();
+
 	inline int getPrevazdkoveNaklady() {
 		return prevadzkoveNaklady_;
 	}
@@ -52,6 +54,11 @@ public:
 
 	void pridajZasielku(Zasielka* zasielka) {
 		nosnost_ -= zasielka->getHmotnost();
+		arrayListZasielok->add(zasielka);
+	}
+	void aktualizujCelkoveNaklady()
+	{
+		this->naklady_ += 2 * prevadzkoveNaklady_ + linkedListTrasaVozidla->size();
 	}
 	bool dokazeNalozitZasielku(Zasielka* zasielka) {
 		return nosnost_ - zasielka->getHmotnost() >= 0;
@@ -63,6 +70,7 @@ private:
 	std::string SPZ_ = "ZA_";
 	int naklady_ = 0;
 	double nosnost_;
-	structures::ArrayList<Prekladisko *> * linkedListTrasaVozidla;
+	structures::LinkedList<Prekladisko *> * linkedListTrasaVozidla;
+	structures::ArrayList<Zasielka *> * arrayListZasielok;
 };
 

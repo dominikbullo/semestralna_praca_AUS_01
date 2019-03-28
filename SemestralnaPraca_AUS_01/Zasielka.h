@@ -20,6 +20,7 @@ public:
 
 	// GETTERS
 	string getDatumaCasSpracovania() { return datumaCasSpracovania_; }
+	string getdatumaCasUkoncenia_() { return datumaCasUkoncenia_; }
 	double getHmotnost() { return hmotnost_; }
 	double getVzdialenost() { return vzdialenostOdPrekladiska_; }
 	std::string getRegion() { return region_; }

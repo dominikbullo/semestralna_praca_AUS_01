@@ -12,6 +12,9 @@ Zasielka::Zasielka(double hmotnost, double vzdialenost, std::string region)
 
 Zasielka::~Zasielka()
 {
+	this->hmotnost_ = 0;
+	this->vzdialenostOdPrekladiska_ = 0;
+	this->region_ = "";
 }
 
 

@@ -77,6 +77,14 @@ void Firma::pridajRegionyDoTrasyVozidla(Vozidlo* vozidlo) {
 void Firma::vratVozidlaDoCentralnehoSkladu()
 {
 	this->spracujVsetkyObjednavky();
+
+	for (Vozidlo *vozidlo : *arrayListVozidiel)
+	{
+		vozidlo->aktualizujCelkoveNaklady();
+		vozidlo->toString();
+		cout << "Zasielky tohto vozidla su" << endl;
+		vozidlo->vypisZasielkyVozidla();
+	}
 }
 
 Prekladisko* Firma::dajPrekladiskoPodlaRegionu(std::string region) {
@@ -142,10 +150,6 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 		return;
 	}
 
-	// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	// TODO: pripocitaj kedy by daný dron doletel, aj s nabitím
-	// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	auto caspriletu = Datum::time_t_to_string(vhodnyDron->casPriletuPreZasielku(zasielka));
 	if (vhodnyDron->casPriletuPreZasielku(zasielka) > Datum::getAktualnyDatumaCasAsTime() + 60 * 60) {
 		if (chceUserZrusitObjednavku(vhodnyDron, zasielka)) {
 			objednavka->setStav(eStavObjednavky::ZRUSENA);
