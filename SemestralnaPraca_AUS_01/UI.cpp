@@ -8,7 +8,7 @@ UI::UI()
 	firma = new Firma("AoE");
 	pridajVsetkyPrekladiska();
 
-	// TODO: pole okresov ? 
+	// NOTE: pole okresov ? 
 	//poleRegionov = new structures::Array<std::string>(23);
 }
 
@@ -65,7 +65,7 @@ void UI::hlavneMenu()
 		//firma->dajPrekladiskoPodlaRegionu("MA")->vypisZoznamDronov();
 		firma->getVozidloBySPZ("ZA232DB")->vypisTrasuVozidla();
 
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 20), new Adresat("MA", 15.5));
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));

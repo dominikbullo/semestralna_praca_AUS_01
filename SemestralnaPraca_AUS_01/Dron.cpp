@@ -86,7 +86,7 @@ bool Dron::stihnePriletietPreZasielku(Zasielka * zasielka) {
 
 void Dron::prepocitajInformacieoDosupnosti()
 {
-
+	// FIXME -> pod¾a mòa to zle funguje
 	this->nabiDrona(Datum::string_to_time_t(vytazenyDo_) - Datum::getAktualnyDatumaCasAsTime());
 	time_t test = Datum::string_to_time_t(vytazenyDo_);
 	time_t test1 = Datum::getAktualnyDatumaCasAsTime();

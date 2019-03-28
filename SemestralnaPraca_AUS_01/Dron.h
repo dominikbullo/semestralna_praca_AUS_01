@@ -24,45 +24,29 @@ public:
 	void prepocitajInformacieoDosupnosti();
 	void pridajZasielku(Zasielka * zasielka);
 	void spracujObjednavky();
-
 	bool jeVolny() { return !vytazeny_; };
+
 	std::string vytazenyDo() { return vytazenyDo_; };
 	std::string getDatumaCasEvidencie() { return datumaCasEvidencie_; }
 
 	bool unesieZasielku(Zasielka * zasielka) { return  nosnost_ >= zasielka->getHmotnost() ? true : false; }
-
-	bool zvladneLet(Zasielka * zasielka) {
-		// zohľadniný aj stav nabitia
-		return maxDobaLetu_ * (kapacitaBaterie_ / 100) * (primernaRychlost_ / 60.0) / 2 >= zasielka->getVzdialenost() ? true : false;
-	}
-
-	// NOTE: trvanie cesty tam aj späť
+	bool zvladneLet(Zasielka * zasielka) { return maxDobaLetu_ * (kapacitaBaterie_ / 100) * (primernaRychlost_ / 60.0) / 2 >= zasielka->getVzdialenost() ? true : false; }
 	double trvanieLetu(Zasielka* zasielka) { return (zasielka->getVzdialenost() / primernaRychlost_) * 60 * 60 * 2; }
 
 
-	// FIXME podla toho kedy odletí
-	time_t casPriletuPreZasielku(Zasielka * zasielka) {
-		return Datum::string_to_time_t(vytazenyDo_) + ((trvanieLetu(zasielka) / 2.0));
-	}
+	// FIXME podla toho kedy odletí a kapacity
+	time_t casPriletuPreZasielku(Zasielka * zasielka) { return Datum::string_to_time_t(vytazenyDo_) + ((trvanieLetu(zasielka) / 2.0)); }
 
-	double getAktualnaKapacitaBaterie() {
-		return kapacitaBaterie_;
-	}
-	double getCelkovyPocetNalietanychHodin() {
-		return celkovyPocetNalietanychHodin_;
-	}
-	int getCelkovyPocetPrepravenychZasielok() {
-		return celkovyPocetPrepravenychZasielok_;
-	}
-	int getNosnost() {
-		return nosnost_;
-	}
-	void znizKapacituBaterie(double pocetSekundLetu) {
-		kapacitaBaterie_ -= (pocetSekundLetu / 60) * (100.0 / maxDobaLetu_);
-	}
+	double getAktualnaKapacitaBaterie() { return kapacitaBaterie_; }
+	double getCelkovyPocetNalietanychHodin() { return celkovyPocetNalietanychHodin_; }
+	int getCelkovyPocetPrepravenychZasielok() { return celkovyPocetPrepravenychZasielok_; }
+	int getNosnost() { return nosnost_; }
+	void znizKapacituBaterie(double pocetSekundLetu) { kapacitaBaterie_ -= (pocetSekundLetu / 60) * (100.0 / maxDobaLetu_); }
+
 	void nabiDrona(double pocetSekundNaNabijacke) {
 		// TODO VZOREEEEEEEEEEC
-		kapacitaBaterie_ += pocetSekundNaNabijacke;
+		double casNaNabitie1Percenta = 10 / casNaNabitie10Percent_ * 60;
+		kapacitaBaterie_ += (pocetSekundNaNabijacke / 60) / casNaNabitie1Percenta;
 
 		// Overflow 
 		if (kapacitaBaterie_ > 100) { kapacitaBaterie_ = 100; }

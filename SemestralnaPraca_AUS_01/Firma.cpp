@@ -142,11 +142,10 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 		objednavka->zamietniObjednavku("Vozidlo ktore bude prechadzat prekladiskom adresata sa nenaslo");
 		return;
 	}
-	// TODO: vypisuj aj dôvody zamietnutia
 
-		// TODO stihne dorucit zasielku a spýtam sa na hodinu dopredu, nie na 20:00
-		// FIXME stihne dorucit zasielku a spýtam sa na hodinu dopredu, nie na 20:00
-		//stihnePriletietPreZasielku(zasielka, 20, 00)
+	// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// TODO: pripocitaj kedy by daný dron doletel, aj s nabitím
+	// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	if (vhodnyDron->casPriletuPreZasielku(zasielka) > Datum::getAktualnyDatumaCasAsTime() + 60 * 60) {
 		if (chceUserZrusitObjednavku(vhodnyDron, objednavka)) {
 			return;
