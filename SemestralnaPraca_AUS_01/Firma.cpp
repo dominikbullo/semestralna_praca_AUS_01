@@ -57,6 +57,8 @@ void  Firma::pridajVozidlo(Vozidlo* noveVozidlo)
 void Firma::pridajVsetkyRegionyDoTrasyVozidla(Vozidlo* vozidlo)
 {
 	for (Prekladisko * prekladisko : *arrayListPrekladisk) {
+		//// NOTE: for testing!!
+		//if (prekladisko->dajRegion() == "BA") { continue; }
 		vozidlo->pridajPrekladiskoDoTrasyVozidla(prekladisko);
 	}
 }
@@ -120,38 +122,46 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	Zasielka * zasielka = new Zasielka(hmotnostZasielky, odosielatel->getVzdialenostOdPrekladiska(), odosielatel->getRegion());
 
 	Prekladisko* prekladiskoOdoslania = this->dajPrekladiskoPodlaRegionu(odosielatel->getRegion());
-	Dron* vhodnyDron = prekladiskoOdoslania->vyberDrona(zasielka);
-	Vozidlo* vozidloNaVyzdvihnutie = this->vyberVozidlo(zasielka);
 
+	Vozidlo* vozidloNaVyzdvihnutie = this->vyberVozidlo(zasielka);
+	if (vozidloNaVyzdvihnutie == NULL)
+	{
+		objednavka->zamietniObjednavku("Vozidlo ktore bude prechadzat prekladiskom odosielatela sa nenaslo");
+		return;
+	}
+	Dron* vhodnyDron = prekladiskoOdoslania->vyberDrona(zasielka);
+	if (vhodnyDron == NULL)
+	{
+		objednavka->zamietniObjednavku("Nenašiel sa vhodny dron");
+		return;
+	}
 	// preaženým metódy sa pýtam nie na prekladisko, ktoré mu bolo priradené, ale na prekladisko k adresátovi
 	Vozidlo* vozidloPreAdresata = this->vyberVozidlo(zasielka, this->dajPrekladiskoPodlaRegionu(adresat->getRegion()));
-
-	// TODO: vypisuj aj dôvody zamietnutia
-	if (vhodnyDron == NULL ||
-		vozidloNaVyzdvihnutie == NULL ||
-		vozidloPreAdresata == NULL)
+	if (vozidloPreAdresata == NULL)
 	{
-		objednavka->setStav(eStavObjednavky::ZAMIETNUTA);
+		objednavka->zamietniObjednavku("Vozidlo ktore bude prechadzat prekladiskom adresata sa nenaslo");
+		return;
 	}
-	else
-	{	// TODO stihne dorucit zasielku a spýtam sa na hodinu dopredu, nie na 20:00
-		{	// FIXME stihne dorucit zasielku a spýtam sa na hodinu dopredu, nie na 20:00
-			//stihnePriletietPreZasielku(zasielka, 20, 00)
-			if (vhodnyDron->casPriletuPreZasielku(zasielka) > Datum::getAktualnyDatumaCasAsTime() + 60 * 60) {
-				if (chceUserZrusitObjednavku(vhodnyDron, objednavka)) {
-					return;
-				}
-			}
+	// TODO: vypisuj aj dôvody zamietnutia
 
-			objednavka->setStav(eStavObjednavky::PRIJATA);
-			zasielka->setDatumaCasSpracovania(vhodnyDron->vytazenyDo());
-			objednavka->setDatumaCasSpracovania(zasielka->getDatumaCasSpracovania());
-			vhodnyDron->pridajZasielku(zasielka);
-			zasielka->toString();
-
-			vozidloNaVyzdvihnutie->pridajZasielku(zasielka);
+		// TODO stihne dorucit zasielku a spýtam sa na hodinu dopredu, nie na 20:00
+		// FIXME stihne dorucit zasielku a spýtam sa na hodinu dopredu, nie na 20:00
+		//stihnePriletietPreZasielku(zasielka, 20, 00)
+	if (vhodnyDron->casPriletuPreZasielku(zasielka) > Datum::getAktualnyDatumaCasAsTime() + 60 * 60) {
+		if (chceUserZrusitObjednavku(vhodnyDron, objednavka)) {
+			return;
 		}
 	}
+
+	zasielka->setDatumaCasSpracovania(vhodnyDron->vytazenyDo());
+
+	objednavka->setStav(eStavObjednavky::PRIJATA);
+	objednavka->setDatumaCasSpracovania(zasielka->getDatumaCasSpracovania());
+
+	vhodnyDron->pridajZasielku(zasielka);
+	vozidloNaVyzdvihnutie->pridajZasielku(zasielka);
+
+	zasielka->toString();
 }
 bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Objednavka * objednavka)
 {

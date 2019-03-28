@@ -48,10 +48,18 @@ void Objednavka::toString()
 		"Datum a cas vytvorenia objednavky: " << datumaCasVytvoreniaObjednavky_ << endl <<
 		"Datum a cas spracovania objednavky: " << datumaCasSpracovania_ << endl <<
 		//"Datum a cas ukoncenia zasielky: " << datumaCasUkoncenia_ << endl <<
-		"Stav: " << stringStav() << endl;
+		"Stav: " << stringStav() << endl <<
+		(stav_ == eStavObjednavky::ZAMIETNUTA ? "Dovod zamietnutia: " + dovodZamietnutia_ : "")
+		<< endl;
 	cout << "*******************************************************************" << endl;
 
 
+}
+
+void Objednavka::zamietniObjednavku(string dovodZamietnutia)
+{
+	this->stav_ = eStavObjednavky::ZAMIETNUTA;
+	this->dovodZamietnutia_ = dovodZamietnutia;
 }
 
 Odosielatel::Odosielatel(std::string region, double vzdialenostOdPrekladiska)

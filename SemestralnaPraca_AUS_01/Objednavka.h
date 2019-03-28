@@ -44,10 +44,11 @@ public:
 	Objednavka(double hmotnostZasielky, Odosielatel* odosielatel, Adresat* adresat);
 	~Objednavka();
 	void toString();
+	void zamietniObjednavku(std::string dovodZamietnutia);
 
 	void setDatumaCasSpracovania(std::string datum_a_cas) { this->datumaCasSpracovania_ = datum_a_cas; }
 	void setStav(eStavObjednavky stav) { this->stav_ = stav; }
-	void setDovodZamietnutia(string dovodZamietnutia) { this->dovodZamietnutia_ = dovodZamietnutia_; }
+	//void setDovodZamietnutia(string dovodZamietnutia) { this->dovodZamietnutia_ = dovodZamietnutia_; }
 
 	inline double getHmotnostZasielky() { return hmotnostZasielky_; }
 	inline Adresat* getAdresat() { return adresat_; }

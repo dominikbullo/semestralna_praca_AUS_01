@@ -71,7 +71,6 @@ Dron * Prekladisko::vyberDrona(Zasielka * zasielka)
 
 	for (Dron * dron : *arrayListDronov_)
 	{
-
 		dron->prepocitajInformacieoDosupnosti();
 		//dron->toString();
 
