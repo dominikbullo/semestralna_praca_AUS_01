@@ -181,20 +181,16 @@ bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasi
 }
 
 ostream& operator<< (ostream& os, Firma& firma) {
-	// potrebujem 
-	//nazovFirmy_ = nazovFirmy;
-	//centralnySklad_ = new CentralnySklad();
 
-	//arrayListVozidiel = new structures::ArrayList<Vozidlo*>();
-	//arrayListPrekladisk = new structures::ArrayList<Prekladisko*>();
-	//linkedListObjednavok = new structures::LinkedList<Objednavka*>();
+	os << firma.nazovFirmy_ << "\n";
+	//firma.centralnySklad_ << " " << "\n";
+
 
 	os << "Size vozidiel: " << firma.arrayListVozidiel->size() << "\n";
 
 	for (Vozidlo * var : *firma.arrayListVozidiel) {
 		os << *var;
 	}
-
 
 	return os;
 }

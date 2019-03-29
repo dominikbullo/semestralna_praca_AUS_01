@@ -35,3 +35,19 @@ void CentralnySklad::vypisZoznamZasielok() {
 }
 void CentralnySklad::naplVozidla() {
 }
+
+ostream & operator<<(ostream & os, CentralnySklad & centralnySklad)
+{
+	// TODO: insert return statement here
+	for (Zasielka* zasielka : *centralnySklad.arrayListZasielok)
+	{
+		os << *zasielka;
+	}
+	return os;
+}
+
+istream & operator>>(istream & is, CentralnySklad & centralnySklad)
+{
+	// TODO: insert return statement here
+	return is;
+}
