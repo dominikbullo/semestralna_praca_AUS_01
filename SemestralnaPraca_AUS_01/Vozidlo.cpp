@@ -43,12 +43,31 @@ void Vozidlo::vypisZasielkyVozidla()
 
 ostream & operator<<(ostream & os, Vozidlo & vozidlo)
 {
-	// TODO: insert return statement here
-	throw std::exception("Dorobit");
+	// Atributy
+	os <<
+		vozidlo.prevadzkoveNaklady_ << " " <<
+		vozidlo.datumaCasEvidencie_ << " " <<
+		vozidlo.SPZ_ << " " <<
+		vozidlo.naklady_ << " " <<
+		vozidlo.nosnost_ << " " << "\n";
+
+	// Struktury 
+	os << "Size trasy: " << vozidlo.linkedListTrasaVozidla_->size() << "\n";
+	for (Prekladisko * var : *vozidlo.linkedListTrasaVozidla_) {
+		os << *var;
+	}
+	os << "Size zasielok: " << vozidlo.arrayListZasielok_->size() << "\n";
+	for (Zasielka * var : *vozidlo.arrayListZasielok_) {
+		os << *var;
+	}
+
+	os << "\n";
+	return os;
 }
 
 istream & operator>>(istream & is, Vozidlo & vozidlo)
 {
 	throw std::exception("Dorobit");
 	// TODO: insert return statement here
+	return is;
 }

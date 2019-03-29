@@ -9,8 +9,6 @@ int main()
 	// TODO: Uloženie a načítanie aktuálneho stavu evidencie do/zo súboru.
 
 	initHeapMonitor();
-	//std::string datumaCasEvidencie_ = Datum::getAktualnyDatumaCas();
-	//time_t testtime = Datum::string_to_time_t(datumaCasEvidencie_);
 	UI *userInterface = new UI();
 	userInterface->hlavneMenu();
 

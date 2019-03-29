@@ -17,7 +17,6 @@ public:
 	void setDatumaCasSpracovania(std::string datum_a_cas) { datumaCasSpracovania_ = datum_a_cas; }
 	void setdatumaCasPrevzatia(std::string datum_a_cas) { datumaCasPrevzatia_ = datum_a_cas; }
 	void setDatumaCasUkoncenia(std::string datum_a_cas) { datumaCasUkoncenia_ = datum_a_cas; }
-	//void setPrekladisko(Prekladisko * prekladisko) { prekladisko_ = prekladisko; }
 
 	// GETTERS
 	string getDatumaCasSpracovania() { return datumaCasSpracovania_; }
@@ -27,6 +26,8 @@ public:
 	std::string getRegion() { return region_; }
 
 
+	friend ostream& operator<< (ostream& os, Zasielka& zasielka);
+	friend istream& operator>> (istream& is, Zasielka& zasielka);
 private:
 	Objednavka* objednavka_;
 	double hmotnost_;
@@ -36,6 +37,5 @@ private:
 	std::string datumaCasSpracovania_;
 	std::string datumaCasPrevzatia_;
 	std::string datumaCasUkoncenia_;
-	eStavObjednavky stav_;
 };
 

@@ -61,7 +61,7 @@ private:
 	std::string SPZ_ = "ZA_";
 	double naklady_ = 0;
 	double nosnost_;
-	structures::LinkedList<Prekladisko *> * linkedListTrasaVozidla_;
-	structures::ArrayList<Zasielka *> * arrayListZasielok_;
+	structures::LinkedList<Prekladisko*> *linkedListTrasaVozidla_;
+	structures::ArrayList<Zasielka*> *arrayListZasielok_;
 };
 

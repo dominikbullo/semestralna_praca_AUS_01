@@ -136,3 +136,30 @@ std::string Prekladisko::set_get_SerioveCislo()
 	return serioveCislo_;
 }
 
+ostream & operator<<(ostream & os, Prekladisko & prekladisko)
+{
+	// Atributy
+	os << prekladisko.region_ << "\n";
+
+	// Struktury 
+	os << prekladisko.arrayListDronov_->size() << " ";
+	for (Dron * var : *prekladisko.arrayListDronov_) {
+		os << *var;
+	}
+
+	// TODO Čo v prípade, že nie je ?
+	//if (!prekladisko.arrayListZasielok_->isEmpty()) {
+	//	os << prekladisko.arrayListZasielok_->size() << " ";
+	//	for (Zasielka * var : *prekladisko.arrayListZasielok_) {
+	//		os << *var;
+	//	}
+	//}
+
+	return os;
+}
+
+istream & operator>>(istream & is, Prekladisko & prekladisko)
+{
+	// TODO: insert return statement here
+	return is;
+}

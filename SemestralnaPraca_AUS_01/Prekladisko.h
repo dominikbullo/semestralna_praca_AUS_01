@@ -21,23 +21,24 @@ public:
 	void pridajDron(Dron * novyDron);
 	void vypisZoznamDronov();
 	void spracujZasielky();
-	//structures::ArrayList<Zasielka*>  vyzdvihniZasielky();
-	//void nalozVozidlo(Vozidlo* vozidloNaNalozenie);
-	std::string dajRegion() { return region_; }
 
 	Dron * vyberDrona(Zasielka * zasielka);
+	std::string Prekladisko::set_get_SerioveCislo();
+
+	std::string dajRegion() { return region_; }
 	Dron * dajLepöiehoVolnehoDrona(Dron * dron1, Dron * dron2);
 	Dron * dajLelpöiehoObsadenehoDrona(Dron * dron1, Dron * dron2);
-	std::string Prekladisko::set_get_SerioveCislo();
+
+	friend ostream& operator<< (ostream& os, Prekladisko& prekladisko);
+	friend istream& operator>> (istream& is, Prekladisko& prekladisko);
 private:
 	std::string region_;
-	std::string serioveCislo_ = region_;
 
-	// TODO ako vraciaù toto ? 
 	structures::ArrayList<Dron*> * arrayListDronov_;
 	structures::ArrayList<Zasielka*> * arrayListZasielok_;
 
 protected:
+	std::string serioveCislo_ = region_;
 	static int unikatneSerioveCislo_;
 };
 

@@ -34,3 +34,24 @@ void Zasielka::toString()
 	cout << "*******************************************************************" << endl;
 	cout << "*******************************************************************" << endl;
 }
+
+ostream & operator<<(ostream & os, Zasielka & zasielka)
+{
+	// Atributy
+	os <<
+		zasielka.objednavka_ << " " <<
+		zasielka.hmotnost_ << " " <<
+		zasielka.vzdialenostOdPrekladiska_ << " " <<
+		zasielka.region_ << " " <<
+		zasielka.datumaCasSpracovania_ << " " <<
+		zasielka.datumaCasPrevzatia_ << " " <<
+		zasielka.datumaCasUkoncenia_ << " " << "\n";
+
+	return os;
+}
+
+istream & operator>>(istream & is, Zasielka & zasielka)
+{
+	// TODO: insert return statement here
+	return is;
+}

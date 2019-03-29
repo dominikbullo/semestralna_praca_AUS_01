@@ -59,12 +59,11 @@ public:
 		(kapacitaBaterie_ + pocetPercetDobitia > 100) ? kapacitaBaterie_ = 100 : kapacitaBaterie_ += pocetPercetDobitia;
 	}
 
-	//friend ostream& operator<< (ostream& os, Dron& dron);
-	//friend istream& operator>> (istream& is, Dron& dron);
+	friend ostream& operator<< (ostream& os, Dron& dron);
+	friend istream& operator>> (istream& is, Dron& dron);
 private:
 	eDrony typ_;
 	bool vytazeny_ = false;
-	structures::ExplicitQueue<Zasielka*> * frontZasielok_;
 
 	std::string datumaCasEvidencie_;
 	std::string serioveCislo_;
@@ -74,8 +73,11 @@ private:
 	int primernaRychlost_;
 	int maxDobaLetu_;
 	int casNaNabitie10Percent_;
+	int celkovyPocetPrepravenychZasielok_ = 0;
+
 	double kapacitaBaterie_ = 100.0;
 	double celkovyPocetNalietanychHodin_ = 0.0;
-	int celkovyPocetPrepravenychZasielok_ = 0;
+
+	structures::ExplicitQueue<Zasielka*> * frontZasielok_;
 };
 

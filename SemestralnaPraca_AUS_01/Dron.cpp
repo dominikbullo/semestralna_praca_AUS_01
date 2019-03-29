@@ -121,3 +121,33 @@ void Dron::toString()
 
 }
 
+ostream & operator<<(ostream & os, Dron & dron)
+{
+	// Atributy
+	// TODO store TYP drona
+	// vypocitatelne udaje -> nostnost, priemerka, max doba, cas na nabitie
+	os <<
+		dron.vytazeny_ << " " <<
+		dron.datumaCasEvidencie_ << " " <<
+		dron.serioveCislo_ << " " <<
+		dron.vytazenyDo_ << " " <<
+		dron.nosnost_ << " " << // nosnost aj ostane veci viem podla typu
+		dron.celkovyPocetPrepravenychZasielok_ << " " <<
+		dron.kapacitaBaterie_ << " " <<
+		dron.celkovyPocetNalietanychHodin_ << " " << "\n";
+
+	// Struktury 
+
+	// TODO store Queue
+	// make copy
+	// while not empty -> store
+	//frontZasielok_
+
+	return os;
+}
+
+istream & operator>>(istream & is, Dron & dron)
+{
+	// TODO: insert return statement here
+	return is;
+}
