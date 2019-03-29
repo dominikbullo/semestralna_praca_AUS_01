@@ -28,6 +28,7 @@ public:
 
 	std::string vytazenyDo() { return vytazenyDo_; };
 	std::string getDatumaCasEvidencie() { return datumaCasEvidencie_; }
+	std::string stringTyp() { return (typ_ == eDrony::JEDEN) ? "JEDEN" : "DVA"; }
 
 	bool unesieZasielku(Zasielka * zasielka) { return  nosnost_ >= zasielka->getHmotnost() ? true : false; }
 	bool zvladneLet(Zasielka * zasielka) { return maxDobaLetu_ * (kapacitaBaterie_ / 100) * (primernaRychlost_ / 60.0) / 2 >= zasielka->getVzdialenost() ? true : false; }

@@ -146,15 +146,6 @@ ostream & operator<<(ostream & os, Prekladisko & prekladisko)
 	for (Dron * var : *prekladisko.arrayListDronov_) {
 		os << *var;
 	}
-
-	// TODO Čo v prípade, že nie je ?
-	//if (!prekladisko.arrayListZasielok_->isEmpty()) {
-	//	os << prekladisko.arrayListZasielok_->size() << " ";
-	//	for (Zasielka * var : *prekladisko.arrayListZasielok_) {
-	//		os << *var;
-	//	}
-	//}
-
 	return os;
 }
 

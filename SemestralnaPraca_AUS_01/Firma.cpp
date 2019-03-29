@@ -191,14 +191,13 @@ ostream& operator<< (ostream& os, Firma& firma) {
 		os << *var;
 	}
 
-	os << "Size prekladisk: " << firma.arrayListVozidiel->size() << "\n";
+	os << "Size prekladisk: " << firma.arrayListPrekladisk->size() << "\n";
 
 	for (Prekladisko * var : *firma.arrayListPrekladisk) {
 		os << *var;
 	}
 
-
-	os << "Size objednavok: " << firma.arrayListVozidiel->size() << "\n";
+	os << "Size objednavok: " << firma.linkedListObjednavok->size() << "\n";
 
 	for (Objednavka * var : *firma.linkedListObjednavok) {
 		os << *var;

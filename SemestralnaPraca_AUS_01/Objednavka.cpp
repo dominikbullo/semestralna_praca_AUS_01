@@ -76,8 +76,16 @@ Adresat::Adresat(std::string region, double vzdialenostOdPrekladiska)
 
 ostream & operator<<(ostream & os, Objednavka & objednavka)
 {
-	// TODO: insert return statement here
-	throw std::exception("operator<<(ostream & os, Objednavka & objednavka): Not implemented yet.");
+	// TODO: odosielatel
+	os <<
+		objednavka.hmotnostZasielky_ << " " <<
+		objednavka.datumaCasVytvoreniaObjednavky_ << " " <<
+		objednavka.stringStav() << " " <<
+		objednavka.dovodZamietnutia_ << " " <<
+		objednavka.odosielatel_->getRegion() << " " <<
+		objednavka.odosielatel_->getVzdialenostOdPrekladiska() << " " <<
+		objednavka.adresat_->getRegion() << " " <<
+		objednavka.adresat_->getVzdialenostOdPrekladiska() << " " << "\n";
 	return os;
 }
 istream & operator>>(istream & is, Objednavka & objednavka)

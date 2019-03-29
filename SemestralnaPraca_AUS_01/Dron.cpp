@@ -52,7 +52,7 @@ void Dron::pridajZasielku(Zasielka * novaZasielka)
 		throw std::exception("You screw it up man");
 	}
 
-	this->celkovyPocetNalietanychHodin_ += trvanieLetu(novaZasielka) / 60 / 60;
+	this->celkovyPocetNalietanychHodin_ += trvanieLetu(novaZasielka) / 60.0 / 60;
 	this->celkovyPocetPrepravenychZasielok_++;
 	novaZasielka->setDatumaCasUkoncenia(this->vytazenyDo_);
 
@@ -62,13 +62,13 @@ void Dron::pridajZasielku(Zasielka * novaZasielka)
 void Dron::spracujZasielky()
 {
 	if (frontZasielok_->isEmpty()) { return; }
-	//TODO think about this	while (frontZasielok_->peek()->getdatumaCasUkoncenia_() < Datum::getAktualnyDatumaCas())
+	//TODO think about this	
+	while (frontZasielok_->peek()->getdatumaCasUkoncenia_() < Datum::getAktualnyDatumaCas())
 	{
 		// TODO test it
 		//arrayListZasielok_->add(frontZasielok_->pop());
 		frontZasielok_->pop();
 	}
-	prepocitajInformacieoDosupnosti();
 
 }
 
@@ -121,11 +121,11 @@ void Dron::toString()
 	cout <<
 		"Seriove cislo - " << this->serioveCislo_ << endl <<
 		"Datum zaradenia do prevadzky - " << this->datumaCasEvidencie_ << endl <<
-		"Typ - " << ((typ_ == eDrony::JEDEN) ? "jeden" : "dva") << endl <<
+		"Typ - " << ((typ_ == eDrony::JEDEN) ? "JEDEN" : "DVA") << endl <<
 		"Obsadeny do - " << this->vytazenyDo_ << endl <<
 		"Kapacita baterie - " << this->kapacitaBaterie_ << endl <<
-		"celkovyPocetNalietanychHodin - " << this->celkovyPocetNalietanychHodin_ << endl <<
-		"celkovyPocetPrepravenychZasielok - " << this->celkovyPocetPrepravenychZasielok_ << endl;
+		"Celkovy pocet nalietanych hodin - " << this->celkovyPocetNalietanychHodin_ << endl <<
+		"Celkovy pocet prepravenych zasielok - " << this->celkovyPocetPrepravenychZasielok_ << endl;
 	cout << "*******************************************************************" << endl;
 
 }
@@ -133,9 +133,9 @@ void Dron::toString()
 ostream & operator<<(ostream & os, Dron & dron)
 {
 	// Atributy
-	// TODO store TYP drona
-	// vypocitatelne udaje -> nostnost, priemerka, max doba, cas na nabitie
+
 	os <<
+		dron.stringTyp() << " " <<
 		dron.vytazeny_ << " " <<
 		dron.datumaCasEvidencie_ << " " <<
 		dron.serioveCislo_ << " " <<
@@ -152,6 +152,13 @@ ostream & operator<<(ostream & os, Dron & dron)
 	// while not empty -> store
 	//frontZasielok_
 
+	os << "Front objednavok drona \n";
+	structures::ExplicitQueue<Zasielka*> *kopiaFrontu = new structures::ExplicitQueue<Zasielka*>(*dron.frontZasielok_);
+
+	while (!kopiaFrontu->isEmpty()) {
+		os << *kopiaFrontu->pop();
+	}
+	delete kopiaFrontu;
 	return os;
 }
 
