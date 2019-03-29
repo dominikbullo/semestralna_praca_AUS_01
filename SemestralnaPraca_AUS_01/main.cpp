@@ -5,8 +5,16 @@
 int main()
 {
 
-	// TODO: Vypísanie nasledujúcich sumárnych štatistík:
+
+	// TODO 29.03
 	// TODO: Uloženie a načítanie aktuálneho stavu evidencie do/zo súboru.
+	// TODO: Bug fix battery.
+
+
+	// TODO do 31.3
+	// TODO Vyber vozidiel v centralnom sklade, zaslanie zasielky do lokalnych prekladisk
+	// TODO Odoslanie z prekladisk userom
+	// TODO: Vypísanie nasledujúcich sumárnych štatistík:
 
 	initHeapMonitor();
 	UI *userInterface = new UI();

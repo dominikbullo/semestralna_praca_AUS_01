@@ -42,6 +42,7 @@ void Dron::pridajZasielku(Zasielka * novaZasielka)
 	double cestaSpat = trvanieLetu(novaZasielka) / 2.0;
 
 	this->vytazenyDo_ = Datum::time_t_to_string(casPriletuPreZasielku(novaZasielka) + cestaSpat);
+
 	znizKapacituBaterie(trvanieLetu(novaZasielka));
 
 	// FIXME nájs kde je chyba
@@ -50,6 +51,7 @@ void Dron::pridajZasielku(Zasielka * novaZasielka)
 	{
 		throw std::exception("You screw it up man");
 	}
+
 	this->celkovyPocetNalietanychHodin_ += trvanieLetu(novaZasielka) / 60 / 60;
 	this->celkovyPocetPrepravenychZasielok_++;
 	novaZasielka->setDatumaCasUkoncenia(this->vytazenyDo_);

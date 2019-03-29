@@ -72,6 +72,7 @@ void UI::hlavneMenu()
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 2), new Adresat("MA", 15.5));
 		datumUI->posunCas(60 * 60);
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+		// FIXME zaporna kapacita baterie 
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
 
 

@@ -52,6 +52,7 @@ ostream & operator<<(ostream & os, Vozidlo & vozidlo)
 		vozidlo.nosnost_ << " " << "\n";
 
 	// Struktury 
+	// TODO staèi regiony
 	os << "Size trasy: " << vozidlo.linkedListTrasaVozidla_->size() << "\n";
 	for (Prekladisko * var : *vozidlo.linkedListTrasaVozidla_) {
 		os << *var;

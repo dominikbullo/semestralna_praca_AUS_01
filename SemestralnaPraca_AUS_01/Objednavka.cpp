@@ -73,3 +73,17 @@ Adresat::Adresat(std::string region, double vzdialenostOdPrekladiska)
 	region_ = region;
 	vzdialenostOdPrekladiska_ = vzdialenostOdPrekladiska;
 }
+
+ostream & operator<<(ostream & os, Objednavka & objednavka)
+{
+	// TODO: insert return statement here
+	throw std::exception("operator<<(ostream & os, Objednavka & objednavka): Not implemented yet.");
+	return os;
+}
+istream & operator>>(istream & is, Objednavka & objednavka)
+{
+	// TODO: insert return statement here
+	throw std::exception("operator>>(istream & is, Objednavka & objednavka): Not implemented yet.");
+	return is;
+}
+

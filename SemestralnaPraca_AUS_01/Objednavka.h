@@ -56,6 +56,8 @@ public:
 	std::string getDatumaCasVytvorenia() { return datumaCasVytvoreniaObjednavky_; }
 	std::string getDatumaCasSpracovania() { return datumaCasSpracovania_; }
 
+	friend std::ostream& operator<< (std::ostream& os, Objednavka& objednavka);
+	friend std::istream& operator>> (std::istream& is, Objednavka& objednavka);
 private:
 	double hmotnostZasielky_ = 0.0;
 	std::string datumaCasVytvoreniaObjednavky_;

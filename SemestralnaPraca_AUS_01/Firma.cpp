@@ -185,10 +185,22 @@ ostream& operator<< (ostream& os, Firma& firma) {
 	os << firma.nazovFirmy_ << "\n";
 	//firma.centralnySklad_ << " " << "\n";
 
-
 	os << "Size vozidiel: " << firma.arrayListVozidiel->size() << "\n";
 
 	for (Vozidlo * var : *firma.arrayListVozidiel) {
+		os << *var;
+	}
+
+	os << "Size prekladisk: " << firma.arrayListVozidiel->size() << "\n";
+
+	for (Prekladisko * var : *firma.arrayListPrekladisk) {
+		os << *var;
+	}
+
+
+	os << "Size objednavok: " << firma.arrayListVozidiel->size() << "\n";
+
+	for (Objednavka * var : *firma.linkedListObjednavok) {
 		os << *var;
 	}
 
