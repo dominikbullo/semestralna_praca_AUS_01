@@ -45,12 +45,12 @@ void Dron::pridajZasielku(Zasielka * novaZasielka)
 
 	znizKapacituBaterie(trvanieLetu(novaZasielka));
 
-	// FIXME n·jsù kde je chyba
-	// TODO n·jsù kde je chyba
-	if (kapacitaBaterie_ < 0)
-	{
-		throw std::exception("You screw it up man");
-	}
+	//// FIXME n·jsù kde je chyba
+	//// TODO n·jsù kde je chyba
+	//if (kapacitaBaterie_ < 0)
+	//{
+	//	throw std::exception("You screw it up man");
+	//}
 
 	this->celkovyPocetNalietanychHodin_ += trvanieLetu(novaZasielka) / 60.0 / 60;
 	this->celkovyPocetPrepravenychZasielok_++;

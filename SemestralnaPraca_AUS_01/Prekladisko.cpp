@@ -83,7 +83,6 @@ Dron * Prekladisko::vyberDrona(Zasielka * zasielka)
 			}
 		}
 
-		// TODO better way ? 
 		else if (dron->unesieZasielku(zasielka) &&
 			dron->stihnePriletietPreZasielku(zasielka))
 		{
@@ -93,7 +92,6 @@ Dron * Prekladisko::vyberDrona(Zasielka * zasielka)
 
 	}
 
-	// TODO: dron, ktorý zvládne najefektívnejšie doručiť objednávku, aj s userovím súhlasom ak to bude neskoro
 	if (volnyKandidatNaDrona != nullptr) { return volnyKandidatNaDrona; }
 	if (obsadenyKandidatNaDrona != nullptr) { return obsadenyKandidatNaDrona; }
 	if (vybityKandidatNaDrona != nullptr)
