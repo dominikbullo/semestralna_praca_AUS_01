@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 #include <string>
 #include <iostream>
 #include "Konstatnty.h"
@@ -32,10 +32,9 @@ private:
 	Objednavka* objednavka_;
 	double hmotnost_;
 	double vzdialenostOdPrekladiska_;
-	std::string region_; // prekladisko, ktorÈ moment·lne spravuje z·sielku
+	std::string region_; // prekladisko, ktor√© moment√°lne spravuje z√°sielku
 
 	std::string datumaCasSpracovania_;
 	std::string datumaCasPrevzatia_;
 	std::string datumaCasUkoncenia_;
 };
-

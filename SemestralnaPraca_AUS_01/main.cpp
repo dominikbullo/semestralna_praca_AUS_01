@@ -4,7 +4,7 @@
 
 int main()
 {
-
+	// TODO PREKLADISKA MAJU PEVNY POCET!!! ARRAY!!!!!
 
 	// TODO 29.03
 	// TODO: Uloženie a načítanie aktuálneho stavu evidencie do/zo súboru.
@@ -24,4 +24,3 @@ int main()
 	system("pause");
 	return 0;
 }
-
