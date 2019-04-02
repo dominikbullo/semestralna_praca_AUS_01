@@ -7,8 +7,10 @@ int Prekladisko::unikatneSerioveCislo_ = 000000;
 Prekladisko::Prekladisko(std::string region)
 {
 	this->unikatneSerioveCislo_ = 000000;
+
 	std::transform(region.begin(), region.end(), region.begin(), ::toupper);
 	this->region_ = region;
+
 	this->arrayListDronov_ = new structures::ArrayList<Dron*>();
 	this->arrayListZasielok_ = new structures::ArrayList<Zasielka*>();
 
@@ -22,10 +24,9 @@ Prekladisko::~Prekladisko()
 	}
 	delete this->arrayListDronov_;
 
-
-	for (Zasielka * zasielka : *this->arrayListZasielok_) {
-		delete zasielka;
-	}
+	//for (Zasielka * zasielka : *this->arrayListZasielok_) {
+	//	delete zasielka;
+	//}
 	delete this->arrayListZasielok_;
 }
 
@@ -54,7 +55,6 @@ void Prekladisko::spracujZasielky()
 {
 	for (Dron * dron : *this->arrayListDronov_) {
 		dron->spracujZasielky(arrayListZasielok_);
-		//dron->spracujZasielky();
 	}
 }
 

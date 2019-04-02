@@ -70,15 +70,11 @@ void UI::hlavneMenu()
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
 
 
-		time_t aktualnyCas = datumUI->getAktualnyDatumaCasAsTime();
-		// TODO vypočítať čas na pridanie do 21:00
-		time_t casZatvorenia = datumUI->getAktualnyDatumaCasAsTime();
-
+		Datum::posunCasNaUrcituHodinu(eOtvoracieHodiny::ZATVORENE);
 		firma->vratVozidlaDoCentralnehoSkladu();
 
 		firma->getCentralnySklad()->vypisZoznamZasielok();
 		firma->getCentralnySklad()->naplVozidla();
-
 
 		out.open("ulozenie");
 		out << *firma;

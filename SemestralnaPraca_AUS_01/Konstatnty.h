@@ -8,10 +8,13 @@ enum class eStavObjednavky
 	ZRUSENA = 3,
 	ZREALIZOVANA = 4,
 };
-enum class eSmerZasielky
+
+
+enum class eOtvoracieHodiny
 {
-	DO_CENTRALNEHO_SKLADU,
-	Z_CENTRALNEHO_SKLADU
+	POSLEDNE_MOZNE_VYZDVIHNUTIE = 20,
+	ZATVORENE = 21,
+	OTVORENA = 7
 };
 
 

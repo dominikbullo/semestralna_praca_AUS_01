@@ -43,6 +43,18 @@ time_t Datum::string_to_time_t(std::string s)
 	return mktime(&when);
 }
 
+void Datum::posunCasNaUrcituHodinu(eOtvoracieHodiny celaHodina)
+{
+	time_t aktualnyCas = Datum::getAktualnyDatumaCasAsTime();
+	tm *ltm = localtime(&aktualnyCas);
+
+	struct tm ziadanyCas = *ltm;
+	ziadanyCas.tm_hour = (int)celaHodina; ;
+	ziadanyCas.tm_min = 00;
+
+	datum_a_cas_ = time_t_to_string(mktime(&ziadanyCas));
+
+}
 Datum::Datum()
 {
 }

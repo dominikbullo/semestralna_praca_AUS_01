@@ -35,6 +35,7 @@ public:
 		arrayListPrekladisk->add(novePrekladisko);
 	};
 
+	// vytriedim dronovi objednávky, ktoré už vybavil
 	void spracujVsetkyObjednavky()
 	{
 		for (Prekladisko* prekladisko : *arrayListPrekladisk)

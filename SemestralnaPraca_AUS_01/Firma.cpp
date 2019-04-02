@@ -1,6 +1,6 @@
 #include "Firma.h"
 
-bool testingProgram = true;
+bool first = true;
 using namespace std;
 Firma::Firma(std::string nazovFirmy)
 {
@@ -39,8 +39,13 @@ void Firma::vypisanieVsetkychObjednavok()
 
 void  Firma::pridajVozidlo(Vozidlo* noveVozidlo)
 {
-	if (testingProgram) { pridajVsetkyRegionyDoTrasyVozidla(noveVozidlo); }
-	else { pridajRegionyDoTrasyVozidla(noveVozidlo); }
+	if (first) {
+		pridajVsetkyRegionyDoTrasyVozidla(noveVozidlo);
+		first = false;
+	}
+	else {
+		pridajRegionyDoTrasyVozidla(noveVozidlo);
+	}
 
 	// vozidlo prid·vam vûdy na koniec, t˝m p·dom viem, ûe vozidl· s˙ zoradenÈ podæa poradia zaevidovania
 	int index = 0;
@@ -77,14 +82,13 @@ void Firma::pridajRegionyDoTrasyVozidla(Vozidlo* vozidlo) {
 
 void Firma::vratVozidlaDoCentralnehoSkladu()
 {
-	// TODO metoda sa mÙûe volaù aû po 22!
 	time_t aktualnyCas = Datum::getAktualnyDatumaCasAsTime();
 	tm *ltm = localtime(&aktualnyCas);
 	struct tm uzatvorenieFirmy = *ltm;
-	uzatvorenieFirmy.tm_hour = 21;
+	uzatvorenieFirmy.tm_hour = (int)eOtvoracieHodiny::ZATVORENE;
 	uzatvorenieFirmy.tm_min = 00;
 
-	if (mktime(&uzatvorenieFirmy) < Datum::getAktualnyDatumaCasAsTime())
+	if (mktime(&uzatvorenieFirmy) <= Datum::getAktualnyDatumaCasAsTime())
 	{
 		this->spracujVsetkyObjednavky();
 

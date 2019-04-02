@@ -4,6 +4,7 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
+#include "Konstatnty.h"
 
 class Datum
 {
@@ -32,6 +33,7 @@ public:
 
 	static std::string time_t_to_string(time_t t);
 	static time_t string_to_time_t(std::string s);
+	void static posunCasNaUrcituHodinu(eOtvoracieHodiny celaHodina);
 private:
 	static std::string datum_a_cas_;
 	static tm *ltm_;
@@ -39,5 +41,4 @@ private:
 	Datum();
 	Datum(Datum const& copy);
 };
-
 
