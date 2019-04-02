@@ -37,10 +37,6 @@ public:
 
 	time_t casPriletuPreZasielku(Zasielka * zasielka)
 	{
-		//auto test1 = Datum::string_to_time_t(vytazenyDo_);
-		//auto test2 = getCasPotrebnyNaDobitie(getPocetPercentNaZvladnutieLetu(zasielka));
-		//auto test3 = trvanieLetu(zasielka) / 2.0;
-		//auto teeest = Datum::time_t_to_string(test1 + test3);
 		return Datum::string_to_time_t(vytazenyDo_) +
 			getCasPotrebnyNaDobitie(getPocetPercentNaZvladnutieLetu(zasielka)) +
 			(trvanieLetu(zasielka) / 2.0);
@@ -80,6 +76,7 @@ private:
 
 	double kapacitaBaterie_ = 100.0;
 	double celkovyPocetNalietanychHodin_ = 0.0;
+
 
 	structures::ExplicitQueue<Zasielka*> * frontZasielok_;
 };

@@ -19,9 +19,10 @@ public:
 	void vypisZasielkyVozidla();
 	void pridajPrekladiskoDoTrasyVozidla(Prekladisko * prekladisko);
 
+	double getPocetNajazdenychKm() { return pocetNajazdenychKilometrov; }
 	inline int getPrevazdkoveNaklady() { return prevadzkoveNaklady_; }
-	std::string getSPZ() { return SPZ_; }
 	inline int getNaklady() { return naklady_; }
+	std::string getSPZ() { return SPZ_; }
 	std::string getDatumaCasEvidencie() { return datumaCasEvidencie_; }
 	structures::ArrayList<Zasielka*> getArrayListZasielok() { return *arrayListZasielok_; }
 
@@ -50,6 +51,7 @@ public:
 
 	void pridajZasielku(Zasielka* zasielka) {
 		nosnost_ -= zasielka->getHmotnost();
+		pocetNajazdenychKilometrov += (int)eKonstanty::VZDIALENOST_OKRESOV;
 		arrayListZasielok_->add(zasielka);
 	}
 
@@ -57,10 +59,14 @@ public:
 	friend istream& operator>> (istream& is, Vozidlo& vozidlo);
 private:
 	int prevadzkoveNaklady_;
-	std::string datumaCasEvidencie_;
-	std::string SPZ_ = "ZA_";
 	double naklady_ = 0;
 	double nosnost_;
+	double pocetNajazdenychKilometrov;
+
+	std::string datumaCasEvidencie_;
+	std::string SPZ_ = "ZA_";
+
+
 	structures::LinkedList<Prekladisko*> *linkedListTrasaVozidla_;
 	structures::ArrayList<Zasielka*> *arrayListZasielok_;
 };

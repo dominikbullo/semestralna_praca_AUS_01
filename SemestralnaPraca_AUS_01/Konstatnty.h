@@ -6,9 +6,8 @@ enum class eStavObjednavky
 	PRIJATA = 1,
 	ZAMIETNUTA = 2,
 	ZRUSENA = 3,
-	ZREALIZOVANA = 4,
+	DORUCENA = 4
 };
-
 
 enum class eOtvoracieHodiny
 {
@@ -16,7 +15,10 @@ enum class eOtvoracieHodiny
 	ZATVORENE = 21,
 	OTVORENA = 7
 };
-
+enum class eKonstanty
+{
+	VZDIALENOST_OKRESOV = 25
+};
 
 enum class eDrony
 {

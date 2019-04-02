@@ -6,6 +6,7 @@ UI::UI()
 {
 	running = true;
 	datumUI = Datum::getInstance();
+	//datumUI->posunCas(-10 * 60 * 60);
 	firma = new Firma("AoE");
 	pridajVsetkyPrekladiska();
 }
@@ -292,9 +293,14 @@ void UI::menuStatistiky(std::string text, bool clearTerminal)
 		break;
 	}
 	case 3:
+	{
 		system("cls");
-		firma->vypisZasielkySDovodomZamietnutia(getStrInputFromUser("Zadaj region z ktoreho chces vypisat zasielky"));
+		string region = getStrInputFromUser("Zadaj region z ktoreho chces vypisat zasielky");
+		datumOd = getDateFromUser("Zadaj datum od");
+		datumDo = getDateFromUser("Zadaj datum do");
+		firma->vypisZasielkySDovodomZamietnutia(datumOd, datumDo, region);
 		break;
+	}
 	case 4:
 		system("cls");
 		datumOd = getDateFromUser("Zadaj datum od");

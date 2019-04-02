@@ -27,6 +27,7 @@ Firma::~Firma()
 	delete arrayListVozidiel;
 	delete arrayListPrekladisk;
 	delete linkedListObjednavok;
+
 	delete centralnySklad_;
 }
 
@@ -149,12 +150,14 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	if (vozidloNaVyzdvihnutie == NULL)
 	{
 		objednavka->zamietniObjednavku("Vozidlo ktore bude prechadzat prekladiskom odosielatela sa nenaslo");
+		delete zasielka;
 		return;
 	}
 	Dron* vhodnyDron = prekladiskoOdoslania->vyberDrona(zasielka);
 	if (vhodnyDron == NULL)
 	{
 		objednavka->zamietniObjednavku("Nenašiel sa vhodny dron");
+		delete zasielka;
 		return;
 	}
 	// preaženým metódy sa pýtam nie na prekladisko, ktoré mu bolo priradené, ale na prekladisko k adresátovi
@@ -162,6 +165,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	if (vozidloPreAdresata == NULL)
 	{
 		objednavka->zamietniObjednavku("Vozidlo ktore bude prechadzat prekladiskom adresata sa nenaslo");
+		delete zasielka;
 		return;
 	}
 	string test = Datum::time_t_to_string(vhodnyDron->casPriletuPreZasielku(zasielka));
@@ -196,8 +200,10 @@ bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasi
 
 void Firma::getRegionsNajvacsimPoctomDorucenychObjednavok(std::string datumOd, std::string datumDo)
 {
-	// TODO  date_range_check;
-	throw std::exception("Not implemented yet!");
+	//string region = "";
+	for (Objednavka * objednavka : *this->linkedListObjednavok) {
+		string region = objednavka->getAdresat()->getRegion();
+	}
 }
 void Firma::getRegionsNajvacsimPoctomPrijatychObjednavok(std::string datumOd, std::string datumDo)
 {
@@ -205,30 +211,52 @@ void Firma::getRegionsNajvacsimPoctomPrijatychObjednavok(std::string datumOd, st
 	throw std::exception("Not implemented yet!");
 
 }
-void Firma::vypisZasielkySDovodomZamietnutia(std::string region)
+void Firma::vypisZasielkySDovodomZamietnutia(std::string datumOd, std::string datumDo, std::string region)
 {
-	throw std::exception("Not implemented yet!");
-
+	int pocet = 0;
+	for (Objednavka * objednavka : *this->linkedListObjednavok) {
+		if (objednavka->getStav() == eStavObjednavky::ZAMIETNUTA &&
+			objednavka->getOdosielatel()->getRegion() == region &&
+			objednavka->getDatumaCasVytvorenia() >= datumOd &&
+			objednavka->getDatumaCasVytvorenia() <= datumDo)
+		{
+			objednavka->toString();
+			pocet++;
+		}
+	}
+	if (pocet == 0)
+	{
+		system("cls");
+		cout << "Ziadna objednavka nebola v regione " << region << " zrusena v tento datum" << endl;
+	}
 }
+
 void Firma::vypisaniePoctuZrusenychObjednavok(std::string datumOd, std::string datumDo)
 {
-	// TODO  date_range_check;
-	throw std::exception("Not implemented yet!");
+	Prekladisko* prekladisko = NULL;
+	int pocet = 0;
+	int max = 0;
 
 }
 void Firma::vypisanieCelkovehoPoctuDorucenychZasielok()
 {
-	throw std::exception("Not implemented yet!");
-
+	int pocet = 0;
+	for (Objednavka * objednavka : *this->linkedListObjednavok) {
+		if (objednavka->getStav() == eStavObjednavky::DORUCENA)
+		{
+			pocet++;
+		}
+	}
+	cout << "Pocet dorucenych zasielok je " << pocet << endl;
 }
 void Firma::vypisaniePoctuKilometrovVsetkychVozidiel()
 {
 	double pocetKm = 0;
 	for (Vozidlo *voz : *arrayListVozidiel)
 	{
-		//pocetKm += voz->getPocetNajazdenychKilometrov();
-		//cout << "\nVozidlo -> " << voz->spz() << endl;
-		//cout << "Pocet najazdenych km: " << voz->getPocetNajazdenychKilometrov() << endl;
+		pocetKm += voz->getPocetNajazdenychKm();
+		cout << "Vozidlo -> " << voz->getSPZ() << endl;
+		cout << "Pocet najazdenych km: " << voz->getPocetNajazdenychKm() << endl;
 	}
 	cout << "Celkovy pocet kilometrov vsetkych vozidiel je " << pocetKm << endl;
 }

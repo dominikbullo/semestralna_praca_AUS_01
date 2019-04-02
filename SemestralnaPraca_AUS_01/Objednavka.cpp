@@ -29,8 +29,8 @@ std::string Objednavka::stringStav()
 	case eStavObjednavky::ZRUSENA:
 		pom = "ZRUSENA";
 		break;
-	case eStavObjednavky::ZREALIZOVANA:
-		pom = "ZREALIZOVANA";
+	case eStavObjednavky::DORUCENA:
+		pom = "DORUCENA";
 		break;
 	}
 	return pom;

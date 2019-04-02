@@ -71,9 +71,8 @@ public:
 
 	void getRegionsNajvacsimPoctomDorucenychObjednavok(std::string datumOd, std::string datumDo);
 	void getRegionsNajvacsimPoctomPrijatychObjednavok(std::string datumOd, std::string datumDo);
-	void vypisZasielkySDovodomZamietnutia(std::string region);
+	void vypisZasielkySDovodomZamietnutia(std::string datumOd, std::string datumDo, std::string region);
 	void vypisaniePoctuZrusenychObjednavok(std::string datumOd, std::string datumDo);
-	void vypisaniePoctuZrusenychZasielok();
 	void vypisanieCelkovehoPoctuDorucenychZasielok();
 
 	void vypisaniePoctuKilometrovVsetkychVozidiel();

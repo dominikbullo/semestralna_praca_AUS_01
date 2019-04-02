@@ -52,8 +52,8 @@ public:
 		this->stav_ = stav;
 		std::cout << "Objednavka bola " << stringStav() << std::endl;
 	}
-	//void setDovodZamietnutia(string dovodZamietnutia) { this->dovodZamietnutia_ = dovodZamietnutia_; }
 
+	eStavObjednavky getStav() { return stav_; }
 	inline double getHmotnostZasielky() { return hmotnostZasielky_; }
 	inline Adresat* getAdresat() { return adresat_; }
 	inline Odosielatel* getOdosielatel() { return odosielatel_; }
