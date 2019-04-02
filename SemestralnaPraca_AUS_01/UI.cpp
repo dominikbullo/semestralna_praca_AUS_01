@@ -4,6 +4,7 @@
 using namespace std;
 UI::UI()
 {
+	running = true;
 	datumUI = Datum::getInstance();
 	firma = new Firma("AoE");
 	pridajVsetkyPrekladiska();
@@ -20,95 +21,125 @@ void UI::hlavneMenu()
 	std::ofstream out;
 	std::ifstream in;
 
-	//system("cls");
-	cout << "++++++++++ Vitajte v Informacnom systeme firmy " << firma->getNazovFirmy() << " ++++++++++" << endl;
-	cout << "Date: " << Datum::getAktualnyDatumaCas() << endl;
-	cout <<
-		"1. Sprava Vozidiel" << endl <<
-		"2. Sprava Prekladísk" << endl <<
-		"3. Sprava Objednavok" << endl << endl <<
-		"4. Posun hodinu" << endl << endl <<
-		"5. Test" << endl << endl <<
-		"6. Uloz" << endl <<
-		"7. Nacitaj " << endl << endl <<
-		"0. Koniec" << endl <<
-		endl;
 
-	switch (getIntInputFromUser("Zvolte si moznost zo zoznamu"))
-	{
-	case 1:
-		menuVozidla(true);
-		break;
-	case 2:
-		menuPrekladiska(true);
-		break;
-	case 3:
-		menuObjednavky();
-		break;
-	case 4:
-		datumUI->posunCas(60 * 60);
-		firma->spracujVsetkyObjednavky();
-		hlavneMenu();
-		break;
-	case 5:
+	while (running) {
+		cout << "++++++++++ Vitajte v Informacnom systeme firmy " << firma->getNazovFirmy() << " ++++++++++" << endl;
+		cout << "Aktualny datum: " << Datum::getAktualnyDatumaCas() << endl;
+		cout <<
+			"1. Sprava vozidiel" << endl <<
+			"2. Sprava prekladisk" << endl <<
+			"3. Sprava objednavok" << endl <<
+			"4. Sumarne statistiky" << endl << endl <<
 
-		//firma->pridajVozidlo(new Vozidlo(14560, 1045550, "ZA222BA"));
-		firma->pridajVozidlo(new Vozidlo(10000, 10, "ZA232DB"));
-		//firma->pridajVozidlo(new Vozidlo(10000, 10, "ZA214DB"));
-		firma->vypisZoznamVozidiel();
+			"5. Test" << endl << endl <<
 
-		//pridám jeden extra dron prekladisku v regióne 
-		//firma->dajPrekladiskoPodlaRegionu("MA")->pridajDron(new Dron(eDrony::JEDEN, firma->dajPrekladiskoPodlaRegionu("MA")->set_get_SerioveCislo()));
-
-		//firma->dajPrekladiskoPodlaRegionu("MA")->vypisZoznamDronov();
-		firma->getVozidloBySPZ("ZA232DB")->vypisTrasuVozidla();
-
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 2), new Adresat("MA", 15.5));
-		//datumUI->posunCas(60 * 60);
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
-		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+			"6. Vypis aktualny cas" << endl <<
+			"7. Posun hodinu" << endl << endl <<
 
 
-		Datum::posunCasNaUrcituHodinu(eOtvoracieHodiny::ZATVORENE);
-		firma->vratVozidlaDoCentralnehoSkladu();
+			"8. Uloz" << endl <<
+			"9. Nacitaj " << endl << endl <<
 
-		firma->getCentralnySklad()->vypisZoznamZasielok();
-		firma->getCentralnySklad()->naplVozidla();
+			"0. Koniec" << endl <<
+			endl;
 
-		out.open("ulozenie");
-		out << *firma;
-		out.close();
-		hlavneMenu();
-		break;
-	case 6:
-		system("cls");
-		out.open("ulozenie");
-		out << *firma;
-		out.close();
-		hlavneMenu();
-		break;
-	case 7:
-		system("cls");
-		in.open("ulozenie");
-		in >> *firma;
-		in.close();
-		hlavneMenu();
-	case 111:
-		exit(0);
-	case 0:
-		return;
-	default:
-		hlavneMenu();
-		break;
+		switch (getIntInputFromUser("Zvolte si moznost zo zoznamu"))
+		{
+		case 1:
+			menuVozidla(true);
+			break;
+		case 2:
+			menuPrekladiska(true);
+			break;
+		case 3:
+			menuObjednavky("", true);
+			break;
+		case 4:
+			menuStatistiky("", true);
+			break;
+		case 5:
+			//firma->pridajVozidlo(new Vozidlo(14560, 1045550, "ZA222BA"));
+			firma->pridajVozidlo(new Vozidlo(10000, 10, "ZA232DB"));
+			//firma->pridajVozidlo(new Vozidlo(10000, 10, "ZA214DB"));
+			firma->vypisZoznamVozidiel();
+
+			//pridám jeden extra dron prekladisku v regióne 
+			//firma->dajPrekladiskoPodlaRegionu("MA")->pridajDron(new Dron(eDrony::JEDEN, firma->dajPrekladiskoPodlaRegionu("MA")->set_get_SerioveCislo()));
+
+			//firma->dajPrekladiskoPodlaRegionu("MA")->vypisZoznamDronov();
+			firma->getVozidloBySPZ("ZA232DB")->vypisTrasuVozidla();
+
+			firma->vytvorObjednavku(2.75, new Odosielatel("BA", 2), new Adresat("MA", 15.5));
+			//datumUI->posunCas(60 * 60);
+			firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+			firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+			firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
+
+
+			ukonciDen();
+
+			ulozVsetko(out);
+			break;
+		case 6:
+			cout << "Aktualny cas: " << Datum::getAktualnyDatumaCas() << endl;
+			break;
+		case 7:
+			datumUI->posunCas(60 * 60);
+			firma->spracujVsetkyObjednavky();
+			break;
+		case 8:
+			ulozVsetko(out);
+			break;
+		case 9:
+			system("cls");
+			in.open("ulozenie");
+			in >> *firma;
+			in.close();
+			break;
+		case 111:
+			running = false;
+			exit(0);
+		case 0:
+			running = false;
+			cout << "Dovidenia." << endl;
+			break;
+		default:
+			cout << "Nespravna volba. ";
+		}
 	}
+}
 
+void UI::ulozVsetko(std::ofstream &out)
+{
+	out.open("ulozenie");
+	out << *firma;
+	out.close();
+}
+
+void UI::ukonciDen()
+{
+	Datum::posunCasNaUrcituHodinu(eOtvoracieHodiny::ZATVORENE);
+	firma->vratVozidlaDoCentralnehoSkladu();
+
+	firma->getCentralnySklad()->vypisZoznamZasielok();
+	firma->getCentralnySklad()->naplVozidla();
 }
 
 int UI::getIntInputFromUser(std::string consoleOutput)
 {
-	// TODO: pridaj kontrolu vstupov 
-	return std::stoi(getStrInputFromUser(consoleOutput));
+	cout << consoleOutput << ": " << endl;
+	int pom;
+	cin >> pom;
+	while (!cin)
+	{
+		cout << "Nespravna volba. Zadajte volbu: " << endl;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');;
+		cin >> pom;
+	}
+	return pom;
+
+
 }
 string UI::getStrInputFromUser(string consoleOutput)
 {
@@ -126,29 +157,7 @@ void UI::pridajVsetkyPrekladiska()
 	{
 		firma->pridajPrekladisko(new Prekladisko(region));
 	}
-	/*firma->pridajPrekladisko(new Prekladisko("MA"));
-	firma->pridajPrekladisko(new Prekladisko("BA"));
-	firma->pridajPrekladisko(new Prekladisko("TT"));
-	firma->pridajPrekladisko(new Prekladisko("TN"));
-	firma->pridajPrekladisko(new Prekladisko("NR"));
-	firma->pridajPrekladisko(new Prekladisko("KN"));
-	firma->pridajPrekladisko(new Prekladisko("PD"));
-	firma->pridajPrekladisko(new Prekladisko("LV"));
-	firma->pridajPrekladisko(new Prekladisko("CA"));
-	firma->pridajPrekladisko(new Prekladisko("MT"));
-	firma->pridajPrekladisko(new Prekladisko("BB"));
-	firma->pridajPrekladisko(new Prekladisko("ZV"));
-	firma->pridajPrekladisko(new Prekladisko("KA"));
-	firma->pridajPrekladisko(new Prekladisko("NO"));
-	firma->pridajPrekladisko(new Prekladisko("LM"));
-	firma->pridajPrekladisko(new Prekladisko("LC"));
-	firma->pridajPrekladisko(new Prekladisko("RA"));
-	firma->pridajPrekladisko(new Prekladisko("SL"));
-	firma->pridajPrekladisko(new Prekladisko("SN"));
-	firma->pridajPrekladisko(new Prekladisko("PO"));
-	firma->pridajPrekladisko(new Prekladisko("KE"));
-	firma->pridajPrekladisko(new Prekladisko("HE"));
-	firma->pridajPrekladisko(new Prekladisko("MI"));*/
+
 }
 
 void UI::menuVozidla(std::string text, bool clearTerminal)
@@ -201,23 +210,24 @@ void UI::menuPrekladiska(std::string text, bool clearTerminal)
 	}
 	cout << "++++++++++ Sprava Prekladisk ++++++++++" << endl;
 	cout <<
-		"1. Pridaj Dron" << endl <<
-		"2. Pridaj Prekladisko" << endl <<
+		"1. Pridaj prekladisko" << endl <<
+		"2. Pridaj dron do lokalneho prekladiska" << endl <<
 		"3. Vypis zoznam dronov v prekladisku" << endl << endl <<
 		"0. Hlavne Menu" <<
 		endl;
 
 	switch (getIntInputFromUser("Zvolte si moznost zo zoznamu"))
 	{
-		//case 1:
-		//	firma->dajPrekladiskoPodlaRegionu(
-		//		getStrInputFromUser("Zadaj skratku regionu prekladiska do ktoreho chces pridat drona"))
-		//		->pridajDron(new Dron((getIntInputFromUser("Zadaj typ drona [1/2]") ? eDrony::JEDEN : eDrony::DVA)));
-		//	menuPrekladiska("Dron bol uspesne pridany", true);
-	case 2:
+
+	case 1:
 		firma->pridajPrekladisko(new Prekladisko(getStrInputFromUser("Zadaj skratku regionu prekladiska, ktore chces pridat")));
 		menuPrekladiska("Prekladisko bolo uspesne pridane", true);
 		break;
+		//case 1:
+//	firma->dajPrekladiskoPodlaRegionu(
+//		getStrInputFromUser("Zadaj skratku regionu prekladiska do ktoreho chces pridat drona"))
+//		->pridajDron(new Dron((getIntInputFromUser("Zadaj typ drona [1/2]") ? eDrony::JEDEN : eDrony::DVA)));
+//	menuPrekladiska("Dron bol uspesne pridany", true);
 	case 3:
 		firma->dajPrekladiskoPodlaRegionu(
 			getStrInputFromUser("Zadaj skratku regionu prekladiska z ktoreho chces vypisat drony"))->vypisZoznamDronov();
@@ -232,9 +242,44 @@ void UI::menuPrekladiska(std::string text, bool clearTerminal)
 	}
 }
 
-void UI::menuObjednavky()
+void UI::menuStatistiky(std::string text, bool clearTerminal)
 {
-	//system("cls");
+	if (clearTerminal) { system("cls"); }
+	if (text != "") {
+		cout << text << endl;
+	}
+	cout << "++++++++++ Sprava Prekladisk ++++++++++" << endl;
+	cout <<
+		"1. Vyhladaj region, do ktoreho bolo v danom casovom obdobi dorucenych najviac objednavok." << endl <<
+		"2. Vyhladaj region, z ktoreho bolo v danom casovom obdobi odoslanych najviac objednavok " << endl <<
+		"3. Vypisanie vsetkych zasielok v danom regione s dovodom zamietnutia " << endl <<
+		"4. Vypisanie poctu zrusenych objednavok za dane casove obdobie v jednotlivych regionoch " << endl <<
+		"5. Vypisanie celkoveho poctu dorucenych zasielok " << endl <<
+		"6. Vypisanie celkoveho poctu najazdenych kilometrov vsetkych vozidiel " << endl <<
+		"7. Vypisanie celkoveho poctu nalietanych hodin jednotlivych typov dronov v jednotlivych regionoch " << endl << endl <<
+
+		"0. Hlavne Menu" << endl;
+	switch (getIntInputFromUser("Zvolte si moznost zo zoznamu"))
+	{
+	case 0:
+		hlavneMenu();
+		break;
+	case 2:
+		firma->vypisanieVsetkychObjednavok();
+		menuObjednavky("Objednavky boli vypisane", true);
+		break;
+	default:
+		menuStatistiky("", true);
+		break;
+	}
+}
+
+void UI::menuObjednavky(std::string text, bool clearTerminal)
+{
+	if (clearTerminal) { system("cls"); }
+	if (text != "") {
+		cout << text << endl;
+	}
 	cout << "++++++++++ Sprava Objednavok ++++++++++" << endl;
 	cout <<
 		"1. Vytvor OBjednavku" << endl <<
@@ -250,10 +295,10 @@ void UI::menuObjednavky()
 		break;
 	case 2:
 		firma->vypisanieVsetkychObjednavok();
-		menuObjednavky();
+		menuObjednavky("", false);
 		break;
 	default:
-		menuObjednavky();
+		menuObjednavky("", true);
 		break;
 	}
 

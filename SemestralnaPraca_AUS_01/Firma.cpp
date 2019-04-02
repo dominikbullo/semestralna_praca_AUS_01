@@ -95,11 +95,12 @@ void Firma::vratVozidlaDoCentralnehoSkladu()
 		for (Vozidlo *vozidlo : *arrayListVozidiel)
 		{
 			vozidlo->aktualizujCelkoveNaklady();
-			vozidlo->toString();
 			this->centralnySklad_->prijmiZasielky(vozidlo);
 		}
 	}
-	std::cout << "Firma je este otvorena. Nemozno vratit vozidla do centralneho skladu" << std::endl;
+	else {
+		std::cout << "Firma je este otvorena. Nemozno vratit vozidla do centralneho skladu" << std::endl;
+	}
 }
 
 
@@ -167,7 +168,6 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 	if (vhodnyDron->casPriletuPreZasielku(zasielka) > Datum::getAktualnyDatumaCasAsTime() + 60 * 60) {
 		if (chceUserZrusitObjednavku(vhodnyDron, zasielka)) {
 			objednavka->setStav(eStavObjednavky::ZRUSENA);
-			cout << "Vasa objednavka bola zrusena" << endl;
 			delete zasielka;
 			return;
 		}
@@ -181,7 +181,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 
 	vhodnyDron->pridajZasielku(zasielka);
 	vozidloNaVyzdvihnutie->pridajZasielku(zasielka);
-	vhodnyDron->toString();
+	//vhodnyDron->toString();
 }
 bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasielka)
 {
