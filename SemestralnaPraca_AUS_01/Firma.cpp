@@ -194,6 +194,36 @@ bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasi
 	return (userInput == 1);
 }
 
+void Firma::getRegionsNajvacsimPoctomDorucenychObjednavok()
+{
+	throw std::exception("Not implemented yet!");
+}
+void Firma::getRegionsNajvacsimPoctomPrijatychObjednavok()
+{
+	throw std::exception("Not implemented yet!");
+
+}
+void Firma::vypisZasielkySDovodomZamietnutia()
+{
+	throw std::exception("Not implemented yet!");
+
+}
+void Firma::vypisaniePoctuZrusenychObjednavok()
+{
+	throw std::exception("Not implemented yet!");
+
+}
+void Firma::vypisaniePoctuZrusenychZasielok()
+{
+	throw std::exception("Not implemented yet!");
+
+}
+void Firma::vypisanieCelkovehoPoctuDorucenychZasielok()
+{
+	throw std::exception("Not implemented yet!");
+
+}
+
 ostream& operator<< (ostream& os, Firma& firma) {
 
 	os << firma.nazovFirmy_ << "\n";
@@ -219,6 +249,6 @@ ostream& operator<< (ostream& os, Firma& firma) {
 	return os;
 }
 istream& operator>> (istream& is, Firma& firma) {
-
+	throw std::exception("Not implemented yet!");
 	return is;
 }

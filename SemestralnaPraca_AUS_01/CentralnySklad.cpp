@@ -19,9 +19,11 @@ void CentralnySklad::prijmiZasielky(Vozidlo * vozidlo)
 	{
 		arrayListZasielok->add(zasielka);
 	}
+
 	// TODO po pridaní, odstraò zasielku z vozidla -> vyber a prelož do iného 
-	// TODO otestova 
 	vozidlo->getArrayListZasielok().clear();
+	throw std::exception("CentralnySklad::prijmiZasielky(Vozidlo * vozidlo): Not tested yet.");
+
 }
 
 void CentralnySklad::vypisZoznamZasielok() {
@@ -34,6 +36,7 @@ void CentralnySklad::vypisZoznamZasielok() {
 	}
 }
 void CentralnySklad::naplVozidla() {
+	throw std::exception("CentralnySklad::naplVozidla(): Not implemented yet.");
 }
 
 ostream & operator<<(ostream & os, CentralnySklad & centralnySklad)

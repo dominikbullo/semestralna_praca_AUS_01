@@ -104,7 +104,9 @@ void UI::hlavneMenu()
 			cout << "Dovidenia." << endl;
 			break;
 		default:
-			cout << "Nespravna volba. ";
+			system("cls");
+			cout << "Nespravna volba. " << endl;
+
 		}
 	}
 }
@@ -177,7 +179,6 @@ void UI::menuVozidla(std::string text, bool clearTerminal)
 	switch (getIntInputFromUser("Zvolte si moznost zo zoznamu"))
 	{
 	case 1:
-		// TODO spýtať sa na trasu ? 
 		firma->pridajVozidlo(new Vozidlo(
 			getIntInputFromUser("Zadaj nosnost"),
 			getIntInputFromUser("Zadaj prevadzkoveNaklady"),
@@ -261,12 +262,37 @@ void UI::menuStatistiky(std::string text, bool clearTerminal)
 		"0. Hlavne Menu" << endl;
 	switch (getIntInputFromUser("Zvolte si moznost zo zoznamu"))
 	{
-	case 0:
-		hlavneMenu();
+	case 1:
+		system("cls");
+
 		break;
 	case 2:
-		firma->vypisanieVsetkychObjednavok();
-		menuObjednavky("Objednavky boli vypisane", true);
+		system("cls");
+
+		break;
+	case 3:
+		system("cls");
+
+		break;
+	case 4:
+		system("cls");
+
+		break;
+	case 5:
+		system("cls");
+
+		break;
+	case 6:
+		system("cls");
+
+		break;
+	case 7:
+		system("cls");
+
+		break;
+	case 0:
+		system("cls");
+		hlavneMenu();
 		break;
 	default:
 		menuStatistiky("", true);
@@ -282,11 +308,11 @@ void UI::menuObjednavky(std::string text, bool clearTerminal)
 	}
 	cout << "++++++++++ Sprava Objednavok ++++++++++" << endl;
 	cout <<
-		"1. Vytvor OBjednavku" << endl <<
-		"2. Vypis zoznam vsetkych objednavok Firmy" << endl <<
-		"2. Vypis zoznam vsetkych objednavok v Prekladisku" << endl << endl <<
-		"0. Hlavne Menu" <<
-		endl;
+		"1. Vytvor objednavku" << endl <<
+		"2. Vypis zoznam vsetkych objednavok firmy" << endl <<
+		"2. Vypis zoznam vsetkych objednavok v lokalnom prekladisku" << endl << endl <<
+
+		"0. Hlavne Menu" << endl;
 
 	switch (getIntInputFromUser("Zvolte si moznost zo zoznamu"))
 	{

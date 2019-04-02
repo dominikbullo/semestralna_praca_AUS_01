@@ -69,6 +69,13 @@ public:
 	void vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat);
 	bool chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasielka);
 
+	void getRegionsNajvacsimPoctomDorucenychObjednavok();
+	void getRegionsNajvacsimPoctomPrijatychObjednavok();
+	void vypisZasielkySDovodomZamietnutia();
+	void vypisaniePoctuZrusenychObjednavok();
+	void vypisaniePoctuZrusenychZasielok();
+	void vypisanieCelkovehoPoctuDorucenychZasielok();
+
 	friend ostream& operator<< (ostream& os, Firma& firma);
 	friend istream& operator>> (istream& is, Firma& firma);
 private:
@@ -78,3 +85,4 @@ private:
 	structures::ArrayList<Prekladisko*> * arrayListPrekladisk;
 	structures::LinkedList<Objednavka*> * linkedListObjednavok;
 };
+string getStrInputFromUser(string consoleOutput);
