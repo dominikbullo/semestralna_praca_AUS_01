@@ -140,9 +140,8 @@ int UI::getIntInputFromUser(std::string consoleOutput)
 		cin >> pom;
 	}
 	return pom;
-
-
 }
+
 string UI::getStrInputFromUser(string consoleOutput)
 {
 	string userInput;
@@ -150,6 +149,18 @@ string UI::getStrInputFromUser(string consoleOutput)
 	cin >> userInput;
 
 	return userInput;
+}
+string UI::getDateFromUser(string consoleOutput)
+{
+	struct tm when = { 0 };
+
+	cout << consoleOutput << ": " << endl;
+	when.tm_mday = getIntInputFromUser("Zadaj den");
+	when.tm_mon = getIntInputFromUser("Zadaj mesiac") - 1;
+	when.tm_year = getIntInputFromUser("Zadaj rok") - 1900;
+	//auto test = mktime(&when);
+
+	return Datum::time_t_to_string(mktime(&when));
 }
 
 void UI::pridajVsetkyPrekladiska()
@@ -260,35 +271,48 @@ void UI::menuStatistiky(std::string text, bool clearTerminal)
 		"7. Vypisanie celkoveho poctu nalietanych hodin jednotlivych typov dronov v jednotlivych regionoch " << endl << endl <<
 
 		"0. Hlavne Menu" << endl;
+
+	string datumOd;
+	string datumDo;
 	switch (getIntInputFromUser("Zvolte si moznost zo zoznamu"))
 	{
 	case 1:
 		system("cls");
-
+		datumOd = getDateFromUser("Zadaj datum od");
+		datumDo = getDateFromUser("Zadaj datum do");
+		firma->getRegionsNajvacsimPoctomDorucenychObjednavok(datumOd, datumDo);
+		//firma->getRegionsNajvacsimPoctomDorucenychObjednavok(getDateFromUser("Zadaj datum od"), getDateFromUser("Zadaj datum do"));
 		break;
 	case 2:
+	{
 		system("cls");
-
+		datumOd = getDateFromUser("Zadaj datum od");
+		datumDo = getDateFromUser("Zadaj datum do");
+		firma->getRegionsNajvacsimPoctomPrijatychObjednavok(datumOd, datumDo);
 		break;
+	}
 	case 3:
 		system("cls");
-
+		firma->vypisZasielkySDovodomZamietnutia(getStrInputFromUser("Zadaj region z ktoreho chces vypisat zasielky"));
 		break;
 	case 4:
 		system("cls");
+		datumOd = getDateFromUser("Zadaj datum od");
+		datumDo = getDateFromUser("Zadaj datum do");
+		firma->vypisaniePoctuZrusenychObjednavok(datumOd, datumDo);
 
 		break;
 	case 5:
 		system("cls");
-
+		firma->vypisanieCelkovehoPoctuDorucenychZasielok();
 		break;
 	case 6:
 		system("cls");
-
+		firma->vypisaniePoctuKilometrovVsetkychVozidiel();
 		break;
 	case 7:
 		system("cls");
-
+		firma->vypisaniePoctuKilometrovPodlaTypuDrona();
 		break;
 	case 0:
 		system("cls");

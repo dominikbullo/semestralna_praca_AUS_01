@@ -3,8 +3,6 @@
 #include <ctime>
 #include "Datum.h"
 
-
-
 Datum* Datum::instance = 0;
 time_t now_ = time(0);
 std::string Datum::datum_a_cas_ = time_t_to_string(now_);

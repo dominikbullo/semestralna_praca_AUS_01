@@ -194,27 +194,25 @@ bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasi
 	return (userInput == 1);
 }
 
-void Firma::getRegionsNajvacsimPoctomDorucenychObjednavok()
+void Firma::getRegionsNajvacsimPoctomDorucenychObjednavok(std::string datumOd, std::string datumDo)
 {
+	// TODO  date_range_check;
 	throw std::exception("Not implemented yet!");
 }
-void Firma::getRegionsNajvacsimPoctomPrijatychObjednavok()
+void Firma::getRegionsNajvacsimPoctomPrijatychObjednavok(std::string datumOd, std::string datumDo)
+{
+	// TODO  date_range_check;
+	throw std::exception("Not implemented yet!");
+
+}
+void Firma::vypisZasielkySDovodomZamietnutia(std::string region)
 {
 	throw std::exception("Not implemented yet!");
 
 }
-void Firma::vypisZasielkySDovodomZamietnutia()
+void Firma::vypisaniePoctuZrusenychObjednavok(std::string datumOd, std::string datumDo)
 {
-	throw std::exception("Not implemented yet!");
-
-}
-void Firma::vypisaniePoctuZrusenychObjednavok()
-{
-	throw std::exception("Not implemented yet!");
-
-}
-void Firma::vypisaniePoctuZrusenychZasielok()
-{
+	// TODO  date_range_check;
 	throw std::exception("Not implemented yet!");
 
 }
@@ -223,7 +221,20 @@ void Firma::vypisanieCelkovehoPoctuDorucenychZasielok()
 	throw std::exception("Not implemented yet!");
 
 }
-
+void Firma::vypisaniePoctuKilometrovVsetkychVozidiel()
+{
+	double pocetKm = 0;
+	for (Vozidlo *voz : *arrayListVozidiel)
+	{
+		//pocetKm += voz->getPocetNajazdenychKilometrov();
+		//cout << "\nVozidlo -> " << voz->spz() << endl;
+		//cout << "Pocet najazdenych km: " << voz->getPocetNajazdenychKilometrov() << endl;
+	}
+	cout << "Celkovy pocet kilometrov vsetkych vozidiel je " << pocetKm << endl;
+}
+void Firma::vypisaniePoctuKilometrovPodlaTypuDrona()
+{
+}
 ostream& operator<< (ostream& os, Firma& firma) {
 
 	os << firma.nazovFirmy_ << "\n";
