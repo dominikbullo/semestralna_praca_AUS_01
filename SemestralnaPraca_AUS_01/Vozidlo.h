@@ -61,7 +61,7 @@ private:
 	int prevadzkoveNaklady_;
 	double naklady_ = 0;
 	double nosnost_;
-	double pocetNajazdenychKilometrov;
+	double pocetNajazdenychKilometrov = 0;
 
 	std::string datumaCasEvidencie_;
 	std::string SPZ_ = "ZA_";

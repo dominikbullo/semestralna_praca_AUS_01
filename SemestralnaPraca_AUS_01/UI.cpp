@@ -283,6 +283,7 @@ void UI::menuStatistiky(std::string text, bool clearTerminal)
 		datumDo = getDateFromUser("Zadaj datum do");
 		firma->getRegionsNajvacsimPoctomDorucenychObjednavok(datumOd, datumDo);
 		//firma->getRegionsNajvacsimPoctomDorucenychObjednavok(getDateFromUser("Zadaj datum od"), getDateFromUser("Zadaj datum do"));
+		menuStatistiky("", false);
 		break;
 	case 2:
 	{
@@ -290,6 +291,7 @@ void UI::menuStatistiky(std::string text, bool clearTerminal)
 		datumOd = getDateFromUser("Zadaj datum od");
 		datumDo = getDateFromUser("Zadaj datum do");
 		firma->getRegionsNajvacsimPoctomPrijatychObjednavok(datumOd, datumDo);
+		menuStatistiky("", false);
 		break;
 	}
 	case 3:
@@ -299,6 +301,7 @@ void UI::menuStatistiky(std::string text, bool clearTerminal)
 		datumOd = getDateFromUser("Zadaj datum od");
 		datumDo = getDateFromUser("Zadaj datum do");
 		firma->vypisZasielkySDovodomZamietnutia(datumOd, datumDo, region);
+		menuStatistiky("", false);
 		break;
 	}
 	case 4:
@@ -306,26 +309,29 @@ void UI::menuStatistiky(std::string text, bool clearTerminal)
 		datumOd = getDateFromUser("Zadaj datum od");
 		datumDo = getDateFromUser("Zadaj datum do");
 		firma->vypisaniePoctuZrusenychObjednavok(datumOd, datumDo);
-
+		menuStatistiky("", false);
 		break;
 	case 5:
 		system("cls");
 		firma->vypisanieCelkovehoPoctuDorucenychZasielok();
+		menuStatistiky("", false);
 		break;
 	case 6:
 		system("cls");
 		firma->vypisaniePoctuKilometrovVsetkychVozidiel();
+		menuStatistiky("", false);
 		break;
 	case 7:
 		system("cls");
 		firma->vypisaniePoctuKilometrovPodlaTypuDrona();
+		menuStatistiky("", false);
 		break;
 	case 0:
 		system("cls");
 		hlavneMenu();
 		break;
 	default:
-		menuStatistiky("", true);
+		menuStatistiky("Bola zadana neplatna volba", true);
 		break;
 	}
 }
@@ -354,7 +360,7 @@ void UI::menuObjednavky(std::string text, bool clearTerminal)
 		menuObjednavky("", false);
 		break;
 	default:
-		menuObjednavky("", true);
+		menuObjednavky("Bola zadana neplatna volba", true);
 		break;
 	}
 
