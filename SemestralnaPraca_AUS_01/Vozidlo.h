@@ -66,7 +66,6 @@ private:
 	std::string datumaCasEvidencie_;
 	std::string SPZ_ = "ZA_";
 
-
 	structures::LinkedList<Prekladisko*> *linkedListTrasaVozidla_;
 	structures::ArrayList<Zasielka*> *arrayListZasielok_;
 };

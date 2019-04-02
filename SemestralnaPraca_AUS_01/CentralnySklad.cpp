@@ -41,7 +41,6 @@ void CentralnySklad::naplVozidla() {
 
 ostream & operator<<(ostream & os, CentralnySklad & centralnySklad)
 {
-	// TODO: insert return statement here
 	for (Zasielka* zasielka : *centralnySklad.arrayListZasielok)
 	{
 		os << *zasielka;
@@ -52,5 +51,6 @@ ostream & operator<<(ostream & os, CentralnySklad & centralnySklad)
 istream & operator>>(istream & is, CentralnySklad & centralnySklad)
 {
 	// TODO: insert return statement here
+	throw std::exception("operator>>: Not implemented yet.");
 	return is;
 }

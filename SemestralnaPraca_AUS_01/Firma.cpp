@@ -215,13 +215,14 @@ void Firma::vypisZasielkySDovodomZamietnutia(std::string datumOd, std::string da
 {
 	int pocet = 0;
 	for (Objednavka * objednavka : *this->linkedListObjednavok) {
+		// zamietnuté -> nie zrušené
 		if (objednavka->getStav() == eStavObjednavky::ZAMIETNUTA &&
 			objednavka->getOdosielatel()->getRegion() == region &&
-			objednavka->getDatumaCasVytvorenia() >= datumOd &&
-			objednavka->getDatumaCasVytvorenia() <= datumDo)
+			Datum::string_to_time_t(objednavka->getDatumaCasVytvorenia()) >= Datum::string_to_time_t(datumOd) &&
+			Datum::string_to_time_t(objednavka->getDatumaCasVytvorenia()) <= Datum::string_to_time_t(datumDo))
 		{
-			objednavka->toString();
 			pocet++;
+			objednavka->toString();
 		}
 	}
 	if (pocet == 0)

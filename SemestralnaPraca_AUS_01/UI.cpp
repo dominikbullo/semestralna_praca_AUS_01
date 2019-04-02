@@ -6,7 +6,7 @@ UI::UI()
 {
 	running = true;
 	datumUI = Datum::getInstance();
-	//datumUI->posunCas(-10 * 60 * 60);
+	datumUI->posunCas(-10 * 60 * 60);
 	firma = new Firma("AoE");
 	pridajVsetkyPrekladiska();
 }
@@ -78,7 +78,6 @@ void UI::hlavneMenu()
 
 
 			ukonciDen();
-
 			ulozVsetko(out);
 			break;
 		case 6:
