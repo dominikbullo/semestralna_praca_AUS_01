@@ -128,7 +128,6 @@ namespace structures
 	template<typename T>
 	inline void ExplicitQueue<T>::push(const T& data)
 	{
-		// NOTE: pridávam na koniec 
 		list_->add(data);
 	}
 

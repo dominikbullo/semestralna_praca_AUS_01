@@ -21,6 +21,7 @@ Prekladisko::~Prekladisko()
 		delete dron;
 	}
 	delete this->arrayListDronov_;
+
 	for (Zasielka * zasielka : *this->arrayListZasielok_) {
 		delete zasielka;
 	}
@@ -84,8 +85,7 @@ Dron * Prekladisko::vyberDrona(Zasielka * zasielka)
 			}
 		}
 
-		else if (dron->unesieZasielku(zasielka) &&
-			dron->stihnePriletietPreZasielku(zasielka))
+		else if (dron->unesieZasielku(zasielka) && dron->stihnePriletietPreZasielku(zasielka))
 		{
 			vybityKandidatNaDrona = dron;
 			continue;

@@ -156,7 +156,6 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 			return;
 		}
 	}
-	vhodnyDron->toString();
 
 	zasielka->setDatumaCasSpracovania(vhodnyDron->vytazenyDo());
 	zasielka->setdatumaCasPrevzatia(Datum::time_t_to_string(vhodnyDron->casPriletuPreZasielku(zasielka)));
@@ -166,14 +165,12 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 
 	vhodnyDron->pridajZasielku(zasielka);
 	vozidloNaVyzdvihnutie->pridajZasielku(zasielka);
-	std::cout << "Prepocitany ale stale ten isty";
 	vhodnyDron->toString();
-	//zasielka->toString();
 }
 bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasielka)
 {
 	int userInput;
-	cout << "Vasu zasielku môzeme spracovat o viac ako hodinu a to konkretne " <<
+	cout << "Vasu zasielku mozeme spracovat o viac ako hodinu a to konkretne " <<
 		Datum::time_t_to_string(dronPreOdosielatela->casPriletuPreZasielku(zasielka)) << endl <<
 		"Prajete si zasielku zrusit?" << endl;
 	cout << "1. ANO" << endl << "2. NIE" << endl;
