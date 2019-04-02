@@ -22,6 +22,7 @@ Prekladisko::~Prekladisko()
 	}
 	delete this->arrayListDronov_;
 
+
 	for (Zasielka * zasielka : *this->arrayListZasielok_) {
 		delete zasielka;
 	}

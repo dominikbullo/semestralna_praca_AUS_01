@@ -52,12 +52,15 @@ void Dron::pridajZasielku(Zasielka * novaZasielka)
 	this->frontZasielok_->push(novaZasielka);
 }
 
+// TODO spracovanie, pod¾a èasu, alebo pod¾a naloženia
 void Dron::spracujZasielky(structures::ArrayList<Zasielka*> * arrayListZasielok_)
 {
-	while (!frontZasielok_->isEmpty() && frontZasielok_->peek()->getdatumaCasUkoncenia_() < Datum::getAktualnyDatumaCas())
+	while (!frontZasielok_->isEmpty()
+		&& frontZasielok_->peek()->getdatumaCasUkoncenia_() < Datum::getAktualnyDatumaCas()
+		)
 	{
-		arrayListZasielok_->add(frontZasielok_->peek());
-		frontZasielok_->pop();
+		arrayListZasielok_->add(frontZasielok_->pop());
+		//frontZasielok_->pop();
 	}
 
 }
@@ -80,7 +83,7 @@ double Dron::getPocetPercentNaZvladnutieLetu(Zasielka * zasielka)
 }
 
 bool Dron::stihnePriletietPreZasielku(Zasielka * zasielka) {
-	time_t aktualnyCas = Datum::string_to_time_t(Datum::getAktualnyDatumaCas());
+	time_t aktualnyCas = Datum::getAktualnyDatumaCasAsTime();
 
 	tm *ltm = localtime(&aktualnyCas);
 	struct tm casNajneskor = *ltm;
@@ -122,7 +125,7 @@ void Dron::toString()
 ostream & operator<<(ostream & os, Dron & dron)
 {
 	// Atributy
-
+	os << "**Atributy drona**\n";
 	os <<
 		dron.stringTyp() << " " <<
 		dron.vytazeny_ << " " <<
@@ -135,13 +138,6 @@ ostream & operator<<(ostream & os, Dron & dron)
 		dron.celkovyPocetNalietanychHodin_ << " " << "\n";
 
 	// Struktury 
-
-	// TODO store Queue
-	// make copy
-	// while not empty -> store
-	//frontZasielok_
-
-	os << "Front objednavok drona \n";
 	structures::ExplicitQueue<Zasielka*> *kopiaFrontu = new structures::ExplicitQueue<Zasielka*>(*dron.frontZasielok_);
 
 	while (!kopiaFrontu->isEmpty()) {

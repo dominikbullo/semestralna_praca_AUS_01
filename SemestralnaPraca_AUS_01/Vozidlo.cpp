@@ -20,8 +20,9 @@ Vozidlo::~Vozidlo()
 	{
 		delete zasielka;
 	}
-	delete linkedListTrasaVozidla_;
 	delete arrayListZasielok_;
+
+	delete linkedListTrasaVozidla_;
 }
 
 void Vozidlo::toString()
@@ -55,9 +56,9 @@ ostream & operator<<(ostream & os, Vozidlo & vozidlo)
 	// TODO staèi regiony
 	os << "Size trasy: " << vozidlo.linkedListTrasaVozidla_->size() << "\n";
 	for (Prekladisko * var : *vozidlo.linkedListTrasaVozidla_) {
-		os << *var;
+		os << var->dajRegion() << " ";
 	}
-	os << "Size zasielok: " << vozidlo.arrayListZasielok_->size() << "\n";
+	os << "\nSize nalozenych zasielok: " << vozidlo.arrayListZasielok_->size() << "\n";
 	for (Zasielka * var : *vozidlo.arrayListZasielok_) {
 		os << *var;
 	}

@@ -54,6 +54,7 @@ void UI::hlavneMenu()
 
 		//firma->pridajVozidlo(new Vozidlo(14560, 1045550, "ZA222BA"));
 		firma->pridajVozidlo(new Vozidlo(10000, 10, "ZA232DB"));
+		//firma->pridajVozidlo(new Vozidlo(10000, 10, "ZA214DB"));
 		firma->vypisZoznamVozidiel();
 
 		//pridám jeden extra dron prekladisku v regióne 
@@ -69,11 +70,19 @@ void UI::hlavneMenu()
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
 
 
+		time_t aktualnyCas = datumUI->getAktualnyDatumaCasAsTime();
+		// TODO vypočítať čas na pridanie do 21:00
+		time_t casZatvorenia = datumUI->getAktualnyDatumaCasAsTime();
+
 		firma->vratVozidlaDoCentralnehoSkladu();
 
 		firma->getCentralnySklad()->vypisZoznamZasielok();
 		firma->getCentralnySklad()->naplVozidla();
 
+
+		out.open("ulozenie");
+		out << *firma;
+		out.close();
 		hlavneMenu();
 		break;
 	case 6:

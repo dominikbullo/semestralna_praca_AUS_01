@@ -77,14 +77,25 @@ void Firma::pridajRegionyDoTrasyVozidla(Vozidlo* vozidlo) {
 
 void Firma::vratVozidlaDoCentralnehoSkladu()
 {
-	this->spracujVsetkyObjednavky();
+	// TODO metoda sa mÙûe volaù aû po 22!
+	time_t aktualnyCas = Datum::getAktualnyDatumaCasAsTime();
+	tm *ltm = localtime(&aktualnyCas);
+	struct tm uzatvorenieFirmy = *ltm;
+	uzatvorenieFirmy.tm_hour = 21;
+	uzatvorenieFirmy.tm_min = 00;
 
-	for (Vozidlo *vozidlo : *arrayListVozidiel)
+	if (mktime(&uzatvorenieFirmy) < Datum::getAktualnyDatumaCasAsTime())
 	{
-		vozidlo->aktualizujCelkoveNaklady();
-		vozidlo->toString();
-		this->centralnySklad_->prijmiZasielky(vozidlo);
+		this->spracujVsetkyObjednavky();
+
+		for (Vozidlo *vozidlo : *arrayListVozidiel)
+		{
+			vozidlo->aktualizujCelkoveNaklady();
+			vozidlo->toString();
+			this->centralnySklad_->prijmiZasielky(vozidlo);
+		}
 	}
+	std::cout << "Firma je este otvorena. Nemozno vratit vozidla do centralneho skladu" << std::endl;
 }
 
 
@@ -153,6 +164,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 		if (chceUserZrusitObjednavku(vhodnyDron, zasielka)) {
 			objednavka->setStav(eStavObjednavky::ZRUSENA);
 			cout << "Vasa objednavka bola zrusena" << endl;
+			delete zasielka;
 			return;
 		}
 	}
@@ -181,7 +193,6 @@ bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasi
 ostream& operator<< (ostream& os, Firma& firma) {
 
 	os << firma.nazovFirmy_ << "\n";
-	//firma.centralnySklad_ << " " << "\n";
 
 	os << "Size vozidiel: " << firma.arrayListVozidiel->size() << "\n";
 

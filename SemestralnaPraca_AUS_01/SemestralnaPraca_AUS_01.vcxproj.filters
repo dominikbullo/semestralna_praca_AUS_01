@@ -278,5 +278,6 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="..\README.md" />
+    <None Include="ulozenie" />
   </ItemGroup>
 </Project>
