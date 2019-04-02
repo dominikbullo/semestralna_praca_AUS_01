@@ -23,7 +23,7 @@ public:
 	bool stihnePriletietPreZasielku(Zasielka * zasielka);
 	void prepocitajInformacieoDosupnosti();
 	void pridajZasielku(Zasielka * zasielka);
-	void spracujZasielky();
+	void spracujZasielky(structures::ArrayList<Zasielka*>* arrayListZasielok_);
 	bool jeVolny() { return !vytazeny_; };
 
 	std::string vytazenyDo() { return vytazenyDo_; };
@@ -37,9 +37,10 @@ public:
 
 	time_t casPriletuPreZasielku(Zasielka * zasielka)
 	{
-		auto test1 = Datum::string_to_time_t(vytazenyDo_);
-		auto test2 = getCasPotrebnyNaDobitie(getPocetPercentNaZvladnutieLetu(zasielka));
-		auto test3 = trvanieLetu(zasielka) / 2.0;
+		//auto test1 = Datum::string_to_time_t(vytazenyDo_);
+		//auto test2 = getCasPotrebnyNaDobitie(getPocetPercentNaZvladnutieLetu(zasielka));
+		//auto test3 = trvanieLetu(zasielka) / 2.0;
+		//auto teeest = Datum::time_t_to_string(test1 + test3);
 		return Datum::string_to_time_t(vytazenyDo_) +
 			getCasPotrebnyNaDobitie(getPocetPercentNaZvladnutieLetu(zasielka)) +
 			(trvanieLetu(zasielka) / 2.0);
@@ -56,7 +57,8 @@ public:
 
 	void nabiDrona(double pocetSekundNaNabijacke)
 	{
-		double pocetPercetDobitia = (pocetSekundNaNabijacke / 60) / (10 / casNaNabitie10Percent_ * 60);
+		if (pocetSekundNaNabijacke <= 0) { return; }
+		double pocetPercetDobitia = pocetSekundNaNabijacke / (10 / casNaNabitie10Percent_ * 60.0);
 		(kapacitaBaterie_ + pocetPercetDobitia > 100) ? kapacitaBaterie_ = 100 : kapacitaBaterie_ += pocetPercetDobitia;
 	}
 

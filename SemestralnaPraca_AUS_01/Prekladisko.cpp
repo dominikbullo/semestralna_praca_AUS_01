@@ -10,7 +10,7 @@ Prekladisko::Prekladisko(std::string region)
 	std::transform(region.begin(), region.end(), region.begin(), ::toupper);
 	this->region_ = region;
 	this->arrayListDronov_ = new structures::ArrayList<Dron*>();
-	//this->arrayListZasielok_ = new structures::ArrayList<Zasielka*>();
+	this->arrayListZasielok_ = new structures::ArrayList<Zasielka*>();
 
 	this->pridajDron(new Dron(eDrony::DVA, set_get_SerioveCislo()));
 }
@@ -21,20 +21,22 @@ Prekladisko::~Prekladisko()
 		delete dron;
 	}
 	delete this->arrayListDronov_;
-
+	for (Zasielka * zasielka : *this->arrayListZasielok_) {
+		delete zasielka;
+	}
+	delete this->arrayListZasielok_;
 }
 
 void Prekladisko::pridajDron(Dron * novyDron)
 {
-	// TODO sort by date
-	//for (int i = 0; i < arrayListDronov_->size(); i++)
-	//{
-	//	if (arrayListDronov_->operator[](i)->getDatumaCasEvidencie() > novyDron->getDatumaCasEvidencie())
-	//	{
-	//		arrayListDronov_->insert(novyDron, i);
-	//		return;
-	//	}
-	//}
+	int index = 0;
+	for (Dron *dron : *arrayListDronov_) {
+		if (novyDron->getDatumaCasEvidencie() < dron->getDatumaCasEvidencie()) {
+			this->arrayListDronov_->insert(novyDron, index);
+			return;
+		}
+		index++;
+	}
 	this->arrayListDronov_->add(novyDron);
 }
 
@@ -49,8 +51,8 @@ void Prekladisko::vypisZoznamDronov() {
 void Prekladisko::spracujZasielky()
 {
 	for (Dron * dron : *this->arrayListDronov_) {
-		//dron->spracujZasielky(arrayListZasielok_);
-		dron->spracujZasielky();
+		dron->spracujZasielky(arrayListZasielok_);
+		//dron->spracujZasielky();
 	}
 }
 

@@ -45,13 +45,6 @@ void Dron::pridajZasielku(Zasielka * novaZasielka)
 
 	znizKapacituBaterie(trvanieLetu(novaZasielka));
 
-	//// FIXME n·jsù kde je chyba
-	//// TODO n·jsù kde je chyba
-	//if (kapacitaBaterie_ < 0)
-	//{
-	//	throw std::exception("You screw it up man");
-	//}
-
 	this->celkovyPocetNalietanychHodin_ += trvanieLetu(novaZasielka) / 60.0 / 60;
 	this->celkovyPocetPrepravenychZasielok_++;
 	novaZasielka->setDatumaCasUkoncenia(this->vytazenyDo_);
@@ -59,14 +52,11 @@ void Dron::pridajZasielku(Zasielka * novaZasielka)
 	this->frontZasielok_->push(novaZasielka);
 }
 
-void Dron::spracujZasielky()
+void Dron::spracujZasielky(structures::ArrayList<Zasielka*> * arrayListZasielok_)
 {
-	if (frontZasielok_->isEmpty()) { return; }
-	//TODO think about this	
-	while (frontZasielok_->peek()->getdatumaCasUkoncenia_() < Datum::getAktualnyDatumaCas())
+	while (!frontZasielok_->isEmpty() && frontZasielok_->peek()->getdatumaCasUkoncenia_() < Datum::getAktualnyDatumaCas())
 	{
-		// TODO test it
-		//arrayListZasielok_->add(frontZasielok_->pop());
+		arrayListZasielok_->add(frontZasielok_->peek());
 		frontZasielok_->pop();
 	}
 
@@ -104,7 +94,7 @@ bool Dron::stihnePriletietPreZasielku(Zasielka * zasielka) {
 
 void Dron::prepocitajInformacieoDosupnosti()
 {
-	this->nabiDrona(Datum::string_to_time_t(vytazenyDo_) - Datum::getAktualnyDatumaCasAsTime());
+	this->nabiDrona(Datum::getAktualnyDatumaCasAsTime() - Datum::string_to_time_t(vytazenyDo_));
 	//time_t test = Datum::string_to_time_t(vytazenyDo_);
 	//time_t test1 = Datum::getAktualnyDatumaCasAsTime();
 
@@ -117,13 +107,12 @@ void Dron::prepocitajInformacieoDosupnosti()
 void Dron::toString()
 {
 	cout << "******************** Informacie o dronovi **********************" << endl;
-	if (kapacitaBaterie_ < 0) { throw std::exception("Neplatny stav nabitia baterie"); }
 	cout <<
 		"Seriove cislo - " << this->serioveCislo_ << endl <<
 		"Datum zaradenia do prevadzky - " << this->datumaCasEvidencie_ << endl <<
 		"Typ - " << ((typ_ == eDrony::JEDEN) ? "JEDEN" : "DVA") << endl <<
 		"Obsadeny do - " << this->vytazenyDo_ << endl <<
-		"Kapacita baterie - " << this->kapacitaBaterie_ << endl <<
+		"Virtu·lna kapacita baterie - " << this->kapacitaBaterie_ << endl <<
 		"Celkovy pocet nalietanych hodin - " << this->celkovyPocetNalietanychHodin_ << endl <<
 		"Celkovy pocet prepravenych zasielok - " << this->celkovyPocetPrepravenychZasielok_ << endl;
 	cout << "*******************************************************************" << endl;

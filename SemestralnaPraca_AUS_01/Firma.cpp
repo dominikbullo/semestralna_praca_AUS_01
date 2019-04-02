@@ -7,9 +7,8 @@ Firma::Firma(std::string nazovFirmy)
 	nazovFirmy_ = nazovFirmy;
 	centralnySklad_ = new CentralnySklad();
 
-	arrayPrekladisk = new structures::Array<Prekladisko*>(24);
-	arrayListPrekladisk = new structures::ArrayList<Prekladisko*>();
 	arrayListVozidiel = new structures::ArrayList<Vozidlo*>();
+	arrayListPrekladisk = new structures::ArrayList<Prekladisko*>();
 	linkedListObjednavok = new structures::LinkedList<Objednavka*>();
 }
 
@@ -22,13 +21,9 @@ Firma::~Firma()
 	for (Prekladisko * prekladisko : *arrayListPrekladisk) {
 		delete prekladisko;
 	}
-	/*for (Prekladisko * prekladisko : *arrayPrekladisk) {
-		delete prekladisko;
-	}*/
 	for (Vozidlo *vozidlo : *arrayListVozidiel) {
 		delete vozidlo;
 	}
-	delete arrayPrekladisk;
 	delete arrayListVozidiel;
 	delete arrayListPrekladisk;
 	delete linkedListObjednavok;
@@ -153,7 +148,7 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 		objednavka->zamietniObjednavku("Vozidlo ktore bude prechadzat prekladiskom adresata sa nenaslo");
 		return;
 	}
-
+	string test = Datum::time_t_to_string(vhodnyDron->casPriletuPreZasielku(zasielka));
 	if (vhodnyDron->casPriletuPreZasielku(zasielka) > Datum::getAktualnyDatumaCasAsTime() + 60 * 60) {
 		if (chceUserZrusitObjednavku(vhodnyDron, zasielka)) {
 			objednavka->setStav(eStavObjednavky::ZRUSENA);
@@ -171,7 +166,8 @@ void Firma::vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel,
 
 	vhodnyDron->pridajZasielku(zasielka);
 	vozidloNaVyzdvihnutie->pridajZasielku(zasielka);
-
+	std::cout << "Prepocitany ale stale ten isty";
+	vhodnyDron->toString();
 	//zasielka->toString();
 }
 bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasielka)

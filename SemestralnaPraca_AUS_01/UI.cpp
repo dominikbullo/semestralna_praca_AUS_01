@@ -5,12 +5,8 @@ using namespace std;
 UI::UI()
 {
 	datumUI = Datum::getInstance();
-	datumUI->posunCas(-15 * 60 * 60);
 	firma = new Firma("AoE");
 	pridajVsetkyPrekladiska();
-
-	// NOTE: pole okresov ? 
-	//poleRegionov = new structures::Array<std::string>(23);
 }
 
 UI::~UI()
@@ -57,9 +53,6 @@ void UI::hlavneMenu()
 	case 5:
 
 		//firma->pridajVozidlo(new Vozidlo(14560, 1045550, "ZA222BA"));
-		//// aj v prípade, že ho posuniem naspäť
-		//datumUI->posunCas(-60 * 60);
-
 		firma->pridajVozidlo(new Vozidlo(10000, 10, "ZA232DB"));
 		firma->vypisZoznamVozidiel();
 
@@ -70,7 +63,8 @@ void UI::hlavneMenu()
 		firma->getVozidloBySPZ("ZA232DB")->vypisTrasuVozidla();
 
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 2), new Adresat("MA", 15.5));
-		datumUI->posunCas(60 * 60);
+		//datumUI->posunCas(60 * 60);
+		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
 		firma->vytvorObjednavku(2.75, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
 

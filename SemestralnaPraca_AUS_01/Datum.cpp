@@ -18,6 +18,7 @@ void Datum::posunCas(int pocetSekund)
 
 std::string Datum::time_t_to_string(time_t t)
 {
+	// TODO posun èasu robí zlobu ? žeby ?
 	auto tm = *std::localtime(&t);
 
 	std::ostringstream oss;
@@ -36,7 +37,7 @@ time_t Datum::string_to_time_t(std::string s)
 	when.tm_year = yy - 1900;
 	when.tm_mon = month - 1;;
 	when.tm_mday = dd;
-	when.tm_hour = hh;
+	when.tm_hour = hh - 1;
 	when.tm_min = mm;
 
 	return mktime(&when);
