@@ -276,8 +276,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\README.md">
-      <Filter>Source Files</Filter>
-    </None>
+    <None Include="ClassDiagram.cd" />
+    <None Include="..\README.md" />
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <string>
 #include "structures/heap_monitor.h"
+#include "structures/array/array.h"
 #include "structures/list/array_list.h"
 #include "structures/list/linked_list.h"
 #include "Vozidlo.h"
@@ -73,7 +74,8 @@ public:
 private:
 	std::string nazovFirmy_;
 	CentralnySklad* centralnySklad_;
-	structures::ArrayList<Vozidlo*> * arrayListVozidiel;
+	structures::Array<Prekladisko*> * arrayPrekladisk;
 	structures::ArrayList<Prekladisko*> * arrayListPrekladisk;
+	structures::ArrayList<Vozidlo*> * arrayListVozidiel;
 	structures::LinkedList<Objednavka*> * linkedListObjednavok;
 };

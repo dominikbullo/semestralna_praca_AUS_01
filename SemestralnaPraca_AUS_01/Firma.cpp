@@ -7,8 +7,9 @@ Firma::Firma(std::string nazovFirmy)
 	nazovFirmy_ = nazovFirmy;
 	centralnySklad_ = new CentralnySklad();
 
-	arrayListVozidiel = new structures::ArrayList<Vozidlo*>();
+	arrayPrekladisk = new structures::Array<Prekladisko*>(24);
 	arrayListPrekladisk = new structures::ArrayList<Prekladisko*>();
+	arrayListVozidiel = new structures::ArrayList<Vozidlo*>();
 	linkedListObjednavok = new structures::LinkedList<Objednavka*>();
 }
 
@@ -21,9 +22,13 @@ Firma::~Firma()
 	for (Prekladisko * prekladisko : *arrayListPrekladisk) {
 		delete prekladisko;
 	}
+	/*for (Prekladisko * prekladisko : *arrayPrekladisk) {
+		delete prekladisko;
+	}*/
 	for (Vozidlo *vozidlo : *arrayListVozidiel) {
 		delete vozidlo;
 	}
+	delete arrayPrekladisk;
 	delete arrayListVozidiel;
 	delete arrayListPrekladisk;
 	delete linkedListObjednavok;

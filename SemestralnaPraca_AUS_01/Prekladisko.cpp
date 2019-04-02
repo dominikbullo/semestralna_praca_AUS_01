@@ -26,8 +26,7 @@ Prekladisko::~Prekladisko()
 
 void Prekladisko::pridajDron(Dron * novyDron)
 {
-	// NOTE: netreba ich ukladať podľa dátumu
-	// TODO: priestor na usporiadanie dronov podľa hmotnosti napríklad, následne rýchlejšie sortovanie a vyberanie ? 
+	// TODO sort by date
 	//for (int i = 0; i < arrayListDronov_->size(); i++)
 	//{
 	//	if (arrayListDronov_->operator[](i)->getDatumaCasEvidencie() > novyDron->getDatumaCasEvidencie())
