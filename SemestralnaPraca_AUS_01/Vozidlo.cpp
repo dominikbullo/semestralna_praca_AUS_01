@@ -1,11 +1,14 @@
 #include "structures/heap_monitor.h"
 #include "Vozidlo.h"
+// moze
+#include "Firma.h"
 
 using namespace std;
 
-Vozidlo::Vozidlo(int nostnostVozidla, int prevadzkoveNaklady, std::string SPZ)
+Vozidlo::Vozidlo(double nostnostVozidla, int prevadzkoveNaklady, std::string SPZ)
 {
-	nosnost_ = nostnostVozidla;
+	aktualnaNosnost_ = nostnostVozidla; //v kilogramoch!
+	maxNosnost_ = nostnostVozidla;
 	prevadzkoveNaklady_ = prevadzkoveNaklady;
 	SPZ_ = SPZ;
 	datumaCasEvidencie_ = Datum::getAktualnyDatumaCas();
@@ -46,19 +49,21 @@ ostream & operator<<(ostream & os, Vozidlo & vozidlo)
 {
 	// Atributy
 	os <<
+		vozidlo.aktualnaNosnost_ << " " <<
 		vozidlo.prevadzkoveNaklady_ << " " <<
-		vozidlo.datumaCasEvidencie_ << " " <<
 		vozidlo.SPZ_ << " " <<
-		vozidlo.naklady_ << " " <<
-		vozidlo.nosnost_ << " " << "\n";
+		vozidlo.maxNosnost_ << " " <<
+
+		vozidlo.datumaCasEvidencie_ << " " <<
+		vozidlo.naklady_ << " "  "\n";
 
 	// Struktury 
 	// TODO staèi regiony
-	os << "Size trasy: " << vozidlo.linkedListTrasaVozidla_->size() << "\n";
+	os << vozidlo.linkedListTrasaVozidla_->size() << "\n";
 	for (Prekladisko * var : *vozidlo.linkedListTrasaVozidla_) {
 		os << var->dajRegion() << " ";
 	}
-	os << "\nSize nalozenych zasielok: " << vozidlo.arrayListZasielok_->size() << "\n";
+	os << "\n" << vozidlo.arrayListZasielok_->size() << "\n";
 	for (Zasielka * var : *vozidlo.arrayListZasielok_) {
 		os << *var;
 	}
@@ -69,7 +74,22 @@ ostream & operator<<(ostream & os, Vozidlo & vozidlo)
 
 istream & operator>>(istream & is, Vozidlo & vozidlo)
 {
-	throw std::exception("Dorobit");
-	// TODO: insert return statement here
+	std::string datum, pom, cas;
+	double maxNosnost, naklady;
+	is >> maxNosnost >> datum >> pom >> cas >> naklady;
+
+	vozidlo.maxNosnost_ = maxNosnost;
+	vozidlo.datumaCasEvidencie_ = datum + " " + pom + " " + cas;
+	vozidlo.naklady_;
+
+	//for (size_t i = 0; i < pocetVozidiel; i++)
+	//{
+	//	is >> nosnost >> prevadzkoveNaklady >> SPZ;
+	//	Vozidlo * nacitaneVozidlo = new Vozidlo(nosnost, prevadzkoveNaklady, SPZ);
+	//	is >> *nacitaneVozidlo;
+	//	firma.arrayListVozidiel->add(nacitaneVozidlo);
+	//}
+	//linkedListTrasaVozidla_ = new structures::LinkedList<Prekladisko*>();
+	//arrayListZasielok_ = new structures::ArrayList<Zasielka*>();
 	return is;
 }

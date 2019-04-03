@@ -5,10 +5,7 @@
 int main()
 {
 
-	// TODO 02.04
-	// TODO: Vypísanie nasledujúcich sumárnych štatistík:
-
-	// TODO 03.04
+	// TODO Nosnoť vozidla skontroluj
 	// TODO Uloženie a načítanie aktuálneho stavu evidencie do/zo súboru.
 	// TODO Vyber vozidiel v centralnom sklade, zaslanie zasielky do lokalnych prekladisk
 	// TODO Odoslanie z prekladisk userom

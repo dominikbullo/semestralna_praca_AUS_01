@@ -69,14 +69,13 @@ public:
 	void vytvorObjednavku(double hmotnostZasielky, Odosielatel * odosielatel, Adresat * adresat);
 	bool chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasielka);
 
+	// STATISTIKY
 	void getRegionsNajvacsimPoctomDorucenychObjednavok(std::string datumOd, std::string datumDo);
 	void getRegionsNajvacsimPoctomPrijatychObjednavok(std::string datumOd, std::string datumDo);
 	void vypisZasielkySDovodomZamietnutia(std::string datumOd, std::string datumDo, std::string region);
 	void vypisaniePoctuZrusenychObjednavok(std::string datumOd, std::string datumDo);
 	void vypisanieCelkovehoPoctuDorucenychZasielok();
-
 	void vypisaniePoctuKilometrovVsetkychVozidiel();
-
 	void vypisaniePoctuKilometrovPodlaTypuDrona();
 
 	friend ostream& operator<< (ostream& os, Firma& firma);

@@ -139,10 +139,10 @@ std::string Prekladisko::set_get_SerioveCislo()
 ostream & operator<<(ostream & os, Prekladisko & prekladisko)
 {
 	// Atributy
-	os << prekladisko.region_ << "\n";
+	os << prekladisko.region_ << " ";
 
 	// Struktury 
-	os << prekladisko.arrayListDronov_->size() << " ";
+	os << prekladisko.arrayListDronov_->size() << "\n";
 	for (Dron * var : *prekladisko.arrayListDronov_) {
 		os << *var;
 	}
@@ -151,6 +151,18 @@ ostream & operator<<(ostream & os, Prekladisko & prekladisko)
 
 istream & operator>>(istream & is, Prekladisko & prekladisko)
 {
-	// TODO: insert return statement here
+	int pocetDronov = 0;
+	is >> pocetDronov;
+
+	int typDrona = -1;
+	std::string serioveCislo = "";
+
+	for (size_t i = 0; i < pocetDronov; i++)
+	{
+		is >> typDrona >> serioveCislo;
+		Dron * nacitanyDron = new Dron((eDrony)typDrona, serioveCislo);
+		is >> *nacitanyDron;
+		prekladisko.pridajDron(nacitanyDron);
+	}
 	return is;
 }

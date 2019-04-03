@@ -268,15 +268,16 @@ ostream& operator<< (ostream& os, Firma& firma) {
 
 	os << firma.nazovFirmy_ << "\n";
 
-	os << "Size vozidiel: " << firma.arrayListVozidiel->size() << "\n";
+	// Najskôr prekladiska firmy
+	os << firma.arrayListPrekladisk->size() << "\n";
 
-	for (Vozidlo * var : *firma.arrayListVozidiel) {
+	for (Prekladisko * var : *firma.arrayListPrekladisk) {
 		os << *var;
 	}
 
-	os << "Size prekladisk: " << firma.arrayListPrekladisk->size() << "\n";
+	os << firma.arrayListVozidiel->size() << "\n";
 
-	for (Prekladisko * var : *firma.arrayListPrekladisk) {
+	for (Vozidlo * var : *firma.arrayListVozidiel) {
 		os << *var;
 	}
 
@@ -289,6 +290,40 @@ ostream& operator<< (ostream& os, Firma& firma) {
 	return os;
 }
 istream& operator>> (istream& is, Firma& firma) {
-	throw std::exception("Not implemented yet!");
+	double maxNosnost, nosnost, prevadzkoveNaklady, pocetRegionovTrasy;
+	std::string SPZ, region;
+
+	is >> firma.nazovFirmy_;
+
+	int pocetPrekladisk = 0;
+	is >> pocetPrekladisk;
+
+	for (size_t i = 0; i < pocetPrekladisk; i++)
+	{
+		is >> region;
+		Prekladisko * nacitanePrekladisko = new Prekladisko(region);
+		is >> *nacitanePrekladisko;
+		firma.arrayListPrekladisk->add(nacitanePrekladisko);
+	}
+
+
+
+	int pocetVozidiel = 0;
+	is >> pocetVozidiel;
+
+	for (size_t i = 0; i < pocetVozidiel; i++)
+	{
+		is >> nosnost >> prevadzkoveNaklady >> SPZ;
+		Vozidlo * nacitaneVozidlo = new Vozidlo(nosnost, prevadzkoveNaklady, SPZ);
+		is >> *nacitaneVozidlo;
+
+		is >> pocetRegionovTrasy;
+		for (size_t i = 0; i < pocetRegionovTrasy; i++)
+		{
+			is >> region;
+
+		}
+		firma.arrayListVozidiel->add(nacitaneVozidlo);
+	}
 	return is;
 }

@@ -60,7 +60,7 @@ void UI::hlavneMenu()
 			break;
 		case 5:
 			//firma->pridajVozidlo(new Vozidlo(14560, 1045550, "ZA222BA"));
-			firma->pridajVozidlo(new Vozidlo(10000, 10, "ZA232DB"));
+			firma->pridajVozidlo(new Vozidlo(3500, 10, "ZA232DB"));
 			//firma->pridajVozidlo(new Vozidlo(10000, 10, "ZA214DB"));
 			firma->vypisZoznamVozidiel();
 

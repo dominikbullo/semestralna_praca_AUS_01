@@ -125,12 +125,13 @@ void Dron::toString()
 ostream & operator<<(ostream & os, Dron & dron)
 {
 	// Atributy
-	os << "**Atributy drona**\n";
+	//os << "**atributy drona**\n";
 	os <<
-		dron.stringTyp() << " " <<
+		(int)dron.typ_ << " " <<
+		dron.serioveCislo_ << " " <<
+
 		dron.vytazeny_ << " " <<
 		dron.datumaCasEvidencie_ << " " <<
-		dron.serioveCislo_ << " " <<
 		dron.vytazenyDo_ << " " <<
 		dron.nosnost_ << " " << // nosnost aj ostane veci viem podla typu
 		dron.celkovyPocetPrepravenychZasielok_ << " " <<

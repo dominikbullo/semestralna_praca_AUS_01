@@ -13,7 +13,7 @@
 class Vozidlo
 {
 public:
-	Vozidlo(int nostnostVozidla, int prevadzkoveNaklady, std::string SPZ);
+	Vozidlo(double nostnostVozidla, int prevadzkoveNaklady, std::string SPZ);
 	~Vozidlo();
 	void toString();
 	void vypisZasielkyVozidla();
@@ -27,7 +27,7 @@ public:
 	structures::ArrayList<Zasielka*> getArrayListZasielok() { return *arrayListZasielok_; }
 
 	void aktualizujCelkoveNaklady() { this->naklady_ += 2.0 * prevadzkoveNaklady_ + linkedListTrasaVozidla_->size(); }
-	bool dokazeNalozitZasielku(Zasielka* zasielka) { return nosnost_ - zasielka->getHmotnost() >= 0; }
+	bool dokazeNalozitZasielku(Zasielka* zasielka) { return aktualnaNosnost_ - zasielka->getHmotnost() >= 0; }
 
 	bool prechadzaPrekladiskom(Prekladisko* prekladiskoKtorymMaPrechadzat) {
 		for (Prekladisko * prekladiskoKtorymPrechadza : *linkedListTrasaVozidla_)
@@ -50,7 +50,7 @@ public:
 	}
 
 	void pridajZasielku(Zasielka* zasielka) {
-		nosnost_ -= zasielka->getHmotnost();
+		aktualnaNosnost_ -= zasielka->getHmotnost();
 		pocetNajazdenychKilometrov += (int)eKonstanty::VZDIALENOST_OKRESOV;
 		arrayListZasielok_->add(zasielka);
 	}
@@ -60,7 +60,8 @@ public:
 private:
 	int prevadzkoveNaklady_;
 	double naklady_ = 0;
-	double nosnost_;
+	double aktualnaNosnost_;
+	double maxNosnost_;
 	double pocetNajazdenychKilometrov = 0;
 
 	std::string datumaCasEvidencie_;
