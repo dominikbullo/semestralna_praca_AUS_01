@@ -7,7 +7,7 @@ UI::UI()
 	running = true;
 	datumUI = Datum::getInstance();
 	datumUI->posunCas(-10 * 60 * 60);
-	firma = new Firma("AoE");
+	firma = new Firma("Age of Express");
 	pridajVsetkyPrekladiska();
 }
 
@@ -124,7 +124,10 @@ void UI::ukonciDen()
 	firma->vratVozidlaDoCentralnehoSkladu();
 
 	firma->getCentralnySklad()->vypisZoznamZasielok();
-	firma->getCentralnySklad()->naplVozidla();
+	firma->naplnVozidla();
+	//// TODO 
+	//// prekladsiko->prijmiZasielky(vozidlo)
+	//firma->vylozZasielkyvPrekladiskach();
 }
 
 int UI::getIntInputFromUser(std::string consoleOutput)
@@ -170,7 +173,6 @@ void UI::pridajVsetkyPrekladiska()
 	{
 		firma->pridajPrekladisko(new Prekladisko(region));
 	}
-
 }
 
 void UI::menuVozidla(std::string text, bool clearTerminal)

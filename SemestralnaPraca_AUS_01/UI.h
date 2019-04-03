@@ -12,6 +12,7 @@ public:
 	void hlavneMenu();
 	void ulozVsetko(std::ofstream &out);
 	void ukonciDen();
+
 	std::string getStrInputFromUser(std::string consoleOutput);
 	string getDateFromUser(string consoleOutput);
 	int getIntInputFromUser(std::string consoleOutput);

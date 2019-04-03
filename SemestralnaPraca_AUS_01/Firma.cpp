@@ -5,11 +5,11 @@ using namespace std;
 Firma::Firma(std::string nazovFirmy)
 {
 	nazovFirmy_ = nazovFirmy;
-	centralnySklad_ = new CentralnySklad();
 
 	arrayListVozidiel = new structures::ArrayList<Vozidlo*>();
 	arrayListPrekladisk = new structures::ArrayList<Prekladisko*>();
 	linkedListObjednavok = new structures::LinkedList<Objednavka*>();
+
 }
 
 Firma::~Firma()
@@ -95,12 +95,20 @@ void Firma::vratVozidlaDoCentralnehoSkladu()
 
 		for (Vozidlo *vozidlo : *arrayListVozidiel)
 		{
-			vozidlo->aktualizujCelkoveNaklady();
+			/*vozidlo->aktualizujCelkoveNaklady();*/
 			this->centralnySklad_->prijmiZasielky(vozidlo);
 		}
 	}
 	else {
 		std::cout << "Firma je este otvorena. Nemozno vratit vozidla do centralneho skladu" << std::endl;
+	}
+}
+
+void Firma::naplnVozidla()
+{
+	for (Zasielka * zasielka : centralnySklad_->getArrayListZasielok())
+	{
+		this->vyberVozidlo(zasielka)->pridajZasielku(zasielka);
 	}
 }
 
@@ -286,7 +294,7 @@ void Firma::vypisZasielkySDovodomZamietnutia(std::string datumOd, std::string da
 	if (pocet == 0)
 	{
 		system("cls");
-		cout << "Ziadna objednavka nebola v regione " << region << " zrusena v tento datum" << endl;
+		cout << "Ziadna objednavka nebola v regione " << region << " zamietnuta firmou v tento datum" << endl;
 	}
 }
 
@@ -321,6 +329,7 @@ void Firma::vypisaniePoctuKilometrovVsetkychVozidiel()
 }
 void Firma::vypisaniePoctuKilometrovPodlaTypuDrona()
 {
+	// TODO
 }
 ostream& operator<< (ostream& os, Firma& firma) {
 
@@ -415,7 +424,5 @@ istream& operator>> (istream& is, Firma& firma)
 
 		firma.linkedListObjednavok->add(nacitanaObjednavka);
 	}
-
-
 	return is;
 }

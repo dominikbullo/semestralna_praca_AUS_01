@@ -16,7 +16,6 @@ void Datum::posunCas(int pocetSekund)
 
 std::string Datum::time_t_to_string(time_t t)
 {
-	// TODO posun èasu robí zlobu ? žeby ?
 	auto tm = *std::localtime(&t);
 
 	std::ostringstream oss;

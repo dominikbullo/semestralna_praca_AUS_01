@@ -22,6 +22,7 @@ public:
 	void pridajVsetkyRegionyDoTrasyVozidla(Vozidlo * vozidlo);
 	void pridajRegionyDoTrasyVozidla(Vozidlo * vozidlo);
 	void vratVozidlaDoCentralnehoSkladu();
+	void naplnVozidla();
 
 	std::string getNazovFirmy() {
 		return nazovFirmy_;

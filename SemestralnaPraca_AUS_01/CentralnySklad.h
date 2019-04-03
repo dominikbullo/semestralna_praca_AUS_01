@@ -8,11 +8,15 @@ public:
 	void prijmiZasielky(Vozidlo *vozidlo);
 	void vypisZoznamZasielok();
 	void naplVozidla();
-
+	structures::ArrayList<Zasielka*> getArrayListZasielok()
+	{
+		return *arrayListZasielok_;
+	}
 
 	friend ostream& operator<< (ostream& os, CentralnySklad& centralnySklad);
 	friend istream& operator>> (istream& is, CentralnySklad& centralnySklad);
 private:
-	structures::ArrayList<Zasielka *> * arrayListZasielok;
+	structures::ArrayList<Zasielka *> * arrayListZasielok_;
+	structures::ArrayList<Vozidlo*> * zoznamVozidiel_;
 };
 

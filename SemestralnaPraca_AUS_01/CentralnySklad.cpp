@@ -4,44 +4,49 @@ using namespace std;
 
 CentralnySklad::CentralnySklad()
 {
-	arrayListZasielok = new structures::ArrayList<Zasielka*>();
+	arrayListZasielok_ = new structures::ArrayList<Zasielka*>();
 }
 
 CentralnySklad::~CentralnySklad()
 {
-	delete arrayListZasielok;
+	delete arrayListZasielok_;
 }
 
 void CentralnySklad::prijmiZasielky(Vozidlo * vozidlo)
 {
+	vozidlo->aktualizujCelkoveNaklady();
 
 	for (Zasielka* zasielka : vozidlo->getArrayListZasielok())
 	{
-		arrayListZasielok->add(zasielka);
+		//zmením smer
+		zasielka->setRegion(zasielka->getObjednavka()->getAdresat()->getRegion());
+		zasielka->setVzdialenost(zasielka->getObjednavka()->getAdresat()->getVzdialenostOdPrekladiska());
+		arrayListZasielok_->add(zasielka);
 	}
-
-	// TODO po pridaní, odstraò zasielku z vozidla -> vyber a prelož do iného 
 	vozidlo->getArrayListZasielok().clear();
-	throw std::exception("CentralnySklad::prijmiZasielky(Vozidlo * vozidlo): Not tested yet.");
-
 }
 
 void CentralnySklad::vypisZoznamZasielok() {
 	cout << endl << "*******************************************************************" << endl;
 	cout << "*************** Zoznam zasielok v centralnom sklade ***************" << endl;
 	cout << "*******************************************************************" << endl << endl;
-	for (Zasielka* zasielka : *arrayListZasielok)
+	for (Zasielka* zasielka : *arrayListZasielok_)
 	{
 		zasielka->toString();
 	}
 }
-void CentralnySklad::naplVozidla() {
+void CentralnySklad::naplVozidla()
+{
+	//	// TODO
+	//	for (Zasielka* zasielka : *arrayListZasielok_)
+	//	{
+	//	}
 	throw std::exception("CentralnySklad::naplVozidla(): Not implemented yet.");
 }
 
 ostream & operator<<(ostream & os, CentralnySklad & centralnySklad)
 {
-	for (Zasielka* zasielka : *centralnySklad.arrayListZasielok)
+	for (Zasielka* zasielka : *centralnySklad.arrayListZasielok_)
 	{
 		os << *zasielka;
 	}

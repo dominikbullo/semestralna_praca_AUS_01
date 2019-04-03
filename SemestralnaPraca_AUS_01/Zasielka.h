@@ -17,6 +17,8 @@ public:
 	void setDatumaCasSpracovania(std::string datum_a_cas) { datumaCasSpracovania_ = datum_a_cas; }
 	void setdatumaCasPrevzatia(std::string datum_a_cas) { datumaCasPrevzatia_ = datum_a_cas; }
 	void setDatumaCasUkoncenia(std::string datum_a_cas) { datumaCasUkoncenia_ = datum_a_cas; }
+	void setVzdialenost(double vzdialenost) { vzdialenostOdPrekladiska_ = vzdialenost; }
+	void setRegion(std::string region) { region_ = region; }
 
 	// GETTERS
 	string getDatumaCasSpracovania() { return datumaCasSpracovania_; }
@@ -24,6 +26,7 @@ public:
 	double getHmotnost() { return hmotnost_; }
 	double getVzdialenost() { return vzdialenostOdPrekladiska_; }
 	std::string getRegion() { return region_; }
+	Objednavka* getObjednavka() { return objednavka_; }
 
 
 	friend ostream& operator<< (ostream& os, Zasielka& zasielka);

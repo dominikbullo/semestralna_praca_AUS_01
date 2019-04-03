@@ -4,11 +4,14 @@
 
 int main()
 {
+	// TODO vypisaniePoctuKilometrovPodlaTypuDrona
+	// TODO Uložiť a načítať centrálny sklad
 
-	// TODO Nosnoť vozidla skontroluj
-	// TODO Zasielky sa duplikuju aj vo fronte, aj vo vozidle, zisti, či to nie je chyba, ale nemala by byť
+	//// TODO 
+	//// prekladsiko->prijmiZasielky(vozidlo)
+	//firma->vylozZasielkyvPrekladiskach();
 	// TODO Vyber vozidiel v centralnom sklade, zaslanie zasielky do lokalnych prekladisk
-	// TODO Odoslanie z prekladisk userom
+
 
 	initHeapMonitor();
 	UI *userInterface = new UI();
