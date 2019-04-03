@@ -82,14 +82,5 @@ istream & operator>>(istream & is, Vozidlo & vozidlo)
 	vozidlo.datumaCasEvidencie_ = datum + " " + pom + " " + cas;
 	vozidlo.naklady_;
 
-	//for (size_t i = 0; i < pocetVozidiel; i++)
-	//{
-	//	is >> nosnost >> prevadzkoveNaklady >> SPZ;
-	//	Vozidlo * nacitaneVozidlo = new Vozidlo(nosnost, prevadzkoveNaklady, SPZ);
-	//	is >> *nacitaneVozidlo;
-	//	firma.arrayListVozidiel->add(nacitaneVozidlo);
-	//}
-	//linkedListTrasaVozidla_ = new structures::LinkedList<Prekladisko*>();
-	//arrayListZasielok_ = new structures::ArrayList<Zasielka*>();
 	return is;
 }

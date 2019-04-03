@@ -6,7 +6,7 @@ int main()
 {
 
 	// TODO Nosnoť vozidla skontroluj
-	// TODO Uloženie a načítanie aktuálneho stavu evidencie do/zo súboru.
+	// TODO Zasielky sa duplikuju aj vo fronte, aj vo vozidle, zisti, či to nie je chyba, ale nemala by byť
 	// TODO Vyber vozidiel v centralnom sklade, zaslanie zasielky do lokalnych prekladisk
 	// TODO Odoslanie z prekladisk userom
 

@@ -281,7 +281,7 @@ ostream& operator<< (ostream& os, Firma& firma) {
 		os << *var;
 	}
 
-	os << "Size objednavok: " << firma.linkedListObjednavok->size() << "\n";
+	os << firma.linkedListObjednavok->size() << "\n";
 
 	for (Objednavka * var : *firma.linkedListObjednavok) {
 		os << *var;
@@ -291,8 +291,7 @@ ostream& operator<< (ostream& os, Firma& firma) {
 }
 istream& operator>> (istream& is, Firma& firma)
 {
-	// TODO najskor asi vsetky objednavky ? 
-	double maxNosnost, nosnost, prevadzkoveNaklady, pocetRegionovTrasy;
+	double nosnost, prevadzkoveNaklady, pocetRegionovTrasy;
 	std::string SPZ, region;
 
 	is >> firma.nazovFirmy_;
@@ -318,12 +317,45 @@ istream& operator>> (istream& is, Firma& firma)
 		is >> *nacitaneVozidlo;
 
 		is >> pocetRegionovTrasy;
-		for (size_t i = 0; i < pocetRegionovTrasy; i++)
+		for (size_t j = 0; j < pocetRegionovTrasy; j++)
 		{
 			is >> region;
+			nacitaneVozidlo->pridajPrekladiskoDoTrasyVozidla(firma.dajPrekladiskoPodlaRegionu(region));
+
+		}
+		int pocetZasielokVoVozidle = 0;
+		is >> pocetZasielokVoVozidle;
+		double hmotnost, odosVzd, adrVzd;
+		std::string odosReg, adrReg;
+
+		for (size_t k = 0; k < pocetZasielokVoVozidle; k++)
+		{
+			is >> hmotnost >> odosReg >> odosVzd >> adrReg >> adrVzd;
+			Objednavka* nacitanaObjednavka = new Objednavka(hmotnost, new Odosielatel(odosReg, odosVzd), new Adresat(adrReg, adrVzd));
+			is >> *nacitanaObjednavka;
+
+			Zasielka* nacitanaZasielka = new Zasielka(nacitanaObjednavka);
+			is >> *nacitanaZasielka;
+
+			nacitaneVozidlo->getArrayListZasielok().add(nacitanaZasielka);
 
 		}
 		firma.arrayListVozidiel->add(nacitaneVozidlo);
 	}
+
+	int pocetObjednavok = 0;
+	is >> pocetObjednavok;
+	for (size_t i = 0; i < pocetObjednavok; i++)
+	{
+		double hmotnost, odosVzd, adrVzd;
+		std::string odosReg, adrReg;
+		is >> hmotnost >> odosReg >> odosVzd >> adrReg >> adrVzd;
+		Objednavka* nacitanaObjednavka = new Objednavka(hmotnost, new Odosielatel(odosReg, odosVzd), new Adresat(adrReg, adrVzd));
+		is >> *nacitanaObjednavka;
+
+		firma.linkedListObjednavok->add(nacitanaObjednavka);
+	}
+
+
 	return is;
 }
