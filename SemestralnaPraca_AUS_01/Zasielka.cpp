@@ -39,7 +39,7 @@ ostream & operator<<(ostream & os, Zasielka & zasielka)
 {
 	// Atributy
 	// TODO objednavka
-	os << *zasielka.objednavka_ << "\n";
+	os << *zasielka.objednavka_;
 
 	os <<
 		zasielka.vzdialenostOdPrekladiska_ << " " <<
@@ -53,6 +53,20 @@ ostream & operator<<(ostream & os, Zasielka & zasielka)
 
 istream & operator>>(istream & is, Zasielka & zasielka)
 {
-	// TODO: insert return statement here
+
+	std::string datum, pom, cas;
+
+	is >> zasielka.vzdialenostOdPrekladiska_
+		>> zasielka.region_;
+
+	is >> datum >> pom >> cas;
+	zasielka.datumaCasSpracovania_ = datum + " " + pom + " " + cas;
+
+	is >> datum >> pom >> cas;
+	zasielka.datumaCasPrevzatia_ = datum + " " + pom + " " + cas;
+
+	is >> datum >> pom >> cas;
+	zasielka.datumaCasUkoncenia_ = datum + " " + pom + " " + cas;
+
 	return is;
 }

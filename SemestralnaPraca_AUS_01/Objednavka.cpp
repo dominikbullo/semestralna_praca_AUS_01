@@ -76,22 +76,44 @@ Adresat::Adresat(std::string region, double vzdialenostOdPrekladiska)
 
 ostream & operator<<(ostream & os, Objednavka & objednavka)
 {
-	// TODO: odosielatel
 	os <<
 		objednavka.hmotnostZasielky_ << " " <<
-		objednavka.datumaCasVytvoreniaObjednavky_ << " " <<
-		objednavka.stringStav() << " " <<
-		objednavka.dovodZamietnutia_ << " " <<
 		objednavka.odosielatel_->getRegion() << " " <<
 		objednavka.odosielatel_->getVzdialenostOdPrekladiska() << " " <<
 		objednavka.adresat_->getRegion() << " " <<
-		objednavka.adresat_->getVzdialenostOdPrekladiska() << " " << "\n";
+		objednavka.adresat_->getVzdialenostOdPrekladiska() << " " <<
+		objednavka.datumaCasVytvoreniaObjednavky_ << " " <<
+		(int)objednavka.stav_ << " " <<
+		// NOTE pozor na to - niekedy je, niekedy nie 
+		objednavka.dovodZamietnutia_ << " " <<
+		// NOTE pozor na to - niekedy je, niekedy nie 
+		objednavka.datumaCasSpracovania_ << " " << "\n";
 	return os;
 }
 istream & operator>>(istream & is, Objednavka & objednavka)
 {
-	// TODO: insert return statement here
-	throw std::exception("operator>>(istream & is, Objednavka & objednavka): Not implemented yet.");
+	std::string datum, pom, cas;
+
+	is >> datum >> pom >> cas;
+	objednavka.datumaCasVytvoreniaObjednavky_ = datum + " " + pom + " " + cas;
+
+	int pomStav;
+	is >> pomStav;
+	objednavka.stav_ = (eStavObjednavky)pomStav;
+
+	if (objednavka.stav_ == eStavObjednavky::ZRUSENA)
+	{
+		return is;
+	}
+	if (objednavka.stav_ == eStavObjednavky::ZAMIETNUTA)
+	{
+		// TODO dovod zamietnutia pokracovat ? poradie ? 
+		return is;
+	}
+
+	is >> datum >> pom >> cas;
+	objednavka.datumaCasSpracovania_ = datum + " " + pom + " " + cas;
+
 	return is;
 }
 

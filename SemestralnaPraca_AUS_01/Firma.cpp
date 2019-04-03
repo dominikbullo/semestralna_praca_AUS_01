@@ -289,7 +289,9 @@ ostream& operator<< (ostream& os, Firma& firma) {
 
 	return os;
 }
-istream& operator>> (istream& is, Firma& firma) {
+istream& operator>> (istream& is, Firma& firma)
+{
+	// TODO najskor asi vsetky objednavky ? 
 	double maxNosnost, nosnost, prevadzkoveNaklady, pocetRegionovTrasy;
 	std::string SPZ, region;
 
@@ -305,8 +307,6 @@ istream& operator>> (istream& is, Firma& firma) {
 		is >> *nacitanePrekladisko;
 		firma.arrayListPrekladisk->add(nacitanePrekladisko);
 	}
-
-
 
 	int pocetVozidiel = 0;
 	is >> pocetVozidiel;

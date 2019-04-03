@@ -136,11 +136,12 @@ ostream & operator<<(ostream & os, Dron & dron)
 		dron.nosnost_ << " " << // nosnost aj ostane veci viem podla typu
 		dron.celkovyPocetPrepravenychZasielok_ << " " <<
 		dron.kapacitaBaterie_ << " " <<
-		dron.celkovyPocetNalietanychHodin_ << " " << "\n";
+		dron.celkovyPocetNalietanychHodin_ << " ";
 
 	// Struktury 
 	structures::ExplicitQueue<Zasielka*> *kopiaFrontu = new structures::ExplicitQueue<Zasielka*>(*dron.frontZasielok_);
 
+	os << kopiaFrontu->size() << "\n";
 	while (!kopiaFrontu->isEmpty()) {
 		os << *kopiaFrontu->pop();
 	}
@@ -150,6 +151,33 @@ ostream & operator<<(ostream & os, Dron & dron)
 
 istream & operator>>(istream & is, Dron & dron)
 {
-	// TODO: insert return statement here
+	std::string datum, pom, cas;
+
+	is >> dron.vytazeny_;
+
+	is >> datum >> pom >> cas;
+	dron.datumaCasEvidencie_ = datum + " " + pom + " " + cas;
+
+	is >> datum >> pom >> cas;
+	dron.vytazenyDo_ = datum + " " + pom + " " + cas;
+
+	is >> dron.nosnost_ >> dron.celkovyPocetPrepravenychZasielok_ >> dron.kapacitaBaterie_ >> dron.celkovyPocetNalietanychHodin_;
+
+	int velkostFrontu = 0;
+	is >> velkostFrontu;
+	double hmotnost, odosVzd, adrVzd;
+	std::string odosReg, adrReg;
+
+	for (size_t i = 0; i < velkostFrontu; i++)
+	{
+		is >> hmotnost >> odosReg >> odosVzd >> adrReg >> adrVzd;
+		Objednavka* nacitanaObjednavka = new Objednavka(hmotnost, new Odosielatel(odosReg, odosVzd), new Adresat(adrReg, adrVzd));
+		is >> *nacitanaObjednavka;
+
+		Zasielka* nacitanaZasielka = new Zasielka(nacitanaObjednavka);
+		is >> *nacitanaZasielka;
+
+		dron.frontZasielok_->push(nacitanaZasielka);
+	}
 	return is;
 }

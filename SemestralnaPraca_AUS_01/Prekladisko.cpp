@@ -163,6 +163,9 @@ istream & operator>>(istream & is, Prekladisko & prekladisko)
 		Dron * nacitanyDron = new Dron((eDrony)typDrona, serioveCislo);
 		is >> *nacitanyDron;
 		prekladisko.pridajDron(nacitanyDron);
+		// NOTE vypisovanie nacítaného drona
+		std::cout << "Uspesne som nacital drona" << std::endl;
+		nacitanyDron->toString();
 	}
 	return is;
 }
