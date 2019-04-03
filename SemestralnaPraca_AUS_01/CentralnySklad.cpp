@@ -35,14 +35,6 @@ void CentralnySklad::vypisZoznamZasielok() {
 		zasielka->toString();
 	}
 }
-void CentralnySklad::naplVozidla()
-{
-	//	// TODO
-	//	for (Zasielka* zasielka : *arrayListZasielok_)
-	//	{
-	//	}
-	throw std::exception("CentralnySklad::naplVozidla(): Not implemented yet.");
-}
 
 ostream & operator<<(ostream & os, CentralnySklad & centralnySklad)
 {

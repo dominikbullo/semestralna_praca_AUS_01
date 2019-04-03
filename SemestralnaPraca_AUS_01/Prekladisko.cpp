@@ -51,6 +51,17 @@ void Prekladisko::vypisZoznamDronov() {
 	}
 }
 
+//void Prekladisko::prijmiZasielky(Vozidlo * vozidlo)
+//{
+//	for (Zasielka* zasielka : vozidlo->getArrayListZasielok())
+//	{
+//		// TODO delete from car
+//		vozidlo->
+//		arrayListZasielok_->add(zasielka);
+//	}
+//}
+
+
 void Prekladisko::spracujZasielky()
 {
 	for (Dron * dron : *this->arrayListDronov_) {
