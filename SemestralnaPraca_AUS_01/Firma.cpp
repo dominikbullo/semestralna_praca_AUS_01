@@ -200,17 +200,75 @@ bool Firma::chceUserZrusitObjednavku(Dron * dronPreOdosielatela, Zasielka * zasi
 
 void Firma::getRegionsNajvacsimPoctomDorucenychObjednavok(std::string datumOd, std::string datumDo)
 {
-	//string region = "";
-	for (Objednavka * objednavka : *this->linkedListObjednavok) {
-		string region = objednavka->getAdresat()->getRegion();
+	int max = 0;
+	Prekladisko *maxPrekladisko = NULL;
+
+	for (Prekladisko* prekladisko : *this->arrayListPrekladisk)
+	{
+		int temp = 0;
+		for (Objednavka* objednavka : *this->linkedListObjednavok)
+		{
+			if (prekladisko->dajRegion() == objednavka->getAdresat()->getRegion() &&
+				Datum::string_to_time_t(objednavka->getDatumaCasVytvorenia())
+				> Datum::string_to_time_t(datumOd) &&
+				Datum::string_to_time_t(objednavka->getDatumaCasVytvorenia())
+				< Datum::string_to_time_t(datumDo))
+			{
+				temp++;
+			}
+		}
+
+		if (temp > max) {
+			max = temp;
+			maxPrekladisko = prekladisko;
+		}
+	}
+	if (maxPrekladisko != NULL)
+	{
+		cout << "Najviac zasielok sa dorucilo do regionu " << maxPrekladisko->dajRegion() << endl;
+	}
+	else
+	{
+		cout << "Ziadne prekladisko neprijalo zasielku." << endl;
 	}
 }
+
 void Firma::getRegionsNajvacsimPoctomPrijatychObjednavok(std::string datumOd, std::string datumDo)
 {
-	// TODO  date_range_check;
-	throw std::exception("Not implemented yet!");
+	int max = 0;
+	Prekladisko *maxPrekladisko = NULL;
 
+	for (Prekladisko* prekladisko : *this->arrayListPrekladisk)
+	{
+		int temp = 0;
+		for (Objednavka* objednavka : *this->linkedListObjednavok)
+		{
+			if (prekladisko->dajRegion() == objednavka->getOdosielatel()->getRegion() &&
+				Datum::string_to_time_t(objednavka->getDatumaCasVytvorenia())
+				> Datum::string_to_time_t(datumOd) &&
+				Datum::string_to_time_t(objednavka->getDatumaCasVytvorenia())
+				< Datum::string_to_time_t(datumDo))
+			{
+				temp++;
+			}
+		}
+
+		if (temp > max) {
+			max = temp;
+			maxPrekladisko = prekladisko;
+		}
+	}
+	if (maxPrekladisko != NULL)
+	{
+		cout << "Najviac zasielok sa odoslalo z regionu " << maxPrekladisko->dajRegion() << endl;
+	}
+	else
+	{
+		cout << "Ziadne prekladisko neodoslalo zasielku." << endl;
+	}
 }
+
+
 void Firma::vypisZasielkySDovodomZamietnutia(std::string datumOd, std::string datumDo, std::string region)
 {
 	int pocet = 0;
