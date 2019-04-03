@@ -77,7 +77,7 @@ void UI::hlavneMenu()
 			firma->vytvorObjednavku(4, new Odosielatel("BA", 10), new Adresat("MA", 15.5));
 
 
-			//ukonciDen();
+			ukonciDen();
 			ulozVsetko(out);
 			break;
 		case 6:

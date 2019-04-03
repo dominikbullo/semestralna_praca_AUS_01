@@ -337,8 +337,10 @@ istream& operator>> (istream& is, Firma& firma)
 			Zasielka* nacitanaZasielka = new Zasielka(nacitanaObjednavka);
 			is >> *nacitanaZasielka;
 
-			nacitaneVozidlo->getArrayListZasielok().add(nacitanaZasielka);
+			// TODO this is baad
 
+			nacitaneVozidlo->pridajZasielkuDoVozidla(nacitanaZasielka);
+			delete nacitanaObjednavka;
 		}
 		firma.arrayListVozidiel->add(nacitaneVozidlo);
 	}

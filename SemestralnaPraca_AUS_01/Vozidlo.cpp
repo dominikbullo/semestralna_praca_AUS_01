@@ -30,10 +30,18 @@ Vozidlo::~Vozidlo()
 
 void Vozidlo::toString()
 {
-	std::cout << "Prevazdkove naklady - " << prevadzkoveNaklady_ << "\t SPZ - " << SPZ_ << "\t CELKOVE NAKLADY: " << naklady_ << " " << std::endl;
+	std::cout << "Prevazdkove naklady - " <<
+		prevadzkoveNaklady_ << "\t SPZ - " <<
+		SPZ_ << "\t CELKOVE NAKLADY: " <<
+		naklady_ << " " << std::endl;
 }
 
-void Vozidlo::pridajPrekladiskoDoTrasyVozidla(Prekladisko* prekladisko) {
+void Vozidlo::pridajZasielkuDoVozidla(Zasielka * zasielka)
+{
+	this->arrayListZasielok_->add(zasielka);
+}
+void Vozidlo::pridajPrekladiskoDoTrasyVozidla(Prekladisko* prekladisko)
+{
 	linkedListTrasaVozidla_->add(prekladisko);
 }
 
