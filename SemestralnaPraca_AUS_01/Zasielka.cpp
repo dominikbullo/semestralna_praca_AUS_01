@@ -38,7 +38,6 @@ void Zasielka::toString()
 ostream & operator<<(ostream & os, Zasielka & zasielka)
 {
 	// Atributy
-	// TODO objednavka
 	os << *zasielka.objednavka_;
 
 	os <<

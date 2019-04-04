@@ -52,7 +52,6 @@ void Dron::pridajZasielku(Zasielka * novaZasielka)
 	this->frontZasielok_->push(novaZasielka);
 }
 
-// TODO spracovanie, pod¾a èasu, alebo pod¾a naloženia
 void Dron::spracujZasielky(structures::ArrayList<Zasielka*> * arrayListZasielok_)
 {
 	while (!frontZasielok_->isEmpty()

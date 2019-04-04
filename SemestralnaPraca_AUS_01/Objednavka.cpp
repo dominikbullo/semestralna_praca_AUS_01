@@ -107,8 +107,7 @@ istream & operator>>(istream & is, Objednavka & objednavka)
 	}
 	if (objednavka.stav_ == eStavObjednavky::ZAMIETNUTA)
 	{
-		// TODO dovod zamietnutia pokracovat ? poradie ? 
-		return is;
+		is >> objednavka.dovodZamietnutia_;
 	}
 
 	is >> datum >> pom >> cas;

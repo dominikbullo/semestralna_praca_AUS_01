@@ -127,7 +127,8 @@ void UI::ukonciDen()
 	firma->naplnVozidla();
 
 	// TODO prekladisko prime zasielky
-	//// prekladsiko->prijmiZasielky(vozidlo)
+	//for (Vozidlo* vozidlo : firma..)
+	//prekladsiko->prijmiZasielky(arrayListZasielok)
 	//firma->vylozZasielkyvPrekladiskach();
 }
 

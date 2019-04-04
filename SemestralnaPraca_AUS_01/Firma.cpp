@@ -297,11 +297,9 @@ void Firma::vypisZasielkySDovodomZamietnutia(std::string datumOd, std::string da
 
 void Firma::vypisaniePoctuZrusenychObjednavok(std::string datumOd, std::string datumDo)
 {
-	Prekladisko* prekladisko = NULL;
-	int pocet = 0;
-	int max = 0;
-
+	throw std::exception("vypisaniePoctuZrusenychObjednavok: Not implemented yet!");
 }
+
 void Firma::vypisanieCelkovehoPoctuDorucenychZasielok()
 {
 	int pocet = 0;
@@ -349,19 +347,17 @@ ostream& operator<< (ostream& os, Firma& firma) {
 
 	os << firma.nazovFirmy_ << "\n";
 
-	// Najskôr prekladiska firmy
 	os << firma.arrayListPrekladisk->size() << "\n";
-
 	for (Prekladisko * var : *firma.arrayListPrekladisk) {
 		os << *var;
 	}
-	os << firma.arrayListVozidiel->size() << "\n";
 
+	os << firma.arrayListVozidiel->size() << "\n";
 	for (Vozidlo * var : *firma.arrayListVozidiel) {
 		os << *var;
 	}
-	os << firma.linkedListObjednavok->size() << "\n";
 
+	os << firma.linkedListObjednavok->size() << "\n";
 	for (Objednavka * var : *firma.linkedListObjednavok) {
 		os << *var;
 	}

@@ -120,7 +120,6 @@ Dron * Prekladisko::dajLelpšiehoObsadenehoDrona(Dron * dron1, Dron * dron2)
 	if (dron1 == nullptr) { return dron2; }
 	if (dron2 == nullptr) { return dron1; }
 
-	// TODO možno tu, zarátať aj čas, ktorý sa mohol nabíjať
 	return dron1->vytazenyDo() < dron2->vytazenyDo() ? dron1 : dron2;
 
 }

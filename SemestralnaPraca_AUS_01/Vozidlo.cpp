@@ -70,7 +70,6 @@ ostream & operator<<(ostream & os, Vozidlo & vozidlo)
 		vozidlo.naklady_ << " "  "\n";
 
 	// Struktury 
-	// TODO staèi regiony
 	os << vozidlo.linkedListTrasaVozidla_->size() << "\n";
 	for (Prekladisko * var : *vozidlo.linkedListTrasaVozidla_) {
 		os << var->dajRegion() << " ";

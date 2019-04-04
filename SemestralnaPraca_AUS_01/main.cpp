@@ -4,15 +4,6 @@
 
 int main()
 {
-	// TODO vypisaniePoctuHodinPodlaTypuDrona
-	// TODO Uložiť a načítať centrálny sklad
-
-	//// TODO 
-	//// prekladsiko->prijmiZasielky(vozidlo)
-	//firma->vylozZasielkyvPrekladiskach();
-	// TODO Vyber vozidiel v centralnom sklade, zaslanie zasielky do lokalnych prekladisk
-
-
 	initHeapMonitor();
 	UI *userInterface = new UI();
 	userInterface->hlavneMenu();
