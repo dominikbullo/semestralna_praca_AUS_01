@@ -354,8 +354,7 @@ void UI::menuObjednavky(std::string text, bool clearTerminal)
 	cout << "++++++++++ Sprava Objednavok ++++++++++" << endl;
 	cout <<
 		"1. Vytvor objednavku" << endl <<
-		"2. Vypis zoznam vsetkych objednavok firmy" << endl <<
-		"2. Vypis zoznam vsetkych objednavok v lokalnom prekladisku" << endl << endl <<
+		"2. Vypis zoznam vsetkych objednavok firmy" << endl << endl <<
 
 		"0. Hlavne Menu" << endl;
 
@@ -363,6 +362,12 @@ void UI::menuObjednavky(std::string text, bool clearTerminal)
 	{
 	case 0:
 		hlavneMenu();
+		break;
+	case 1:
+		menuObjednavky("", false);
+		firma->vytvorObjednavku(getIntInputFromUser("Zadaj hmotnost objednavky"),
+			new Odosielatel(getStrInputFromUser("Zadaj region odoslania"), getIntInputFromUser("Zadaj vzdialenost od prekladiska odoslania")),
+			new Adresat(getStrInputFromUser("Zadaj region prijatia"), getIntInputFromUser("Zadaj vzdialenost od prekladiska prijatia")));
 		break;
 	case 2:
 		firma->vypisanieVsetkychObjednavok();
