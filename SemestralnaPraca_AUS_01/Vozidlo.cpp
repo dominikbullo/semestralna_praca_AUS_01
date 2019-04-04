@@ -91,7 +91,7 @@ istream & operator>>(istream & is, Vozidlo & vozidlo)
 
 	vozidlo.maxNosnost_ = maxNosnost;
 	vozidlo.datumaCasEvidencie_ = datum + " " + pom + " " + cas;
-	vozidlo.naklady_;
+	vozidlo.naklady_ = naklady;
 
 	return is;
 }

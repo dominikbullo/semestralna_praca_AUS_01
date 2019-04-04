@@ -7,7 +7,7 @@ UI::UI()
 	running = true;
 	datumUI = Datum::getInstance();
 	//datumUI->posunCas(-2 * 60 * 60);
-	firma = new Firma("Age of Express");
+	firma = new Firma("AoE");
 	pridajVsetkyPrekladiska();
 }
 
@@ -95,6 +95,11 @@ void UI::hlavneMenu()
 			in.open("ulozenie");
 			in >> *firma;
 			in.close();
+
+			cout << "****************************" << endl;
+			cout << "Vsetko bolo uspesne nacitane" << endl;
+			cout << "****************************" << endl;
+
 			break;
 		case 111:
 			running = false;
