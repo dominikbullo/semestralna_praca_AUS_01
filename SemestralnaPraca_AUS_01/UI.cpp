@@ -6,7 +6,7 @@ UI::UI()
 {
 	running = true;
 	datumUI = Datum::getInstance();
-	datumUI->posunCas(-10 * 60 * 60);
+	//datumUI->posunCas(-2 * 60 * 60);
 	firma = new Firma("Age of Express");
 	pridajVsetkyPrekladiska();
 }
@@ -125,7 +125,8 @@ void UI::ukonciDen()
 
 	firma->getCentralnySklad()->vypisZoznamZasielok();
 	firma->naplnVozidla();
-	//// TODO 
+
+	// TODO prekladisko prime zasielky
 	//// prekladsiko->prijmiZasielky(vozidlo)
 	//firma->vylozZasielkyvPrekladiskach();
 }
@@ -237,11 +238,12 @@ void UI::menuPrekladiska(std::string text, bool clearTerminal)
 		firma->pridajPrekladisko(new Prekladisko(getStrInputFromUser("Zadaj skratku regionu prekladiska, ktore chces pridat")));
 		menuPrekladiska("Prekladisko bolo uspesne pridane", true);
 		break;
-		//case 1:
-//	firma->dajPrekladiskoPodlaRegionu(
-//		getStrInputFromUser("Zadaj skratku regionu prekladiska do ktoreho chces pridat drona"))
-//		->pridajDron(new Dron((getIntInputFromUser("Zadaj typ drona [1/2]") ? eDrony::JEDEN : eDrony::DVA)));
-//	menuPrekladiska("Dron bol uspesne pridany", true);
+	case 2:
+	{
+		Prekladisko* prekladisko = firma->dajPrekladiskoPodlaRegionu(getStrInputFromUser("Zadaj skratku regionu prekladiska do ktoreho chces pridat drona"));
+		Dron * dron = new Dron(getIntInputFromUser("Zadaj typ drona [1/2]") ? eDrony::JEDEN : eDrony::DVA, prekladisko->set_get_SerioveCislo());
+		menuPrekladiska("Dron bol uspesne pridany", true);
+	}
 	case 3:
 		firma->dajPrekladiskoPodlaRegionu(
 			getStrInputFromUser("Zadaj skratku regionu prekladiska z ktoreho chces vypisat drony"))->vypisZoznamDronov();
@@ -324,7 +326,7 @@ void UI::menuStatistiky(std::string text, bool clearTerminal)
 		break;
 	case 7:
 		system("cls");
-		firma->vypisaniePoctuKilometrovPodlaTypuDrona();
+		firma->vypisaniePoctuHodinPodlaTypuDrona();
 		menuStatistiky("", false);
 		break;
 	case 0:

@@ -19,6 +19,7 @@ public:
 	void vypisZasielkyVozidla();
 	void pridajPrekladiskoDoTrasyVozidla(Prekladisko * prekladisko);
 	void pridajZasielkuDoVozidla(Zasielka * zasielka);
+	void vyprazdniZasielky();
 
 	double getPocetNajazdenychKm() { return pocetNajazdenychKilometrov; }
 	inline int getPrevazdkoveNaklady() { return prevadzkoveNaklady_; }

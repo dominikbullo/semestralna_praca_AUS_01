@@ -43,24 +43,12 @@ void Prekladisko::pridajDron(Dron * novyDron)
 	this->arrayListDronov_->add(novyDron);
 }
 
-
 void Prekladisko::vypisZoznamDronov() {
 	std::cout << "Vypisujem vsetkych dronov pre prekladisko z okresu - " << region_ << std::endl;
 	for (Dron * dron : *this->arrayListDronov_) {
 		dron->toString();
 	}
 }
-
-//void Prekladisko::prijmiZasielky(Vozidlo * vozidlo)
-//{
-//	for (Zasielka* zasielka : vozidlo->getArrayListZasielok())
-//	{
-//		// TODO delete from car
-//		vozidlo->
-//		arrayListZasielok_->add(zasielka);
-//	}
-//}
-
 
 void Prekladisko::spracujZasielky()
 {

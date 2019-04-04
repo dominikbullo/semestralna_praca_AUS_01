@@ -40,6 +40,10 @@ void Vozidlo::pridajZasielkuDoVozidla(Zasielka * zasielka)
 {
 	this->arrayListZasielok_->add(zasielka);
 }
+void Vozidlo::vyprazdniZasielky()
+{
+	arrayListZasielok_->clear();
+}
 void Vozidlo::pridajPrekladiskoDoTrasyVozidla(Prekladisko* prekladisko)
 {
 	linkedListTrasaVozidla_->add(prekladisko);

@@ -5,11 +5,11 @@ using namespace std;
 Firma::Firma(std::string nazovFirmy)
 {
 	nazovFirmy_ = nazovFirmy;
+	centralnySklad_ = new CentralnySklad();
 
 	arrayListVozidiel = new structures::ArrayList<Vozidlo*>();
 	arrayListPrekladisk = new structures::ArrayList<Prekladisko*>();
 	linkedListObjednavok = new structures::LinkedList<Objednavka*>();
-
 }
 
 Firma::~Firma()
@@ -64,8 +64,6 @@ void  Firma::pridajVozidlo(Vozidlo* noveVozidlo)
 void Firma::pridajVsetkyRegionyDoTrasyVozidla(Vozidlo* vozidlo)
 {
 	for (Prekladisko * prekladisko : *arrayListPrekladisk) {
-		//// NOTE: for testing!!
-		//if (prekladisko->dajRegion() == "BA") { continue; }
 		vozidlo->pridajPrekladiskoDoTrasyVozidla(prekladisko);
 	}
 }
@@ -133,7 +131,6 @@ Vozidlo* Firma::vyberVozidlo(Zasielka* zasielka)
 }
 
 Vozidlo* Firma::vyberVozidlo(Zasielka* zasielka, Prekladisko * prekladisko) {
-	// TODO pozeraj ešte dopredu an naplánované zásielky toho vozidla 
 	for (Vozidlo * vozidlo : *arrayListVozidiel) {
 		if (vozidlo->prechadzaPrekladiskom(prekladisko) &&
 			vozidlo->dokazeNalozitZasielku(zasielka))
@@ -327,9 +324,26 @@ void Firma::vypisaniePoctuKilometrovVsetkychVozidiel()
 	}
 	cout << "Celkovy pocet kilometrov vsetkych vozidiel je " << pocetKm << endl;
 }
-void Firma::vypisaniePoctuKilometrovPodlaTypuDrona()
+void Firma::vypisaniePoctuHodinPodlaTypuDrona()
 {
-	// TODO
+	double typJeden = 0;
+	double typDva = 0;
+
+	for (Prekladisko * prekladisko : *this->arrayListPrekladisk)
+	{
+		for (Dron *dron : prekladisko->getZoznamDronov())
+		{
+			if (dron->getTyp() == eDrony::JEDEN)
+			{
+				typJeden += dron->getCelkovyPocetNalietanychHodin();
+			}
+			else {
+				typDva += dron->getCelkovyPocetNalietanychHodin();
+			}
+		}
+	}
+	cout << "Celkovy pocet hodin dronu typu jeden je " << typJeden << endl;
+	cout << "Celkovy pocet hodin dronu typu dva je " << typDva << endl;
 }
 ostream& operator<< (ostream& os, Firma& firma) {
 
@@ -341,19 +355,16 @@ ostream& operator<< (ostream& os, Firma& firma) {
 	for (Prekladisko * var : *firma.arrayListPrekladisk) {
 		os << *var;
 	}
-
 	os << firma.arrayListVozidiel->size() << "\n";
 
 	for (Vozidlo * var : *firma.arrayListVozidiel) {
 		os << *var;
 	}
-
 	os << firma.linkedListObjednavok->size() << "\n";
 
 	for (Objednavka * var : *firma.linkedListObjednavok) {
 		os << *var;
 	}
-
 	return os;
 }
 istream& operator>> (istream& is, Firma& firma)
@@ -403,8 +414,6 @@ istream& operator>> (istream& is, Firma& firma)
 
 			Zasielka* nacitanaZasielka = new Zasielka(nacitanaObjednavka);
 			is >> *nacitanaZasielka;
-
-			// TODO this is baad
 
 			nacitaneVozidlo->pridajZasielkuDoVozidla(nacitanaZasielka);
 			delete nacitanaObjednavka;

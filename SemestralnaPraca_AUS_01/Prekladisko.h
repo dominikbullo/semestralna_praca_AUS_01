@@ -28,6 +28,7 @@ public:
 	std::string dajRegion() { return region_; }
 	Dron * dajLepšiehoVolnehoDrona(Dron * dron1, Dron * dron2);
 	Dron * dajLelpšiehoObsadenehoDrona(Dron * dron1, Dron * dron2);
+	structures::ArrayList<Dron*> getZoznamDronov() { return *arrayListDronov_; }
 
 	friend ostream& operator<< (ostream& os, Prekladisko& prekladisko);
 	friend istream& operator>> (istream& is, Prekladisko& prekladisko);

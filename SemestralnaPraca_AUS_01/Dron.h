@@ -49,7 +49,7 @@ public:
 	void znizKapacituBaterie(double pocetSekundLetu) { kapacitaBaterie_ -= (pocetSekundLetu / 60) * (100.0 / maxDobaLetu_); }
 	double getCasPotrebnyNaDobitie(double potrebnyPocetPercent);
 	double getPocetPercentNaZvladnutieLetu(Zasielka* zasielka);
-
+	eDrony getTyp() { return typ_; }
 
 	void nabiDrona(double pocetSekundNaNabijacke)
 	{

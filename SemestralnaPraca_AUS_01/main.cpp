@@ -4,7 +4,7 @@
 
 int main()
 {
-	// TODO vypisaniePoctuKilometrovPodlaTypuDrona
+	// TODO vypisaniePoctuHodinPodlaTypuDrona
 	// TODO Uložiť a načítať centrálny sklad
 
 	//// TODO 

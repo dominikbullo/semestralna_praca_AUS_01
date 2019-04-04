@@ -21,15 +21,16 @@ void CentralnySklad::prijmiZasielky(Vozidlo * vozidlo)
 		//zmením smer
 		zasielka->setRegion(zasielka->getObjednavka()->getAdresat()->getRegion());
 		zasielka->setVzdialenost(zasielka->getObjednavka()->getAdresat()->getVzdialenostOdPrekladiska());
-		arrayListZasielok_->add(zasielka);
+		this->arrayListZasielok_->add(zasielka);
 	}
-	vozidlo->getArrayListZasielok().clear();
+	vozidlo->vyprazdniZasielky();
 }
 
 void CentralnySklad::vypisZoznamZasielok() {
 	cout << endl << "*******************************************************************" << endl;
 	cout << "*************** Zoznam zasielok v centralnom sklade ***************" << endl;
 	cout << "*******************************************************************" << endl << endl;
+
 	for (Zasielka* zasielka : *arrayListZasielok_)
 	{
 		zasielka->toString();

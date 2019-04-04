@@ -77,7 +77,7 @@ public:
 	void vypisaniePoctuZrusenychObjednavok(std::string datumOd, std::string datumDo);
 	void vypisanieCelkovehoPoctuDorucenychZasielok();
 	void vypisaniePoctuKilometrovVsetkychVozidiel();
-	void vypisaniePoctuKilometrovPodlaTypuDrona();
+	void vypisaniePoctuHodinPodlaTypuDrona();
 
 	friend ostream& operator<< (ostream& os, Firma& firma);
 	friend istream& operator>> (istream& is, Firma& firma);
